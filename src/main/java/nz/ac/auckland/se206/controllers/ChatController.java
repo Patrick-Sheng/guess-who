@@ -16,7 +16,6 @@ import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * Controller class for the chat view. Handles user interactions and communication with the GPT
@@ -96,7 +95,6 @@ public class ChatController {
       Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
       appendChatMessage(result.getChatMessage());
-      FreeTextToSpeech.speak(result.getChatMessage().getContent());
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       e.printStackTrace();

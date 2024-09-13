@@ -8,9 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import nz.ac.auckland.se206.controllers.ChatController;
-import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
@@ -71,6 +69,16 @@ public class App extends Application {
     stage.show();
   }
 
+  public static void startGame(MouseEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
+    Parent root = loader.load();
+
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene.setRoot(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
@@ -79,15 +87,10 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("room");
+    Parent root = loadFxml("mainMenu");
     scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-    stage.setOnCloseRequest(event -> handleWindowClose(event));
     root.requestFocus();
-  }
-
-  private void handleWindowClose(WindowEvent event) {
-    FreeTextToSpeech.deallocateSynthesizer();
   }
 }

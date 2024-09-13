@@ -36,9 +36,9 @@ public class RoomController {
   public void initialize() {
     if (isFirstTimeInit) {
       TextToSpeech.speak(
-          "Chat with the three customers, and guess who is the "
-              + context.getProfessionToGuess());
+          "Chat with the three customers, and guess who is the " + context.getProfessionToGuess());
       isFirstTimeInit = false;
+      context.setState(context.getGameStartedState());
     }
     lblProfession.setText(context.getProfessionToGuess());
   }
@@ -49,9 +49,7 @@ public class RoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " pressed");
-  }
+  public void onKeyPressed(KeyEvent event) {}
 
   /**
    * Handles the key released event.
@@ -59,9 +57,7 @@ public class RoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyReleased(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " released");
-  }
+  public void onKeyReleased(KeyEvent event) {}
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.

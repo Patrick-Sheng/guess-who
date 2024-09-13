@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.GameState;
 import nz.ac.auckland.se206.states.Guessing;
+import nz.ac.auckland.se206.states.MainMenu;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -24,6 +25,7 @@ public class GameStateContext {
   private final String rectIdToGuess;
   private final String professionToGuess;
   private final Map<String, String> rectanglesToProfession;
+  private final MainMenu mainMenuState;
   private final GameStarted gameStartedState;
   private final Guessing guessingState;
   private final GameOver gameOverState;
@@ -31,11 +33,12 @@ public class GameStateContext {
 
   /** Constructs a new GameStateContext and initializes the game states and professions. */
   public GameStateContext() {
+    mainMenuState = new MainMenu(this);
     gameStartedState = new GameStarted(this);
     guessingState = new Guessing(this);
     gameOverState = new GameOver(this);
 
-    gameState = gameStartedState; // Initial state
+    gameState = mainMenuState; // Initial state
     Map<String, Object> obj = null;
     Yaml yaml = new Yaml();
     try (InputStream inputStream =
@@ -77,6 +80,10 @@ public class GameStateContext {
    */
   public void setState(GameState state) {
     this.gameState = state;
+  }
+
+  public GameState getMainMenuState() {
+    return mainMenuState;
   }
 
   /**
