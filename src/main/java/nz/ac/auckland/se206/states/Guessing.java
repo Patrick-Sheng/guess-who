@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.states;
 
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -43,7 +44,7 @@ public class Guessing implements GameState {
     } else {
       TextToSpeech.speak("You lost! This is the " + clickedProfession);
     }
-    context.setState(context.getGameOverState());
+    App.endGame(event);
   }
 
   /**

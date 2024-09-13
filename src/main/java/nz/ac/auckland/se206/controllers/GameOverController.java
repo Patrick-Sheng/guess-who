@@ -2,16 +2,16 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 
-public class MainMenuController {
-
-  @FXML private Rectangle rectStartGame;
-  @FXML private Rectangle rectSettings;
-  @FXML private Rectangle rectExit;
+public class GameOverController {
+  @FXML private TextArea txtFeedbackBox;
+  @FXML private Button btnBackToMenu;
 
   private static GameStateContext context;
 

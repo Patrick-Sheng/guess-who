@@ -5,9 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -26,7 +26,7 @@ public class RoomController {
   @FXML private Button btnGuess;
 
   private static boolean isFirstTimeInit = true;
-  private static GameStateContext context = new GameStateContext();
+  private static GameStateContext context;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -34,30 +34,14 @@ public class RoomController {
    */
   @FXML
   public void initialize() {
+    context = App.getGameStateContext();
     if (isFirstTimeInit) {
       TextToSpeech.speak(
           "Chat with the three customers, and guess who is the " + context.getProfessionToGuess());
       isFirstTimeInit = false;
-      context.setState(context.getGameStartedState());
     }
     lblProfession.setText(context.getProfessionToGuess());
   }
-
-  /**
-   * Handles the key pressed event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void onKeyPressed(KeyEvent event) {}
-
-  /**
-   * Handles the key released event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void onKeyReleased(KeyEvent event) {}
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.

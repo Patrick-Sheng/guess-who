@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" prefHeight="600.0" prefWidth="790.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fitHeight="452.0" fitWidth="789.0" layoutY="149.0" preserveRatio="true">
          <image>
@@ -31,7 +31,7 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Label fx:id="lblProfession" layoutX="533.0" layoutY="56.0" prefHeight="37.0" prefWidth="247.0" wrapText="true">
+      <Label fx:id="lblProfession" layoutX="532.0" layoutY="58.0" prefHeight="37.0" prefWidth="247.0" wrapText="true">
          <font>
             <Font size="21.0" />
          </font>
