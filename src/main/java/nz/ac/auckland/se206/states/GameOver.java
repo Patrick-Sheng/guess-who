@@ -33,13 +33,4 @@ public class GameOver implements GameState {
       return;
     }
   }
-
-  /**
-   * Handles the event when the guess button is clicked. Informs the player that the game is over
-   * and no further guesses can be made.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  @Override
-  public void handleGuessClick() throws IOException {}
 }

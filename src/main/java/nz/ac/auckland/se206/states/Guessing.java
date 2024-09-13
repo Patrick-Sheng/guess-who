@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class Guessing implements GameState {
 
   private final GameStateContext context;
+  private String selectedPerson;
 
   /**
    * Constructs a new Guessing state with the given game state context.
@@ -33,28 +34,27 @@ public class Guessing implements GameState {
    */
   @Override
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
-    if (rectangleId.equals("rectCashier") || rectangleId.equals("rectWaitress")) {
-      TextToSpeech.speak("You should click on the customers");
-      return;
-    }
 
-    String clickedProfession = context.getProfession(rectangleId);
-    if (rectangleId.equals(context.getRectIdToGuess())) {
-      TextToSpeech.speak("Correct! You won! This is the " + clickedProfession);
-    } else {
-      TextToSpeech.speak("You lost! This is the " + clickedProfession);
+    switch (rectangleId) {
+      case "rectPerson1":
+        selectedPerson = context.getProfession(rectangleId);
+        return;
+      case "rectPerson2":
+        selectedPerson = context.getProfession(rectangleId);
+        return;
+      case "rectPerson3":
+        selectedPerson = context.getProfession(rectangleId);
+        return;
+      case "rectSubmit":
+        if (selectedPerson != null) {
+          if (selectedPerson.equals(context.getProfessionToGuess())) {
+            TextToSpeech.speak("Correct! You won! This is the " + selectedPerson);
+          } else {
+            TextToSpeech.speak("You lost! This is the " + selectedPerson);
+          }
+          App.endGame(event);
+        }
     }
-    App.endGame(event);
-  }
-
-  /**
-   * Handles the event when the guess button is clicked. Since the player has already guessed, it
-   * notifies the player.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  @Override
-  public void handleGuessClick() throws IOException {
-    TextToSpeech.speak("You have already guessed!");
+    return;
   }
 }

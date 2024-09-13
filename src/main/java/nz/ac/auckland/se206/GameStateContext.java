@@ -151,13 +151,4 @@ public class GameStateContext {
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
     gameState.handleRectangleClick(event, rectangleId);
   }
-
-  /**
-   * Handles the event when the guess button is clicked.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  public void handleGuessClick() throws IOException {
-    gameState.handleGuessClick();
-  }
 }

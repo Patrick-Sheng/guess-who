@@ -85,6 +85,12 @@ public class App extends Application {
     context.setState(context.getGameStartedState());
   }
 
+  public static void startGuessing(MouseEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));
+    loadScene(event, loader);
+    context.setState(context.getGuessingState());
+  }
+
   public static void endGame(MouseEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/gameOver.fxml"));
     loadScene(event, loader);

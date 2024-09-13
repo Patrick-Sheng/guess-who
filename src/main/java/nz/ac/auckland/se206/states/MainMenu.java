@@ -23,7 +23,4 @@ public class MainMenu implements GameState {
         break;
     }
   }
-
-  @Override
-  public void handleGuessClick() throws IOException {}
 }

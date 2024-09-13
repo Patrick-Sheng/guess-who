@@ -17,11 +17,4 @@ public interface GameState {
    * @throws IOException if there is an I/O error
    */
   void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException;
-
-  /**
-   * Handles the event when the guess button is clicked.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  void handleGuessClick() throws IOException;
 }
