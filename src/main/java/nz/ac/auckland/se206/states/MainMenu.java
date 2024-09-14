@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.states;
 
 import java.io.IOException;
+
+import javafx.application.Platform;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
@@ -19,7 +21,7 @@ public class MainMenu implements GameState {
         System.out.println("Settings clicked");
         break;
       case "rectExit":
-        System.out.println("Exit clicked");
+        Platform.exit();
         break;
     }
   }
