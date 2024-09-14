@@ -79,28 +79,30 @@ public class App extends Application {
     stage.show();
   }
 
-  public static void startGame(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
-    loadScene(event, loader);
-    context.setState(context.getGameStartedState());
-  }
+  public static void openScene(MouseEvent event, SceneState state) throws IOException {
 
-  public static void startGuessing(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));
-    loadScene(event, loader);
-    context.setState(context.getGuessingState());
-  }
-
-  public static void endGame(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/gameOver.fxml"));
-    loadScene(event, loader);
-    context.setState(context.getGameOverState());
-  }
-
-  public static void openMenu(MouseEvent event) throws IOException {
+    // Default loader on MainMenu
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/mainMenu.fxml"));
+
+    switch (state) {
+      case MAIN_MENU:
+        context.setState(context.getMainMenuState());
+        break;
+      case START_GAME:
+        loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
+        context.setState(context.getGameStartedState());
+        break;
+      case START_GUESSING:
+        loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));
+        context.setState(context.getGuessingState());
+        break;
+      case END_GAME:
+        loader = new FXMLLoader(App.class.getResource("/fxml/gameOver.fxml"));
+        context.setState(context.getGameOverState());
+        break;
+    }
+
     loadScene(event, loader);
-    context.setState(context.getMainMenuState());
   }
 
   public static void loadScene(MouseEvent event, FXMLLoader loader) throws IOException {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -52,7 +53,7 @@ public class Guessing implements GameState {
           } else {
             TextToSpeech.speak("You lost! This is the " + selectedPerson);
           }
-          App.endGame(event);
+          App.openScene(event, SceneState.END_GAME);
         }
     }
     return;

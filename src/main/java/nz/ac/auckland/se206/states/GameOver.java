@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.SceneState;
 
 /**
  * The GameOver state of the game. Handles interactions after the game has ended, informing the
@@ -29,7 +30,7 @@ public class GameOver implements GameState {
   @Override
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
     if (rectangleId.equals("rectBackToMenu")) {
-      App.openMenu(event);
+      App.openScene(event, SceneState.MAIN_MENU);
       return;
     }
   }
