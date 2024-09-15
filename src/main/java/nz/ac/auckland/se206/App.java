@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.states.GameState;
 
 /**
@@ -19,6 +20,9 @@ public class App extends Application {
 
   private static Scene scene;
   private static GameStateContext context = new GameStateContext();
+  private static RoomController roomController;
+  private static ChatController chatController;
+  private static Room currentRoom;
 
   /**
    * The main method that launches the JavaFX application.
@@ -59,6 +63,21 @@ public class App extends Application {
     return context;
   }
 
+  // Note that main room will reset every visit, as it's opening the file again
+  public static void openMainRoom(MouseEvent event) throws IOException {
+    currentRoom = Room.MAIN_ROOM;
+
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
+    Parent root = loader.load();
+
+    roomController = loader.getController();
+
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene.setRoot(root);
+    stage.setScene(scene);
+    stage.show();
+  }
+
   /**
    * Opens the chat view and sets the profession in the chat controller.
    *
@@ -67,10 +86,12 @@ public class App extends Application {
    * @throws IOException if the FXML file is not found
    */
   public static void openChat(MouseEvent event, String profession) throws IOException {
+    currentRoom = Room.CHAT_ROOM;
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
+    // Keeping this here for now, as removing it will break the code :(
     Parent root = loader.load();
 
-    ChatController chatController = loader.getController();
+    chatController = loader.getController();
     chatController.setProfession(profession);
 
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -89,10 +110,10 @@ public class App extends Application {
         context.setState(context.getMainMenuState());
         break;
       case START_GAME:
-        loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
+        openMainRoom(event);
         context.setState(context.getGameStartedState());
-        context.startTimer(30);
-        break;
+        context.startTimer(10);
+        return;
       case START_GUESSING:
         loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));
         context.setState(context.getGuessingState());
@@ -112,6 +133,17 @@ public class App extends Application {
     scene.setRoot(root);
     stage.setScene(scene);
     stage.show();
+  }
+
+  public static void updateTimer(int time) {
+    switch (currentRoom) {
+      case MAIN_ROOM:
+        roomController.updateLabelTimer(time);
+        break;
+      case CHAT_ROOM:
+        chatController.updateLabelTimer(time);
+        break;
+    }
   }
 
   /**

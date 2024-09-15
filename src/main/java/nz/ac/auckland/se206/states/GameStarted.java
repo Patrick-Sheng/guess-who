@@ -54,6 +54,9 @@ public class GameStarted implements GameState {
       case "rectWaitress":
         TextToSpeech.speak("Hi, let me know when you are ready to order!");
         return;
+      case "rectBackToMainRoom":
+        App.openMainRoom(event);
+        return;
       default:
         App.openChat(event, context.getProfession(rectangleId));
     }

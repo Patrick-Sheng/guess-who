@@ -36,5 +36,7 @@
          </font>
       </Label>
       <Label fx:id="lblGuess" layoutX="356.0" layoutY="108.0" text="Make a guess" />
+      <Label layoutX="678.0" layoutY="108.0" text="Timer:" />
+      <Label fx:id="lblTimer" alignment="CENTER" layoutX="718.0" layoutY="108.0" text="XX:XX" />
    </children>
 </Pane>

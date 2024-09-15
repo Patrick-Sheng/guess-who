@@ -23,6 +23,7 @@ public class RoomController {
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectWaitress;
   @FXML private Label lblProfession;
+  @FXML private Label lblTimer;
   @FXML private Button btnGuess;
 
   private static boolean isFirstTimeInit = true;
@@ -65,5 +66,11 @@ public class RoomController {
     handleRectangleThread = new Thread(handleRectangleTask);
     handleRectangleThread.setDaemon(true);
     handleRectangleThread.start();
+  }
+
+  public void updateLabelTimer(int time) {
+    int minutes = time / 60;
+    int seconds = time % 60;
+    lblTimer.setText(String.format("%2d:%02d", minutes, seconds));
   }
 }

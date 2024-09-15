@@ -52,6 +52,6 @@ public class CountdownTimer {
   }
 
   public void updateLabel() {
-    System.out.println("Time remaining: " + remainingTime);
+    App.updateTimer(remainingTime);
   }
 }
