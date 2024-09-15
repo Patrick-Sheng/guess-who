@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.enums.Room;
+import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.states.GameState;
 
 /**

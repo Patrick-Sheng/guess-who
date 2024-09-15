@@ -3,10 +3,10 @@ package nz.ac.auckland.se206.states;
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.SceneState;
+import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.timer.CountdownTimer;
 
 /**
  * The GameStarted state of the game. Handles the initial interactions when the game starts,

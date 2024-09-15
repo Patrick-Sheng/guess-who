@@ -4,7 +4,7 @@ import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.SceneState;
+import nz.ac.auckland.se206.enums.SceneState;
 
 /**
  * The GameOver state of the game. Handles interactions after the game has ended, informing the

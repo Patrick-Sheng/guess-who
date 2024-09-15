@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.enums;
 
 public enum SceneState {
   MAIN_MENU(),

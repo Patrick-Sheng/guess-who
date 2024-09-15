@@ -1,7 +1,8 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.timer;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import nz.ac.auckland.se206.App;
 
 public class CountdownTimer {
 

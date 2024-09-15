@@ -5,7 +5,7 @@ import javafx.application.Platform;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.SceneState;
+import nz.ac.auckland.se206.enums.SceneState;
 
 public class MainMenu implements GameState {
 
