@@ -91,6 +91,7 @@ public class App extends Application {
       case START_GAME:
         loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
         context.setState(context.getGameStartedState());
+        context.startTimer(30);
         break;
       case START_GUESSING:
         loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));

@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.states;
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -14,6 +15,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class GameStarted implements GameState {
 
   private final GameStateContext context;
+  private CountdownTimer timer;
 
   /**
    * Constructs a new GameStarted state with the given game state context.
@@ -22,6 +24,11 @@ public class GameStarted implements GameState {
    */
   public GameStarted(GameStateContext context) {
     this.context = context;
+  }
+
+  public void startTimer(int time) {
+    timer = new CountdownTimer(time);
+    timer.start();
   }
 
   /**

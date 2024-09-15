@@ -151,4 +151,10 @@ public class GameStateContext {
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
     gameState.handleRectangleClick(event, rectangleId);
   }
+
+  public void startTimer(int time) {
+    if (gameState instanceof GameStarted) {
+      ((GameStarted) gameState).startTimer(time);
+    }
+  }
 }

@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +27,7 @@ public class RoomController {
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context;
+  private Thread handleRectangleThread;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -51,6 +53,17 @@ public class RoomController {
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
-    context.handleRectangleClick(event, clickedRectangle.getId());
+
+    Task<Void> handleRectangleTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            context.handleRectangleClick(event, clickedRectangle.getId());
+            return null;
+          }
+        };
+    handleRectangleThread = new Thread(handleRectangleTask);
+    handleRectangleThread.setDaemon(true);
+    handleRectangleThread.start();
   }
 }
