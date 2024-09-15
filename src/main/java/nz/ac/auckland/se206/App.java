@@ -68,6 +68,7 @@ public class App extends Application {
     currentRoom = Room.MAIN_ROOM;
 
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
+    // Keeping this here for now, as removing it will break the code :(
     Parent root = loader.load();
 
     roomController = loader.getController();
@@ -112,9 +113,10 @@ public class App extends Application {
       case START_GAME:
         openMainRoom(event);
         context.setState(context.getGameStartedState());
-        context.startTimer(10);
+        context.startTimer(300); // 5 minutes
         return;
       case START_GUESSING:
+        context.stopTimer(); // Stop the timer in the previous state (GameStarted)
         loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));
         context.setState(context.getGuessingState());
         break;

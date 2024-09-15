@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -12,6 +13,7 @@ public class GuessingController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectSubmit;
+  @FXML private Label lblTimer;
 
   private static GameStateContext context;
 
@@ -30,5 +32,11 @@ public class GuessingController {
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     context.handleRectangleClick(event, clickedRectangle.getId());
+  }
+
+  public void updateLabelTimer(int time) {
+    int minutes = time / 60;
+    int seconds = time % 60;
+    lblTimer.setText(String.format("%2d:%02d", minutes, seconds));
   }
 }

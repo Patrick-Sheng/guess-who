@@ -31,6 +31,10 @@ public class GameStarted implements GameState {
     timer.start();
   }
 
+  public void stopTimer() {
+    timer.stop();
+  }
+
   /**
    * Handles the event when a rectangle is clicked. Depending on the clicked rectangle, it either
    * provides an introduction or transitions to the chat view.

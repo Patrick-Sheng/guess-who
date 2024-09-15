@@ -40,12 +40,12 @@ public class CountdownTimer {
     timerThread.start();
   }
 
-  public void pauseTimer() {
+  public void pause() {
     isRunning = false;
   }
 
-  public void stopTimer() {
-    pauseTimer();
+  public void stop() {
+    pause();
     if (timerThread != null && timerThread.isAlive()) {
       timerThread.interrupt();
     }

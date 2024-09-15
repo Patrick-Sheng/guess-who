@@ -157,4 +157,10 @@ public class GameStateContext {
       ((GameStarted) gameState).startTimer(time);
     }
   }
+
+  public void stopTimer() {
+    if (gameState instanceof GameStarted) {
+      ((GameStarted) gameState).stopTimer();
+    }
+  }
 }

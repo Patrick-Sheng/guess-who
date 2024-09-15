@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.states;
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CountdownTimer;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -15,6 +16,7 @@ public class Guessing implements GameState {
 
   private final GameStateContext context;
   private String selectedPerson;
+  private CountdownTimer timer;
 
   /**
    * Constructs a new Guessing state with the given game state context.
@@ -23,6 +25,15 @@ public class Guessing implements GameState {
    */
   public Guessing(GameStateContext context) {
     this.context = context;
+  }
+
+  public void startTimer(int time) {
+    timer = new CountdownTimer(time);
+    timer.start();
+  }
+
+  public void stopTimer() {
+    timer.stop();
   }
 
   /**

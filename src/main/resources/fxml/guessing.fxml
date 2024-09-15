@@ -6,7 +6,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessingController">
    <children>
       <Label layoutX="233.0" layoutY="58.0" text="Click on the suspect to make a guess">
@@ -23,5 +22,7 @@
       <Label layoutX="154.0" layoutY="202.0" text="Person 1" />
       <Label layoutX="372.0" layoutY="202.0" text="Person 2" />
       <Label layoutX="591.0" layoutY="202.0" text="Person 3" />
+      <Label layoutX="636.0" layoutY="50.0" text="Timer:" />
+      <Label fx:id="lblTimer" layoutX="671.0" layoutY="50.0" text="XX:XX" />
    </children>
 </Pane>
