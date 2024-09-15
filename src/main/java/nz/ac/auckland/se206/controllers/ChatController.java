@@ -3,11 +3,15 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -15,8 +19,8 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-import nz.ac.auckland.se206.speech.FreeTextToSpeech;
 
 /**
  * Controller class for the chat view. Handles user interactions and communication with the GPT
@@ -27,9 +31,14 @@ public class ChatController {
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private Button btnSend;
+  @FXML private Label lblTimer;
 
   private ChatCompletionRequest chatCompletionRequest;
   private String profession;
+  private GameStateContext context;
+  private Thread professionThread;
+  private Thread applicationThread;
+  private Thread handleRectangleThread;
 
   /**
    * Initializes the chat view.
@@ -38,7 +47,19 @@ public class ChatController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    // Any required initialization code can be placed here
+    context = App.getGameStateContext();
+  }
+
+  public void stopAllThreads() {
+    stopThread(professionThread);
+    stopThread(applicationThread);
+    stopThread(handleRectangleThread);
+  }
+
+  private void stopThread(Thread thread) {
+    if (thread != null && thread.isAlive()) {
+      thread.interrupt();
+    }
   }
 
   /**
@@ -59,18 +80,29 @@ public class ChatController {
    */
   public void setProfession(String profession) {
     this.profession = profession;
-    try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-      chatCompletionRequest =
-          new ChatCompletionRequest(config)
-              .setN(1)
-              .setTemperature(0.2)
-              .setTopP(0.5)
-              .setMaxTokens(100);
-      runGpt(new ChatMessage("system", getSystemPrompt()));
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-    }
+
+    Task<Void> professionTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            try {
+              ApiProxyConfig config = ApiProxyConfig.readConfig();
+              chatCompletionRequest =
+                  new ChatCompletionRequest(config)
+                      .setN(1)
+                      .setTemperature(0.2)
+                      .setTopP(0.5)
+                      .setMaxTokens(100);
+              runGpt(new ChatMessage("system", getSystemPrompt()));
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+            }
+            return null;
+          }
+        };
+    professionThread = new Thread(professionTask);
+    professionThread.setDaemon(true);
+    professionThread.start();
   }
 
   /**
@@ -96,7 +128,6 @@ public class ChatController {
       Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
       appendChatMessage(result.getChatMessage());
-      FreeTextToSpeech.speak(result.getChatMessage().getContent());
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       e.printStackTrace();
@@ -113,6 +144,8 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    stopThread(professionThread);
+
     String message = txtInput.getText().trim();
     if (message.isEmpty()) {
       return;
@@ -120,18 +153,39 @@ public class ChatController {
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    runGpt(msg);
+
+    Task<Void> sendMessageTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            runGpt(msg);
+            return null;
+          }
+        };
+    applicationThread = new Thread(sendMessageTask);
+    applicationThread.setDaemon(true);
+    applicationThread.start();
   }
 
-  /**
-   * Navigates back to the previous view.
-   *
-   * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
   @FXML
-  private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot("room");
+  private void handleRectangleClick(MouseEvent event) throws IOException {
+    Rectangle clickedRectangle = (Rectangle) event.getSource();
+    Task<Void> handleRectangleTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            context.handleRectangleClick(event, clickedRectangle.getId());
+            return null;
+          }
+        };
+    handleRectangleThread = new Thread(handleRectangleTask);
+    handleRectangleThread.setDaemon(true);
+    handleRectangleThread.start();
+  }
+
+  public void updateLabelTimer(int time) {
+    int minutes = time / 60;
+    int seconds = time % 60;
+    lblTimer.setText(String.format("%2d:%02d", minutes, seconds));
   }
 }

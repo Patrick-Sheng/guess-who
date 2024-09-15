@@ -1,13 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.event.ActionEvent;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -23,10 +23,12 @@ public class RoomController {
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectWaitress;
   @FXML private Label lblProfession;
+  @FXML private Label lblTimer;
   @FXML private Button btnGuess;
 
   private static boolean isFirstTimeInit = true;
-  private static GameStateContext context = new GameStateContext();
+  private static GameStateContext context;
+  private Thread handleRectangleThread;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -34,33 +36,13 @@ public class RoomController {
    */
   @FXML
   public void initialize() {
+    context = App.getGameStateContext();
     if (isFirstTimeInit) {
       TextToSpeech.speak(
-          "Chat with the three customers, and guess who is the "
-              + context.getProfessionToGuess());
+          "Chat with the three customers, and guess who is the " + context.getProfessionToGuess());
       isFirstTimeInit = false;
     }
     lblProfession.setText(context.getProfessionToGuess());
-  }
-
-  /**
-   * Handles the key pressed event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void onKeyPressed(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " pressed");
-  }
-
-  /**
-   * Handles the key released event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void onKeyReleased(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " released");
   }
 
   /**
@@ -72,17 +54,23 @@ public class RoomController {
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
-    context.handleRectangleClick(event, clickedRectangle.getId());
+
+    Task<Void> handleRectangleTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            context.handleRectangleClick(event, clickedRectangle.getId());
+            return null;
+          }
+        };
+    handleRectangleThread = new Thread(handleRectangleTask);
+    handleRectangleThread.setDaemon(true);
+    handleRectangleThread.start();
   }
 
-  /**
-   * Handles the guess button click event.
-   *
-   * @param event the action event triggered by clicking the guess button
-   * @throws IOException if there is an I/O error
-   */
-  @FXML
-  private void handleGuessClick(ActionEvent event) throws IOException {
-    context.handleGuessClick();
+  public void updateLabelTimer(int time) {
+    int minutes = time / 60;
+    int seconds = time % 60;
+    lblTimer.setText(String.format("%2d:%02d", minutes, seconds));
   }
 }

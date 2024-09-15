@@ -4,7 +4,9 @@ import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.timer.CountdownTimer;
 
 /**
  * The GameStarted state of the game. Handles the initial interactions when the game starts,
@@ -13,6 +15,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class GameStarted implements GameState {
 
   private final GameStateContext context;
+  private CountdownTimer timer;
 
   /**
    * Constructs a new GameStarted state with the given game state context.
@@ -21,6 +24,15 @@ public class GameStarted implements GameState {
    */
   public GameStarted(GameStateContext context) {
     this.context = context;
+  }
+
+  public void startTimer(int time) {
+    timer = new CountdownTimer(time);
+    timer.start();
+  }
+
+  public void stopTimer() {
+    timer.stop();
   }
 
   /**
@@ -33,6 +45,11 @@ public class GameStarted implements GameState {
    */
   @Override
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
+    if (rectangleId.equals("rectGuess") || rectangleId.equals("lblGuess")) {
+      App.openScene(event, SceneState.START_GUESSING);
+      return;
+    }
+
     // Transition to chat view or provide an introduction based on the clicked rectangle
     switch (rectangleId) {
       case "rectCashier":
@@ -41,19 +58,11 @@ public class GameStarted implements GameState {
       case "rectWaitress":
         TextToSpeech.speak("Hi, let me know when you are ready to order!");
         return;
+      case "rectBackToMainRoom":
+        App.openMainRoom(event);
+        return;
+      default:
+        App.openChat(event, context.getProfession(rectangleId));
     }
-    App.openChat(event, context.getProfession(rectangleId));
-  }
-
-  /**
-   * Handles the event when the guess button is clicked. Prompts the player to make a guess and
-   * transitions to the guessing state.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  @Override
-  public void handleGuessClick() throws IOException {
-    TextToSpeech.speak("Make a guess, click on the " + context.getProfessionToGuess());
-    context.setState(context.getGuessingState());
   }
 }

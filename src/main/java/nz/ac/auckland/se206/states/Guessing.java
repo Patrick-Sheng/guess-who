@@ -2,8 +2,11 @@ package nz.ac.auckland.se206.states;
 
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.timer.CountdownTimer;
 
 /**
  * The Guessing state of the game. Handles the logic for when the player is making a guess about the
@@ -12,6 +15,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class Guessing implements GameState {
 
   private final GameStateContext context;
+  private String selectedPerson;
+  private CountdownTimer timer;
 
   /**
    * Constructs a new Guessing state with the given game state context.
@@ -20,6 +25,15 @@ public class Guessing implements GameState {
    */
   public Guessing(GameStateContext context) {
     this.context = context;
+  }
+
+  public void startTimer(int time) {
+    timer = new CountdownTimer(time);
+    timer.start();
+  }
+
+  public void stopTimer() {
+    timer.stop();
   }
 
   /**
@@ -32,28 +46,27 @@ public class Guessing implements GameState {
    */
   @Override
   public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
-    if (rectangleId.equals("rectCashier") || rectangleId.equals("rectWaitress")) {
-      TextToSpeech.speak("You should click on the customers");
-      return;
-    }
 
-    String clickedProfession = context.getProfession(rectangleId);
-    if (rectangleId.equals(context.getRectIdToGuess())) {
-      TextToSpeech.speak("Correct! You won! This is the " + clickedProfession);
-    } else {
-      TextToSpeech.speak("You lost! This is the " + clickedProfession);
+    switch (rectangleId) {
+      case "rectPerson1":
+        selectedPerson = context.getProfession(rectangleId);
+        return;
+      case "rectPerson2":
+        selectedPerson = context.getProfession(rectangleId);
+        return;
+      case "rectPerson3":
+        selectedPerson = context.getProfession(rectangleId);
+        return;
+      case "rectSubmit":
+        if (selectedPerson != null) {
+          if (selectedPerson.equals(context.getProfessionToGuess())) {
+            TextToSpeech.speak("Correct! You won! This is the " + selectedPerson);
+          } else {
+            TextToSpeech.speak("You lost! This is the " + selectedPerson);
+          }
+          App.openScene(event, SceneState.END_GAME);
+        }
     }
-    context.setState(context.getGameOverState());
-  }
-
-  /**
-   * Handles the event when the guess button is clicked. Since the player has already guessed, it
-   * notifies the player.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  @Override
-  public void handleGuessClick() throws IOException {
-    TextToSpeech.speak("You have already guessed!");
+    return;
   }
 }
