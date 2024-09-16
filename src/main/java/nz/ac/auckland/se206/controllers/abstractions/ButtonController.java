@@ -1,32 +1,24 @@
 package nz.ac.auckland.se206.controllers.abstractions;
 
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameStateContext;
 
-import java.io.IOException;
-
-public abstract class ClickableController {
-    private static GameStateContext context;
+public abstract class ButtonController {
+    private AudioClip hoverSound;
 
     @FXML
     public void initialize() {
-        App.playMusic(getMusic());
-
-        context = App.getGameStateContext();
-
-        postInitialize();
+        hoverSound = new AudioClip(App.class.getResource("/sounds/buttonHover.wav").toExternalForm());
     }
 
-    public abstract String getMusic();
-
-    public void postInitialize() {}
+    @FXML
+    private void handleRectangleEntered() {
+        hoverSound.play();
+    }
 
     @FXML
-    private void handleRectangleClick(MouseEvent event) throws IOException {
-        ImageView clickedRectangle = (ImageView) event.getSource();
-        context.handleRectangleClick(event, clickedRectangle.getId());
+    private void handleRectangleExited() {
+        hoverSound.stop();
     }
 }

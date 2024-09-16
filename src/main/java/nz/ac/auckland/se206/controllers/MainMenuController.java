@@ -1,28 +1,28 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
+import nz.ac.auckland.se206.enums.SceneState;
 
-public class MainMenuController {
-
-  @FXML private Rectangle rectStartGame;
-  @FXML private Rectangle rectSettings;
-  @FXML private Rectangle rectExit;
-
-  private static GameStateContext context;
+public class MainMenuController extends ButtonController {
+  public ImageView startGame;
+  public ImageView settings;
+  public ImageView exit;
 
   @FXML
-  public void initialize() {
-    context = App.getGameStateContext();
+  private void onExit() {
+    System.exit(0);
   }
 
   @FXML
-  private void handleRectangleClick(MouseEvent event) throws IOException {
-    Rectangle clickedRectangle = (Rectangle) event.getSource();
-    context.handleRectangleClick(event, clickedRectangle.getId());
+  private void onSettings() {
+    App.setRoot(SceneState.SETTINGS);
+  }
+
+  @FXML
+  private void onStart() {
+    App.setRoot(SceneState.START_GAME);
   }
 }

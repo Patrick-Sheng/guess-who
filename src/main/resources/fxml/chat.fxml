@@ -4,17 +4,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
-  <children>
-    <TextArea fx:id="txtaChat" editable="false" layoutX="286.0" layoutY="26.0" prefHeight="498.0" prefWidth="478.0" wrapText="true" />
-    <TextField fx:id="txtInput" layoutX="286.0" layoutY="540.0" prefHeight="26.0" prefWidth="354.0" />
-    <Button fx:id="btnSend" layoutX="650.0" layoutY="541.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-      <Rectangle fx:id="rectBackToMainRoom" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="34.0" layoutX="705.0" layoutY="536.0" onMouseClicked="#handleRectangleClick" stroke="BLACK" strokeType="INSIDE" width="59.0" />
-      <Label layoutX="713.0" layoutY="545.0" text="Go Back" />
-      <Label layoutX="169.0" layoutY="45.0" text="Timer:" />
-      <Label fx:id="lblTimer" layoutX="212.0" layoutY="45.0" text="XX:XX" />
-  </children>
+<AnchorPane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false"
+            prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
+            xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+  <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/backgrounds/gardener.jpeg" />
+  </ImageView>
+  <TextArea fx:id="txtaChat" editable="false" layoutX="286.0" layoutY="26.0" prefHeight="498.0" prefWidth="478.0"
+            wrapText="true"/>
+  <TextField fx:id="txtInput" layoutX="286.0" layoutY="540.0" prefHeight="26.0" prefWidth="354.0"/>
+  <Button fx:id="btnSend" layoutX="650.0" layoutY="541.0" mnemonicParsing="false"
+          text="Send"/>
+  <Rectangle fx:id="rectBackToMainRoom" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="34.0" layoutX="705.0"
+             layoutY="536.0" stroke="BLACK" strokeType="INSIDE" width="59.0"/>
+  <Label layoutX="713.0" layoutY="545.0" text="Go Back"/>
+  <Label layoutX="169.0" layoutY="45.0" text="Timer:"/>
+  <Label fx:id="lblTimer" layoutX="212.0" layoutY="45.0" text="XX:XX"/>
 </AnchorPane>
