@@ -1,0 +1,75 @@
+.highlight-image {
+    -fx-effect: dropshadow(gaussian, rgba(249,245,229,0.1), 20, 0.5, 0, 0);
+}
+.highlight-image:hover {
+    -fx-effect: dropshadow(gaussian, rgba(249,245,229,0.5), 30, 0.5, 0, 0);
+}
+
+.highlight-image:pressed  {
+    -fx-effect: dropshadow(gaussian, rgba(249,245,229,0.75), 40, 0.5, 0, 0);
+}
+
+.pane {
+    -fx-background-color: #1a1a1a;
+}
+
+.label {
+    -fx-font-family: 'Georgia', serif;
+    -fx-text-fill: #FEFCCD;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0.5, 0, 0);
+}
+
+.grid-pane {
+    -fx-background-color: rgba(7, 60, 140, 0.2);
+    -fx-border-radius: 15px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0, 0);
+}
+
+.slider {
+    -fx-control-inner-background: #FEFCCD;
+    -fx-control-inner-background-alt: #FFFFFF;
+    -fx-background-color: linear-gradient(to bottom, #27576E, #1A3D57);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0.5, 0, 0);
+}
+
+.toggle-button {
+    -fx-background-color: #2b2b2b, linear-gradient(to bottom, #27576E, #1A3D57);
+    -fx-text-fill: #FEFCCD;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0.5, 0, 0);
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0.5, 0, 0);
+}
+
+.credits-label {
+    -fx-text-fill: #FEFCCD;
+    -fx-font-family: 'Georgia', serif;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0.5, 0, 0);
+}
+
+.back-button {
+    -fx-background-color: #2b2b2b, linear-gradient(to bottom, #F6C583, #C9636D);
+    -fx-text-fill: #FEFCCD;
+    -fx-font-family: 'Georgia', serif;
+    -fx-font-size: 24px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 20, 0.5, 0, 0);
+}
+
+.back-button:hover {
+    -fx-background-color: #3b3b3b, linear-gradient(to bottom, #E8A76B, #9E344C);
+    -fx-font-family: 'Georgia', serif;
+    -fx-font-size: 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 30, 0.5, 0, 0);
+}
+.back-button:pressed {
+    -fx-background-color: #4b4b4b, linear-gradient(to bottom, #C9815F, #582748);
+    -fx-font-family: 'Georgia', serif;
+    -fx-font-size: 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 40, 0.5, 0, 0);
+}

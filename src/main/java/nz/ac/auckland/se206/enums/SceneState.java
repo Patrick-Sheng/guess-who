@@ -1,8 +1,10 @@
 package nz.ac.auckland.se206.enums;
 
 public enum SceneState {
-  MAIN_MENU(),
-  START_GAME(),
-  START_GUESSING(),
-  END_GAME();
+  MAIN_MENU,
+  SETTINGS,
+  START_GAME,
+  START_GUESSING,
+  END_GAME_WON,
+  END_GAME_LOST
 }

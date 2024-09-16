@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<Pane fx:id="room" focusTraversable="true" prefHeight="600.0" prefWidth="790.0" style="-fx-background-color: #A9A9A9;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
-   <children>
-      <ImageView fitHeight="452.0" fitWidth="789.0" layoutY="149.0" preserveRatio="true">
-         <image>
-            <Image url="@../images/cafe.png" />
-         </image>
-      </ImageView>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="128.0" layoutX="113.0" layoutY="298.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="109.0" />
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="171.0" layoutX="368.0" layoutY="305.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="587.0" layoutY="284.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
-      <Rectangle fx:id="rectCashier" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="73.0" layoutX="222.0" layoutY="262.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
-      <Rectangle fx:id="rectWaitress" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="251.0" layoutX="463.0" layoutY="237.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="rectGuess" arcHeight="5.0" arcWidth="5.0" fill="#bcbcbc" height="31.0" layoutX="347.0" layoutY="101.0" onMouseClicked="#handleRectangleClick" stroke="BLACK" strokeType="INSIDE" width="91.0" />
-      <Label layoutX="155.0" layoutY="14.0" text="SOFTENG206 - Guess Who ?">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="57.0" layoutY="61.0" text="Chat with the three customers, and guess who is the ">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblProfession" layoutX="546.0" layoutY="58.0" prefHeight="37.0" prefWidth="236.0" wrapText="true">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblGuess" layoutX="356.0" layoutY="108.0" text="Make a guess" />
-      <Label layoutX="678.0" layoutY="108.0" text="Timer:" />
-      <Label fx:id="lblTimer" alignment="CENTER" layoutX="718.0" layoutY="108.0" text="XX:XX" />
-   </children>
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+   <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/backgrounds/manor.jpeg" />
+   </ImageView>
+   <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="128.0" layoutX="113.0" layoutY="298.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="109.0" />
+   <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="171.0" layoutX="368.0" layoutY="305.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
+   <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="135.0" layoutX="587.0" layoutY="284.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
+   <Rectangle fx:id="rectCashier" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="73.0" layoutX="222.0" layoutY="262.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+   <Rectangle fx:id="rectWaitress" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="251.0" layoutX="463.0" layoutY="237.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+   <Rectangle fx:id="rectGuess" arcHeight="5.0" arcWidth="5.0" fill="#bcbcbc" height="31.0" layoutX="339.0" layoutY="504.0" stroke="BLACK" strokeType="INSIDE" width="91.0" />
+   <Label layoutX="159.0" layoutY="116.0" text="SOFTENG206 - Guess Who ?">
+      <font>
+         <Font size="38.0" />
+      </font>
+   </Label>
+   <Label layoutX="145.0" layoutY="171.0" text="Chat with the three customers, and guess who is the ">
+      <font>
+         <Font size="21.0" />
+      </font>
+   </Label>
+   <Label fx:id="lblProfession" layoutX="546.0" layoutY="58.0" prefHeight="37.0" prefWidth="236.0" wrapText="true">
+      <font>
+         <Font size="21.0" />
+      </font>
+   </Label>
+   <Label fx:id="lblGuess" layoutX="348.0" layoutY="511.0" text="Make a guess" />
+   <Label layoutX="357.0" layoutY="229.0" text="Timer:" />
+   <Label fx:id="lblTimer" alignment="CENTER" layoutX="397.0" layoutY="229.0" text="XX:XX" />
 </Pane>

@@ -1,30 +1,31 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import  javafx.scene.image.Image;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.controllers.ChatController;
-import nz.ac.auckland.se206.controllers.RoomController;
-import nz.ac.auckland.se206.enums.Room;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.enums.SceneState;
-import nz.ac.auckland.se206.states.GameState;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
  * application.
  */
 public class App extends Application {
-
   private static Scene scene;
-  private static GameStateContext context = new GameStateContext();
-  private static RoomController roomController;
-  private static ChatController chatController;
-  private static Room currentRoom;
+  private static MediaPlayer music;
+  private static String currentlyPlaying;
 
   /**
    * The main method that launches the JavaFX application.
@@ -35,14 +36,52 @@ public class App extends Application {
     launch();
   }
 
+  public static MediaPlayer getMusic() {
+    return music;
+  }
+
   /**
    * Sets the root of the scene to the specified FXML file.
    *
-   * @param fxml the name of the FXML file (without extension)
-   * @throws IOException if the FXML file is not found
+   * @param state the state to transition to
    */
-  public static void setRoot(String fxml) throws IOException {
-    scene.setRoot(loadFxml(fxml));
+  public static void setRoot(SceneState state) {
+    String fxml = getSceneName(state);
+
+    Task<Parent> task =
+            new Task<>() {
+              @Override
+              protected Parent call() throws IOException {
+                return loadFxml(fxml);
+              }
+            };
+
+    task.setOnSucceeded(
+            event -> {
+              Parent root = task.getValue();
+              Platform.runLater(() -> {
+                Stage stage = (Stage) scene.getWindow();
+                SetStage(stage, root, state);
+              });
+            });
+
+    task.setOnFailed(
+            event -> {
+              Throwable e = task.getException();
+              e.printStackTrace();
+            });
+
+    new Thread(task).start();
+  }
+
+  private static void SetStage(Stage stage, Parent root, SceneState state) {
+    scene.setRoot(root);
+    stage.setScene(scene);
+    stage.show();
+    root.requestFocus();
+
+    String music = getSceneMusic(state);
+    playMusic(music);
   }
 
   /**
@@ -57,97 +96,59 @@ public class App extends Application {
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
-  public static void setCurrentState(GameState state) {
-    context.setState(state);
-  }
-
-  public static GameStateContext getGameStateContext() {
-    return context;
-  }
-
-  // Note that main room will reset every visit, as it's opening the file again
-  public static void openMainRoom(MouseEvent event) throws IOException {
-    currentRoom = Room.MAIN_ROOM;
-
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/room.fxml"));
-    // Keeping this here for now, as removing it will break the code :(
-    Parent root = loader.load();
-
-    roomController = loader.getController();
-
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene.setRoot(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  /**
-   * Opens the chat view and sets the profession in the chat controller.
-   *
-   * @param event the mouse event that triggered the method
-   * @param profession the profession to set in the chat controller
-   * @throws IOException if the FXML file is not found
-   */
-  public static void openChat(MouseEvent event, String profession) throws IOException {
-    currentRoom = Room.CHAT_ROOM;
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
-    // Keeping this here for now, as removing it will break the code :(
-    Parent root = loader.load();
-
-    chatController = loader.getController();
-    chatController.setProfession(profession);
-
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene.setRoot(root);
-    stage.setScene(scene);
-    stage.show();
-  }
-
-  public static void openScene(MouseEvent event, SceneState state) throws IOException {
-
-    // Default loader on MainMenu
-    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/mainMenu.fxml"));
-
-    switch (state) {
-      case MAIN_MENU:
-        context.setState(context.getMainMenuState());
-        break;
-      case START_GAME:
-        openMainRoom(event);
-        context.setState(context.getGameStartedState());
-        context.startTimer(300); // 5 minutes
-        return;
-      case START_GUESSING:
-        context.stopTimer(); // Stop the timer in the previous state (GameStarted)
-        loader = new FXMLLoader(App.class.getResource("/fxml/guessing.fxml"));
-        context.setState(context.getGuessingState());
-        break;
-      case END_GAME:
-        loader = new FXMLLoader(App.class.getResource("/fxml/gameOver.fxml"));
-        context.setState(context.getGameOverState());
-        break;
+  private static void playMusic(String name) {
+    if (currentlyPlaying.equals(name)) {
+      return;
     }
 
-    loadScene(event, loader);
-  }
+    boolean muted = false;
+    double volume = 1;
 
-  public static void loadScene(MouseEvent event, FXMLLoader loader) throws IOException {
-    Parent root = loader.load();
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    scene.setRoot(root);
-    stage.setScene(scene);
-    stage.show();
-  }
+    if (music != null) {
+      muted = music.isMute();
+      volume = music.getVolume();
 
-  public static void updateTimer(int time) {
-    switch (currentRoom) {
-      case MAIN_ROOM:
-        roomController.updateLabelTimer(time);
-        break;
-      case CHAT_ROOM:
-        chatController.updateLabelTimer(time);
-        break;
+      music.stop();
+      music.dispose();
     }
+
+    URL resource = App.class.getResource("/music/" + name + ".mp3");
+
+    assert resource != null;
+    music = new MediaPlayer(new Media(resource.toString()));
+
+    music.setMute(muted);
+    music.setVolume(volume);
+
+    music.setOnEndOfMedia(
+            new Runnable() {
+              public void run() {
+                music.seek(Duration.ZERO);
+              }
+            });
+
+    music.play();
+
+    currentlyPlaying = name;
+  }
+
+  private static String getSceneName(SceneState state) {
+    return switch (state) {
+      case MAIN_MENU -> "mainMenu";
+      case SETTINGS -> "settings";
+      case START_GAME -> "room";
+      case START_GUESSING -> "guessing";
+      case END_GAME_WON, END_GAME_LOST -> "gameOver";
+    };
+  }
+
+  private static String getSceneMusic(SceneState state) {
+    return switch (state) {
+      case MAIN_MENU, SETTINGS -> "menuMusic";
+      case START_GAME, START_GUESSING -> "guessingMusic";
+      case END_GAME_WON -> "winMusic";
+      case END_GAME_LOST -> "gameOverMusic";
+    };
   }
 
   /**
@@ -158,10 +159,18 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Parent root = loadFxml("mainMenu");
+    SceneState defaultState = SceneState.MAIN_MENU;
+    currentlyPlaying = "";
+
+    Parent root = loadFxml(getSceneName(defaultState));
+
     scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
-    root.requestFocus();
+    scene.getStylesheets().add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
+
+    stage.setResizable(false);
+    stage.setTitle("PI Masters: Whispers of Emeralds");
+    stage.getIcons().add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
+
+    SetStage(stage, root, defaultState);
   }
 }
