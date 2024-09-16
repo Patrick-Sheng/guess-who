@@ -7,11 +7,13 @@ import java.util.Objects;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import  javafx.scene.image.Image;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -26,6 +28,9 @@ public class App extends Application {
   private static Scene scene;
   private static MediaPlayer music;
   private static String currentlyPlaying;
+  private static AudioClip hoverSound;
+
+  private static boolean isMuted;
 
   /**
    * The main method that launches the JavaFX application.
@@ -34,6 +39,14 @@ public class App extends Application {
    */
   public static void main(final String[] args) {
     launch();
+  }
+
+  public static void setMuted(boolean newMuteState) {
+    isMuted = newMuteState;
+  }
+
+  public static AudioClip getSfx() {
+    return hoverSound;
   }
 
   public static MediaPlayer getMusic() {
@@ -102,7 +115,7 @@ public class App extends Application {
     }
 
     boolean muted = false;
-    double volume = 1;
+    double volume = .25;
 
     if (music != null) {
       muted = music.isMute();
@@ -130,6 +143,15 @@ public class App extends Application {
     music.play();
 
     currentlyPlaying = name;
+  }
+
+  public static void playHover() {
+    if (!isMuted)
+      hoverSound.play();
+  }
+
+  public static void stopHover() {
+    hoverSound.stop();
   }
 
   private static String getSceneName(SceneState state) {
@@ -160,7 +182,12 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     SceneState defaultState = SceneState.MAIN_MENU;
+
     currentlyPlaying = "";
+    isMuted = false;
+
+    hoverSound = new AudioClip(Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav")).toExternalForm());
+    hoverSound.setVolume(.25f);
 
     Parent root = loadFxml(getSceneName(defaultState));
 

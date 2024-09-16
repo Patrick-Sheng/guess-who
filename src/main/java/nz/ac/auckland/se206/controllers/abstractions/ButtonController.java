@@ -4,21 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.media.AudioClip;
 import nz.ac.auckland.se206.App;
 
+import java.util.Objects;
+
 public abstract class ButtonController {
-    private AudioClip hoverSound;
-
-    @FXML
-    public void initialize() {
-        hoverSound = new AudioClip(App.class.getResource("/sounds/buttonHover.wav").toExternalForm());
-    }
-
     @FXML
     private void handleRectangleEntered() {
-        hoverSound.play();
+        App.playHover();
     }
 
     @FXML
     private void handleRectangleExited() {
-        hoverSound.stop();
+        App.stopHover();
     }
 }
