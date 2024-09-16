@@ -11,66 +11,66 @@ import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 
 public class SettingsController extends ButtonController {
-    public Slider volumeSlider;
-    public Slider sfxSlider;
-    public ToggleButton muteButton;
-    public ImageView backButton;
+  public Slider volumeSlider;
+  public Slider sfxSlider;
+  public ToggleButton muteButton;
+  public ImageView backButton;
 
-    private MediaPlayer music;
-    private AudioClip sfx;
+  private MediaPlayer music;
+  private AudioClip sfx;
 
-    @FXML
-    public void initialize() {
-        music = App.getMusic();
-        sfx = App.getSfx();
+  @FXML
+  public void initialize() {
+    music = App.getMusic();
+    sfx = App.getSfx();
 
-        volumeSlider.setValue(music.getVolume() * 100);
-        sfxSlider.setValue(sfx.getVolume() * 100);
+    volumeSlider.setValue(music.getVolume() * 100);
+    sfxSlider.setValue(sfx.getVolume() * 100);
 
-        volumeSlider
-                .valueProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> {
-                            music.setVolume(newValue.doubleValue() / 100.0);
-                        });
+    volumeSlider
+        .valueProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              music.setVolume(newValue.doubleValue() / 100.0);
+            });
 
-        sfxSlider
-                .valueProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> {
-                            sfx.setVolume(newValue.doubleValue() / 100.0);
-                        });
+    sfxSlider
+        .valueProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              sfx.setVolume(newValue.doubleValue() / 100.0);
+            });
 
-        updateMuteButton();
+    updateMuteButton();
 
-        music
-                .muteProperty()
-                .addListener(
-                        (observable, oldValue, newValue) -> {
-                            updateMuteButton();
-                        });
+    music
+        .muteProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              updateMuteButton();
+            });
+  }
+
+  @FXML
+  private void onMuteToggle() {
+    boolean newMute = !music.isMute();
+    App.setMuted(newMute);
+    music.setMute(newMute);
+    updateMuteButton();
+  }
+
+  private void updateMuteButton() {
+    if (music.isMute()) {
+      muteButton.setText("On");
+      muteButton.setStyle("-fx-text-fill: darkred;");
+    } else {
+      muteButton.setText("Off");
+      muteButton.setStyle("-fx-text-fill: green;");
     }
+  }
 
-    @FXML
-    private void onMuteToggle() {
-        boolean newMute = !music.isMute();
-        App.setMuted(newMute);
-        music.setMute(newMute);
-        updateMuteButton();
-    }
-
-    private void updateMuteButton() {
-        if (music.isMute()) {
-            muteButton.setText("On");
-            muteButton.setStyle("-fx-text-fill: darkred;");
-        } else {
-            muteButton.setText("Off");
-            muteButton.setStyle("-fx-text-fill: green;");
-        }
-    }
-
-    @FXML
-    private void onBackButton() {
-        App.setRoot(SceneState.MAIN_MENU);
-    }
+  @FXML
+  private void onBackButton() {
+    App.setRoot(SceneState.MAIN_MENU);
+  }
 }
