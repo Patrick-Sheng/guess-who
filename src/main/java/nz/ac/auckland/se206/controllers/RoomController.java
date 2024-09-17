@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -14,7 +15,7 @@ import nz.ac.auckland.se206.enums.SceneState;
  * chat with customers and guess their profession.
  */
 public class RoomController {
-
+  @FXML private Button guessButton;
   @FXML private ImageView exitImage;
   @FXML private Pane paneRoom;
   @FXML private Pane paneMap;
@@ -23,11 +24,26 @@ public class RoomController {
 
   @FXML
   public void initialize() {
+    disableLabels();
+    disableButton();
+    enableButton();
     paneMap.setVisible(false);
   }
 
+  private void disableLabels() {}
+
+  private void disableButton() {
+    guessButton.setStyle("-fx-background-color: darkred; -fx-text-fill: #222;");
+    guessButton.setDisable(true);
+  }
+
+  public void enableButton() {
+    guessButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+    guessButton.setDisable(false);
+  }
+
   @FXML
-  private void onGuess() {
+  private void onMakeGuess() {
     App.setRoot(SceneState.START_GUESSING);
   }
 
