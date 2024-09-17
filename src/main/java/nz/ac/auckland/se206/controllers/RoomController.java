@@ -62,7 +62,7 @@ public class RoomController {
         text = "GardenerRoom";
         break;
       case "mainRoom":
-        text = "Crime scene";
+        text = "You are in the Crime scene";
         break;
       default:
         text = "";
@@ -73,9 +73,15 @@ public class RoomController {
   }
 
   @FXML
-  private void exitMap(MouseEvent event) {
+  private void exitMap() {
     System.out.println("exit");
     textMap.setText("");
     exitImage.setVisible(true);
+  }
+
+  @FXML
+  private void clickRoom(MouseEvent event) {
+    System.out.println("click");
+    App.setRoot(SceneState.CHAT);
   }
 }
