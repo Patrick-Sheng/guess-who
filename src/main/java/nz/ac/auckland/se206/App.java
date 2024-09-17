@@ -158,6 +158,7 @@ public class App extends Application {
       case MAIN_MENU -> "mainMenu";
       case SETTINGS -> "settings";
       case START_GAME -> "room";
+      case CHAT -> "chat";
       case START_GUESSING -> "guessing";
       case END_GAME_WON, END_GAME_LOST -> "gameOver";
     };
@@ -165,7 +166,7 @@ public class App extends Application {
 
   private static String getSceneMusic(SceneState state) {
     return switch (state) {
-      case MAIN_MENU, SETTINGS -> "menuMusic";
+      case MAIN_MENU, SETTINGS, CHAT -> "menuMusic";
       case START_GAME, START_GUESSING -> "guessingMusic";
       case END_GAME_WON -> "winMusic";
       case END_GAME_LOST -> "gameOverMusic";
