@@ -32,14 +32,14 @@
          <Button layoutX="706.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#onMap" text="map" />
       </children>
    </Pane>
-   <Pane fx:id="paneMap" onMouseClicked="#onExitMap" prefHeight="768.0" prefWidth="768.0">
+   <Pane fx:id="paneMap" prefHeight="768.0" prefWidth="768.0">
       <children>
          <ImageView fitHeight="685.0" fitWidth="819.0" layoutX="-25.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/map/map_mansion.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" opacity="0.74" pickOnBounds="true" preserveRatio="true">
+         <ImageView onMouseClicked="#onExitMap" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" opacity="0.74" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../images/buttons/exit.png" />
             </image>
