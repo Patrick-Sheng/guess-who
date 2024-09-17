@@ -61,8 +61,6 @@ public class RoomController {
 
   @FXML
   private void enterMap(MouseEvent event) {
-    System.out.println("enter");
-
     Pane hoverPane = (Pane) event.getSource();
     String paneId = hoverPane.getId();
     String text = "";
@@ -90,7 +88,6 @@ public class RoomController {
 
   @FXML
   private void exitMap() {
-    System.out.println("exit");
     textMap.setText("");
     exitImage.setVisible(true);
   }
