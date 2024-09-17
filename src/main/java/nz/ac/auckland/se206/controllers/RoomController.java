@@ -97,7 +97,22 @@ public class RoomController {
 
   @FXML
   private void clickRoom(MouseEvent event) {
-    System.out.println("click");
-    App.setRoot(SceneState.CHAT);
+    Pane hoverPane = (Pane) event.getSource();
+    String paneId = hoverPane.getId();
+
+    switch (paneId) {
+      case "auntieRoom":
+        App.setRoot(SceneState.CHAT);
+        break;
+      case "childRoom":
+        App.setRoot(SceneState.CHAT);
+        break;
+      case "gardenerRoom":
+        App.setRoot(SceneState.CHAT);
+        break;
+      case "mainRoom":
+        App.setRoot(SceneState.START_GAME);
+        break;
+    }
   }
 }

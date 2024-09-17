@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
@@ -67,8 +73,8 @@
            </rowConstraints>
             <children>
                <Pane fx:id="gardenerRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" />
-               <Pane fx:id="mainRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="1" />
-               <Pane fx:id="mainRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="18.0" prefWidth="112.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="1" />
+               <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="18.0" prefWidth="112.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                <Pane fx:id="auntieRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="2" />
                <Pane fx:id="childRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             </children>
