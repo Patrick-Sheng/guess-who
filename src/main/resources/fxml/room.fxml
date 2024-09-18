@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -29,7 +30,7 @@
             <RowConstraints maxHeight="62.00000000000001" minHeight="10.0" prefHeight="19.999992370605476" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="46.00000762939453" minHeight="0.0" prefHeight="42.00000762939453" vgrow="SOMETIMES" />
           </rowConstraints>
-          <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 05:00" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="5">
+          <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 05:00" textAlignment="CENTER" textFill="#32ff46" GridPane.rowIndex="5">
             <font>
               <Font name="Georgia" size="36.0" />
             </font>
@@ -110,6 +111,26 @@
                <Image url="@../images/buttons/exit.png" />
             </image>
          </ImageView>
+      </children>
+   </Pane>
+   <Pane fx:id="paneTimeIsUp" prefHeight="768.0" prefWidth="768.0">
+      <children>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="184.0" layoutY="185.0" stroke="#5e2900" strokeType="INSIDE" width="400.0" />
+         <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="194.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/time_is_up.jpeg" />
+            </image>
+         </ImageView>
+         <Label layoutX="281.0" layoutY="248.0" text="Time is Up!" textFill="WHITE">
+            <font>
+               <Font name="Georgia" size="40.0" />
+            </font>
+         </Label>
+         <Button fx:id="toGuessRoomButton" layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" prefHeight="111.0" prefWidth="126.0" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
+            <font>
+               <Font name="Georgia Bold" size="22.0" />
+            </font>
+         </Button>
       </children>
    </Pane>
 </Pane>
