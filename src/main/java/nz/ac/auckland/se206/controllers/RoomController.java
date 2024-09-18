@@ -73,7 +73,7 @@ public class RoomController {
         text = "Child Room";
         break;
       case "gardenerRoom":
-        text = "GardenerRoom";
+        text = "Gardener Room";
         break;
       case "mainRoom":
         text = "You are in the Crime scene";

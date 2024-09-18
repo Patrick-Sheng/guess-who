@@ -51,7 +51,7 @@ public class ChatController {
         text = "Child Room";
         break;
       case "gardenerRoom":
-        text = "GardenerRoom";
+        text = "Gardener Room";
         break;
       case "mainRoom":
         text = "Crime scene";
