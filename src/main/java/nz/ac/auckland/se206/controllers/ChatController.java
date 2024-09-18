@@ -18,9 +18,10 @@ public class ChatController extends MapController {
     paneMap.setVisible(false);
   }
 
-  public void updateLblTimer(int time) {
+  public void updateLblTimer(int time, int red, int green, int blue) {
     int minutes = time / 60;
     int seconds = time % 60;
+    timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
   }
 }

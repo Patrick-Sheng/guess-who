@@ -37,15 +37,17 @@ public class RoomController extends MapController {
     guessButton.setDisable(false);
   }
 
-  public void updateLblTimer(int time) {
+  public void updateLblTimer(int time, int red, int green, int blue) {
     int minutes = time / 60;
     int seconds = time % 60;
+    timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
   }
 
   @FXML
   private void onMakeGuess() {
     App.stopTimer();
+    App.resetColour();
     App.startTimer(60);
     App.setRoot(SceneState.START_GUESSING);
   }

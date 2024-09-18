@@ -42,6 +42,10 @@ public class App extends Application {
   private static GameOverController gameOverController;
   private static Suspect chosenSuspect;
 
+  private static int red = 50;
+  private static int green = 255;
+  private static int blue = 70;
+
   private static boolean isMuted;
 
   /**
@@ -134,8 +138,7 @@ public class App extends Application {
     Parent root = loader.load();
 
     if (fxml.equals("mainMenu")) { // Reset controllers if main menu is loaded
-      roomController = null;
-      chatController = null;
+      resetGame();
     } else if (fxml.equals("room") && roomController == null) {
       roomController = loader.getController();
       roomControllerRoot = root;
@@ -150,6 +153,21 @@ public class App extends Application {
     }
 
     return root;
+  }
+
+  private static void resetGame() {
+    roomController = null;
+    chatController = null;
+    guessingController = null;
+    gameOverController = null;
+    chosenSuspect = null;
+    resetColour();
+  }
+
+  public static void resetColour() {
+    red = 50;
+    green = 255;
+    blue = 70;
   }
 
   private static void playMusic(String name) {
@@ -234,25 +252,46 @@ public class App extends Application {
       if (time <= 0) {
         stopTimer();
       }
+      changeTimerColor();
       switch (currentState) {
         case START_GAME:
           if (roomController != null) {
-            roomController.updateLblTimer(time);
+            roomController.updateLblTimer(time, red, green, blue);
           }
           break;
         case CHAT:
           if (chatController != null) {
-            chatController.updateLblTimer(time);
+            chatController.updateLblTimer(time, red, green, blue);
           }
           break;
         case START_GUESSING:
           if (guessingController != null) {
-            guessingController.updateLblTimer(time);
+            guessingController.updateLblTimer(time, red, green, blue);
           }
           break;
         default:
           System.out.println("Other: " + time);
           break;
+      }
+    }
+  }
+
+  public static void changeTimerColor() {
+    if (currentState.equals(SceneState.START_GAME) || currentState.equals(SceneState.CHAT)) {
+      if (blue - 2 > 31) {
+        blue -= 2;
+      } else if (red + 2 < 256) {
+        red += 2;
+      } else if (green - 2 > 31) {
+        green -= 2;
+      }
+    } else if (currentState.equals(SceneState.START_GUESSING)) {
+      if (blue - 10 > 31) {
+        blue -= 10;
+      } else if (red + 10 < 256) {
+        red += 10;
+      } else if (green + 10 > 31) {
+        green -= 10;
       }
     }
   }
