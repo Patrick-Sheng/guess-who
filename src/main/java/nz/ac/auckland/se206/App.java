@@ -15,7 +15,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.timer.CountdownTimer;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
@@ -26,6 +29,12 @@ public class App extends Application {
   private static MediaPlayer music;
   private static String currentlyPlaying;
   private static AudioClip hoverSound;
+  private static CountdownTimer timer;
+  private static SceneState currentState;
+  private static Parent roomControllerRoot;
+  private static Parent chatControllerRoot;
+  private static RoomController roomController;
+  private static ChatController chatController;
 
   private static boolean isMuted;
 
@@ -56,7 +65,18 @@ public class App extends Application {
    * @param state the state to transition to
    */
   public static void setRoot(SceneState state) {
+    currentState = state;
     String fxml = getSceneName(state);
+
+    if (fxml.equals("room") && roomController != null) {
+      Stage stage = (Stage) scene.getWindow();
+      SetStage(stage, roomControllerRoot, state);
+      return;
+    } else if (fxml.equals("chat") && chatController != null) {
+      Stage stage = (Stage) scene.getWindow();
+      SetStage(stage, chatControllerRoot, state);
+      return;
+    }
 
     Task<Parent> task =
         new Task<>() {
@@ -104,7 +124,21 @@ public class App extends Application {
    * @throws IOException if the FXML file is not found
    */
   private static Parent loadFxml(final String fxml) throws IOException {
-    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
+    Parent root = loader.load();
+
+    if (fxml.equals("mainMenu")) { // Reset controllers if main menu is loaded
+      roomController = null;
+      chatController = null;
+    } else if (fxml.equals("room") && roomController == null) {
+      roomController = loader.getController();
+      roomControllerRoot = root;
+    } else if (fxml.equals("chat") && chatController == null) {
+      chatController = loader.getController();
+      chatControllerRoot = root;
+    }
+
+    return root;
   }
 
   private static void playMusic(String name) {
@@ -171,6 +205,40 @@ public class App extends Application {
       case END_GAME_WON -> "winMusic";
       case END_GAME_LOST -> "gameOverMusic";
     };
+  }
+
+  public static void startTimer(int time) {
+    timer = new CountdownTimer(time + 1); // 1 extra second to account for delay (for now)
+    timer.start();
+  }
+
+  public static void stopTimer() {
+    if (timer != null) {
+      timer.stop();
+    }
+  }
+
+  public static void updateTimer(int time) {
+    if (timer != null && currentState != null) {
+      if (time <= 0) {
+        stopTimer();
+      }
+      switch (currentState) {
+        case START_GAME:
+          if (roomController != null) {
+            roomController.updateLblTimer(time);
+          }
+          break;
+        case CHAT:
+          if (chatController != null) {
+            chatController.updateLblTimer(time);
+          }
+          break;
+        default:
+          System.out.println("Other: " + time);
+          break;
+      }
+    }
   }
 
   /**

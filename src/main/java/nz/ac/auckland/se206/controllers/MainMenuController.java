@@ -24,5 +24,6 @@ public class MainMenuController extends ButtonController {
   @FXML
   private void onStart() {
     App.setRoot(SceneState.START_GAME);
+    App.startTimer(300);
   }
 }

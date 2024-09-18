@@ -83,8 +83,11 @@ public abstract class MapController extends ButtonController {
         App.setRoot(SceneState.START_GAME);
         break;
       case "guessRoom":
+        App.stopTimer();
         App.setRoot(SceneState.START_GUESSING);
         break;
     }
+    paneMap.setVisible(false);
+    paneRoom.setOpacity(1);
   }
 }
