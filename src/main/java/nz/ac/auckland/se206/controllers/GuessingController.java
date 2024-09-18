@@ -96,6 +96,7 @@ public class GuessingController {
         new Task<Void>() {
           @Override
           protected Void call() {
+            App.setSuspect(chosenSuspect);
             switch (chosenSuspect) {
               case AUNT:
                 App.setRoot(SceneState.END_GAME_WON);

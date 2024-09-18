@@ -16,9 +16,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.GameOverController;
 import nz.ac.auckland.se206.controllers.GuessingController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.timer.CountdownTimer;
 
 /**
@@ -37,6 +39,8 @@ public class App extends Application {
   private static RoomController roomController;
   private static ChatController chatController;
   private static GuessingController guessingController;
+  private static GameOverController gameOverController;
+  private static Suspect chosenSuspect;
 
   private static boolean isMuted;
 
@@ -140,6 +144,9 @@ public class App extends Application {
       chatControllerRoot = root;
     } else if (fxml.equals("guessing")) {
       guessingController = loader.getController();
+    } else if (fxml.equals("gameOver")) {
+      gameOverController = loader.getController();
+      gameOverController.setGameOverImage(chosenSuspect);
     }
 
     return root;
@@ -247,6 +254,16 @@ public class App extends Application {
           System.out.println("Other: " + time);
           break;
       }
+    }
+  }
+
+  public static void setSuspect(Suspect suspect) {
+    chosenSuspect = suspect;
+  }
+
+  public static void sendEndGameStats(Suspect suspect) {
+    if (gameOverController != null) {
+      gameOverController.setGameOverImage(suspect);
     }
   }
 
