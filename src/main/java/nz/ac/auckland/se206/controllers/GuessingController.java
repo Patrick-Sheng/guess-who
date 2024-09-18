@@ -2,8 +2,10 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
@@ -11,6 +13,9 @@ import nz.ac.auckland.se206.enums.Suspect;
 
 public class GuessingController {
 
+  @FXML private Pane paneTimeIsUp;
+  @FXML private Label systemDescriptionLabel;
+  @FXML private Button moveToNextScene;
   @FXML private Rectangle rectAunt;
   @FXML private Rectangle rectGardener;
   @FXML private Rectangle rectNiece;
@@ -19,13 +24,33 @@ public class GuessingController {
   private Suspect chosenSuspect;
 
   @FXML
-  public void initialize() {}
+  public void initialize() {
+    paneTimeIsUp.setVisible(false);
+  }
 
   public void updateLblTimer(int time, int red, int green, int blue) {
+    if (time == 0) {
+      timeIsUp();
+    }
+
     int minutes = time / 60;
     int seconds = time % 60;
     timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
+  }
+
+  private void timeIsUp() {
+    App.stopTimer();
+    paneTimeIsUp.setVisible(true);
+
+    if (chosenSuspect == null) {
+      systemDescriptionLabel.setText(
+          "You did not select a suspect within time limit. Game is now over.");
+      moveToNextScene.setText("Back to Main Menu");
+    } else {
+      systemDescriptionLabel.setText("Click submit to see if you are correct.");
+      moveToNextScene.setText("Submit");
+    }
   }
 
   private void highlightCharacterPane(String rectId) {
@@ -90,7 +115,7 @@ public class GuessingController {
   }
 
   @FXML
-  public void onSubmitFeedback() {
+  private void onSubmitFeedback() {
     App.stopTimer();
 
     Task<Void> task =
@@ -116,5 +141,15 @@ public class GuessingController {
         };
 
     new Thread(task).start();
+  }
+
+  @FXML
+  public void onMoveToNextScene() {
+    App.stopTimer();
+    if (chosenSuspect == null) {
+      App.setRoot(SceneState.MAIN_MENU);
+    } else {
+      onSubmitFeedback();
+    }
   }
 }

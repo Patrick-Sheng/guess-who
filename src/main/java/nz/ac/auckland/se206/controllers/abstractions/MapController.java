@@ -84,6 +84,8 @@ public abstract class MapController extends ButtonController {
         break;
       case "guessRoom":
         App.stopTimer();
+        App.resetColour();
+        App.startTimer(60);
         App.setRoot(SceneState.START_GUESSING);
         break;
     }

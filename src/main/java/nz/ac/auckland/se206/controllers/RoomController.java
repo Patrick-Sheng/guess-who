@@ -14,6 +14,8 @@ import nz.ac.auckland.se206.enums.SceneState;
  */
 public class RoomController extends MapController {
   @FXML private Button guessButton;
+  @FXML private Button toGuessRoomButton;
+  @FXML private Pane paneTimeIsUp;
   @FXML private Pane paneMap;
   @FXML private Label timerLabel;
 
@@ -22,6 +24,7 @@ public class RoomController extends MapController {
     disableLabels();
     disableButton();
     enableButton();
+    paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
   }
 
@@ -38,6 +41,11 @@ public class RoomController extends MapController {
   }
 
   public void updateLblTimer(int time, int red, int green, int blue) {
+    if (time == 0) {
+      App.stopTimer();
+      paneTimeIsUp.setVisible(true);
+    }
+
     int minutes = time / 60;
     int seconds = time % 60;
     timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
