@@ -72,13 +72,17 @@
             </rowConstraints>
             <children>
                <Pane fx:id="gardenerRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" />
+               <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+               <Pane fx:id="guessRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
                <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="1" />
                <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="18.0" prefWidth="112.0" styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                <Pane fx:id="auntieRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="2" />
+               <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                <Pane fx:id="childRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" styleClass="cell" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             </children>
          </GridPane>
-         <Text fx:id="textMap" layoutX="284.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " wrappingWidth="210.13670349121094" />
+         <Text fx:id="textMap" layoutX="284.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " textAlignment="CENTER" wrappingWidth="210.13670349121094" />
          <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.74" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
             <image>
                <Image url="@../images/buttons/exit.png" />

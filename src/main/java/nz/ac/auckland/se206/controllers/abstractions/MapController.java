@@ -47,6 +47,9 @@ public abstract class MapController extends ButtonController {
       case "mainRoom":
         text = "Crime scene";
         break;
+      case "guessRoom":
+        text = "Guess Room";
+        break;
       default:
         text = "";
     }
@@ -78,6 +81,9 @@ public abstract class MapController extends ButtonController {
         break;
       case "mainRoom":
         App.setRoot(SceneState.START_GAME);
+        break;
+      case "guessRoom":
+        App.setRoot(SceneState.START_GUESSING);
         break;
     }
   }
