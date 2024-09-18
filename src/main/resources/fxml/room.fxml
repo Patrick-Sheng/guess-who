@@ -17,7 +17,6 @@
         <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
           <Image url="@../images/backgrounds/manor.jpeg" />
         </ImageView>
-        <Button layoutX="706.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#onMap" text="map" />
         <GridPane alignment="CENTER" layoutX="76.0" layoutY="44.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -51,6 +50,28 @@
             <Font name="Georgia Bold" size="24.0" />
           </font>
         </Button>
+         <GridPane layoutX="650.0" layoutY="10.0" prefHeight="95.0" prefWidth="95.0">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" />
+             <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="30.199996948242188" valignment="CENTER" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="64.80000305175781" valignment="CENTER" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <ImageView fitHeight="57.0" fitWidth="75.0" onMouseClicked="#onMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+                  <image>
+                     <Image url="@../images/map/preview.png" />
+                  </image>
+               </ImageView>
+               <Label fx:id="labelMap" alignment="TOP_CENTER" prefHeight="6.0" prefWidth="62.0" text="Map" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <font>
+                     <Font name="Georgia Bold Italic" size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </GridPane>
       </children>
    </Pane>
    <Pane fx:id="paneMap" prefHeight="768.0" prefWidth="768.0">
@@ -80,7 +101,7 @@
             </children>
          </GridPane>
          <Text fx:id="textMap" layoutX="284.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " wrappingWidth="210.13670349121094" />
-         <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" opacity="0.74" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.74" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
             <image>
                <Image url="@../images/buttons/exit.png" />
             </image>

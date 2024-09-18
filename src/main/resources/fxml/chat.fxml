@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
@@ -20,7 +21,6 @@
         <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
           <Image url="@../images/backgrounds/gardener.jpeg" />
         </ImageView>
-         <Button layoutX="708.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#onMap" text="Map" />
         <TextArea fx:id="txtaChat" editable="false" layoutX="392.0" layoutY="260.0" prefHeight="386.0" prefWidth="361.0" wrapText="true" />
         <TextField fx:id="txtInput" layoutX="395.0" layoutY="660.0" prefHeight="26.0" prefWidth="354.0" />
         <Button fx:id="btnSend" layoutX="706.0" layoutY="695.0" mnemonicParsing="false" text="Send" />
@@ -28,6 +28,28 @@
         <Label layoutX="401.0" layoutY="708.0" text="Go Back" />
         <Label layoutX="497.0" layoutY="78.0" text="Timer:" />
         <Label fx:id="lblTimer" layoutX="540.0" layoutY="78.0" text="XX:XX" />
+         <GridPane layoutX="650.0" layoutY="10.0" prefHeight="95.0" prefWidth="95.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints maxHeight="20.0" minHeight="0.0" prefHeight="0.0" />
+               <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="30.199996948242188" valignment="CENTER" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="64.80000305175781" valignment="CENTER" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+               <ImageView fitHeight="57.0" fitWidth="75.0" onMouseClicked="#onMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+                  <image>
+                     <Image url="@../images/map/preview.png" />
+                  </image>
+               </ImageView>
+               <Label fx:id="labelMap" alignment="TOP_CENTER" prefHeight="6.0" prefWidth="62.0" text="Map" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <font>
+                     <Font name="Georgia Bold Italic" size="16.0" />
+                  </font>
+               </Label>
+            </children>
+         </GridPane>
       </children>
    </AnchorPane>
    <Pane fx:id="paneMap" layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="768.0">
@@ -57,7 +79,7 @@
             </children>
          </GridPane>
          <Text fx:id="textMap" layoutX="284.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " wrappingWidth="210.13670349121094" />
-         <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" opacity="0.74" pickOnBounds="true" preserveRatio="true">
+         <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.74" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
             <image>
                <Image url="@../images/buttons/exit.png" />
             </image>
