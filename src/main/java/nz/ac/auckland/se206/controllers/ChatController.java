@@ -21,7 +21,6 @@ public class ChatController extends MapController {
   public void updateLblTimer(int time) {
     int minutes = time / 60;
     int seconds = time % 60;
-    System.out.println("Time left: " + minutes + ":" + seconds);
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
   }
 }

@@ -16,6 +16,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.GuessingController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.timer.CountdownTimer;
@@ -35,6 +36,7 @@ public class App extends Application {
   private static Parent chatControllerRoot;
   private static RoomController roomController;
   private static ChatController chatController;
+  private static GuessingController guessingController;
 
   private static boolean isMuted;
 
@@ -136,6 +138,8 @@ public class App extends Application {
     } else if (fxml.equals("chat") && chatController == null) {
       chatController = loader.getController();
       chatControllerRoot = root;
+    } else if (fxml.equals("guessing")) {
+      guessingController = loader.getController();
     }
 
     return root;
@@ -232,6 +236,11 @@ public class App extends Application {
         case CHAT:
           if (chatController != null) {
             chatController.updateLblTimer(time);
+          }
+          break;
+        case START_GUESSING:
+          if (guessingController != null) {
+            guessingController.updateLblTimer(time);
           }
           break;
         default:
