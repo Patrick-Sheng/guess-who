@@ -4,12 +4,20 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
+import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
+import nz.ac.auckland.apiproxy.chat.openai.Choice;
+import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
+import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 public class GuessingController {
 
@@ -20,12 +28,99 @@ public class GuessingController {
   @FXML private Rectangle rectGardener;
   @FXML private Rectangle rectNiece;
   @FXML private Label timerLabel;
+  @FXML private TextArea explanationTextArea;
 
+  private ChatCompletionRequest chatCompletionRequest;
   private Suspect chosenSuspect;
 
   @FXML
   public void initialize() {
     paneTimeIsUp.setVisible(false);
+    setAiProxyConfig();
+  }
+
+  /**
+   * Generates the system prompt based on the profession.
+   *
+   * @return the system prompt string
+   */
+  private String getSystemPrompt() {
+    return PromptEngineering.getPrompt("feedback_instruction.txt", null);
+  }
+
+  public void setAiProxyConfig() {
+
+    Task<Void> setGptModelTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() {
+            try {
+              ApiProxyConfig config = ApiProxyConfig.readConfig();
+              chatCompletionRequest = new ChatCompletionRequest(config).setMaxTokens(100);
+              ChatMessage chatMsg = runGpt(new ChatMessage("system", getSystemPrompt()));
+              System.out.println("AI: " + chatMsg.getContent());
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+            }
+            return null;
+          }
+        };
+
+    new Thread(setGptModelTask).start();
+  }
+
+  /**
+   * Runs the GPT model with a given chat message.
+   *
+   * @param msg the chat message to process
+   * @return the response chat message
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   */
+  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    chatCompletionRequest.addMessage(msg);
+    try {
+      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
+      chatCompletionRequest.addMessage(result.getChatMessage());
+      return result.getChatMessage();
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  private void setExplanation() {
+    Task<String> getExplanationTask =
+        new Task<String>() {
+          @Override
+          protected String call() {
+            String message = explanationTextArea.getText().trim();
+            if (!message.isEmpty()) {
+              try {
+                ChatMessage response = runGpt(new ChatMessage("user", message));
+                return response.getContent();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+            }
+            return null;
+          }
+        };
+
+    getExplanationTask.setOnSucceeded(
+        event -> {
+          String explanation = getExplanationTask.getValue();
+          if (explanation != null) {
+            App.updateFeedbackPrompt(explanation);
+          }
+        });
+    getExplanationTask.setOnFailed(
+        event -> {
+          Throwable e = getExplanationTask.getException();
+          e.printStackTrace();
+        });
+
+    new Thread(getExplanationTask).start();
   }
 
   public void updateLblTimer(int time, int red, int green, int blue) {
@@ -126,6 +221,7 @@ public class GuessingController {
             switch (chosenSuspect) {
               case AUNT:
                 App.setRoot(SceneState.END_GAME_WON);
+                setExplanation();
                 break;
               case GARDENER:
                 App.setRoot(SceneState.END_GAME_LOST);

@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
@@ -11,6 +12,7 @@ public class GameOverController {
   @FXML ImageView imageAunt;
   @FXML ImageView imageGardener;
   @FXML ImageView imageNiece;
+  @FXML TextArea feedbackTextArea;
 
   @FXML
   public void initialize() {
@@ -31,6 +33,10 @@ public class GameOverController {
         imageNiece.setVisible(true);
         break;
     }
+  }
+
+  public void setFeedbackPrompt(String feedback) {
+    feedbackTextArea.setText(feedback);
   }
 
   @FXML

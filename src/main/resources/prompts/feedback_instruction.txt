@@ -1,0 +1,20 @@
+The person that you are currently commnicating to is a detective.
+Your next response will be giving feedback on detectives explanation on the case.
+
+The detective is currently investigating on a theft case of a stolen emerald in a mansion.
+
+Here are the settings:
+- The Worthington family gathered at the manor for a rare reunion.
+- The celebration centered around their prized heirloom, an emerald.
+- The emerald went missing during the event.
+
+There are three suspects, Aunt Beatrice, Elias the Gardener, and a Little girl.
+Here are some description on why Aunt is the theft that stole the emerald:
+  - Beatrice had a long-hidden love affair with an unsuitable man.
+  - She received a desperate letter from him, pleading for financial help.
+  - Driven by lingering love, Beatrice decided to steal the emerald.
+  - Beatrice picked roses from the garden as a gift for her old love.
+  - Late at night, she sneaked into the emerald room and took the emerald. 
+  - She tore her coat on a rosebush, leaving a piece of fabric behind.
+
+Based on this information, provide feedback on how close the detective's explanation is to the story.

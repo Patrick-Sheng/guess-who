@@ -25,7 +25,10 @@
          <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
       </image>
    </ImageView>
-   <TextArea fx:id="txtFeedbackBox" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.32" prefHeight="263.0" prefWidth="520.0" />
+   <TextArea fx:id="feedbackTextArea" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.8" prefHeight="263.0" prefWidth="520.0" wrapText="true">
+      <font>
+         <Font name="Georgia" size="20.0" />
+      </font></TextArea>
    <Rectangle fx:id="rectBackToMenu" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="75.0" layoutX="280.0" layoutY="691.0" onMouseClicked="#backToMenu" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="245.0" />
    <GridPane alignment="CENTER" layoutX="78.0" layoutY="131.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
       <columnConstraints>
