@@ -23,6 +23,9 @@ public class RoomController extends MapController {
   @FXML private Pane paneClue;
   @FXML private Label timerLabel;
   @FXML private ImageView bagOpen;
+  @FXML private ImageView emeraldRoom;
+  @FXML private ImageView letterCloseUp;
+  @FXML private ImageView reportCloseUp;
 
   @FXML
   public void initialize() {
@@ -65,20 +68,28 @@ public class RoomController extends MapController {
 
     switch (ImageViewID) {
       case "bag":
-        bagOpen.setVisible(true);
+        setClue(bagOpen);
         break;
       case "letter":
-        bagOpen.setVisible(true);
+        setClue(letterCloseUp);
         break;
       case "door":
-        bagOpen.setVisible(true);
+        setClue(emeraldRoom);
         break;
       case "report":
-        bagOpen.setVisible(true);
+        setClue(reportCloseUp);
         break;
     }
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
+  }
+
+  private void setClue(ImageView image) {
+    bagOpen.setVisible(false);
+    letterCloseUp.setVisible(false);
+    emeraldRoom.setVisible(false);
+    reportCloseUp.setVisible(false);
+    image.setVisible(true);
   }
 
   @FXML
