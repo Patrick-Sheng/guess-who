@@ -55,8 +55,10 @@
                <Pane fx:id="gardenerRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" />
                <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="18.0" prefWidth="112.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               <Pane fx:id="auntieRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-               <Pane fx:id="childRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               <Pane fx:id="childRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <children>
+                     <Pane fx:id="auntieRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" />
+                  </children></Pane>
                <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                <Pane fx:id="mainRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                <Pane fx:id="guessRoom" onMouseClicked="#clickRoom" onMouseEntered="#enterMap" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
@@ -73,9 +75,24 @@
    </Pane>
    <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
       <children>
-        <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-style">
-          <Image url="@../images/backgrounds/manor.jpeg" />
+        <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+          <Image url="@../images/backgrounds/manor.jpg" />
         </ImageView>
+         <ImageView fitHeight="114.0" fitWidth="308.0" layoutX="343.0" layoutY="658.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+            <image>
+               <Image url="@../images/clue/paper.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="161.0" fitWidth="114.0" layoutX="128.8" layoutY="357.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+            <image>
+               <Image url="@../images/clue/door.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="257.0" fitWidth="295.0" layoutX="20.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+            <image>
+               <Image url="@../images/clue/bag.png" />
+            </image>
+         </ImageView>
         <GridPane alignment="CENTER" layoutX="76.0" layoutY="44.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -104,11 +121,6 @@
             </font>
           </Label>
         </GridPane>
-         <ImageView fitHeight="257.0" fitWidth="295.0" layoutX="20.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-            <image>
-               <Image url="@../images/clue/bag.png" />
-            </image>
-         </ImageView>
         <Button fx:id="guessButton" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="643.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" prefHeight="111.0" prefWidth="111.0" styleClass="highlight-image" text="Make Your Guess" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
           <font>
             <Font name="Georgia Bold" size="24.0" />
