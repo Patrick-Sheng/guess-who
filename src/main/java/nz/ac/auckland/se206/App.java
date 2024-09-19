@@ -103,28 +103,28 @@ public class App extends Application {
 
   private static Task<Parent> getParentTask(SceneState state, String fxml) {
     Task<Parent> task =
-        new Task<>() {
-          @Override
-          protected Parent call() throws IOException {
-            return loadFxml(fxml);
-          }
-        };
+            new Task<>() {
+              @Override
+              protected Parent call() throws IOException {
+                return loadFxml(fxml);
+              }
+            };
 
     task.setOnSucceeded(
-        event -> {
-          Parent root = task.getValue();
-          Platform.runLater(
-              () -> {
-                Stage stage = (Stage) scene.getWindow();
-                SetStage(stage, root, state);
-              });
-        });
+            event -> {
+              Parent root = task.getValue();
+              Platform.runLater(
+                      () -> {
+                        Stage stage = (Stage) scene.getWindow();
+                        SetStage(stage, root, state);
+                      });
+            });
 
     task.setOnFailed(
-        event -> {
-          Throwable e = task.getException();
-          e.printStackTrace();
-        });
+            event -> {
+              Throwable e = task.getException();
+              e.printStackTrace();
+            });
     return task;
   }
 
@@ -208,11 +208,7 @@ public class App extends Application {
     music.setVolume(volume);
 
     music.setOnEndOfMedia(
-        new Runnable() {
-          public void run() {
-            music.seek(Duration.ZERO);
-          }
-        });
+            () -> music.seek(Duration.ZERO));
 
     music.play();
 
@@ -319,12 +315,6 @@ public class App extends Application {
     }
   }
 
-  public static void sendEndGameStats(Suspect suspect) {
-    if (gameOverController != null) {
-      gameOverController.setGameOverImage(suspect);
-    }
-  }
-
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
@@ -339,23 +329,23 @@ public class App extends Application {
     isMuted = false;
 
     hoverSound =
-        new AudioClip(
-            Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
-                .toExternalForm());
+            new AudioClip(
+                    Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
+                            .toExternalForm());
     hoverSound.setVolume(.5f);
 
     Parent root = loadFxml(getSceneName(defaultState));
 
     scene = new Scene(root);
     scene
-        .getStylesheets()
-        .add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
+            .getStylesheets()
+            .add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
 
     stage.setResizable(false);
     stage.setTitle("PI Masters: Whispers of Emeralds");
     stage
-        .getIcons()
-        .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
+            .getIcons()
+            .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
 
     SetStage(stage, root, defaultState);
   }

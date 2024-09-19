@@ -4,11 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 
 public class GameOverController {
+
+  public Rectangle rectBackToMenu;
+  public Label timerLabel;
 
   @FXML ImageView imageAunt;
   @FXML ImageView imageGardener;

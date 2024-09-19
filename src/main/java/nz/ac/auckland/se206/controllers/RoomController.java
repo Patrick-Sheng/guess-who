@@ -15,8 +15,26 @@ import nz.ac.auckland.se206.enums.SceneState;
  * chat with customers and guess their profession.
  */
 public class RoomController extends MapController {
+  public Label labelMap;
+
+  public Pane gardenerRoom;
+  public Pane auntieRoom;
+  public Pane childRoom;
+  public Pane guessRoom;
+
+  public ImageView emeraldRoom;
+
+  public ImageView letterCloseUp;
+  public ImageView report;
+  public ImageView exitClue;
+
+  public Button toGuessRoomButton;
+
+  public ImageView letter;
+  public ImageView door;
+  public ImageView bag;
+
   @FXML private Button guessButton;
-  @FXML private Button toGuessRoomButton;
   @FXML private Pane paneTimeIsUp;
   @FXML private Pane paneMap;
   @FXML private Pane paneRoom;

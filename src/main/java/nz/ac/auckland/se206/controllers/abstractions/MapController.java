@@ -15,7 +15,6 @@ public abstract class MapController extends ButtonController {
   @FXML private ImageView exitImage;
   @FXML private Pane paneRoom;
   @FXML private Pane paneMap;
-  @FXML private GridPane gridMap;
 
   @FXML
   private void onMap() {
@@ -35,27 +34,14 @@ public abstract class MapController extends ButtonController {
   private void enterMap(MouseEvent event) {
     Pane hoverPane = (Pane) event.getSource();
     String paneId = hoverPane.getId();
-    String text = "";
-
-    switch (paneId) {
-      case "auntieRoom":
-        text = "Auntie Room";
-        break;
-      case "childRoom":
-        text = "Child Room";
-        break;
-      case "gardenerRoom":
-        text = "Gardener Room";
-        break;
-      case "mainRoom":
-        text = "Crime scene";
-        break;
-      case "guessRoom":
-        text = "Guess Room";
-        break;
-      default:
-        text = "";
-    }
+    String text = switch (paneId) {
+      case "auntieRoom" -> "Auntie Room";
+      case "childRoom" -> "Child Room";
+      case "gardenerRoom" -> "Gardener Room";
+      case "mainRoom" -> "Crime scene";
+      case "guessRoom" -> "Guess Room";
+      default -> "";
+    };
 
     textMap.setText(text);
     exitImage.setVisible(false);

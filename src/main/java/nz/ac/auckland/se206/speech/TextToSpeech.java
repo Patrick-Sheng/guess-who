@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -31,13 +32,6 @@ import nz.ac.auckland.se206.App;
 
 /** Text-to-speech API using the JavaX speech library. */
 public class TextToSpeech {
-  /** Custom unchecked exception for Text-to-speech issues. */
-  static class TextToSpeechException extends RuntimeException {
-    public TextToSpeechException(final String message) {
-      super(message);
-    }
-  }
-
   private static final Map<String, String> textToMp3Map = new HashMap<>();
 
   public static Thread voiceThread;
@@ -65,7 +59,7 @@ public class TextToSpeech {
 
     Text text = new Text(message, voice, provider);
 
-    String mp3FilePath = getMp3FilePath(text.getText());
+    String mp3FilePath = getMp3FilePath(text.text());
 
     dialogQueue.offer(
             () -> {
@@ -135,13 +129,13 @@ public class TextToSpeech {
 
       // Make request to servers.
       TextToSpeechRequest ttsRequest = new TextToSpeechRequest(config);
-      ttsRequest.setText(text.getText()).setProvider(text.getProvider()).setVoice(text.getVoice());
+      ttsRequest.setText(text.text()).setProvider(text.provider()).setVoice(text.voice());
 
       // Received TTS result.
       TextToSpeechResult ttsResult = ttsRequest.execute();
       String audioUrl = ttsResult.getAudioUrl();
 
-      System.out.println("Found audio for '" + text.getText() + "': " + audioUrl);
+      System.out.println("Found audio for '" + text.text() + "': " + audioUrl);
 
       // Play TTS via JavaFX player.
       try (InputStream inputStream = new BufferedInputStream(new URL(audioUrl).openStream())) {
@@ -162,7 +156,7 @@ public class TextToSpeech {
 
   private static void loadMp3Files() {
     try (Stream<Path> paths =
-                 Files.walk(Paths.get(TextToSpeech.class.getResource("/tts").toURI()))) {
+                 Files.walk(Paths.get(Objects.requireNonNull(TextToSpeech.class.getResource("/tts")).toURI()))) {
       paths
               .filter(Files::isRegularFile)
               .filter(path -> path.toString().endsWith(".mp3"))
