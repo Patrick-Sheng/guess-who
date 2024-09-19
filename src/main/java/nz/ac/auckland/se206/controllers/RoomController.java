@@ -26,6 +26,7 @@ public class RoomController extends MapController {
   @FXML private ImageView emeraldRoom;
   @FXML private ImageView letterCloseUp;
   @FXML private ImageView reportCloseUp;
+  @FXML private ImageView report;
 
   @FXML
   public void initialize() {
@@ -69,6 +70,7 @@ public class RoomController extends MapController {
     switch (ImageViewID) {
       case "bag":
         setClue(bagOpen);
+        report.setVisible(true);
         break;
       case "letter":
         setClue(letterCloseUp);
@@ -89,6 +91,7 @@ public class RoomController extends MapController {
     letterCloseUp.setVisible(false);
     emeraldRoom.setVisible(false);
     reportCloseUp.setVisible(false);
+    report.setVisible(false);
     image.setVisible(true);
   }
 
