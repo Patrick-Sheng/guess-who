@@ -300,6 +300,12 @@ public class App extends Application {
     chosenSuspect = suspect;
   }
 
+  public static void updateFeedbackPrompt(String prompt) {
+    if (gameOverController != null) {
+      gameOverController.setFeedbackPrompt(prompt);
+    }
+  }
+
   public static void sendEndGameStats(Suspect suspect) {
     if (gameOverController != null) {
       gameOverController.setGameOverImage(suspect);
