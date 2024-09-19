@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
@@ -33,6 +34,7 @@ public class RoomController extends MapController {
   public ImageView letter;
   public ImageView door;
   public ImageView bag;
+  public GridPane gridMap;
 
   @FXML private Button guessButton;
   @FXML private Pane paneTimeIsUp;
@@ -97,6 +99,7 @@ public class RoomController extends MapController {
     }
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
+    handleRectangleEntered();
   }
 
   @FXML
@@ -104,6 +107,7 @@ public class RoomController extends MapController {
     bagOpen.setVisible(false);
     paneClue.setVisible(false);
     paneRoom.setOpacity(1);
+    handleRectangleExited();
   }
 
   @FXML
