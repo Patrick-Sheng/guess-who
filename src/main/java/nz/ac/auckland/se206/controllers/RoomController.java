@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
@@ -17,7 +19,10 @@ public class RoomController extends MapController {
   @FXML private Button toGuessRoomButton;
   @FXML private Pane paneTimeIsUp;
   @FXML private Pane paneMap;
+  @FXML private Pane paneRoom;
+  @FXML private Pane paneClue;
   @FXML private Label timerLabel;
+  @FXML private ImageView bagOpen;
 
   @FXML
   public void initialize() {
@@ -26,6 +31,7 @@ public class RoomController extends MapController {
     enableButton();
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
+    paneClue.setVisible(false);
   }
 
   private void disableLabels() {}
@@ -50,6 +56,36 @@ public class RoomController extends MapController {
     int seconds = time % 60;
     timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
+  }
+
+  @FXML
+  private void onClue(MouseEvent event) {
+    ImageView clickedImageView = (ImageView) event.getSource();
+    String ImageViewID = clickedImageView.getId();
+
+    switch (ImageViewID) {
+      case "bag":
+        bagOpen.setVisible(true);
+        break;
+      case "letter":
+        bagOpen.setVisible(true);
+        break;
+      case "door":
+        bagOpen.setVisible(true);
+        break;
+      case "report":
+        bagOpen.setVisible(true);
+        break;
+    }
+    paneRoom.setOpacity(0.2);
+    paneClue.setVisible(true);
+  }
+
+  @FXML
+  private void onExitClue() {
+    bagOpen.setVisible(false);
+    paneClue.setVisible(false);
+    paneRoom.setOpacity(1);
   }
 
   @FXML
