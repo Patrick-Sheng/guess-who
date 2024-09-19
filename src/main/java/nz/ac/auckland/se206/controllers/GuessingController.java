@@ -16,12 +16,13 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
-public class GuessingController {
+public class GuessingController extends ButtonController {
 
     public ImageView pane;
     public Button submitButton;
@@ -143,6 +144,8 @@ public class GuessingController {
     private void timeIsUp() {
         App.stopTimer();
         paneTimeIsUp.setVisible(true);
+
+        TextToSpeech.speak("Time is up!");
 
         if (chosenSuspect == null) {
             systemDescriptionLabel.setText(

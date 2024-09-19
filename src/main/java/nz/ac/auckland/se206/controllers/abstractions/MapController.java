@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers.abstractions;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -14,6 +16,16 @@ public abstract class MapController extends ButtonController {
   @FXML private ImageView exitImage;
   @FXML private Pane paneRoom;
   @FXML private Pane paneMap;
+  @FXML private Button guessButton;
+  @FXML private Label timerLabel;
+  @FXML private Pane paneTimeIsUp;
+
+  @FXML
+  public void initialize() {
+    enableButton();
+    paneTimeIsUp.setVisible(false);
+    paneMap.setVisible(false);
+  }
 
   @FXML
   private void onMap() {
@@ -79,5 +91,36 @@ public abstract class MapController extends ButtonController {
     }
     paneMap.setVisible(false);
     paneRoom.setOpacity(1);
+  }
+
+  private void disableButton() {
+    guessButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
+    guessButton.setDisable(true);
+    guessButton.setOpacity(1f);
+  }
+
+  public void enableButton() {
+    guessButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+    guessButton.setDisable(false);
+  }
+
+  public void updateLblTimer(int time, int red, int green, int blue) {
+    if (time == 0) {
+      App.stopTimer();
+      paneTimeIsUp.setVisible(true);
+    }
+
+    int minutes = time / 60;
+    int seconds = time % 60;
+    timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
+    timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
+  }
+
+  @FXML
+  private void onMakeGuess() {
+    App.stopTimer();
+    App.resetColour();
+    App.startTimer(60);
+    App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
   }
 }
