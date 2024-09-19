@@ -71,6 +71,6 @@ public class SettingsController extends ButtonController {
 
   @FXML
   private void onBackButton() {
-    App.setRoot(SceneState.MAIN_MENU);
+    App.setRoot(SceneState.MAIN_MENU, "Going back to home page...");
   }
 }

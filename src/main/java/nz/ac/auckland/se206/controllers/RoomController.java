@@ -93,6 +93,6 @@ public class RoomController extends MapController {
     App.stopTimer();
     App.resetColour();
     App.startTimer(60);
-    App.setRoot(SceneState.START_GUESSING);
+    App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
   }
 }

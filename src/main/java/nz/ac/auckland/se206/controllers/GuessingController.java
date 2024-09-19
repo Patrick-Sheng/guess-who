@@ -18,6 +18,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GuessingController {
 
@@ -180,12 +181,15 @@ public class GuessingController {
     switch (rectId) {
       case "rectAunt":
         chosenSuspect = Suspect.AUNT;
+        TextToSpeech.speak("Aunt Beatrice");
         break;
       case "rectGardener":
         chosenSuspect = Suspect.GARDENER;
+        TextToSpeech.speak("Elias Greenfield");
         break;
       case "rectNiece":
         chosenSuspect = Suspect.NIECE;
+        TextToSpeech.speak("Sophie Baxter");
         break;
     }
     highlightCharacterPane(rectId);
@@ -220,14 +224,14 @@ public class GuessingController {
             App.setSuspect(chosenSuspect);
             switch (chosenSuspect) {
               case AUNT:
-                App.setRoot(SceneState.END_GAME_WON);
+                App.setRoot(SceneState.END_GAME_WON, "Wow, you got it! Who knew it could have been Beatrice?");
                 setExplanation();
                 break;
               case GARDENER:
-                App.setRoot(SceneState.END_GAME_LOST);
+                App.setRoot(SceneState.END_GAME_LOST, "Unfortunately, Gardener Elias was not the thief.");
                 break;
               case NIECE:
-                App.setRoot(SceneState.END_GAME_LOST);
+                App.setRoot(SceneState.END_GAME_LOST, "Unfortunately, Niece Sophie was not the thief.");
                 break;
               default:
                 return null;
@@ -243,7 +247,7 @@ public class GuessingController {
   public void onMoveToNextScene() {
     App.stopTimer();
     if (chosenSuspect == null) {
-      App.setRoot(SceneState.MAIN_MENU);
+      App.setRoot(SceneState.MAIN_MENU, "Going back to main menu...");
     } else {
       onSubmitFeedback();
     }

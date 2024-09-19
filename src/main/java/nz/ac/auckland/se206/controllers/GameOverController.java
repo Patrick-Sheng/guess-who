@@ -48,6 +48,6 @@ public class GameOverController {
 
   @FXML
   public void backToMenu() {
-    App.setRoot(SceneState.MAIN_MENU);
+    App.setRoot(SceneState.MAIN_MENU, "Going back to main menu...");
   }
 }

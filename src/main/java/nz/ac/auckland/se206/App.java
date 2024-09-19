@@ -22,6 +22,7 @@ import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.timer.CountdownTimer;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
@@ -45,6 +46,10 @@ public class App extends Application {
   private static int red = 50;
   private static int green = 255;
   private static int blue = 70;
+
+  public static boolean running = true;
+
+  public static final String GUESS_DIALOG = "Let's get to guessing!";
 
   private static boolean isMuted;
 
@@ -74,7 +79,10 @@ public class App extends Application {
    *
    * @param state the state to transition to
    */
-  public static void setRoot(SceneState state) {
+  public static void setRoot(SceneState state, String speech) {
+    TextToSpeech.stopSpeak();
+    TextToSpeech.speak(speech);
+
     currentState = state;
     String fxml = getSceneName(state);
 
@@ -88,6 +96,12 @@ public class App extends Application {
       return;
     }
 
+    Task<Parent> task = getParentTask(state, fxml);
+
+    new Thread(task).start();
+  }
+
+  private static Task<Parent> getParentTask(SceneState state, String fxml) {
     Task<Parent> task =
         new Task<>() {
           @Override
@@ -111,8 +125,7 @@ public class App extends Application {
           Throwable e = task.getException();
           e.printStackTrace();
         });
-
-    new Thread(task).start();
+    return task;
   }
 
   private static void SetStage(Stage stage, Parent root, SceneState state) {
@@ -329,7 +342,7 @@ public class App extends Application {
         new AudioClip(
             Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
                 .toExternalForm());
-    hoverSound.setVolume(.25f);
+    hoverSound.setVolume(.5f);
 
     Parent root = loadFxml(getSceneName(defaultState));
 
@@ -345,5 +358,12 @@ public class App extends Application {
         .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
 
     SetStage(stage, root, defaultState);
+  }
+
+  @Override
+  public void stop() throws Exception {
+    running = false;
+    TextToSpeech.stopSpeak();
+    super.stop();
   }
 }

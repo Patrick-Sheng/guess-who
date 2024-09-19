@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
   @FXML private Text textMap;
@@ -18,12 +19,14 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void onMap() {
+    TextToSpeech.speak("Opening map...");
     paneMap.setVisible(true);
     paneRoom.setOpacity(0.5);
   }
 
   @FXML
   private void onExitMap() {
+    TextToSpeech.speak("Closing map!");
     paneMap.setVisible(false);
     paneRoom.setOpacity(1);
   }
@@ -71,22 +74,22 @@ public abstract class MapController extends ButtonController {
 
     switch (paneId) {
       case "auntieRoom":
-        App.setRoot(SceneState.CHAT);
+        App.setRoot(SceneState.CHAT, "Going To Aunt Beatrice's Study");
         break;
       case "childRoom":
-        App.setRoot(SceneState.CHAT);
+        App.setRoot(SceneState.CHAT, "Going To Sophie Baxter's Nursery");
         break;
       case "gardenerRoom":
-        App.setRoot(SceneState.CHAT);
+        App.setRoot(SceneState.CHAT, "Going To Elias Greenfield's Garden");
         break;
       case "mainRoom":
-        App.setRoot(SceneState.START_GAME);
+        App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
         break;
       case "guessRoom":
         App.stopTimer();
         App.resetColour();
         App.startTimer(60);
-        App.setRoot(SceneState.START_GUESSING);
+        App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
         break;
     }
     paneMap.setVisible(false);
