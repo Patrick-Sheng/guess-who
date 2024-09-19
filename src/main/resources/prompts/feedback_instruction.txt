@@ -18,3 +18,4 @@ Here are some description on why Aunt is the theft that stole the emerald:
   - She tore her coat on a rosebush, leaving a piece of fabric behind.
 
 Based on this information, provide feedback on how close the detective's explanation is to the story.
+Keep your feedback within 100 words.

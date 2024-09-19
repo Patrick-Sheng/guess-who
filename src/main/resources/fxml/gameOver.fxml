@@ -25,7 +25,7 @@
          <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
       </image>
    </ImageView>
-   <TextArea fx:id="feedbackTextArea" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.8" prefHeight="263.0" prefWidth="520.0" wrapText="true">
+   <TextArea fx:id="feedbackTextArea" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.8" prefHeight="370.0" prefWidth="520.0" wrapText="true">
       <font>
          <Font name="Georgia" size="20.0" />
       </font></TextArea>
@@ -58,7 +58,7 @@
                <Font name="Georgia" size="36.0" />
             </font>
          </Label>
-         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="34.0" prefWidth="610.0" text="Here are some feedback based on your gameplay" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="7">
+         <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="34.0" prefWidth="610.0" text="Here are some feedback based on your gameplay" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="7">
             <font>
                <Font name="Georgia" size="17.0" />
             </font>

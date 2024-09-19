@@ -26,7 +26,12 @@ public class PromptEngineering {
     try {
       // Load the prompt template file from resources
       URL resourceUrl = PromptEngineering.class.getClassLoader().getResource("prompts/" + promptId);
-      return loadTemplate(resourceUrl.toURI());
+
+      if (data == null) {
+        return loadTemplate(resourceUrl.toURI());
+      } else {
+        return fillTemplate(loadTemplate(resourceUrl.toURI()), data);
+      }
     } catch (IOException | URISyntaxException e) {
       e.printStackTrace();
       throw new IllegalArgumentException("Error loading or filling the prompt template.", e);
@@ -42,5 +47,20 @@ public class PromptEngineering {
    */
   private static String loadTemplate(URI filePath) throws IOException {
     return new String(Files.readAllBytes(Paths.get(filePath)));
+  }
+
+  /**
+   * Fills a template string with the provided data. Replaces placeholders in the template with
+   * corresponding values from the data map.
+   *
+   * @param template the template string to fill
+   * @param data the data to fill into the template
+   * @return the filled template string
+   */
+  private static String fillTemplate(String template, Map<String, String> data) {
+    for (Map.Entry<String, String> entry : data.entrySet()) {
+      template = template.replace("{" + entry.getKey() + "}", entry.getValue());
+    }
+    return template;
   }
 }

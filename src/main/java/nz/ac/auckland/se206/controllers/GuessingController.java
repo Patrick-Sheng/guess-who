@@ -56,9 +56,8 @@ public class GuessingController {
           protected Void call() {
             try {
               ApiProxyConfig config = ApiProxyConfig.readConfig();
-              chatCompletionRequest = new ChatCompletionRequest(config).setMaxTokens(100);
-              ChatMessage chatMsg = runGpt(new ChatMessage("system", getSystemPrompt()));
-              System.out.println("AI: " + chatMsg.getContent());
+              chatCompletionRequest = new ChatCompletionRequest(config).setMaxTokens(200);
+              runGpt(new ChatMessage("system", getSystemPrompt()));
             } catch (ApiProxyException e) {
               e.printStackTrace();
             }
@@ -98,6 +97,7 @@ public class GuessingController {
             if (!message.isEmpty()) {
               try {
                 ChatMessage response = runGpt(new ChatMessage("user", message));
+                System.out.println(response.getContent());
                 return response.getContent();
               } catch (ApiProxyException e) {
                 e.printStackTrace();

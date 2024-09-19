@@ -51,7 +51,10 @@
                </Label>
             </children>
          </GridPane>
-         <TextArea fx:id="explanationTextArea" layoutX="74.0" layoutY="500.0" opacity="0.8" prefHeight="180.0" prefWidth="618.0" promptText="Enter in your reasoning here" />
+         <TextArea fx:id="explanationTextArea" layoutX="74.0" layoutY="500.0" opacity="0.8" prefHeight="180.0" prefWidth="618.0" promptText="Enter in your reasoning here" wrapText="true">
+            <font>
+               <Font name="Georgia" size="15.0" />
+            </font></TextArea>
       	<Button fx:id="submitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0" mnemonicParsing="false" onMouseClicked="#onSubmitFeedback" prefHeight="39.0" prefWidth="129.0" styleClass="highlight-image" text="Submit" textAlignment="CENTER" wrapText="true">
       		<font>
       			<Font name="Georgia Bold" size="24.0" />
