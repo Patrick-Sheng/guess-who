@@ -18,6 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javazoom.jl.decoder.JavaLayerException;
@@ -33,12 +34,10 @@ import nz.ac.auckland.se206.App;
 public class TextToSpeech {
   private static final Map<String, String> textToMp3Map = new HashMap<>();
 
-  public static Thread voiceThread;
-
   private static final BlockingQueue<Runnable> dialogQueue = new LinkedBlockingQueue<>();
   private static final AtomicBoolean stopFlag = new AtomicBoolean(false);
 
-  static {
+  public static void SetupTTS() {
     loadMp3Files();
     processQueue();
   }
@@ -71,28 +70,27 @@ public class TextToSpeech {
   }
 
   private static void processQueue() {
-    voiceThread =
-            new Thread(
-                    () -> {
-                      while (App.isRunning()) {
-                        if (dialogQueue.isEmpty() || stopFlag.get()) {
-                          continue;
-                        }
+    Thread voiceThread = new Thread(
+            () -> {
+              while (App.isRunning()) {
+                if (dialogQueue.isEmpty() || stopFlag.get()) {
+                  continue;
+                }
 
-                        try {
-                          Runnable task = dialogQueue.take();
-                          task.run();
-                        } catch (InterruptedException e) {
-                          Thread.currentThread().interrupt();
-                        }
+                try {
+                  Runnable task = dialogQueue.take();
+                  task.run();
+                } catch (InterruptedException e) {
+                  Thread.currentThread().interrupt();
+                }
 
-                        try {
-                          Thread.sleep(10);
-                        } catch (InterruptedException e) {
-                          e.printStackTrace();
-                        }
-                      }
-                    });
+                try {
+                  Thread.sleep(10);
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
 
     voiceThread.setDaemon(true);
     voiceThread.start();

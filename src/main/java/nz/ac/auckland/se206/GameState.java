@@ -27,8 +27,8 @@ public class GameState {
     private GuessingController guessingController;
     private GameOverController gameOverController;
 
-    private Map<Suspect, List<InteractionLog>> interactionLogs = new HashMap<>();
-    private Map<Suspect, ChatCompletionRequest> chatMessages = new HashMap<>();
+    private final Map<Suspect, List<InteractionLog>> interactionLogs = new HashMap<>();
+    private final Map<Suspect, ChatCompletionRequest> chatMessages = new HashMap<>();
 
     private int objectsInterfaced = 0;
     private int peopleInterfaced = 0;

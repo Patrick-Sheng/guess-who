@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,18 +16,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  * chat with customers and guess their profession.
  */
 public class RoomController extends MapController {
-  public Label labelMap;
-
-  public Button toGuessRoomButton;
-
-  public ImageView letter;
-  public ImageView door;
-  public ImageView bag;
-  public GridPane gridMap;
-
   @FXML private Pane paneRoom;
   @FXML private Pane paneClue;
-  @FXML private Label timerLabel;
   @FXML private Label fabricLabel;
   @FXML private Label roseLabel;
   @FXML private ImageView bagOpen;
@@ -41,7 +30,7 @@ public class RoomController extends MapController {
 
   private Boolean isClueClick;
   ;
-  private Boolean isLetterReavel;
+  private Boolean isLetterReveal;
   private double mouseAnchorX;
   private double mouseAnchorY;
 
@@ -51,7 +40,7 @@ public class RoomController extends MapController {
     TextToSpeech.speak("The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out - mister detective!");
 
     isClueClick = false;
-    isLetterReavel = false;
+    isLetterReveal = false;
 
     paneClue.setVisible(false);
   }
@@ -72,7 +61,7 @@ public class RoomController extends MapController {
         report.setVisible(true);
         break;
       case "letter":
-        if (!isLetterReavel) {
+        if (!isLetterReveal) {
           setClue(yellowPaper);
           revealLetterGrid.setVisible(true);
         } else {
@@ -151,7 +140,7 @@ public class RoomController extends MapController {
     revealLetterGrid.setVisible(true);
     if (326 < event.getSceneX() && event.getSceneX() < 326 + 112) {
       if (538 < event.getSceneY() && event.getSceneY() < 538 + 144) {
-        isLetterReavel = true;
+        isLetterReveal = true;
         setClue(letterCloseUp);
       }
     }

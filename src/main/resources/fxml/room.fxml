@@ -12,19 +12,19 @@
         <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/backgrounds/manor.jpg" />
         </ImageView>
-        <ImageView fx:id="letter" fitHeight="114.0" fitWidth="308.0" layoutX="343.0" layoutY="658.0" onMouseClicked="#onClue" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+        <ImageView fitHeight="114.0" fitWidth="308.0" layoutX="343.0" layoutY="658.0" onMouseClicked="#onClue" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/clue/paper.png" />
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
         </ImageView>
-        <ImageView fx:id="door" fitHeight="161.0" fitWidth="114.0" layoutX="128.8" layoutY="357.0" onMouseClicked="#onClue" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+        <ImageView fitHeight="161.0" fitWidth="114.0" layoutX="128.8" layoutY="357.0" onMouseClicked="#onClue" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/clue/door.png" />
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
         </ImageView>
-        <ImageView fx:id="bag" fitHeight="257.0" fitWidth="295.0" layoutX="20.0" layoutY="473.0" onMouseClicked="#onClue" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+        <ImageView fitHeight="257.0" fitWidth="295.0" layoutX="20.0" layoutY="473.0" onMouseClicked="#onClue" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/clue/bag.png" />
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -81,7 +81,7 @@
                <Cursor fx:constant="HAND" />
             </cursor>
             </ImageView>
-            <Label fx:id="labelMap" alignment="TOP_CENTER" prefHeight="6.0" prefWidth="62.0" text="Map" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="BOTTOM">
+            <Label alignment="TOP_CENTER" prefHeight="6.0" prefWidth="62.0" text="Map" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="BOTTOM">
                 <font>
                     <Font name="Georgia Bold Italic" size="24.0" />
                 </font>
@@ -106,7 +106,7 @@
                   <Font name="Georgia" size="12.0" />
                </font>
             </Label>
-            <Rectangle fx:id="fabricRec" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" onMouseClicked="#rectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0" GridPane.rowIndex="1">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" onMouseClicked="#rectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0" GridPane.rowIndex="1">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -122,7 +122,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Rectangle fx:id="roseRec" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" onMouseClicked="#rectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" GridPane.rowIndex="1">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" onMouseClicked="#rectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" GridPane.rowIndex="1">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -143,7 +143,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </ImageView>
-        <ImageView fx:id="exitClue" fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+        <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
             <Image url="@../images/buttons/exit.png" />
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -197,7 +197,7 @@
         <ImageView fitHeight="685.0" fitWidth="819.0" layoutX="-25.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/map/map_mansion.png" />
         </ImageView>
-        <GridPane fx:id="gridMap" layoutX="221.0" layoutY="214.0" prefHeight="334.0" prefWidth="336.0" styleClass="game-grid">
+        <GridPane layoutX="221.0" layoutY="214.0" prefHeight="334.0" prefWidth="336.0" styleClass="game-grid">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -263,7 +263,7 @@
                 <Font name="Georgia" size="40.0" />
             </font>
         </Label>
-        <Button fx:id="toGuessRoomButton" layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
+        <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
             <font>
                 <Font name="Georgia Bold" size="22.0" />
             </font>

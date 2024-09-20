@@ -29,21 +29,13 @@ import java.util.HashMap;
  * model via the API proxy.
  */
 public class ChatController extends MapController {
-  public ImageView imageGardener;
-  public ImageView imageNiece;
-  public ImageView imageAunt;
+  @FXML private ImageView imageGardener;
+  @FXML private ImageView imageNiece;
+  @FXML private ImageView imageAunt;
 
-  public Pane childRoom;
-  public Pane auntieRoom;
-  public Pane gardenerRoom;
-  public Pane guessRoom;
-
-  public GridPane gridMap;
-  public Label labelMap;
-  
-  public TextField userField;
-  public InlineCssTextArea logArea;
-  public Label suspectLabel;
+  @FXML private TextField userField;
+  @FXML private InlineCssTextArea logArea;
+  @FXML private Label suspectLabel;
 
   @FXML
   public void initialize() {
