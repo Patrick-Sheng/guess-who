@@ -2,7 +2,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>SOFTENG206-2024</groupId>
-  <artifactId>guess-who-beta-final</artifactId>
+  <artifactId>guess-who-beta-and-final</artifactId>
   <name>guess-who</name>
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
