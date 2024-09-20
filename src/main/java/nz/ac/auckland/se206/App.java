@@ -15,8 +15,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
@@ -56,7 +56,9 @@ public class App extends Application {
     isMuted = newMuteState;
   }
 
-  public static AudioClip getSfx() { return hoverSound; }
+  public static AudioClip getSfx() {
+    return hoverSound;
+  }
 
   public static MediaPlayer getMusic() {
     return music;
@@ -74,7 +76,7 @@ public class App extends Application {
     currentState = state;
     String fxml = getSceneName(state);
 
-    if(gameState != null) {
+    if (gameState != null) {
       RoomController roomController = gameState.getRoomController();
       ChatController chatController = gameState.getChatController();
 
@@ -101,28 +103,28 @@ public class App extends Application {
 
   private static Task<Parent> getParentTask(SceneState state, String fxml) {
     Task<Parent> task =
-            new Task<>() {
-              @Override
-              protected Parent call() throws IOException {
-                return loadFxml(fxml);
-              }
-            };
+        new Task<>() {
+          @Override
+          protected Parent call() throws IOException {
+            return loadFxml(fxml);
+          }
+        };
 
     task.setOnSucceeded(
-            event -> {
-              Parent root = task.getValue();
-              Platform.runLater(
-                      () -> {
-                        Stage stage = (Stage) scene.getWindow();
-                        SetStage(stage, root, state);
-                      });
-            });
+        event -> {
+          Parent root = task.getValue();
+          Platform.runLater(
+              () -> {
+                Stage stage = (Stage) scene.getWindow();
+                SetStage(stage, root, state);
+              });
+        });
 
     task.setOnFailed(
-            event -> {
-              Throwable e = task.getException();
-              e.printStackTrace();
-            });
+        event -> {
+          Throwable e = task.getException();
+          e.printStackTrace();
+        });
     return task;
   }
 
@@ -150,9 +152,7 @@ public class App extends Application {
 
     if (fxml.equals("mainMenu")) { // Reset controllers if main menu is loaded
       gameState = new GameState();
-    }
-    else if (gameState != null)
-    {
+    } else if (gameState != null) {
       if (fxml.equals("room") && gameState.getRoomController() == null) {
         gameState.setRoomController(loader.getController());
         gameState.setRoomControllerRoot(root);
@@ -194,8 +194,7 @@ public class App extends Application {
     music.setMute(muted);
     music.setVolume(volume);
 
-    music.setOnEndOfMedia(
-            () -> music.seek(Duration.ZERO));
+    music.setOnEndOfMedia(() -> music.seek(Duration.ZERO));
 
     music.play();
 
@@ -254,23 +253,23 @@ public class App extends Application {
     isMuted = false;
 
     hoverSound =
-            new AudioClip(
-                    Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
-                            .toExternalForm());
+        new AudioClip(
+            Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
+                .toExternalForm());
     hoverSound.setVolume(.5f);
 
     Parent root = loadFxml(getSceneName(defaultState));
 
     scene = new Scene(root);
     scene
-            .getStylesheets()
-            .add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
+        .getStylesheets()
+        .add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
 
     stage.setResizable(false);
     stage.setTitle("PI Masters: Whispers of Emeralds");
     stage
-            .getIcons()
-            .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
+        .getIcons()
+        .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
 
     SetStage(stage, root, defaultState);
   }

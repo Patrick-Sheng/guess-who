@@ -59,17 +59,18 @@ public class TextToSpeech {
     String mp3FilePath = getMp3FilePath(text.text());
 
     dialogQueue.offer(
-            () -> {
-              if (mp3FilePath != null) {
-                playMp3(mp3FilePath);
-              } else {
-                cloudTts(text);
-              }
-            });
+        () -> {
+          if (mp3FilePath != null) {
+            playMp3(mp3FilePath);
+          } else {
+            cloudTts(text);
+          }
+        });
   }
 
   private static void processQueue() {
-    Thread voiceThread = new Thread(
+    Thread voiceThread =
+        new Thread(
             () -> {
               while (App.isRunning()) {
                 if (dialogQueue.isEmpty() || stopFlag.get()) {
@@ -105,10 +106,10 @@ public class TextToSpeech {
 
     mediaPlayer.setOnEndOfMedia(latch::countDown);
     mediaPlayer.setOnError(
-            () -> {
-              System.err.println("Error occurred: " + mediaPlayer.getError());
-              latch.countDown();
-            });
+        () -> {
+          System.err.println("Error occurred: " + mediaPlayer.getError());
+          latch.countDown();
+        });
 
     Platform.runLater(mediaPlayer::play);
 
@@ -150,20 +151,21 @@ public class TextToSpeech {
 
   private static void loadMp3Files() {
     try (Stream<Path> paths =
-                 Files.walk(Paths.get(Objects.requireNonNull(TextToSpeech.class.getResource("/tts")).toURI()))) {
+        Files.walk(
+            Paths.get(Objects.requireNonNull(TextToSpeech.class.getResource("/tts")).toURI()))) {
       paths
-              .filter(Files::isRegularFile)
-              .filter(path -> path.toString().endsWith(".mp3"))
-              .forEach(
-                      path -> {
-                        String fileName = path.getFileName().toString();
-                        String key =
-                                fileName
-                                        .toLowerCase()
-                                        .replaceAll("[^a-z0-9]", "")
-                                        .substring(0, fileName.length() - 4); // Remove ".mp3"
-                        textToMp3Map.put(key, path.toString());
-                      });
+          .filter(Files::isRegularFile)
+          .filter(path -> path.toString().endsWith(".mp3"))
+          .forEach(
+              path -> {
+                String fileName = path.getFileName().toString();
+                String key =
+                    fileName
+                        .toLowerCase()
+                        .replaceAll("[^a-z0-9]", "")
+                        .substring(0, fileName.length() - 4); // Remove ".mp3"
+                textToMp3Map.put(key, path.toString());
+              });
     } catch (IOException | URISyntaxException e) {
       e.printStackTrace();
     }

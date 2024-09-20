@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
@@ -27,21 +26,18 @@ public class SettingsController extends ButtonController {
     sfxSlider.setValue(sfx.getVolume() * 100);
 
     volumeSlider
-            .valueProperty()
-            .addListener(
-                    (observable, oldValue, newValue) -> music.setVolume(newValue.doubleValue() / 100.0));
+        .valueProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> music.setVolume(newValue.doubleValue() / 100.0));
 
     sfxSlider
-            .valueProperty()
-            .addListener(
-                    (observable, oldValue, newValue) -> sfx.setVolume(newValue.doubleValue() / 100.0));
+        .valueProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> sfx.setVolume(newValue.doubleValue() / 100.0));
 
     updateMuteButton();
 
-    music
-            .muteProperty()
-            .addListener(
-                    (observable, oldValue, newValue) -> updateMuteButton());
+    music.muteProperty().addListener((observable, oldValue, newValue) -> updateMuteButton());
   }
 
   @FXML

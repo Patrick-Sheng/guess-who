@@ -162,7 +162,7 @@ public abstract class MapController extends ButtonController {
   public void checkButton() {
     if (App.getGameState().checkEnableButton()) {
       enableButton();
-    } else  {
+    } else {
       disableButton();
     }
   }
