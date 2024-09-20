@@ -115,7 +115,7 @@ public class App extends Application {
                 setStage(stage, root, state);
               });
         });
-    
+
     task.setOnFailed(
         event -> {
           Throwable e = task.getException();

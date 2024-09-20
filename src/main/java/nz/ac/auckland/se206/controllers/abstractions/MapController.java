@@ -144,12 +144,9 @@ public abstract class MapController extends ButtonController {
       GameState state = App.getGameState();
       state.stopTimer();
 
-      if (App.getGameState().checkEnableButton())
-      {
+      if (App.getGameState().checkEnableButton()) {
         paneTimeIsUp.setVisible(true);
-      }
-      else
-      {
+      } else {
         state.setSuspect(Suspect.OUT_OF_TIME);
         App.setRoot(SceneState.END_GAME_LOST, "Looks like you ran out of time!");
       }

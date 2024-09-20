@@ -46,15 +46,17 @@ public class GuessingController extends ButtonController {
     foundSuspect = false;
     foundExplanation = false;
     disableButton();
-    explanationTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (!foundExplanation)
-      {
-        foundExplanation = true;
-        if(!isNotValidResponse()) {
-          enableButton();
-        }
-      }
-    });
+    explanationTextArea
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              if (!foundExplanation) {
+                foundExplanation = true;
+                if (!isNotValidResponse()) {
+                  enableButton();
+                }
+              }
+            });
   }
 
   public void disableButton() {
@@ -220,7 +222,7 @@ public class GuessingController extends ButtonController {
   private void runChoose(Suspect suspect, String speech) {
     chosenSuspect = suspect;
     foundSuspect = true;
-    if(!isNotValidResponse()) {
+    if (!isNotValidResponse()) {
       enableButton();
     }
     TextToSpeech.speak(speech);

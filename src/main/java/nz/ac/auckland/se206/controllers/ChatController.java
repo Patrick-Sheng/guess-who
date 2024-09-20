@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -20,10 +21,6 @@ import nz.ac.auckland.se206.models.InteractionLog;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import org.fxmisc.richtext.InlineCssTextArea;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Controller class for the chat view. Handles user interactions and communication with the GPT
@@ -109,7 +106,8 @@ public class ChatController extends MapController {
     new Thread(task).start();
   }
 
-  private void addMessage(String message, Suspect conversation, Suspect from, boolean newLineBefore) {
+  private void addMessage(
+      String message, Suspect conversation, Suspect from, boolean newLineBefore) {
     GameState state = App.getGameState();
 
     InteractionLog log = new InteractionLog(from, message);
