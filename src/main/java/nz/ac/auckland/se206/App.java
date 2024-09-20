@@ -66,16 +66,20 @@ public class App extends Application {
    * @param state the state to transition to
    */
   public static void setRoot(SceneState state, String speech) {
+
     TextToSpeech.stopSpeak();
     TextToSpeech.speak(speech);
 
     currentState = state;
     String fxml = getSceneName(state);
 
+    // Check if the current game state is null
     if (gameState != null) {
+      // Prepares the controller for room and chat scenes
       RoomController roomController = gameState.getRoomController();
       ChatController chatController = gameState.getChatController();
 
+      // Set relevant scene on stage
       if (fxml.equals("room") && roomController != null) {
         Stage stage = (Stage) scene.getWindow();
         setStage(stage, gameState.getRoomControllerRoot(), state);
@@ -98,6 +102,8 @@ public class App extends Application {
   }
 
   private static Task<Parent> getParentTask(SceneState state, String fxml) {
+
+    // Load FXML and set scene on stage
     Task<Parent> task =
         new Task<>() {
           @Override
@@ -109,13 +115,14 @@ public class App extends Application {
     task.setOnSucceeded(
         event -> {
           Parent root = task.getValue();
+          // Set the scene on the JavaFX Application Thread
           Platform.runLater(
               () -> {
                 Stage stage = (Stage) scene.getWindow();
                 setStage(stage, root, state);
               });
         });
-    
+
     task.setOnFailed(
         event -> {
           Throwable e = task.getException();
@@ -167,6 +174,7 @@ public class App extends Application {
   }
 
   private static void playMusic(String name) {
+    // Check if the music currently playing is the same as the music to be played
     if (currentlyPlaying.equals(name)) {
       return;
     }
@@ -182,11 +190,13 @@ public class App extends Application {
       music.dispose();
     }
 
+    // Find mp3 file and plays the music
     URL resource = App.class.getResource("/music/" + name + ".mp3");
 
     assert resource != null;
     music = new MediaPlayer(new Media(resource.toString()));
 
+    // Set volume and mute status
     music.setMute(muted);
     music.setVolume(volume);
 
@@ -208,6 +218,7 @@ public class App extends Application {
   }
 
   private static String getSceneName(SceneState state) {
+    // Returns relevant state name as a string based on current state
     return switch (state) {
       case MAIN_MENU -> "mainMenu";
       case SETTINGS -> "settings";
@@ -254,6 +265,7 @@ public class App extends Application {
     SceneState defaultState = SceneState.MAIN_MENU;
     TextToSpeech.doStartSpeech();
 
+    // Initialize game state, variables, and API proxy config
     config = ApiProxyConfig.readConfig();
     gameState = new GameState();
 
@@ -266,6 +278,7 @@ public class App extends Application {
                 .toExternalForm());
     hoverSound.setVolume(.5f);
 
+    // Set main menu scene (default state) as root on stage
     Parent root = loadFxml(getSceneName(defaultState));
 
     scene = new Scene(root);

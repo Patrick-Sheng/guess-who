@@ -13,7 +13,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
- * chat with customers and guess their profession.
+ * interact with clues to investigate the crime scene.
  */
 public class RoomController extends MapController {
   @FXML private Pane paneRoom;
@@ -37,10 +37,12 @@ public class RoomController extends MapController {
   @FXML
   public void initialize() {
     super.initialize();
+    // Speaks introductory message to the player
     TextToSpeech.speak(
         "The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out"
             + " - mister detective!");
 
+    // Initializes the state of clue interaction and visibility
     isClueClick = false;
     isLetterReveal = false;
 
@@ -72,10 +74,12 @@ public class RoomController extends MapController {
       isClueClick = true;
     }
 
+    // Highlights the clicked clue by changing its style
     ImageView clickedImageView = (ImageView) event.getSource();
     clickedImageView.getStyleClass().remove("highlight-clue");
     clickedImageView.getStyleClass().add("lighter-clue");
 
+    // Performs actions based on which clue was clicked
     switch (clue) {
       case BAG:
         setClue(bagOpen);
@@ -97,15 +101,18 @@ public class RoomController extends MapController {
         break;
     }
 
+    // Dims the room pane and shows the clue pane
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
     handleRectangleEntered();
 
+    // Updates the game state and checks if a button should be enabled
     App.getGameState().increaseObjects();
     checkButton();
   }
 
   private void setClue(ImageView image) {
+    // Hides all clue-related images and labels
     bagOpen.setVisible(false);
     letterCloseUp.setVisible(false);
     emeraldRoom.setVisible(false);
@@ -115,11 +122,14 @@ public class RoomController extends MapController {
     revealLetterGrid.setVisible(false);
     roseLabel.setVisible(false);
     fabricLabel.setVisible(false);
+
+    // Shows the specified clue image
     image.setVisible(true);
   }
 
   @FXML
   private void onExitClue() {
+    // Hides the clue and restores the room pane's visibility
     bagOpen.setVisible(false);
     paneClue.setVisible(false);
     paneRoom.setOpacity(1);
@@ -128,8 +138,11 @@ public class RoomController extends MapController {
 
   @FXML
   private void onMousePressed(MouseEvent event) {
+    // Records the initial mouse position when the yellow paper is pressed
     mouseAnchorX = event.getX();
     mouseAnchorY = event.getY();
+
+    // Makes adjustments to the yellow paper's appearance and the room pane
     yellowPaper.setOpacity(0.7);
     revealLetterGrid.setVisible(false);
     paneRoom.setOpacity(1);
@@ -137,6 +150,7 @@ public class RoomController extends MapController {
 
   @FXML
   private void onMouseDragged(MouseEvent event) {
+    // Updates the yellow paper's position based on the mouse's movement
     yellowPaper.setLayoutX(event.getSceneX() - mouseAnchorX);
     if (yellowPaper.getLayoutX() < 0) {
       yellowPaper.setLayoutX(0);
@@ -158,14 +172,20 @@ public class RoomController extends MapController {
    */
   @FXML
   private void onMouseDropped(MouseEvent event) {
+    // Restores the yellow paper's opacity and reveals the letter grid
     yellowPaper.setOpacity(1);
     revealLetterGrid.setVisible(true);
+
+    // Checks if the yellow paper is dropped within the correct bounds
     if (326 < event.getSceneX() && event.getSceneX() < 326 + 112) {
       if (538 < event.getSceneY() && event.getSceneY() < 538 + 144) {
+        // Reveals the letter if the drop is successful
         isLetterReveal = true;
         setClue(letterCloseUp);
       }
     }
+
+    // Dims the room pane after dropping
     paneRoom.setOpacity(0.2);
   }
 

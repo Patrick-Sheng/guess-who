@@ -13,6 +13,17 @@ import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
+
+  public static String enumToName(Suspect suspect) {
+    // Use Enum to correspond the name of each suspect
+    return switch (suspect) {
+      case AUNT -> "Beatrice Worthington";
+      case NIECE -> "Sophie Baxter";
+      case GARDENER -> "Elias Greenfield";
+      default -> "";
+    };
+  }
+
   @FXML private Button guessButton;
   @FXML private ImageView exitImage;
   @FXML private Label timerLabel;
@@ -40,15 +51,6 @@ public abstract class MapController extends ButtonController {
     TextToSpeech.speak("Closing map!");
     paneMap.setVisible(false);
     paneRoom.setOpacity(1);
-  }
-
-  public static String enumToName(Suspect suspect) {
-    return switch (suspect) {
-      case AUNT -> "Beatrice Worthington";
-      case NIECE -> "Sophie Baxter";
-      case GARDENER -> "Elias Greenfield";
-      default -> "";
-    };
   }
 
   @FXML
@@ -144,19 +146,20 @@ public abstract class MapController extends ButtonController {
       GameState state = App.getGameState();
       state.stopTimer();
 
-      if (App.getGameState().checkEnableButton())
-      {
-        paneTimeIsUp.setVisible(true);
-      }
-      else
-      {
+      // Check if the button should be enabled or if the game should end due to time out
+      if (App.getGameState().checkEnableButton()) {
+        paneTimeIsUp.setVisible(true); // Show the "time is up" pane
+      } else {
         state.setSuspect(Suspect.OUT_OF_TIME);
-        App.setRoot(SceneState.END_GAME_LOST, "Looks like you ran out of time!");
+        App.setRoot(SceneState.END_GAME_LOST, "Looks like you ran out of time!"); // End the game
       }
     }
 
+    // Calculate minutes and seconds from the total time in seconds
     int minutes = time / 60;
     int seconds = time % 60;
+
+    // Set the text color and update the timer label with the remaining time
     timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
   }
@@ -164,7 +167,6 @@ public abstract class MapController extends ButtonController {
   @FXML
   private void onMakeGuess() {
     GameState state = App.getGameState();
-
     state.stopTimer();
     state.resetColour();
     state.startTimer(60);

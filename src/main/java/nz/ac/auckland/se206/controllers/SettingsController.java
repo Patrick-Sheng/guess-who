@@ -19,12 +19,15 @@ public class SettingsController extends ButtonController {
 
   @FXML
   public void initialize() {
+    // Get the current music and sound effects instances from the application
     music = App.getMusic();
     sfx = App.getSfx();
 
+    // Set the sliders to the current volume levels (0 to 100 scale)
     volumeSlider.setValue(music.getVolume() * 100);
     sfxSlider.setValue(sfx.getVolume() * 100);
 
+    // Add listeners to the sliders to update the volume in real-time when the user adjusts them
     volumeSlider
         .valueProperty()
         .addListener(
@@ -35,20 +38,26 @@ public class SettingsController extends ButtonController {
         .addListener(
             (observable, oldValue, newValue) -> sfx.setVolume(newValue.doubleValue() / 100.0));
 
+    // Initialize the mute button state based on the current mute state of the music
     updateMuteButton();
 
+    // Add a listener to the music's mute property to update the mute button whenever the mute state
+    // changes
     music.muteProperty().addListener((observable, oldValue, newValue) -> updateMuteButton());
   }
 
   @FXML
   private void onMuteToggle() {
+    // Toggle the mute state of the music and update the application's mute state
     boolean newMute = !music.isMute();
     App.setMuted(newMute);
     music.setMute(newMute);
+    // Update the mute button text and style based on the new mute state
     updateMuteButton();
   }
 
   private void updateMuteButton() {
+    // Update the mute button text and style
     if (music.isMute()) {
       muteButton.setText("On");
       muteButton.setStyle("-fx-text-fill: darkred;");

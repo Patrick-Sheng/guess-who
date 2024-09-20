@@ -48,6 +48,7 @@ public class TextToSpeech {
   ////
 
   public static void speak(String message, Voice voice, Provider provider) {
+    // Check if message is empty
     if (message == null) {
       throw new IllegalArgumentException("Text cannot be null.");
     }
@@ -56,6 +57,7 @@ public class TextToSpeech {
 
     Text text = new Text(message, voice, provider);
 
+    // Play sounds from the mp3 file
     String mp3FilePath = getMp3FilePath(text.text());
 
     dialogQueue.offer(
@@ -69,10 +71,12 @@ public class TextToSpeech {
   }
 
   private static void processQueue() {
+    // Makes sure that voice will not overlap each other
     Thread voiceThread =
         new Thread(
             () -> {
               while (App.isRunning()) {
+                // Only allow one dialog to play at once
                 if (dialogQueue.isEmpty() || stopFlag.get()) {
                   continue;
                 }

@@ -65,10 +65,12 @@ public class GameState {
   public void updateTimer(int time) {
     SceneState currentState = App.getCurrentState();
 
+    // If timer doesn't exist or current state is null, don't update timer label
     if (timer != null && currentState != null) {
       if (time <= 0) {
         stopTimer();
       }
+      // Changes the colour of the timer by 1 iteration
       changeTimerColor();
       switch (currentState) {
         case START_GAME:
@@ -96,6 +98,7 @@ public class GameState {
   public void changeTimerColor() {
     SceneState currentState = App.getCurrentState();
 
+    // Sets how fast colours change based on current state
     if (currentState.equals(SceneState.START_GAME) || currentState.equals(SceneState.CHAT)) {
       if (blue - 2 > 31) {
         blue -= 2;
