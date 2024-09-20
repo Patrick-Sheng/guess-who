@@ -129,9 +129,6 @@ public class GameState {
         return chosenSuspect;
     }
 
-    public void setChosenSuspect(Suspect chosenSuspect) {
-        this.chosenSuspect = chosenSuspect;
-    }
     public void setSelectedSuspect(Suspect selectedSuspect) {
         this.selectedSuspect = selectedSuspect;
     }
