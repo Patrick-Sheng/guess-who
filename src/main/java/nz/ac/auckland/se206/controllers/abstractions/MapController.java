@@ -13,13 +13,13 @@ import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
-  @FXML private Text textMap;
+  @FXML private Button guessButton;
   @FXML private ImageView exitImage;
+  @FXML private Label timerLabel;
   @FXML private Pane paneRoom;
   @FXML private Pane paneMap;
-  @FXML private Button guessButton;
-  @FXML private Label timerLabel;
   @FXML private Pane paneTimeIsUp;
+  @FXML private Text textMap;
 
   @FXML
   public void initialize() {
@@ -174,7 +174,7 @@ public abstract class MapController extends ButtonController {
   public void checkButton() {
     if (App.getGameState().checkEnableButton()) {
       enableButton();
-    } else  {
+    } else {
       disableButton();
     }
   }

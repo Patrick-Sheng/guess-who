@@ -16,19 +16,18 @@ public class CountdownTimer {
 
   public void start() {
     Task<Void> timerTask =
-            new Task<>() {
-                @Override
-                protected Void call() throws Exception {
-                    while (remainingTime > 0 && isRunning) {
-                        Platform.runLater(
-                                () -> updateLabel());
-                        remainingTime--;
-                        Thread.sleep(1000);
-                    }
-                    System.out.println("Time's up!");
-                    return null;
-                }
-            };
+        new Task<>() {
+          @Override
+          protected Void call() throws Exception {
+            while (remainingTime > 0 && isRunning) {
+              Platform.runLater(() -> updateLabel());
+              remainingTime--;
+              Thread.sleep(1000);
+            }
+            System.out.println("Time's up!");
+            return null;
+          }
+        };
 
     timerThread = new Thread(timerTask);
     timerThread.setDaemon(true);
