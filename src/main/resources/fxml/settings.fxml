@@ -44,7 +44,7 @@
          <RowConstraints />
       </rowConstraints>
    </GridPane>
-   <ImageView fx:id="backButton" fitHeight="179.0" fitWidth="193.0" layoutX="309.0" layoutY="522.0" onMouseClicked="#onBackButton" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+   <ImageView fitHeight="179.0" fitWidth="193.0" layoutX="309.0" layoutY="522.0" onMouseClicked="#onBackButton" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
       <Image url="@../images/buttons/back.png" />
    </ImageView>
 </Pane>

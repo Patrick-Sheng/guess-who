@@ -1,32 +1,23 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
+import nz.ac.auckland.se206.enums.Clues;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
  * chat with customers and guess their profession.
  */
 public class RoomController extends MapController {
-  public Label labelMap;
-
-  public Button toGuessRoomButton;
-
-  public ImageView letter;
-  public ImageView door;
-  public ImageView bag;
-  public GridPane gridMap;
-
   @FXML private Pane paneRoom;
   @FXML private Pane paneClue;
-  @FXML private Label timerLabel;
   @FXML private Label fabricLabel;
   @FXML private Label roseLabel;
   @FXML private ImageView bagOpen;
@@ -38,52 +29,78 @@ public class RoomController extends MapController {
   @FXML private GridPane revealLetterGrid;
 
   private Boolean isClueClick;
-  ;
-  private Boolean isLetterReavel;
+
+  private Boolean isLetterReveal;
   private double mouseAnchorX;
   private double mouseAnchorY;
 
   @FXML
   public void initialize() {
-    isClueClick = false;
-    isLetterReavel = false;
     super.initialize();
+    TextToSpeech.speak("The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out - mister detective!");
+
+    isClueClick = false;
+    isLetterReveal = false;
+
     paneClue.setVisible(false);
   }
 
   @FXML
-  private void onClue(MouseEvent event) {
+  public void bagOpen(MouseEvent event) {
+    onClue(event, Clues.BAG);
+  }
+
+  @FXML
+  public void letterReveal(MouseEvent event) {
+    onClue(event, Clues.LETTER);
+  }
+
+  @FXML
+  public void doorOpen(MouseEvent event) {
+    onClue(event, Clues.DOOR);
+  }
+
+  @FXML
+  public void reportClose(MouseEvent event) {
+    onClue(event, Clues.REPORT);
+  }
+
+  private void onClue(MouseEvent event, Clues clue) {
     if (!isClueClick) {
       isClueClick = true;
     }
+
     ImageView clickedImageView = (ImageView) event.getSource();
     clickedImageView.getStyleClass().remove("highlight-clue");
     clickedImageView.getStyleClass().add("lighter-clue");
-    String ImageViewID = clickedImageView.getId();
 
-    switch (ImageViewID) {
-      case "bag":
+    switch (clue) {
+      case BAG:
         setClue(bagOpen);
         report.setVisible(true);
         break;
-      case "letter":
-        if (!isLetterReavel) {
+      case LETTER:
+        if (!isLetterReveal) {
           setClue(yellowPaper);
           revealLetterGrid.setVisible(true);
         } else {
           setClue(letterCloseUp);
         }
         break;
-      case "door":
+      case DOOR:
         setClue(emeraldRoom);
         break;
-      case "report":
+      case REPORT:
         setClue(reportCloseUp);
         break;
     }
+
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
     handleRectangleEntered();
+
+    App.getGameState().increaseObjects();
+    checkButton();
   }
 
   private void setClue(ImageView image) {
@@ -143,7 +160,7 @@ public class RoomController extends MapController {
     revealLetterGrid.setVisible(true);
     if (326 < event.getSceneX() && event.getSceneX() < 326 + 112) {
       if (538 < event.getSceneY() && event.getSceneY() < 538 + 144) {
-        isLetterReavel = true;
+        isLetterReveal = true;
         setClue(letterCloseUp);
       }
     }
@@ -151,16 +168,12 @@ public class RoomController extends MapController {
   }
 
   @FXML
-  private void rectangleClick(MouseEvent event) {
-    Shape clickedRectangle = (Shape) event.getSource();
-    String id = clickedRectangle.getId();
-    switch (id) {
-      case "fabricRec":
-        fabricLabel.setVisible(true);
-        break;
-      case "roseRec":
-        roseLabel.setVisible(true);
-        break;
-    }
+  private void clickFabric() {
+    fabricLabel.setVisible(true);
+  }
+
+  @FXML
+  private void clickRose() {
+    roseLabel.setVisible(true);
   }
 }

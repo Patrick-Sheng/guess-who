@@ -5,7 +5,6 @@ import javafx.concurrent.Task;
 import nz.ac.auckland.se206.App;
 
 public class CountdownTimer {
-
   private int remainingTime;
   private boolean isRunning;
   private Thread timerThread;
@@ -48,6 +47,6 @@ public class CountdownTimer {
   }
 
   public void updateLabel() {
-    App.updateTimer(remainingTime);
+    App.getGameState().updateTimer(remainingTime);
   }
 }

@@ -4,11 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
@@ -22,7 +23,7 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   public void initialize() {
-    enableButton();
+    checkButton();
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
   }
@@ -41,21 +42,13 @@ public abstract class MapController extends ButtonController {
     paneRoom.setOpacity(1);
   }
 
-  @FXML
-  private void enterMap(MouseEvent event) {
-    Pane hoverPane = (Pane) event.getSource();
-    String paneId = hoverPane.getId();
-    String text = switch (paneId) {
-      case "auntieRoom" -> "Auntie Room";
-      case "childRoom" -> "Child Room";
-      case "gardenerRoom" -> "Gardener Room";
-      case "mainRoom" -> "Crime scene";
-      case "guessRoom" -> "Guess Room";
+  public static String EnumToName(Suspect suspect) {
+    return switch (suspect) {
+      case AUNT -> "Beatrice Worthington";
+      case NIECE -> "Sophie Baxter";
+      case GARDENER -> "Elias Greenfield";
       default -> "";
     };
-
-    textMap.setText(text);
-    exitImage.setVisible(false);
   }
 
   @FXML
@@ -65,35 +58,75 @@ public abstract class MapController extends ButtonController {
   }
 
   @FXML
-  private void clickRoom(MouseEvent event) {
-    Pane hoverPane = (Pane) event.getSource();
-    String paneId = hoverPane.getId();
+  private void enterAuntie() {
+    textMap.setText("Auntie Room");
+    exitImage.setVisible(false);
+  }
 
-    switch (paneId) {
-      case "auntieRoom":
-        App.setRoot(SceneState.CHAT, "Going To Aunt Beatrice's Study");
-        break;
-      case "childRoom":
-        App.setRoot(SceneState.CHAT, "Going To Sophie Baxter's Nursery");
-        break;
-      case "gardenerRoom":
-        App.setRoot(SceneState.CHAT, "Going To Elias Greenfield's Garden");
-        break;
-      case "mainRoom":
-        App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
-        break;
-      case "guessRoom":
-        App.stopTimer();
-        App.resetColour();
-        App.startTimer(60);
-        App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
-        break;
-    }
+  @FXML
+  private void clickAuntie() {
+    launchChatWindow(Suspect.AUNT, "Going To Aunt Beatrice's Study");
+  }
+
+  @FXML
+  private void enterChild() {
+    textMap.setText("Child Room");
+    exitImage.setVisible(false);
+  }
+
+  @FXML
+  private void clickChild() {
+    launchChatWindow(Suspect.NIECE, "Going To Sophie Baxter's Nursery");
+  }
+
+  @FXML
+  private void clickGardener() {
+    launchChatWindow(Suspect.GARDENER, "Going To Elias Greenfield's Garden");
+  }
+
+  @FXML
+  private void enterGardener() {
+    textMap.setText("Gardener Room");
+    exitImage.setVisible(false);
+  }
+
+  private void launchChatWindow(Suspect suspect, String text) {
+    GameState state = App.getGameState();
+    state.setSelectedSuspect(suspect);
+    App.setRoot(SceneState.CHAT, text);
+    adjustPanel();
+  }
+
+  @FXML
+  private void enterMain() {
+    textMap.setText("Crime scene");
+    exitImage.setVisible(false);
+  }
+
+  @FXML
+  private void clickMain() {
+    App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
+    adjustPanel();
+  }
+
+  @FXML
+  private void enterGuess() {
+    textMap.setText("Guess Room");
+    exitImage.setVisible(false);
+  }
+
+  @FXML
+  private void clickGuess() {
+    onMakeGuess();
+    adjustPanel();
+  }
+
+  private void adjustPanel() {
     paneMap.setVisible(false);
     paneRoom.setOpacity(1);
   }
 
-  private void disableButton() {
+  public void disableButton() {
     guessButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
     guessButton.setDisable(true);
     guessButton.setOpacity(1f);
@@ -106,7 +139,7 @@ public abstract class MapController extends ButtonController {
 
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
-      App.stopTimer();
+      App.getGameState().stopTimer();
       paneTimeIsUp.setVisible(true);
     }
 
@@ -118,9 +151,19 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void onMakeGuess() {
-    App.stopTimer();
-    App.resetColour();
-    App.startTimer(60);
+    GameState state = App.getGameState();
+
+    state.stopTimer();
+    state.resetColour();
+    state.startTimer(60);
     App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
+  }
+
+  public void checkButton() {
+    if (App.getGameState().checkEnableButton()) {
+      enableButton();
+    } else  {
+      disableButton();
+    }
   }
 }

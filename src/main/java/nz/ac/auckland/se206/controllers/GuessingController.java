@@ -5,15 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
-import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
@@ -23,16 +20,14 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GuessingController extends ButtonController {
-
-    public ImageView pane;
-    public Button submitButton;
-
     @FXML private Pane paneTimeIsUp;
     @FXML private Label systemDescriptionLabel;
     @FXML private Button moveToNextScene;
+
     @FXML private Rectangle rectAunt;
     @FXML private Rectangle rectGardener;
     @FXML private Rectangle rectNiece;
+
     @FXML private Label timerLabel;
     @FXML private TextArea explanationTextArea;
 
@@ -61,8 +56,7 @@ public class GuessingController extends ButtonController {
                     @Override
                     protected Void call() {
                         try {
-                            ApiProxyConfig config = ApiProxyConfig.readConfig();
-                            chatCompletionRequest = new ChatCompletionRequest(config).setMaxTokens(200);
+                            chatCompletionRequest = new ChatCompletionRequest(App.getConfig()).setMaxTokens(200);
                             runGpt(new ChatMessage("system", getSystemPrompt()));
                         } catch (ApiProxyException e) {
                             e.printStackTrace();
@@ -118,7 +112,7 @@ public class GuessingController extends ButtonController {
                 event -> {
                     String explanation = getExplanationTask.getValue();
                     if (explanation != null) {
-                        App.updateFeedbackPrompt(explanation);
+                        App.getGameState().updateFeedbackPrompt(explanation);
                     }
                 });
         getExplanationTask.setOnFailed(
@@ -142,7 +136,7 @@ public class GuessingController extends ButtonController {
     }
 
     private void timeIsUp() {
-        App.stopTimer();
+        App.getGameState().stopTimer();
         paneTimeIsUp.setVisible(true);
 
         TextToSpeech.speak("Time is up!");
@@ -157,59 +151,52 @@ public class GuessingController extends ButtonController {
         }
     }
 
-    private void highlightCharacterPane(String rectId) {
-        switch (rectId) {
-            case "rectAunt":
-                rectAunt.setOpacity(0);
-                rectGardener.setOpacity(0.5);
-                rectNiece.setOpacity(0.5);
-                break;
-            case "rectGardener":
-                rectAunt.setOpacity(0.5);
-                rectGardener.setOpacity(0);
-                rectNiece.setOpacity(0.5);
-                break;
-            case "rectNiece":
-                rectAunt.setOpacity(0.5);
-                rectGardener.setOpacity(0.5);
-                rectNiece.setOpacity(0);
-                break;
-            default:
-                rectAunt.setOpacity(0.5);
-                rectGardener.setOpacity(0.5);
-                rectNiece.setOpacity(0.5);
-                break;
-        }
+    @FXML
+    private void chooseAunt() {
+        runChoose(Suspect.AUNT, "Aunt Beatrice");
     }
 
     @FXML
-    private void chooseSuspect(MouseEvent event) {
-        Rectangle rectangle = (Rectangle) event.getSource();
-        String rectId = rectangle.getId();
-        switch (rectId) {
-            case "rectAunt":
-                chosenSuspect = Suspect.AUNT;
-                TextToSpeech.speak("Aunt Beatrice");
-                break;
-            case "rectGardener":
-                chosenSuspect = Suspect.GARDENER;
-                TextToSpeech.speak("Elias Greenfield");
-                break;
-            case "rectNiece":
-                chosenSuspect = Suspect.NIECE;
-                TextToSpeech.speak("Sophie Baxter");
-                break;
-        }
-        highlightCharacterPane(rectId);
+    private void choosingAunt() {
+        runHighlight(Suspect.AUNT);
     }
 
     @FXML
-    private void enterChoosing(MouseEvent event) {
-        Rectangle rectangle = (Rectangle) event.getSource();
-        String rectId = rectangle.getId();
+    private void chooseGardener() {
+        runChoose(Suspect.GARDENER, "Elias Greenfield");
+    }
+
+    @FXML
+    private void choosingGardener() {
+            runHighlight(Suspect.GARDENER);
+    }
+
+    @FXML
+    private void chooseNiece() {
+        runChoose(Suspect.NIECE, "Sophie Baxter");
+    }
+
+    @FXML
+    private void choosingNiece() {
+        runHighlight(Suspect.NIECE);
+    }
+
+    private void runChoose(Suspect suspect, String speech) {
+        chosenSuspect = suspect;
+        TextToSpeech.speak(speech);
+        highlightCharacterPane(suspect);
+    }
+
+    private void runHighlight(Suspect suspect) {
         if (chosenSuspect == null) {
-            highlightCharacterPane(rectId);
+            highlightCharacterPane(suspect);
         }
+    }
+
+    private void highlightCharacterPane(Suspect suspect) {
+        rectAunt.setOpacity(suspect == Suspect.AUNT ? 0 : 0.5);
+        rectGardener.setOpacity(suspect == Suspect.GARDENER ? 0 : 0.5);
+        rectNiece.setOpacity(suspect == Suspect.NIECE ? 0 : 0.5);
     }
 
     @FXML
@@ -223,13 +210,13 @@ public class GuessingController extends ButtonController {
 
     @FXML
     private void onSubmitFeedback() {
-        App.stopTimer();
+        App.getGameState().stopTimer();
 
         Task<Void> task =
                 new Task<>() {
                     @Override
                     protected Void call() {
-                        App.setSuspect(chosenSuspect);
+                        App.getGameState().setSuspect(chosenSuspect);
                         switch (chosenSuspect) {
                             case AUNT:
                                 App.setRoot(SceneState.END_GAME_WON, "Wow, you got it! Who knew it could have been Beatrice?");
@@ -253,7 +240,7 @@ public class GuessingController extends ButtonController {
 
     @FXML
     public void onMoveToNextScene() {
-        App.stopTimer();
+        App.getGameState().stopTimer();
         if (chosenSuspect == null) {
             App.setRoot(SceneState.MAIN_MENU, "Going back to main menu...");
         } else {

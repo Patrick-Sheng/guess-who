@@ -1,4 +1,4 @@
-The person that you are currently commnicating to is a detective.
+The person that you are currently communicating to is a detective.
 Your next response will be giving feedback on detectives explanation on the case.
 
 The detective is currently investigating on a theft case of a stolen emerald in a mansion.

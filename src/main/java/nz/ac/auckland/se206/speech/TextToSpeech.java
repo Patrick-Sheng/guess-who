@@ -22,7 +22,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest.Provider;
@@ -34,12 +33,10 @@ import nz.ac.auckland.se206.App;
 public class TextToSpeech {
   private static final Map<String, String> textToMp3Map = new HashMap<>();
 
-  public static Thread voiceThread;
-
   private static final BlockingQueue<Runnable> dialogQueue = new LinkedBlockingQueue<>();
   private static final AtomicBoolean stopFlag = new AtomicBoolean(false);
 
-  static {
+  public static void setupTTS() {
     loadMp3Files();
     processQueue();
   }
@@ -72,28 +69,27 @@ public class TextToSpeech {
   }
 
   private static void processQueue() {
-    voiceThread =
-            new Thread(
-                    () -> {
-                      while (App.running) {
-                        if (dialogQueue.isEmpty() || stopFlag.get()) {
-                          continue;
-                        }
+    Thread voiceThread = new Thread(
+            () -> {
+              while (App.isRunning()) {
+                if (dialogQueue.isEmpty() || stopFlag.get()) {
+                  continue;
+                }
 
-                        try {
-                          Runnable task = dialogQueue.take();
-                          task.run();
-                        } catch (InterruptedException e) {
-                          Thread.currentThread().interrupt();
-                        }
+                try {
+                  Runnable task = dialogQueue.take();
+                  task.run();
+                } catch (InterruptedException e) {
+                  Thread.currentThread().interrupt();
+                }
 
-                        try {
-                          Thread.sleep(10);
-                        } catch (InterruptedException e) {
-                          e.printStackTrace();
-                        }
-                      }
-                    });
+                try {
+                  Thread.sleep(10);
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
 
     voiceThread.setDaemon(true);
     voiceThread.start();
@@ -125,10 +121,8 @@ public class TextToSpeech {
 
   private static void cloudTts(Text text) {
     try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-
       // Make request to servers.
-      TextToSpeechRequest ttsRequest = new TextToSpeechRequest(config);
+      TextToSpeechRequest ttsRequest = new TextToSpeechRequest(App.getConfig());
       ttsRequest.setText(text.text()).setProvider(text.provider()).setVoice(text.voice());
 
       // Received TTS result.
