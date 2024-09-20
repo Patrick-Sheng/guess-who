@@ -21,6 +21,7 @@ public class GameOverController extends ButtonController {
 
   @FXML
   public void initialize() {
+    // Disable image when first enter the game over state
     imageAunt.setVisible(false);
     imageGardener.setVisible(false);
     imageNiece.setVisible(false);
@@ -30,6 +31,8 @@ public class GameOverController extends ButtonController {
   }
 
   public void setGameOverImage(Suspect suspect) {
+    // Displays the corresponding image, shows the feedback text area if necessary, and updates the
+    // subtitle.
     switch (suspect) {
       case AUNT:
         imageAunt.setVisible(true);
@@ -38,6 +41,7 @@ public class GameOverController extends ButtonController {
         continueOther.setVisible(false);
         continueAunt.setVisible(true);
 
+        // Choosing the actual crime theft will give feedback on user's explanation
         labelSubtitle.setText("Here is some feedback based on your explanation");
         break;
       case GARDENER:
@@ -46,6 +50,7 @@ public class GameOverController extends ButtonController {
         continueOther.setVisible(true);
         continueAunt.setVisible(false);
 
+        // Choosing the gardener will not give feedback on user's explanation
         labelSubtitle.setText("Try again next time!");
         break;
       case NIECE:
@@ -54,9 +59,11 @@ public class GameOverController extends ButtonController {
         continueOther.setVisible(true);
         continueAunt.setVisible(false);
 
+        // Choosing the niece will not give feedback on user's explanation
         labelSubtitle.setText("Try again next time!");
         break;
       case OUT_OF_TIME:
+        // Player lost staight away if the time run out
         outOfTime.setVisible(true);
 
         continueOther.setVisible(true);

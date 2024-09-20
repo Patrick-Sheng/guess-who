@@ -45,21 +45,23 @@ public class ChatController extends MapController {
     GameState state = App.getGameState();
     Suspect suspect = App.getGameState().getSelectedSuspect();
 
+    // Check if this is the first interaction with the suspect
     if (state.getInteractionLogs().containsKey(suspect)) {
       if (!hasDetectiveInteraction(state.getInteractionLogs().get(suspect))) {
-        increasePersonAmount();
+        increasePersonAmount(); // Increase the interaction count for this suspect
       }
     }
 
     String text = userField.getText();
     addMessage(text, state.getSelectedSuspect(), Suspect.DETECTIVE, true);
-    userField.clear();
+    userField.clear(); // Clear the input field after the text is send
 
-    checkButton();
+    checkButton(); // Check if any buttons need to be enabled or disabled
 
-    addLog(new InteractionLog(suspect, "is thinking..."), true);
+    addLog(
+        new InteractionLog(suspect, "is thinking..."), true); // Log that the suspect is processing
 
-    logArea.requestFollowCaret();
+    logArea.requestFollowCaret(); // Ensure the log area scrolls to the latest message
     fetchMessage(suspect);
   }
 
@@ -113,10 +115,12 @@ public class ChatController extends MapController {
     InteractionLog log = new InteractionLog(from, message);
     state.getInteractionLogs().get(conversation).add(log);
 
+    // Only update the chat log if the conversation is with the selected suspect
     if (conversation == state.getSelectedSuspect()) {
       addLog(log, newLineBefore);
     }
 
+    // Send the message to the GPT model if the conversation is with an actor
     if (isActor(conversation)) {
       String type = "assistant";
 
@@ -140,6 +144,7 @@ public class ChatController extends MapController {
   }
 
   public void enterUser(Suspect suspect) {
+    // Prepare the introductory message based on the suspect
     String intro =
         switch (suspect) {
           case AUNT ->
@@ -155,13 +160,14 @@ public class ChatController extends MapController {
           default -> "";
         };
 
-    startDialog(intro, suspect);
+    startDialog(intro, suspect); // Start the dialog with the suspect
 
+    // Set the visibility of the suspect's image
     imageGardener.setVisible(suspect == Suspect.GARDENER);
     imageNiece.setVisible(suspect == Suspect.NIECE);
     imageAunt.setVisible(suspect == Suspect.AUNT);
 
-    suspectLabel.setText(enumToName(suspect));
+    suspectLabel.setText(enumToName(suspect)); // Set the label to the suspect's name
   }
 
   private boolean isActor(Suspect objectType) {
@@ -175,6 +181,7 @@ public class ChatController extends MapController {
       logArea.appendText("\n");
     }
 
+    // Append the suspect's name and the message to the log area
     logArea.append(
         enumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
     logArea.append(log.message(), "");

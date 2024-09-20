@@ -41,19 +41,20 @@ public class GuessingController extends ButtonController {
 
   @FXML
   public void initialize() {
-    paneTimeIsUp.setVisible(false);
-    setAiProxyConfig();
+    paneTimeIsUp.setVisible(false); // Hide the "time is up" pane initially
+    setAiProxyConfig(); // Set up the AI proxy configuration
     foundSuspect = false;
     foundExplanation = false;
-    disableButton();
+    disableButton(); // Disable the submit button initially
     explanationTextArea
         .textProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
+              // Listener to check if an explanation has been provided
               if (!foundExplanation) {
                 foundExplanation = true;
                 if (!isNotValidResponse()) {
-                  enableButton();
+                  enableButton(); // Enable the button if both suspect and explanation are provided
                 }
               }
             });
@@ -86,12 +87,14 @@ public class GuessingController extends ButtonController {
           @Override
           protected Void call() {
             try {
+              // Configure the chatCompletionRequest with specific parameters
               chatCompletionRequest =
                   new ChatCompletionRequest(App.getConfig())
                       .setTemperature(0.1)
                       .setTopP(0.2)
                       .setMaxTokens(200);
               runGpt(new ChatMessage("system", getSystemPrompt()));
+              // Run the GPT model with a system prompt to initialize the chat
             } catch (ApiProxyException e) {
               e.printStackTrace();
             }
@@ -99,6 +102,7 @@ public class GuessingController extends ButtonController {
           }
         };
 
+    // Start the task in a new thread to avoid blocking the main thread
     new Thread(setGptModelTask).start();
   }
 
@@ -115,14 +119,17 @@ public class GuessingController extends ButtonController {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
+      // Runs the GPT model with a given chat message.
       return result.getChatMessage();
     } catch (ApiProxyException e) {
+      // Catch any error if there is any
       e.printStackTrace();
       return null;
     }
   }
 
   private void setExplanation() {
+    // Create a background task to get the explanation from the GPT model
     Task<String> getExplanationTask =
         new Task<>() {
           @Override
@@ -130,6 +137,7 @@ public class GuessingController extends ButtonController {
             String message = explanationTextArea.getText().trim();
             if (!message.isEmpty()) {
               try {
+                // Run the GPT model with the user's message and return the response
                 ChatMessage response = runGpt(new ChatMessage("user", message));
                 assert response != null;
                 System.out.println(response.getContent());
@@ -142,6 +150,7 @@ public class GuessingController extends ButtonController {
           }
         };
 
+    // Update the game state with the explanation when the task succeeds
     getExplanationTask.setOnSucceeded(
         event -> {
           String explanation = getExplanationTask.getValue();
@@ -149,22 +158,26 @@ public class GuessingController extends ButtonController {
             App.getGameState().updateFeedbackPrompt(explanation);
           }
         });
+    // Handle task failure by printing the exception
     getExplanationTask.setOnFailed(
         event -> {
           Throwable e = getExplanationTask.getException();
           e.printStackTrace();
         });
 
+    // Start the task in a new thread to avoid blocking the main thread
     new Thread(getExplanationTask).start();
   }
 
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
-      timeIsUp();
+      timeIsUp(); // If time is up, trigger the time-up event
     }
 
+    // Calculate minutes and seconds from the total time in seconds
     int minutes = time / 60;
     int seconds = time % 60;
+    // Set the text color and update the timer label with the remaining time
     timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
   }
@@ -173,13 +186,17 @@ public class GuessingController extends ButtonController {
     App.getGameState().stopTimer();
     paneTimeIsUp.setVisible(true);
 
+    // Speak to the user, indicating that time is up
     TextToSpeech.speak("Time is up!");
 
     if (isNotValidResponse()) {
+      // If neither a suspect nor an explanation was provided, inform the user and prompt them to go
+      // back to the main menu
       systemDescriptionLabel.setText(
           "You did not select a suspect amd explanation within time limit. Game is now over.");
       moveToNextScene.setText("Back to Main Menu");
     } else {
+      // If a suspect and explanation were provided, allow the user to submit their choice
       systemDescriptionLabel.setText("Click submit to see if you are correct.");
       moveToNextScene.setText("Submit");
     }
@@ -223,10 +240,10 @@ public class GuessingController extends ButtonController {
     chosenSuspect = suspect;
     foundSuspect = true;
     if (!isNotValidResponse()) {
-      enableButton();
+      enableButton(); // Enable the button if both suspect and explanation are provided
     }
     TextToSpeech.speak(speech);
-    highlightCharacterPane(suspect);
+    highlightCharacterPane(suspect); // Highlight the selected suspect's image
   }
 
   private void runHighlight(Suspect suspect) {
@@ -254,17 +271,21 @@ public class GuessingController extends ButtonController {
   private void onSubmitFeedback() {
     App.getGameState().stopTimer();
 
+    // Create a background task to process the feedback submission
     Task<Void> task =
         new Task<>() {
           @Override
           protected Void call() {
+            // Set the chosen suspect in the game state
             App.getGameState().setSuspect(chosenSuspect);
+
+            // Navigate to the appropriate end game scene based on the chosen suspect
             switch (chosenSuspect) {
               case AUNT:
                 App.setRoot(
                     SceneState.END_GAME_WON,
                     "Wow, you got it! Who knew it could have been Beatrice?");
-                setExplanation();
+                setExplanation(); // Set the explanation for the correct choice
                 break;
               case GARDENER:
                 App.setRoot(
@@ -280,17 +301,17 @@ public class GuessingController extends ButtonController {
             return null;
           }
         };
-
+    // Start the task in a new thread to avoid blocking the main thread
     new Thread(task).start();
   }
 
   @FXML
   public void onMoveToNextScene() {
-    App.getGameState().stopTimer();
+    App.getGameState().stopTimer(); // Stop the game timer
     if (isNotValidResponse()) {
       App.setRoot(SceneState.MAIN_MENU, "Going back to main menu...");
     } else {
-      onSubmitFeedback();
+      onSubmitFeedback(); // Submit the feedback if a valid response was provided
     }
   }
 }
