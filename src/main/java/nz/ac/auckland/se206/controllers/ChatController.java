@@ -146,20 +146,28 @@ public class ChatController extends MapController {
 
   public void enterUser(Suspect suspect) {
     // Prepare the introductory message based on the suspect
-    String intro =
-        switch (suspect) {
-          case AUNT ->
-              "You walk into the room where " + enumToName(suspect) + " sits calmly in a chair.";
-          case NIECE ->
-              "You race into the room where "
-                  + enumToName(suspect)
-                  + " sits with her bear, wide eyed.";
-          case GARDENER ->
-              "You peek into the manor's green house were you see "
-                  + enumToName(suspect)
-                  + " standing attentive.";
-          default -> "";
-        };
+    String intro;
+
+    switch (suspect) {
+      case AUNT:
+        intro = "You walk into the room where " + enumToName(suspect) + " sits calmly in a chair.";
+        break;
+      case NIECE:
+        intro =
+            "You race into the room where "
+                + enumToName(suspect)
+                + " sits with her bear, wide eyed.";
+        break;
+      case GARDENER:
+        intro =
+            "You peek into the manor's green house were you see "
+                + enumToName(suspect)
+                + " standing attentive.";
+        break;
+      default:
+        intro = "";
+        break;
+    }
 
     startDialog(intro, suspect); // Start the dialog with the suspect
 
