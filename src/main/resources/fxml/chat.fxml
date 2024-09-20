@@ -9,8 +9,8 @@
 <?import org.fxmisc.richtext.*?>
 
 <?import javafx.scene.Cursor?>
-<AnchorPane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
-   <AnchorPane fx:id="paneRoom" prefHeight="200.0" prefWidth="200.0">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+   <Pane fx:id="paneRoom" prefHeight="200.0" prefWidth="200.0">
       <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/backgrounds/gardener.jpeg" />
       </ImageView>
@@ -93,7 +93,7 @@
             </font>
          </Label>
       </GridPane>
-   </AnchorPane>
+   </Pane>
    <Pane fx:id="paneMap" prefHeight="768.0" prefWidth="768.0">
       <ImageView fitHeight="685.0" fitWidth="819.0" layoutX="-25.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/map/map_mansion.png" />
@@ -155,25 +155,31 @@
             </cursor>
          </Pane>
       </GridPane>
-      <Text fx:id="textMap" layoutX="284.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " textAlignment="CENTER" wrappingWidth="210.13670349121094" />
+      <Text fx:id="textMap" layoutX="284.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " wrappingWidth="210.13670349121094" />
       <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.74" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
          <Image url="@../images/buttons/exit.png" />
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </Pane>
-   <Pane fx:id="paneTimeIsUp" layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="768.0">
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="194.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-      <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="204.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+   <Pane fx:id="paneTimeIsUp" prefHeight="768.0" prefWidth="768.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="184.0" layoutY="185.0" stroke="#5e2900" strokeType="INSIDE" width="400.0" />
+      <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="194.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/time_is_up.jpeg" />
       </ImageView>
-      <Label layoutX="290.0" layoutY="241.0" text="Time is Up!" textFill="WHITE">
+      <Label layoutX="281.0" layoutY="248.0" text="Time is Up!" textFill="WHITE">
          <font>
             <Font name="Georgia" size="40.0" />
          </font>
       </Label>
-      <Button layoutX="330.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true" styleClass="highlight-image">
          <font>
             <Font name="Georgia Bold" size="22.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </Pane>
-</AnchorPane>
+</Pane>

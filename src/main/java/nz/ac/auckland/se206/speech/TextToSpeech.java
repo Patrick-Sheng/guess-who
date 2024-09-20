@@ -36,7 +36,7 @@ public class TextToSpeech {
   private static final BlockingQueue<Runnable> dialogQueue = new LinkedBlockingQueue<>();
   private static final AtomicBoolean stopFlag = new AtomicBoolean(false);
 
-  public static void setupTTS() {
+  public static void doStartSpeech() {
     loadMp3Files();
     processQueue();
   }
