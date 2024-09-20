@@ -61,7 +61,7 @@
 }
 
 .highlight-clue {
-  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.75), 30, 0.5, 0, 0);
+  -fx-effect: dropshadow(gaussian, rgba(14, 14, 14, 0.75), 30, 0.5, 0, 0);
 }
 
 .highlight-clue:hover {
@@ -69,5 +69,17 @@
 }
 
 .highlight-clue:pressed {
+  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
+}
+
+.lighter-clue {
+  -fx-effect: dropshadow(gaussian, rgba(200, 200, 200, 1), 40, 0.5, 0, 0);
+}
+
+.lighter-clue:hover {
+  -fx-effect: dropshadow(gaussian, rgba(239, 207, 80, 0.919), 20, 0.5, 0, 0);
+}
+
+.lighter-clue:pressed {
   -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
 }
