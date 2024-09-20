@@ -28,11 +28,11 @@ public class PromptEngineering {
       URL resourceUrl = PromptEngineering.class.getClassLoader().getResource("prompts/" + promptId);
 
       if (data == null) {
-          assert resourceUrl != null;
-          return loadTemplate(resourceUrl.toURI());
+        assert resourceUrl != null;
+        return loadTemplate(resourceUrl.toURI());
       } else {
-          assert resourceUrl != null;
-          return fillTemplate(loadTemplate(resourceUrl.toURI()), data);
+        assert resourceUrl != null;
+        return fillTemplate(loadTemplate(resourceUrl.toURI()), data);
       }
     } catch (IOException | URISyntaxException e) {
       e.printStackTrace();

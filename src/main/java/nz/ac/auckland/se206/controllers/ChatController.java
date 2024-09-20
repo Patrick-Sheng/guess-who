@@ -1,13 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
@@ -21,9 +21,6 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import org.fxmisc.richtext.InlineCssTextArea;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * Controller class for the chat view. Handles user interactions and communication with the GPT
  * model via the API proxy.
@@ -32,10 +29,9 @@ public class ChatController extends MapController {
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
   @FXML private ImageView imageAunt;
-
-  @FXML private TextField userField;
   @FXML private InlineCssTextArea logArea;
   @FXML private Label suspectLabel;
+  @FXML private TextField userField;
 
   @FXML
   public void initialize() {
@@ -62,39 +58,39 @@ public class ChatController extends MapController {
   private void fetchMessage(Suspect current) {
     // Initialize the task to fetch the voice and message.
     Task<Void> task =
-            new Task<>() {
-              @Override
-              protected Void call() {
-                try {
-                  // Request the chat message (in text)
-                  GameState state = App.getGameState();
+        new Task<>() {
+          @Override
+          protected Void call() {
+            try {
+              // Request the chat message (in text)
+              GameState state = App.getGameState();
 
-                  ChatCompletionRequest request = state.getChatMessages().get(current);
-                  ChatCompletionResult chatCompletionResult = request.execute();
+              ChatCompletionRequest request = state.getChatMessages().get(current);
+              ChatCompletionResult chatCompletionResult = request.execute();
 
-                  Choice result = chatCompletionResult.getChoices().iterator().next();
+              Choice result = chatCompletionResult.getChoices().iterator().next();
 
-                  String message = result.getChatMessage().getContent();
+              String message = result.getChatMessage().getContent();
 
-                  // Add the chat message to the related textbox.
-                  Platform.runLater(
-                          () -> {
-                            addMessage(message, current, current, true);
-                            logArea.requestFollowCaret();
-                          });
-                } catch (ApiProxyException e) {
-                  e.printStackTrace();
-                }
-                return null;
-              }
-            };
+              // Add the chat message to the related textbox.
+              Platform.runLater(
+                  () -> {
+                    addMessage(message, current, current, true);
+                    logArea.requestFollowCaret();
+                  });
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+            }
+            return null;
+          }
+        };
 
     // Start the thread for getting the message.
     new Thread(task).start();
   }
 
   private void addMessage(
-          String message, Suspect conversation, Suspect from, boolean newLineBefore) {
+      String message, Suspect conversation, Suspect from, boolean newLineBefore) {
     GameState state = App.getGameState();
 
     InteractionLog log = new InteractionLog(from, message);
@@ -127,12 +123,20 @@ public class ChatController extends MapController {
   }
 
   public void enterUser(Suspect suspect) {
-    String intro = switch (suspect) {
-      case AUNT -> "You walk into the room where " + EnumToName(suspect) + " sits calmly in a chair.";
-      case NIECE -> "You race into the room where " + EnumToName(suspect) + " sits with her bear, wide eyed.";
-      case GARDENER -> "You peek into the manor's green house were you see " + EnumToName(suspect) + " standing attentive.";
-      default -> "";
-    };
+    String intro =
+        switch (suspect) {
+          case AUNT ->
+              "You walk into the room where " + EnumToName(suspect) + " sits calmly in a chair.";
+          case NIECE ->
+              "You race into the room where "
+                  + EnumToName(suspect)
+                  + " sits with her bear, wide eyed.";
+          case GARDENER ->
+              "You peek into the manor's green house were you see "
+                  + EnumToName(suspect)
+                  + " standing attentive.";
+          default -> "";
+        };
 
     startDialog(intro, suspect);
 
@@ -145,8 +149,8 @@ public class ChatController extends MapController {
 
   private boolean isActor(Suspect objectType) {
     return objectType == Suspect.NIECE
-            || objectType == Suspect.AUNT
-            || objectType == Suspect.GARDENER;
+        || objectType == Suspect.AUNT
+        || objectType == Suspect.GARDENER;
   }
 
   private void addLog(InteractionLog log, boolean newLineBefore) {
@@ -155,7 +159,7 @@ public class ChatController extends MapController {
     }
 
     logArea.append(
-            EnumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
+        EnumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
     logArea.append(log.message(), "");
   }
 

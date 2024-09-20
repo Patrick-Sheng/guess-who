@@ -1,4 +1,4 @@
-The person that you are currently communicating to is a detective.
+The person that you are currently commnicating to is a detective.
 Your next response will be giving feedback on detectives explanation on the case.
 
 The detective is currently investigating on a theft case of a stolen emerald in a mansion.
@@ -18,4 +18,5 @@ Here are some description on why Aunt is the theft that stole the emerald:
   - She tore her coat on a rosebush, leaving a piece of fabric behind.
 
 Based on this information, provide feedback on how close the detective's explanation is to the story.
+If the explanation is irrelevant to the story, tell the user to try interact with more clues and suspects next time.
 Keep your feedback within 100 words.

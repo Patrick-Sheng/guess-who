@@ -37,7 +37,9 @@ public class RoomController extends MapController {
   @FXML
   public void initialize() {
     super.initialize();
-    TextToSpeech.speak("The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out - mister detective!");
+    TextToSpeech.speak(
+        "The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out"
+            + " - mister detective!");
 
     isClueClick = false;
     isLetterReveal = false;
