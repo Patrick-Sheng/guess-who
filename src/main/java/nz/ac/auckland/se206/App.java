@@ -2,9 +2,6 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,17 +15,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
-import nz.ac.auckland.se206.controllers.ChatController;
-import nz.ac.auckland.se206.controllers.GameOverController;
-import nz.ac.auckland.se206.controllers.GuessingController;
-import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
+import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
-import nz.ac.auckland.se206.enums.Suspect;
-import nz.ac.auckland.se206.models.InteractionLog;
-import nz.ac.auckland.se206.timer.CountdownTimer;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -36,42 +27,21 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  * application.
  */
 public class App extends Application {
+  public static final String GUESS_DIALOG = "Let's get to guessing!";
+
   private static Scene scene;
+  private static SceneState currentState;
+
+  private static GameState gameState;
+
+  private static ApiProxyConfig config;
 
   private static MediaPlayer music;
   private static String currentlyPlaying;
   private static AudioClip hoverSound;
   private static boolean isMuted;
 
-  private static CountdownTimer timer;
-  private static SceneState currentState;
-
-  private static Parent roomControllerRoot;
-  private static Parent chatControllerRoot;
-
-  private static RoomController roomController;
-  private static ChatController chatController;
-  private static GuessingController guessingController;
-  private static GameOverController gameOverController;
-
-  public static final String GUESS_DIALOG = "Let's get to guessing!";
-
-  public static Map<Suspect, List<InteractionLog>> interactionLogs;
-  public static Map<Suspect, ChatCompletionRequest> chatMessages;
-
-  private static int objectsInterfaced;
-  private static int peopleInterfaced;
-
-  private static Suspect selectedSuspect;
-  private static Suspect chosenSuspect;
-
-  private static int red = 50;
-  private static int green = 255;
-  private static int blue = 70;
-
-  private static ApiProxyConfig config;
-
-  public static boolean running = true;
+  private static boolean isRunning = true;
 
   /**
    * The main method that launches the JavaFX application.
@@ -86,16 +56,11 @@ public class App extends Application {
     isMuted = newMuteState;
   }
 
-  public static AudioClip getSfx() {
-    return hoverSound;
-  }
+  public static AudioClip getSfx() { return hoverSound; }
 
   public static MediaPlayer getMusic() {
     return music;
   }
-
-  public static void increaseObjects() { objectsInterfaced += 1; }
-  public static void increasePeople() { peopleInterfaced += 1; }
 
   /**
    * Sets the root of the scene to the specified FXML file.
@@ -109,19 +74,24 @@ public class App extends Application {
     currentState = state;
     String fxml = getSceneName(state);
 
-    if (fxml.equals("room") && roomController != null) {
-      Stage stage = (Stage) scene.getWindow();
-      SetStage(stage, roomControllerRoot, state);
+    if(gameState != null) {
+      RoomController roomController = gameState.getRoomController();
+      ChatController chatController = gameState.getChatController();
 
-      roomController.checkButton();
-      return;
-    } else if (fxml.equals("chat") && chatController != null) {
-      Stage stage = (Stage) scene.getWindow();
-      SetStage(stage, chatControllerRoot, state);
+      if (fxml.equals("room") && roomController != null) {
+        Stage stage = (Stage) scene.getWindow();
+        SetStage(stage, gameState.getRoomControllerRoot(), state);
 
-      chatController.checkButton();
-      chatController.enterUser(App.getSelectedSuspect());
-      return;
+        roomController.checkButton();
+        return;
+      } else if (fxml.equals("chat") && chatController != null) {
+        Stage stage = (Stage) scene.getWindow();
+        SetStage(stage, gameState.getChatControllerRoot(), state);
+
+        chatController.checkButton();
+        chatController.enterUser(gameState.getSelectedSuspect());
+        return;
+      }
     }
 
     Task<Parent> task = getParentTask(state, fxml);
@@ -179,47 +149,25 @@ public class App extends Application {
     Parent root = loader.load();
 
     if (fxml.equals("mainMenu")) { // Reset controllers if main menu is loaded
-      resetGame();
-    } else if (fxml.equals("room") && roomController == null) {
-      roomController = loader.getController();
-      roomControllerRoot = root;
-    } else if (fxml.equals("chat") && chatController == null) {
-      chatController = loader.getController();
-      chatControllerRoot = root;
-    } else if (fxml.equals("guessing")) {
-      guessingController = loader.getController();
-    } else if (fxml.equals("gameOver")) {
-      gameOverController = loader.getController();
-      gameOverController.setGameOverImage(chosenSuspect);
+      gameState = new GameState();
+    }
+    else if (gameState != null)
+    {
+      if (fxml.equals("room") && gameState.getRoomController() == null) {
+        gameState.setRoomController(loader.getController());
+        gameState.setRoomControllerRoot(root);
+      } else if (fxml.equals("chat") && gameState.getChatController() == null) {
+        gameState.setChatController(loader.getController());
+        gameState.setChatControllerRoot(root);
+      } else if (fxml.equals("guessing")) {
+        gameState.setGuessingController(loader.getController());
+      } else if (fxml.equals("gameOver")) {
+        gameState.setGameOverController(loader.getController());
+        gameState.getGameOverController().setGameOverImage(gameState.getChosenSuspect());
+      }
     }
 
     return root;
-  }
-
-  private static void resetGame() {
-    roomController = null;
-    chatController = null;
-    guessingController = null;
-    gameOverController = null;
-    chosenSuspect = null;
-
-    resetColour();
-
-    interactionLogs = new HashMap<>();
-    chatMessages = new HashMap<>();
-
-    objectsInterfaced = 0;
-    peopleInterfaced = 0;
-  }
-
-  public static boolean checkEnableButton() {
-      return objectsInterfaced >= 1 && peopleInterfaced >= 3;
-  }
-
-  public static void resetColour() {
-    red = 50;
-    green = 255;
-    blue = 70;
   }
 
   private static void playMusic(String name) {
@@ -284,82 +232,8 @@ public class App extends Application {
     };
   }
 
-  public static void startTimer(int time) {
-    timer = new CountdownTimer(time + 1); // 1 extra second to account for delay (for now)
-    timer.start();
-  }
-
-  public static void stopTimer() {
-    if (timer != null) {
-      timer.stop();
-    }
-  }
-
-  public static void updateTimer(int time) {
-    if (timer != null && currentState != null) {
-      if (time <= 0) {
-        stopTimer();
-      }
-      changeTimerColor();
-      switch (currentState) {
-        case START_GAME:
-          if (roomController != null) {
-            roomController.updateLblTimer(time, red, green, blue);
-          }
-          break;
-        case CHAT:
-          if (chatController != null) {
-            chatController.updateLblTimer(time, red, green, blue);
-          }
-          break;
-        case START_GUESSING:
-          if (guessingController != null) {
-            guessingController.updateLblTimer(time, red, green, blue);
-          }
-          break;
-        default:
-          System.out.println("Other: " + time);
-          break;
-      }
-    }
-  }
-
-  public static void changeTimerColor() {
-    if (currentState.equals(SceneState.START_GAME) || currentState.equals(SceneState.CHAT)) {
-      if (blue - 2 > 31) {
-        blue -= 2;
-      } else if (red + 2 < 256) {
-        red += 2;
-      } else if (green - 2 > 31) {
-        green -= 2;
-      }
-    } else if (currentState.equals(SceneState.START_GUESSING)) {
-      if (blue - 10 > 31) {
-        blue -= 10;
-      } else if (red + 10 < 256) {
-        red += 10;
-      } else if (green + 10 > 31) {
-        green -= 10;
-      }
-    }
-  }
-
-  public static void setSuspect(Suspect suspect) {
-    chosenSuspect = suspect;
-  }
-
-  public static void updateFeedbackPrompt(String prompt) {
-    if (gameOverController != null) {
-      gameOverController.setFeedbackPrompt(prompt);
-    }
-  }
-
-  public static Suspect getSelectedSuspect() {
-    return selectedSuspect;
-  }
-
-  public static void setSelectedSuspect(Suspect selectedSuspect) {
-    App.selectedSuspect = selectedSuspect;
+  public static SceneState getCurrentState() {
+    return currentState;
   }
 
   /**
@@ -373,7 +247,7 @@ public class App extends Application {
     SceneState defaultState = SceneState.MAIN_MENU;
 
     config = ApiProxyConfig.readConfig();
-    resetGame();
+    gameState = new GameState();
 
     currentlyPlaying = "";
     isMuted = false;
@@ -402,12 +276,20 @@ public class App extends Application {
 
   @Override
   public void stop() throws Exception {
-    running = false;
+    isRunning = false;
     TextToSpeech.stopSpeak();
     super.stop();
   }
 
   public static ApiProxyConfig getConfig() {
     return config;
+  }
+
+  public static GameState getGameState() {
+    return gameState;
+  }
+
+  public static boolean isRunning() {
+    return isRunning;
   }
 }

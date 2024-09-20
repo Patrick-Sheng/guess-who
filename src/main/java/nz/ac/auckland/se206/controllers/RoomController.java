@@ -68,7 +68,7 @@ public class RoomController extends MapController {
     paneClue.setVisible(true);
     handleRectangleEntered();
 
-    App.increaseObjects();
+    App.getGameState().increaseObjects();
     checkButton();
   }
 

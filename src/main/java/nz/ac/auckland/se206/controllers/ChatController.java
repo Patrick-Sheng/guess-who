@@ -13,6 +13,7 @@ import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.models.InteractionLog;
@@ -47,24 +48,23 @@ public class ChatController extends MapController {
   @FXML
   public void initialize() {
     super.initialize();
-    enterUser(App.getSelectedSuspect());
+    enterUser(App.getGameState().getSelectedSuspect());
   }
 
   @FXML
   private void onEnter() {
+    Suspect suspect = App.getGameState().getSelectedSuspect();
+
     String text = userField.getText();
-
-    addMessage(text, App.getSelectedSuspect(), Suspect.DETECTIVE, true);
-
+    addMessage(text, App.getGameState().getSelectedSuspect(), Suspect.DETECTIVE, true);
     userField.clear();
 
     checkButton();
 
-    addLog(new InteractionLog(App.getSelectedSuspect(), "is thinking..."), true);
+    addLog(new InteractionLog(suspect, "is thinking..."), true);
 
     logArea.requestFollowCaret();
-
-    fetchMessage(App.getSelectedSuspect());
+    fetchMessage(suspect);
   }
 
   private void fetchMessage(Suspect current) {
@@ -75,7 +75,9 @@ public class ChatController extends MapController {
               protected Void call() {
                 try {
                   // Request the chat message (in text)
-                  ChatCompletionRequest request = App.chatMessages.get(current);
+                  GameState state = App.getGameState();
+
+                  ChatCompletionRequest request = state.getChatMessages().get(current);
                   ChatCompletionResult chatCompletionResult = request.execute();
 
                   Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -101,10 +103,12 @@ public class ChatController extends MapController {
 
   private void addMessage(
           String message, Suspect conversation, Suspect from, boolean newLineBefore) {
-    InteractionLog log = new InteractionLog(from, message);
-    App.interactionLogs.get(conversation).add(log);
+    GameState state = App.getGameState();
 
-    if (conversation == App.getSelectedSuspect()) {
+    InteractionLog log = new InteractionLog(from, message);
+    state.getInteractionLogs().get(conversation).add(log);
+
+    if (conversation == state.getSelectedSuspect()) {
       addLog(log, newLineBefore);
     }
 
@@ -117,7 +121,7 @@ public class ChatController extends MapController {
         type = "user";
       }
 
-      App.chatMessages.get(conversation).addMessage(type, message);
+      state.getChatMessages().get(conversation).addMessage(type, message);
     }
   }
 
@@ -164,13 +168,15 @@ public class ChatController extends MapController {
   }
 
   private void startDialog(String intro, Suspect suspect) {
-    App.setSelectedSuspect(suspect);
+    GameState state = App.getGameState();
+
+    state.setSelectedSuspect(suspect);
 
     logArea.clear();
 
     // If the player has not yet interacted with this character.
-    if (!App.interactionLogs.containsKey(suspect)) {
-      App.increasePeople();
+    if (!state.getInteractionLogs().containsKey(suspect)) {
+      state.increasePeople();
       checkButton();
 
       // Stop previous character from speaking
@@ -178,13 +184,13 @@ public class ChatController extends MapController {
 
       TextToSpeech.speak(intro);
 
-      App.interactionLogs.put(suspect, new ArrayList<>());
+      state.getInteractionLogs().put(suspect, new ArrayList<>());
 
       // Send character description to ai to begin conversation.
       if (isActor(suspect)) {
         ChatCompletionRequest chatCompletionRequest = getChatCompletionRequest(suspect, intro);
 
-        App.chatMessages.put(suspect, chatCompletionRequest);
+        state.getChatMessages().put(suspect, chatCompletionRequest);
 
         fetchMessage(suspect);
       }
@@ -195,7 +201,7 @@ public class ChatController extends MapController {
       boolean isFirst = true;
 
       // Add all logs in from the previous session.
-      for (InteractionLog log : App.interactionLogs.get(suspect)) {
+      for (InteractionLog log : state.getInteractionLogs().get(suspect)) {
         addLog(log, !isFirst);
         isFirst = false;
       }
@@ -210,7 +216,7 @@ public class ChatController extends MapController {
       userField.setDisable(true);
 
       if (suspect != Suspect.NARRATOR && suspect != Suspect.DETECTIVE) {
-        App.increaseObjects();
+        state.increaseObjects();
       }
     }
 

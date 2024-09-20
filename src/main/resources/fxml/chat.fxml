@@ -28,7 +28,7 @@
             <RowConstraints maxHeight="33.0" minHeight="0.0" prefHeight="15.333333333333329" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="39.33333333333333" minHeight="10.0" prefHeight="27.33333333333333" vgrow="SOMETIMES" />
          </rowConstraints>
-         <VirtualizedScrollPane fx:id="virtualizedScrollPane">
+         <VirtualizedScrollPane>
             <content>
                <InlineCssTextArea fx:id="logArea" editable="false" prefHeight="92.0" prefWidth="585.0" style="-fx-background-color: #FBE6B1" wrapText="true" />
             </content>
@@ -133,7 +133,7 @@
             <Font name="Georgia" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="toGuessRoomButton" layoutX="330.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="330.0" layoutY="445.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Georgia Bold" size="22.0" />
          </font>

@@ -7,10 +7,6 @@ import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 
 public class MainMenuController extends ButtonController {
-  public ImageView startGame;
-  public ImageView settings;
-  public ImageView exit;
-
   @FXML
   private void onExit() {
     System.exit(0);
@@ -24,6 +20,6 @@ public class MainMenuController extends ButtonController {
   @FXML
   private void onStart() {
     App.setRoot(SceneState.START_GAME, "Starting game!");
-    App.startTimer(300);
+    App.getGameState().startTimer(300);
   }
 }

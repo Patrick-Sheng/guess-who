@@ -14,7 +14,7 @@
 
 <Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessingController">
    <Pane prefHeight="768.0" prefWidth="768.0">
-      <ImageView fx:id="pane" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/backgrounds/guess.jpeg"/>
       </ImageView>
       <Rectangle fx:id="rectAunt" arcHeight="5.0" arcWidth="5.0" height="768.0" onMouseClicked="#chooseSuspect"
@@ -70,7 +70,7 @@
             <Font name="Georgia" size="15.0"/>
          </font>
       </TextArea>
-      <Button fx:id="submitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0"
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0"
               mnemonicParsing="false" onMouseClicked="#onSubmitFeedback" prefHeight="39.0" prefWidth="129.0"
               styleClass="highlight-image" text="Submit" textAlignment="CENTER" wrapText="true"
               onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited"

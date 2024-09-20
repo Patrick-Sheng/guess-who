@@ -48,6 +48,6 @@ public class CountdownTimer {
   }
 
   public void updateLabel() {
-    App.updateTimer(remainingTime);
+    App.getGameState().updateTimer(remainingTime);
   }
 }

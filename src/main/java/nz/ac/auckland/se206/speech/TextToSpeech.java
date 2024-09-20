@@ -22,7 +22,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest.Provider;
@@ -75,7 +74,7 @@ public class TextToSpeech {
     voiceThread =
             new Thread(
                     () -> {
-                      while (App.running) {
+                      while (App.isRunning()) {
                         if (dialogQueue.isEmpty() || stopFlag.get()) {
                           continue;
                         }

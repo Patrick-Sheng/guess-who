@@ -81,24 +81,24 @@ public abstract class MapController extends ButtonController {
 
     switch (paneId) {
       case "auntieRoom":
-        App.setSelectedSuspect(Suspect.AUNT);
+        App.getGameState().setSelectedSuspect(Suspect.AUNT);
         App.setRoot(SceneState.CHAT, "Going To Aunt Beatrice's Study");
         break;
       case "childRoom":
-        App.setSelectedSuspect(Suspect.NIECE);
+        App.getGameState().setSelectedSuspect(Suspect.NIECE);
         App.setRoot(SceneState.CHAT, "Going To Sophie Baxter's Nursery");
         break;
       case "gardenerRoom":
-        App.setSelectedSuspect(Suspect.GARDENER);
+        App.getGameState().setSelectedSuspect(Suspect.GARDENER);
         App.setRoot(SceneState.CHAT, "Going To Elias Greenfield's Garden");
         break;
       case "mainRoom":
         App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
         break;
       case "guessRoom":
-        App.stopTimer();
-        App.resetColour();
-        App.startTimer(60);
+        App.getGameState().stopTimer();
+        App.getGameState().resetColour();
+        App.getGameState().startTimer(60);
         App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
         break;
     }
@@ -119,7 +119,7 @@ public abstract class MapController extends ButtonController {
 
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
-      App.stopTimer();
+      App.getGameState().stopTimer();
       paneTimeIsUp.setVisible(true);
     }
 
@@ -131,14 +131,14 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void onMakeGuess() {
-    App.stopTimer();
-    App.resetColour();
-    App.startTimer(60);
+    App.getGameState().stopTimer();
+    App.getGameState().resetColour();
+    App.getGameState().startTimer(60);
     App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
   }
 
   public void checkButton() {
-    if (App.checkEnableButton()) {
+    if (App.getGameState().checkEnableButton()) {
       enableButton();
     } else  {
       disableButton();

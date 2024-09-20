@@ -10,15 +10,11 @@ import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 
 public class GameOverController {
-
-  public Rectangle rectBackToMenu;
-  public Label timerLabel;
-
-  @FXML ImageView imageAunt;
-  @FXML ImageView imageGardener;
-  @FXML ImageView imageNiece;
-  @FXML TextArea feedbackTextArea;
-  @FXML Label labelSubtitle;
+  @FXML private ImageView imageAunt;
+  @FXML private ImageView imageGardener;
+  @FXML private ImageView imageNiece;
+  @FXML private TextArea feedbackTextArea;
+  @FXML private Label labelSubtitle;
 
   @FXML
   public void initialize() {

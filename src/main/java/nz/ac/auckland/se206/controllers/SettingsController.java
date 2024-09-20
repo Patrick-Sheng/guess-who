@@ -11,10 +11,9 @@ import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 
 public class SettingsController extends ButtonController {
-  public Slider volumeSlider;
-  public Slider sfxSlider;
-  public ToggleButton muteButton;
-  public ImageView backButton;
+  @FXML private Slider volumeSlider;
+  @FXML private Slider sfxSlider;
+  @FXML private ToggleButton muteButton;
 
   private MediaPlayer music;
   private AudioClip sfx;
