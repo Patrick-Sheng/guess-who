@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.enums.SceneState;
@@ -23,6 +24,8 @@ public class RoomController extends MapController {
   @FXML private Pane paneRoom;
   @FXML private Pane paneClue;
   @FXML private Label timerLabel;
+  @FXML private Label fabricLabel;
+  @FXML private Label roseLabel;
   @FXML private ImageView bagOpen;
   @FXML private ImageView emeraldRoom;
   @FXML private ImageView letterCloseUp;
@@ -115,6 +118,8 @@ public class RoomController extends MapController {
     report.setVisible(false);
     yellowPaper.setVisible(false);
     revealLetterGrid.setVisible(false);
+    roseLabel.setVisible(false);
+    fabricLabel.setVisible(false);
     image.setVisible(true);
   }
 
@@ -174,5 +179,19 @@ public class RoomController extends MapController {
       }
     }
     paneRoom.setOpacity(0.2);
+  }
+
+  @FXML
+  private void rectangleClick(MouseEvent event) {
+    Shape clickedRectangle = (Shape) event.getSource();
+    String id = clickedRectangle.getId();
+    switch (id) {
+      case "fabricRec":
+        fabricLabel.setVisible(true);
+        break;
+      case "roseRec":
+        roseLabel.setVisible(true);
+        break;
+    }
   }
 }
