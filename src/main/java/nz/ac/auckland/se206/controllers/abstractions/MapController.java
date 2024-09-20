@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -78,28 +79,26 @@ public abstract class MapController extends ButtonController {
   private void clickRoom(MouseEvent event) {
     Pane hoverPane = (Pane) event.getSource();
     String paneId = hoverPane.getId();
+    GameState state = App.getGameState();
 
     switch (paneId) {
       case "auntieRoom":
-        App.getGameState().setSelectedSuspect(Suspect.AUNT);
+        state.setSelectedSuspect(Suspect.AUNT);
         App.setRoot(SceneState.CHAT, "Going To Aunt Beatrice's Study");
         break;
       case "childRoom":
-        App.getGameState().setSelectedSuspect(Suspect.NIECE);
+        state.setSelectedSuspect(Suspect.NIECE);
         App.setRoot(SceneState.CHAT, "Going To Sophie Baxter's Nursery");
         break;
       case "gardenerRoom":
-        App.getGameState().setSelectedSuspect(Suspect.GARDENER);
+        state.setSelectedSuspect(Suspect.GARDENER);
         App.setRoot(SceneState.CHAT, "Going To Elias Greenfield's Garden");
         break;
       case "mainRoom":
         App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
         break;
       case "guessRoom":
-        App.getGameState().stopTimer();
-        App.getGameState().resetColour();
-        App.getGameState().startTimer(60);
-        App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
+        onMakeGuess();
         break;
     }
     paneMap.setVisible(false);
@@ -131,9 +130,11 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void onMakeGuess() {
-    App.getGameState().stopTimer();
-    App.getGameState().resetColour();
-    App.getGameState().startTimer(60);
+    GameState state = App.getGameState();
+
+    state.stopTimer();
+    state.resetColour();
+    state.startTimer(60);
     App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
   }
 

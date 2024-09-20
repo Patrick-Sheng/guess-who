@@ -181,9 +181,7 @@ public class ChatController extends MapController {
 
       // Stop previous character from speaking
       TextToSpeech.stopSpeak();
-
       TextToSpeech.speak(intro);
-
       state.getInteractionLogs().put(suspect, new ArrayList<>());
 
       // Send character description to ai to begin conversation.
