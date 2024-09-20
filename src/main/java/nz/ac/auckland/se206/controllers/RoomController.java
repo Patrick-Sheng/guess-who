@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * Controller class for the room view. Handles user interactions within the room where the user can
@@ -42,6 +43,7 @@ public class RoomController extends MapController {
   @FXML
   public void initialize() {
     super.initialize();
+    TextToSpeech.speak("The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out - mister detective!");
     paneClue.setVisible(false);
   }
 
