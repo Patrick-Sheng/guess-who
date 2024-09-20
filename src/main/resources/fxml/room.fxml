@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
     <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
         <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/backgrounds/manor.jpg" />
@@ -58,9 +64,9 @@
                 </font>
             </Label>
         </GridPane>
-        <Button fx:id="guessButton" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="643.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="111.0" styleClass="highlight-image" text="Make Your Guess" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
+        <Button fx:id="guessButton" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="632.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="122.0" prefWidth="119.0" styleClass="highlight-image" text="Make Your Guess" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
             <font>
-                <Font name="Georgia Bold" size="24.0" />
+                <Font name="Georgia Bold" size="22.0" />
             </font>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -92,7 +98,7 @@
         <ImageView fx:id="emeraldRoom" fitHeight="484.0" fitWidth="487.0" layoutX="144.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/clue/emeraldRoom.jpg" />
         </ImageView>
-        <GridPane layoutX="506.0" layoutY="552.0">
+        <GridPane layoutX="508.0" layoutY="552.0" prefHeight="61.0" prefWidth="137.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -101,7 +107,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="fabricLabel" text="torn piece of fabric" textAlignment="CENTER">
+                <Label fx:id="fabricLabel" prefHeight="22.0" prefWidth="128.0" text="torn piece of fabric" textAlignment="CENTER" GridPane.halignment="CENTER">
                     <font>
                         <Font name="Georgia" size="12.0" />
                     </font>
@@ -134,25 +140,25 @@
                 </Label>
             </children>
         </GridPane>
-        <ImageView fx:id="bagOpen" fitHeight="386.0" fitWidth="474.0" layoutX="191.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="bagOpen" fitHeight="386.0" fitWidth="474.0" layoutX="191.0" layoutY="191.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/clue/bag_inside.png" />
         </ImageView>
-        <ImageView fx:id="report" fitHeight="69.0" fitWidth="143.0" layoutX="319.0" layoutY="272.0" onMouseClicked="#reportClose" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+        <ImageView fx:id="report" fitHeight="69.0" fitWidth="143.0" layoutX="319.0" layoutY="272.0" onMouseClicked="#reportClose" opacity="0.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/clue/report.png" />
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+        <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
             <Image url="@../images/buttons/exit.png" />
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="letterCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="240.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="letterCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="240.0" layoutY="212.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/clue/letter_closeup.png" />
         </ImageView>
-        <ImageView fx:id="reportCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="235.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="reportCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="235.0" layoutY="212.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/clue/report_closeup.png" />
             </image>
@@ -165,7 +171,7 @@
                 <Cursor fx:constant="OPEN_HAND" />
             </cursor>
         </ImageView>
-        <GridPane fx:id="revealLetterGrid" layoutX="58.0" layoutY="430.0" prefHeight="61.0" prefWidth="673.0">
+        <GridPane fx:id="revealLetterGrid" layoutX="98.0" layoutY="430.0" prefHeight="61.0" prefWidth="673.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -175,17 +181,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label prefHeight="20.0" prefWidth="302.0" text="This letter is written in invisible ink." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER">
+                <Label prefHeight="20.0" prefWidth="364.0" text="This letter is written in invisible ink." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER">
                     <font>
                         <Font name="Georgia" size="17.0" />
                     </font>
                 </Label>
-                <Label prefHeight="21.0" prefWidth="470.0" text=" Move the letter around. Can you reveal the hidden message?" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                <Label prefHeight="21.0" prefWidth="537.0" text=" Move the letter around. Can you reveal the hidden message?" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                     <font>
                         <Font name="Georgia" size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="102.0" layoutY="30.0" prefHeight="21.0" prefWidth="458.0" text=" I might have heard that heating it up might do some tricks." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                <Label layoutX="102.0" layoutY="30.0" prefHeight="21.0" prefWidth="528.0" text=" I might have heard that heating it up might do some tricks." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                     <font>
                         <Font name="Georgia" size="17.0" />
                     </font>
@@ -272,7 +278,7 @@
                 <Font name="Georgia" size="40.0" />
             </font>
         </Label>
-        <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true" styleClass="highlight-image">
+        <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" styleClass="highlight-image" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
             <font>
                 <Font name="Georgia Bold" size="22.0" />
             </font>
