@@ -5,10 +5,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 
-public class GameOverController {
+public class GameOverController extends ButtonController {
+  @FXML private ImageView continueOther;
+  @FXML private ImageView continueAunt;
   @FXML private ImageView imageAunt;
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
@@ -23,6 +26,7 @@ public class GameOverController {
     imageNiece.setVisible(false);
     outOfTime.setVisible(false);
     feedbackTextArea.setVisible(false);
+    feedbackTextArea.setText("Loading...");
   }
 
   public void setGameOverImage(Suspect suspect) {
@@ -30,18 +34,34 @@ public class GameOverController {
       case AUNT:
         imageAunt.setVisible(true);
         feedbackTextArea.setVisible(true);
-        labelSubtitle.setText("Here are some feedback based on your gameplay");
+
+        continueOther.setVisible(false);
+        continueAunt.setVisible(true);
+
+        labelSubtitle.setText("Here is some feedback based on your explanation");
         break;
       case GARDENER:
         imageGardener.setVisible(true);
+
+        continueOther.setVisible(true);
+        continueAunt.setVisible(false);
+
         labelSubtitle.setText("Try again next time!");
         break;
       case NIECE:
         imageNiece.setVisible(true);
+
+        continueOther.setVisible(true);
+        continueAunt.setVisible(false);
+
         labelSubtitle.setText("Try again next time!");
         break;
       case OUT_OF_TIME:
         outOfTime.setVisible(true);
+
+        continueOther.setVisible(true);
+        continueAunt.setVisible(false);
+
         labelSubtitle.setText("Try to be faster next time!");
     }
   }

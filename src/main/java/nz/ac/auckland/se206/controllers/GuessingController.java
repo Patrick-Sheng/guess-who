@@ -28,16 +28,44 @@ public class GuessingController extends ButtonController {
   @FXML private Rectangle rectGardener;
   @FXML private Rectangle rectNiece;
 
+  @FXML private Button submitButton;
+
   @FXML private Label timerLabel;
   @FXML private TextArea explanationTextArea;
 
   private ChatCompletionRequest chatCompletionRequest;
   private Suspect chosenSuspect;
 
+  private boolean foundSuspect;
+  private boolean foundExplanation;
+
   @FXML
   public void initialize() {
     paneTimeIsUp.setVisible(false);
     setAiProxyConfig();
+    foundSuspect = false;
+    foundExplanation = false;
+    disableButton();
+    explanationTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (!foundExplanation)
+      {
+        foundExplanation = true;
+        if(!isNotValidResponse()) {
+          enableButton();
+        }
+      }
+    });
+  }
+
+  public void disableButton() {
+    submitButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
+    submitButton.setDisable(true);
+    submitButton.setOpacity(1f);
+  }
+
+  public void enableButton() {
+    submitButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+    submitButton.setDisable(false);
   }
 
   /**
@@ -145,14 +173,18 @@ public class GuessingController extends ButtonController {
 
     TextToSpeech.speak("Time is up!");
 
-    if (chosenSuspect == null) {
+    if (isNotValidResponse()) {
       systemDescriptionLabel.setText(
-          "You did not select a suspect within time limit. Game is now over.");
+          "You did not select a suspect amd explanation within time limit. Game is now over.");
       moveToNextScene.setText("Back to Main Menu");
     } else {
       systemDescriptionLabel.setText("Click submit to see if you are correct.");
       moveToNextScene.setText("Submit");
     }
+  }
+
+  private boolean isNotValidResponse() {
+    return !foundSuspect || !foundExplanation;
   }
 
   @FXML
@@ -187,6 +219,10 @@ public class GuessingController extends ButtonController {
 
   private void runChoose(Suspect suspect, String speech) {
     chosenSuspect = suspect;
+    foundSuspect = true;
+    if(!isNotValidResponse()) {
+      enableButton();
+    }
     TextToSpeech.speak(speech);
     highlightCharacterPane(suspect);
   }
@@ -249,7 +285,7 @@ public class GuessingController extends ButtonController {
   @FXML
   public void onMoveToNextScene() {
     App.getGameState().stopTimer();
-    if (chosenSuspect == null) {
+    if (isNotValidResponse()) {
       App.setRoot(SceneState.MAIN_MENU, "Going back to main menu...");
     } else {
       onSubmitFeedback();

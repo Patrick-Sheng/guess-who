@@ -70,11 +70,10 @@
             <Font name="Georgia" size="15.0"/>
          </font>
       </TextArea>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0"
+      <Button fx:id="submitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0"
               mnemonicParsing="false" onMouseClicked="#onSubmitFeedback" prefHeight="39.0" prefWidth="129.0"
               styleClass="highlight-image" text="Submit" textAlignment="CENTER" wrapText="true"
-              onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited"
-              style="-fx-background-color: green; -fx-text-fill: white;">
+              onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited">
          <font>
             <Font name="Georgia Bold" size="24.0"/>
          </font>
