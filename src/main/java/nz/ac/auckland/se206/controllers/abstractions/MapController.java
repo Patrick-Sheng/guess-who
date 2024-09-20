@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
@@ -43,23 +42,6 @@ public abstract class MapController extends ButtonController {
     paneRoom.setOpacity(1);
   }
 
-  @FXML
-  private void enterMap(MouseEvent event) {
-    Pane hoverPane = (Pane) event.getSource();
-    String paneId = hoverPane.getId();
-    String text = switch (paneId) {
-      case "auntieRoom" -> "Auntie Room";
-      case "childRoom" -> "Child Room";
-      case "gardenerRoom" -> "Gardener Room";
-      case "mainRoom" -> "Crime scene";
-      case "guessRoom" -> "Guess Room";
-      default -> "";
-    };
-
-    textMap.setText(text);
-    exitImage.setVisible(false);
-  }
-
   public static String EnumToName(Suspect suspect) {
     return switch (suspect) {
       case AUNT -> "Beatrice Worthington";
@@ -76,31 +58,70 @@ public abstract class MapController extends ButtonController {
   }
 
   @FXML
-  private void clickRoom(MouseEvent event) {
-    Pane hoverPane = (Pane) event.getSource();
-    String paneId = hoverPane.getId();
-    GameState state = App.getGameState();
+  private void enterAuntie() {
+    textMap.setText("Auntie Room");
+    exitImage.setVisible(false);
+  }
 
-    switch (paneId) {
-      case "auntieRoom":
-        state.setSelectedSuspect(Suspect.AUNT);
-        App.setRoot(SceneState.CHAT, "Going To Aunt Beatrice's Study");
-        break;
-      case "childRoom":
-        state.setSelectedSuspect(Suspect.NIECE);
-        App.setRoot(SceneState.CHAT, "Going To Sophie Baxter's Nursery");
-        break;
-      case "gardenerRoom":
-        state.setSelectedSuspect(Suspect.GARDENER);
-        App.setRoot(SceneState.CHAT, "Going To Elias Greenfield's Garden");
-        break;
-      case "mainRoom":
-        App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
-        break;
-      case "guessRoom":
-        onMakeGuess();
-        break;
-    }
+  @FXML
+  private void clickAuntie() {
+    launchChatWindow(Suspect.AUNT, "Going To Aunt Beatrice's Study");
+  }
+
+  @FXML
+  private void enterChild() {
+    textMap.setText("Child Room");
+    exitImage.setVisible(false);
+  }
+
+  @FXML
+  private void clickChild() {
+    launchChatWindow(Suspect.NIECE, "Going To Sophie Baxter's Nursery");
+  }
+
+  @FXML
+  private void clickGardener() {
+    launchChatWindow(Suspect.GARDENER, "Going To Elias Greenfield's Garden");
+  }
+
+  @FXML
+  private void enterGardener() {
+    textMap.setText("Gardener Room");
+    exitImage.setVisible(false);
+  }
+
+  private void launchChatWindow(Suspect suspect, String text) {
+    GameState state = App.getGameState();
+    state.setSelectedSuspect(suspect);
+    App.setRoot(SceneState.CHAT, text);
+    adjustPanel();
+  }
+
+  @FXML
+  private void enterMain() {
+    textMap.setText("Crime scene");
+    exitImage.setVisible(false);
+  }
+
+  @FXML
+  private void clickMain() {
+    App.setRoot(SceneState.START_GAME, "Going To The Crime Scene");
+    adjustPanel();
+  }
+
+  @FXML
+  private void enterGuess() {
+    textMap.setText("Guess Room");
+    exitImage.setVisible(false);
+  }
+
+  @FXML
+  private void clickGuess() {
+    onMakeGuess();
+    adjustPanel();
+  }
+
+  private void adjustPanel() {
     paneMap.setVisible(false);
     paneRoom.setOpacity(1);
   }

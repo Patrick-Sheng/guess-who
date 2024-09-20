@@ -17,14 +17,14 @@
       <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/backgrounds/guess.jpeg"/>
       </ImageView>
-      <Rectangle fx:id="rectAunt" arcHeight="5.0" arcWidth="5.0" height="768.0" onMouseClicked="#chooseSuspect"
-                 onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing" opacity="0.5" stroke="BLACK"
+      <Rectangle fx:id="rectAunt" arcHeight="5.0" arcWidth="5.0" height="768.0" onMouseClicked="#chooseAunt"
+                 onMouseEntered="#choosingAunt" onMouseExited="#exitChoosing" opacity="0.5" stroke="BLACK"
                  strokeType="INSIDE" width="229.0"/>
       <Rectangle fx:id="rectGardener" arcHeight="5.0" arcWidth="5.0" height="762.0" layoutX="228.0" layoutY="3.0"
-                 onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing"
+                 onMouseClicked="#chooseGardener" onMouseEntered="#choosingGardener" onMouseExited="#exitChoosing"
                  opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="311.0"/>
       <Rectangle fx:id="rectNiece" arcHeight="5.0" arcWidth="5.0" height="768.0" layoutX="539.0"
-                 onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing"
+                 onMouseClicked="#chooseNiece" onMouseEntered="#choosingNiece" onMouseExited="#exitChoosing"
                  opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="229.0"/>
       <GridPane alignment="CENTER" layoutX="73.0" layoutY="45.0" prefHeight="122.0" prefWidth="623.0"
                 styleClass="grid-pane">

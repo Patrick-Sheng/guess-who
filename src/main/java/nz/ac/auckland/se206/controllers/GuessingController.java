@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -152,59 +151,46 @@ public class GuessingController extends ButtonController {
         }
     }
 
-    private void highlightCharacterPane(String rectId) {
-        switch (rectId) {
-            case "rectAunt":
-                rectAunt.setOpacity(0);
-                rectGardener.setOpacity(0.5);
-                rectNiece.setOpacity(0.5);
-                break;
-            case "rectGardener":
-                rectAunt.setOpacity(0.5);
-                rectGardener.setOpacity(0);
-                rectNiece.setOpacity(0.5);
-                break;
-            case "rectNiece":
-                rectAunt.setOpacity(0.5);
-                rectGardener.setOpacity(0.5);
-                rectNiece.setOpacity(0);
-                break;
-            default:
-                rectAunt.setOpacity(0.5);
-                rectGardener.setOpacity(0.5);
-                rectNiece.setOpacity(0.5);
-                break;
-        }
+    @FXML
+    private void chooseAunt() {
+        chosenSuspect = Suspect.AUNT;
+        TextToSpeech.speak("Aunt Beatrice");
+        choosingAunt();
     }
 
     @FXML
-    private void chooseSuspect(MouseEvent event) {
-        Rectangle rectangle = (Rectangle) event.getSource();
-        String rectId = rectangle.getId();
-        switch (rectId) {
-            case "rectAunt":
-                chosenSuspect = Suspect.AUNT;
-                TextToSpeech.speak("Aunt Beatrice");
-                break;
-            case "rectGardener":
-                chosenSuspect = Suspect.GARDENER;
-                TextToSpeech.speak("Elias Greenfield");
-                break;
-            case "rectNiece":
-                chosenSuspect = Suspect.NIECE;
-                TextToSpeech.speak("Sophie Baxter");
-                break;
-        }
-        highlightCharacterPane(rectId);
+    private void choosingAunt() {
+        highlightCharacterPane(Suspect.AUNT);
     }
 
     @FXML
-    private void enterChoosing(MouseEvent event) {
-        Rectangle rectangle = (Rectangle) event.getSource();
-        String rectId = rectangle.getId();
-        if (chosenSuspect == null) {
-            highlightCharacterPane(rectId);
-        }
+    private void chooseGardener() {
+        chosenSuspect = Suspect.GARDENER;
+        TextToSpeech.speak("Elias Greenfield");
+        choosingGardener();
+    }
+
+    @FXML
+    private void choosingGardener() {
+        highlightCharacterPane(Suspect.GARDENER);
+    }
+
+    @FXML
+    private void chooseNiece() {
+        chosenSuspect = Suspect.NIECE;
+        TextToSpeech.speak("Sophie Baxter");
+        choosingNiece();
+    }
+
+    @FXML
+    private void choosingNiece() {
+        highlightCharacterPane(Suspect.NIECE);
+    }
+
+    private void highlightCharacterPane(Suspect suspect) {
+        rectAunt.setOpacity(suspect == Suspect.AUNT ? 0 : 0.5);
+        rectGardener.setOpacity(suspect == Suspect.GARDENER ? 0 : 0.5);
+        rectNiece.setOpacity(suspect == Suspect.NIECE ? 0 : 0.5);
     }
 
     @FXML

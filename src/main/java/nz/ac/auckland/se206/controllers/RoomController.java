@@ -6,9 +6,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
+import nz.ac.auckland.se206.enums.Clues;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -29,7 +29,7 @@ public class RoomController extends MapController {
   @FXML private GridPane revealLetterGrid;
 
   private Boolean isClueClick;
-  ;
+
   private Boolean isLetterReveal;
   private double mouseAnchorX;
   private double mouseAnchorY;
@@ -46,21 +46,40 @@ public class RoomController extends MapController {
   }
 
   @FXML
-  private void onClue(MouseEvent event) {
+  public void bagOpen(MouseEvent event) {
+    onClue(event, Clues.BAG);
+  }
+
+  @FXML
+  public void letterReveal(MouseEvent event) {
+    onClue(event, Clues.LETTER);
+  }
+
+  @FXML
+  public void doorOpen(MouseEvent event) {
+    onClue(event, Clues.DOOR);
+  }
+
+  @FXML
+  public void reportClose(MouseEvent event) {
+    onClue(event, Clues.REPORT);
+  }
+
+  private void onClue(MouseEvent event, Clues clue) {
     if (!isClueClick) {
       isClueClick = true;
     }
+
     ImageView clickedImageView = (ImageView) event.getSource();
     clickedImageView.getStyleClass().remove("highlight-clue");
     clickedImageView.getStyleClass().add("lighter-clue");
-    String ImageViewID = clickedImageView.getId();
 
-    switch (ImageViewID) {
-      case "bag":
+    switch (clue) {
+      case BAG:
         setClue(bagOpen);
         report.setVisible(true);
         break;
-      case "letter":
+      case LETTER:
         if (!isLetterReveal) {
           setClue(yellowPaper);
           revealLetterGrid.setVisible(true);
@@ -68,13 +87,14 @@ public class RoomController extends MapController {
           setClue(letterCloseUp);
         }
         break;
-      case "door":
+      case DOOR:
         setClue(emeraldRoom);
         break;
-      case "report":
+      case REPORT:
         setClue(reportCloseUp);
         break;
     }
+
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
     handleRectangleEntered();
@@ -148,16 +168,12 @@ public class RoomController extends MapController {
   }
 
   @FXML
-  private void rectangleClick(MouseEvent event) {
-    Shape clickedRectangle = (Shape) event.getSource();
-    String id = clickedRectangle.getId();
-    switch (id) {
-      case "fabricRec":
-        fabricLabel.setVisible(true);
-        break;
-      case "roseRec":
-        roseLabel.setVisible(true);
-        break;
-    }
+  private void clickFabric() {
+    fabricLabel.setVisible(true);
+  }
+
+  @FXML
+  private void clickRose() {
+    roseLabel.setVisible(true);
   }
 }
