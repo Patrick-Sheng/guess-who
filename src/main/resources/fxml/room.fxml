@@ -140,25 +140,25 @@
                 </Label>
             </children>
         </GridPane>
-        <ImageView fx:id="bagOpen" fitHeight="386.0" fitWidth="474.0" layoutX="191.0" layoutY="191.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="bagOpen" fitHeight="386.0" fitWidth="474.0" layoutX="191.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/clue/bag_inside.png" />
         </ImageView>
-        <ImageView fx:id="report" fitHeight="69.0" fitWidth="143.0" layoutX="319.0" layoutY="272.0" onMouseClicked="#reportClose" opacity="0.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+        <ImageView fx:id="report" fitHeight="69.0" fitWidth="143.0" layoutX="319.0" layoutY="272.0" onMouseClicked="#reportClose" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
             <Image url="@../images/clue/report.png" />
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+        <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
             <Image url="@../images/buttons/exit.png" />
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fx:id="letterCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="240.0" layoutY="212.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="letterCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="240.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/clue/letter_closeup.png" />
         </ImageView>
-        <ImageView fx:id="reportCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="235.0" layoutY="212.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="reportCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="235.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../images/clue/report_closeup.png" />
             </image>
