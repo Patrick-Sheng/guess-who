@@ -5,5 +5,6 @@ public enum Suspect {
   NARRATOR,
   GARDENER,
   AUNT,
-  NIECE;
+  NIECE,
+  OUT_OF_TIME
 }

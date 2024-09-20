@@ -78,13 +78,13 @@ public class App extends Application {
 
       if (fxml.equals("room") && roomController != null) {
         Stage stage = (Stage) scene.getWindow();
-        SetStage(stage, gameState.getRoomControllerRoot(), state);
+        setStage(stage, gameState.getRoomControllerRoot(), state);
 
         roomController.checkButton();
         return;
       } else if (fxml.equals("chat") && chatController != null) {
         Stage stage = (Stage) scene.getWindow();
-        SetStage(stage, gameState.getChatControllerRoot(), state);
+        setStage(stage, gameState.getChatControllerRoot(), state);
 
         chatController.checkButton();
         chatController.enterUser(gameState.getSelectedSuspect());
@@ -112,10 +112,10 @@ public class App extends Application {
           Platform.runLater(
               () -> {
                 Stage stage = (Stage) scene.getWindow();
-                SetStage(stage, root, state);
+                setStage(stage, root, state);
               });
         });
-
+    
     task.setOnFailed(
         event -> {
           Throwable e = task.getException();
@@ -124,7 +124,7 @@ public class App extends Application {
     return task;
   }
 
-  private static void SetStage(Stage stage, Parent root, SceneState state) {
+  private static void setStage(Stage stage, Parent root, SceneState state) {
     scene.setRoot(root);
     stage.setScene(scene);
     stage.show();
@@ -252,7 +252,7 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException, ApiProxyException {
     SceneState defaultState = SceneState.MAIN_MENU;
-    TextToSpeech.setupTTS();
+    TextToSpeech.doStartSpeech();
 
     config = ApiProxyConfig.readConfig();
     gameState = new GameState();
@@ -279,7 +279,7 @@ public class App extends Application {
         .getIcons()
         .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
 
-    SetStage(stage, root, defaultState);
+    setStage(stage, root, defaultState);
   }
 
   @Override

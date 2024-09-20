@@ -272,7 +272,7 @@
                 <Font name="Georgia" size="40.0" />
             </font>
         </Label>
-        <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
+        <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true" styleClass="highlight-image">
             <font>
                 <Font name="Georgia Bold" size="22.0" />
             </font>

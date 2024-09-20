@@ -42,7 +42,7 @@ public abstract class MapController extends ButtonController {
     paneRoom.setOpacity(1);
   }
 
-  public static String EnumToName(Suspect suspect) {
+  public static String enumToName(Suspect suspect) {
     return switch (suspect) {
       case AUNT -> "Beatrice Worthington";
       case NIECE -> "Sophie Baxter";
@@ -111,14 +111,16 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void enterGuess() {
-    textMap.setText("Guess Room");
+    textMap.setText("Guess Room" + (App.getGameState().checkEnableButton() ? "" : " (Locked)"));
     exitImage.setVisible(false);
   }
 
   @FXML
   private void clickGuess() {
-    onMakeGuess();
-    adjustPanel();
+    if (App.getGameState().checkEnableButton()) {
+      onMakeGuess();
+      adjustPanel();
+    }
   }
 
   private void adjustPanel() {
@@ -139,8 +141,18 @@ public abstract class MapController extends ButtonController {
 
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
-      App.getGameState().stopTimer();
-      paneTimeIsUp.setVisible(true);
+      GameState state = App.getGameState();
+      state.stopTimer();
+
+      if (App.getGameState().checkEnableButton())
+      {
+        paneTimeIsUp.setVisible(true);
+      }
+      else
+      {
+        state.setSuspect(Suspect.OUT_OF_TIME);
+        App.setRoot(SceneState.END_GAME_LOST, "Looks like you ran out of time!");
+      }
     }
 
     int minutes = time / 60;

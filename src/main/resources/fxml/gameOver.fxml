@@ -16,6 +16,9 @@
    <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
    </ImageView>
+   <ImageView fx:id="outOfTime" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/backgrounds/outOfTime.png" />
+   </ImageView>
    <TextArea fx:id="feedbackTextArea" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.8" prefHeight="370.0" prefWidth="520.0" style="-fx-control-inner-background: #FBE6B1" wrapText="true">
       <font>
          <Font name="Georgia" size="20.0" />

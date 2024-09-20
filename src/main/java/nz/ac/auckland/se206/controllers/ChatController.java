@@ -21,6 +21,10 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * Controller class for the chat view. Handles user interactions and communication with the GPT
  * model via the API proxy.
@@ -41,10 +45,17 @@ public class ChatController extends MapController {
 
   @FXML
   private void onEnter() {
+    GameState state = App.getGameState();
     Suspect suspect = App.getGameState().getSelectedSuspect();
 
+    if (state.getInteractionLogs().containsKey(suspect)) {
+      if (!hasDetectiveInteraction(state.getInteractionLogs().get(suspect))) {
+        increasePersonAmount();
+      }
+    }
+
     String text = userField.getText();
-    addMessage(text, App.getGameState().getSelectedSuspect(), Suspect.DETECTIVE, true);
+    addMessage(text, state.getSelectedSuspect(), Suspect.DETECTIVE, true);
     userField.clear();
 
     checkButton();
@@ -53,6 +64,15 @@ public class ChatController extends MapController {
 
     logArea.requestFollowCaret();
     fetchMessage(suspect);
+  }
+
+  private static boolean hasDetectiveInteraction(List<InteractionLog> logs) {
+    for (InteractionLog log : logs) {
+      if (log.suspect().equals(Suspect.DETECTIVE)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private void fetchMessage(Suspect current) {
@@ -89,8 +109,7 @@ public class ChatController extends MapController {
     new Thread(task).start();
   }
 
-  private void addMessage(
-      String message, Suspect conversation, Suspect from, boolean newLineBefore) {
+  private void addMessage(String message, Suspect conversation, Suspect from, boolean newLineBefore) {
     GameState state = App.getGameState();
 
     InteractionLog log = new InteractionLog(from, message);
@@ -113,7 +132,7 @@ public class ChatController extends MapController {
     }
   }
 
-  private static String EnumToPrompt(Suspect suspect) {
+  private static String enumToPrompt(Suspect suspect) {
     return switch (suspect) {
       case AUNT -> "auntie";
       case NIECE -> "child";
@@ -126,14 +145,14 @@ public class ChatController extends MapController {
     String intro =
         switch (suspect) {
           case AUNT ->
-              "You walk into the room where " + EnumToName(suspect) + " sits calmly in a chair.";
+              "You walk into the room where " + enumToName(suspect) + " sits calmly in a chair.";
           case NIECE ->
               "You race into the room where "
-                  + EnumToName(suspect)
+                  + enumToName(suspect)
                   + " sits with her bear, wide eyed.";
           case GARDENER ->
               "You peek into the manor's green house were you see "
-                  + EnumToName(suspect)
+                  + enumToName(suspect)
                   + " standing attentive.";
           default -> "";
         };
@@ -144,7 +163,7 @@ public class ChatController extends MapController {
     imageNiece.setVisible(suspect == Suspect.NIECE);
     imageAunt.setVisible(suspect == Suspect.AUNT);
 
-    suspectLabel.setText(EnumToName(suspect));
+    suspectLabel.setText(enumToName(suspect));
   }
 
   private boolean isActor(Suspect objectType) {
@@ -159,7 +178,7 @@ public class ChatController extends MapController {
     }
 
     logArea.append(
-        EnumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
+        enumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
     logArea.append(log.message(), "");
   }
 
@@ -172,9 +191,6 @@ public class ChatController extends MapController {
 
     // If the player has not yet interacted with this character.
     if (!state.getInteractionLogs().containsKey(suspect)) {
-      state.increasePeople();
-      checkButton();
-
       // Stop previous character from speaking
       TextToSpeech.stopSpeak();
       TextToSpeech.speak(intro);
@@ -182,7 +198,7 @@ public class ChatController extends MapController {
 
       // Send character description to ai to begin conversation.
       if (isActor(suspect)) {
-        ChatCompletionRequest chatCompletionRequest = getChatCompletionRequest(suspect, intro);
+        ChatCompletionRequest chatCompletionRequest = getChatCompletionRequest(suspect);
 
         state.getChatMessages().put(suspect, chatCompletionRequest);
 
@@ -219,12 +235,17 @@ public class ChatController extends MapController {
     checkButton();
   }
 
-  private ChatCompletionRequest getChatCompletionRequest(Suspect suspect, String context) {
+  private void increasePersonAmount() {
+    App.getGameState().increasePeople();
+    checkButton();
+  }
+
+  private ChatCompletionRequest getChatCompletionRequest(Suspect suspect) {
     ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest(App.getConfig());
 
     // Base prompt for all AI agents.
     String s1 = PromptEngineering.getPrompt("chat.txt", new HashMap<>());
-    String s2 = PromptEngineering.getPrompt(EnumToPrompt(suspect) + ".txt", new HashMap<>());
+    String s2 = PromptEngineering.getPrompt(enumToPrompt(suspect) + ".txt", new HashMap<>());
 
     String s = s1 + s2;
 

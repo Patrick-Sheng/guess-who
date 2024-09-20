@@ -12,6 +12,7 @@ public class GameOverController {
   @FXML private ImageView imageAunt;
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
+  @FXML private ImageView outOfTime;
   @FXML private TextArea feedbackTextArea;
   @FXML private Label labelSubtitle;
 
@@ -20,6 +21,7 @@ public class GameOverController {
     imageAunt.setVisible(false);
     imageGardener.setVisible(false);
     imageNiece.setVisible(false);
+    outOfTime.setVisible(false);
     feedbackTextArea.setVisible(false);
   }
 
@@ -38,6 +40,9 @@ public class GameOverController {
         imageNiece.setVisible(true);
         labelSubtitle.setText("Try again next time!");
         break;
+      case OUT_OF_TIME:
+        outOfTime.setVisible(true);
+        labelSubtitle.setText("Try to be faster next time!");
     }
   }
 
