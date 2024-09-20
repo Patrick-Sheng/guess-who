@@ -93,8 +93,9 @@
       </Label>
       <Button fx:id="moveToNextScene" layoutX="329.0" layoutY="450.0" mnemonicParsing="false"
               onMouseClicked="#onMoveToNextScene" prefHeight="107.0" prefWidth="129.0" text="Back to Main Menu"
-              textAlignment="CENTER" wrapText="true"
-              style="-fx-background-color: red; -fx-text-fill: #fff;">
+              textAlignment="CENTER" wrapText="true" onMouseEntered="#handleRectangleEntered"
+              onMouseExited="#handleRectangleExited" styleClass="highlight-image"
+              style="-fx-background-color: green; -fx-text-fill: #fff;">
          <font>
             <Font name="Georgia Bold" size="22.0"/>
          </font>
