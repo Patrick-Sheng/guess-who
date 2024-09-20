@@ -15,10 +15,13 @@ public class CountdownTimer {
   }
 
   public void start() {
+
+    // Updates timer by decreasing timer by 1 every 1 second
     Task<Void> timerTask =
         new Task<>() {
           @Override
           protected Void call() throws Exception {
+            // If timer is stopped, don't change the time
             while (remainingTime > 0 && isRunning) {
               Platform.runLater(() -> updateLabel());
               remainingTime--;

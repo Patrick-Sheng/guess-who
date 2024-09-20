@@ -27,6 +27,25 @@ import org.fxmisc.richtext.InlineCssTextArea;
  * model via the API proxy.
  */
 public class ChatController extends MapController {
+
+  private static boolean hasDetectiveInteraction(List<InteractionLog> logs) {
+    for (InteractionLog log : logs) {
+      if (log.suspect().equals(Suspect.DETECTIVE)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static String enumToPrompt(Suspect suspect) {
+    return switch (suspect) {
+      case AUNT -> "auntie";
+      case NIECE -> "child";
+      case GARDENER -> "gardener";
+      default -> "";
+    };
+  }
+
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
   @FXML private ImageView imageAunt;
@@ -63,15 +82,6 @@ public class ChatController extends MapController {
 
     logArea.requestFollowCaret(); // Ensure the log area scrolls to the latest message
     fetchMessage(suspect);
-  }
-
-  private static boolean hasDetectiveInteraction(List<InteractionLog> logs) {
-    for (InteractionLog log : logs) {
-      if (log.suspect().equals(Suspect.DETECTIVE)) {
-        return true;
-      }
-    }
-    return false;
   }
 
   private void fetchMessage(Suspect current) {
@@ -132,15 +142,6 @@ public class ChatController extends MapController {
 
       state.getChatMessages().get(conversation).addMessage(type, message);
     }
-  }
-
-  private static String enumToPrompt(Suspect suspect) {
-    return switch (suspect) {
-      case AUNT -> "auntie";
-      case NIECE -> "child";
-      case GARDENER -> "gardener";
-      default -> "";
-    };
   }
 
   public void enterUser(Suspect suspect) {

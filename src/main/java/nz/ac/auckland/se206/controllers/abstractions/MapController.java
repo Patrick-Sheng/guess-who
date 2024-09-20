@@ -13,6 +13,17 @@ import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
+
+  public static String enumToName(Suspect suspect) {
+    // Use Enum to correspond the name of each suspect
+    return switch (suspect) {
+      case AUNT -> "Beatrice Worthington";
+      case NIECE -> "Sophie Baxter";
+      case GARDENER -> "Elias Greenfield";
+      default -> "";
+    };
+  }
+
   @FXML private Button guessButton;
   @FXML private ImageView exitImage;
   @FXML private Label timerLabel;
@@ -40,16 +51,6 @@ public abstract class MapController extends ButtonController {
     TextToSpeech.speak("Closing map!");
     paneMap.setVisible(false);
     paneRoom.setOpacity(1);
-  }
-
-  public static String enumToName(Suspect suspect) {
-    // Use Enum to correspond the name of each suspect
-    return switch (suspect) {
-      case AUNT -> "Beatrice Worthington";
-      case NIECE -> "Sophie Baxter";
-      case GARDENER -> "Elias Greenfield";
-      default -> "";
-    };
   }
 
   @FXML
