@@ -38,7 +38,7 @@ public class GameOverController extends ButtonController {
         continueOther.setVisible(false);
         continueAunt.setVisible(true);
 
-        labelSubtitle.setText("Here are some feedback based on your explanation");
+        labelSubtitle.setText("Here is some feedback based on your explanation");
         break;
       case GARDENER:
         imageGardener.setVisible(true);
