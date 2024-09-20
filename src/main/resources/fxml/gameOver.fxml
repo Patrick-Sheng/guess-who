@@ -13,18 +13,17 @@
    <ImageView fx:id="imageNiece" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/backgrounds/niece_guessed.jpg" />
    </ImageView>
-   <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
-   </ImageView>
    <ImageView fx:id="outOfTime" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/backgrounds/outOfTime.png" />
+   </ImageView>
+   <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
    </ImageView>
    <TextArea fx:id="feedbackTextArea" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.8" prefHeight="370.0" prefWidth="520.0" style="-fx-control-inner-background: #FBE6B1" wrapText="true">
       <font>
          <Font name="Georgia" size="20.0" />
       </font>
    </TextArea>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="75.0" layoutX="280.0" layoutY="691.0" onMouseClicked="#backToMenu" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="245.0" />
    <GridPane alignment="CENTER" layoutX="78.0" layoutY="131.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
       <columnConstraints>
          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,10 +38,20 @@
             <Font name="Georgia" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="40.0" prefWidth="622.0" text="Here are some feedback based on your gameplay" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
+      <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="40.0" prefWidth="622.0" text="Here are some feedback based on your explanation" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
          <font>
             <Font name="Georgia" size="17.0" />
          </font>
       </Label>
    </GridPane>
+   <ImageView fx:id="continueOther" fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" onMouseClicked="#backToMenu" styleClass="highlight-image">
+      <image>
+         <Image url="@../images/buttons/continue.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="continueAunt" fitHeight="68.0" fitWidth="219.0" layoutX="280.0" layoutY="706.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" onMouseClicked="#backToMenu" styleClass="highlight-image">
+      <image>
+         <Image url="@../images/buttons/aunt_continue.png" />
+      </image>
+   </ImageView>
 </Pane>
