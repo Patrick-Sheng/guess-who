@@ -31,16 +31,12 @@ public class App extends Application {
 
   private static Scene scene;
   private static SceneState currentState;
-
   private static GameState gameState;
-
   private static ApiProxyConfig config;
-
   private static MediaPlayer music;
   private static String currentlyPlaying;
   private static AudioClip hoverSound;
   private static boolean isMuted;
-
   private static boolean isRunning = true;
 
   /**
@@ -235,6 +231,18 @@ public class App extends Application {
     return currentState;
   }
 
+  public static ApiProxyConfig getConfig() {
+    return config;
+  }
+
+  public static GameState getGameState() {
+    return gameState;
+  }
+
+  public static boolean isRunning() {
+    return isRunning;
+  }
+
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
@@ -279,17 +287,5 @@ public class App extends Application {
     isRunning = false;
     TextToSpeech.stopSpeak();
     super.stop();
-  }
-
-  public static ApiProxyConfig getConfig() {
-    return config;
-  }
-
-  public static GameState getGameState() {
-    return gameState;
-  }
-
-  public static boolean isRunning() {
-    return isRunning;
   }
 }

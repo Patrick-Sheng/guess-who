@@ -29,10 +29,9 @@ public class ChatController extends MapController {
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
   @FXML private ImageView imageAunt;
-
-  @FXML private TextField userField;
   @FXML private InlineCssTextArea logArea;
   @FXML private Label suspectLabel;
+  @FXML private TextField userField;
 
   @FXML
   public void initialize() {
