@@ -28,27 +28,21 @@ public class SettingsController extends ButtonController {
     sfxSlider.setValue(sfx.getVolume() * 100);
 
     volumeSlider
-        .valueProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              music.setVolume(newValue.doubleValue() / 100.0);
-            });
+            .valueProperty()
+            .addListener(
+                    (observable, oldValue, newValue) -> music.setVolume(newValue.doubleValue() / 100.0));
 
     sfxSlider
-        .valueProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              sfx.setVolume(newValue.doubleValue() / 100.0);
-            });
+            .valueProperty()
+            .addListener(
+                    (observable, oldValue, newValue) -> sfx.setVolume(newValue.doubleValue() / 100.0));
 
     updateMuteButton();
 
     music
-        .muteProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              updateMuteButton();
-            });
+            .muteProperty()
+            .addListener(
+                    (observable, oldValue, newValue) -> updateMuteButton());
   }
 
   @FXML
@@ -71,6 +65,6 @@ public class SettingsController extends ButtonController {
 
   @FXML
   private void onBackButton() {
-    App.setRoot(SceneState.MAIN_MENU);
+    App.setRoot(SceneState.MAIN_MENU, "Going back to home page...");
   }
 }

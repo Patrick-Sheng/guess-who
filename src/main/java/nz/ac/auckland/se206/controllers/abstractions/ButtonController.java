@@ -5,12 +5,12 @@ import nz.ac.auckland.se206.App;
 
 public abstract class ButtonController {
   @FXML
-  private void handleRectangleEntered() {
+  protected void handleRectangleEntered() {
     App.playHover();
   }
 
   @FXML
-  private void handleRectangleExited() {
+  protected void handleRectangleExited() {
     App.stopHover();
   }
 }

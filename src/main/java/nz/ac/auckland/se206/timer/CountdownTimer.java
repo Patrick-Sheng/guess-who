@@ -6,8 +6,8 @@ import nz.ac.auckland.se206.App;
 
 public class CountdownTimer {
 
-  private int remainingTime = 0;
-  private boolean isRunning = false;
+  private int remainingTime;
+  private boolean isRunning;
   private Thread timerThread;
 
   public CountdownTimer(int time) {
@@ -17,24 +17,19 @@ public class CountdownTimer {
 
   public void start() {
     Task<Void> timerTask =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            while (remainingTime > 0 && isRunning == true) {
-              Platform.runLater(
-                  new Runnable() {
-                    @Override
-                    public void run() {
-                      updateLabel();
+            new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    while (remainingTime > 0 && isRunning) {
+                        Platform.runLater(
+                                () -> updateLabel());
+                        remainingTime--;
+                        Thread.sleep(1000);
                     }
-                  });
-              remainingTime--;
-              Thread.sleep(1000);
-            }
-            System.out.println("Time's up!");
-            return null;
-          }
-        };
+                    System.out.println("Time's up!");
+                    return null;
+                }
+            };
 
     timerThread = new Thread(timerTask);
     timerThread.setDaemon(true);
