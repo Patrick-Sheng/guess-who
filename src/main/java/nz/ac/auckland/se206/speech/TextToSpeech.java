@@ -1,10 +1,25 @@
 package nz.ac.auckland.se206.speech;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
-import javafx.concurrent.Task;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
+import javafx.application.Platform;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
@@ -13,54 +28,160 @@ import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest.Provider;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechRequest.Voice;
 import nz.ac.auckland.apiproxy.tts.TextToSpeechResult;
+import nz.ac.auckland.se206.App;
 
-/** A utility class for converting text to speech using the specified API proxy. */
+/** Text-to-speech API using the JavaX speech library. */
 public class TextToSpeech {
+  private static final Map<String, String> textToMp3Map = new HashMap<>();
 
-  /**
-   * Converts the given text to speech and plays the audio.
-   *
-   * @param text the text to be converted to speech
-   * @throws IllegalArgumentException if the text is null or empty
-   */
-  public static void speak(String text) {
-    if (text == null || text.isEmpty()) {
-      throw new IllegalArgumentException("Text should not be null or empty");
+  public static Thread voiceThread;
+
+  private static final BlockingQueue<Runnable> dialogQueue = new LinkedBlockingQueue<>();
+  private static final AtomicBoolean stopFlag = new AtomicBoolean(false);
+
+  static {
+    loadMp3Files();
+    processQueue();
+  }
+
+  public static void speak(final String text) {
+    speak(text, Voice.OPENAI_ALLOY, Provider.OPENAI);
+  }
+
+  ////
+
+  public static void speak(String message, Voice voice, Provider provider) {
+    if (message == null) {
+      throw new IllegalArgumentException("Text cannot be null.");
     }
 
-    Task<Void> backgroundTask =
-        new Task<>() {
-          @Override
-          protected Void call() {
-            try {
-              ApiProxyConfig config = ApiProxyConfig.readConfig();
-              Provider provider = Provider.GOOGLE;
-              Voice voice = Voice.GOOGLE_EN_US_STANDARD_H;
+    stopFlag.set(false);
 
-              TextToSpeechRequest ttsRequest = new TextToSpeechRequest(config);
-              ttsRequest.setText(text).setProvider(provider).setVoice(voice);
+    Text text = new Text(message, voice, provider);
 
-              TextToSpeechResult ttsResult = ttsRequest.execute();
-              String audioUrl = ttsResult.getAudioUrl();
+    String mp3FilePath = getMp3FilePath(text.text());
 
-              try (InputStream inputStream =
-                  new BufferedInputStream(new URL(audioUrl).openStream())) {
-                Player player = new Player(inputStream);
-                player.play();
-              } catch (JavaLayerException | IOException e) {
-                e.printStackTrace();
+    dialogQueue.offer(
+            () -> {
+              if (mp3FilePath != null) {
+                playMp3(mp3FilePath);
+              } else {
+                cloudTts(text);
               }
+            });
+  }
 
-            } catch (ApiProxyException e) {
-              e.printStackTrace();
-            }
-            return null;
-          }
-        };
+  private static void processQueue() {
+    voiceThread =
+            new Thread(
+                    () -> {
+                      while (App.running) {
+                        if (dialogQueue.isEmpty() || stopFlag.get()) {
+                          continue;
+                        }
 
-    Thread backgroundThread = new Thread(backgroundTask);
-    backgroundThread.setDaemon(true); // Ensure the thread does not prevent JVM shutdown
-    // backgroundThread.start();
-    System.out.println(text);
+                        try {
+                          Runnable task = dialogQueue.take();
+                          task.run();
+                        } catch (InterruptedException e) {
+                          Thread.currentThread().interrupt();
+                        }
+
+                        try {
+                          Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                          e.printStackTrace();
+                        }
+                      }
+                    });
+
+    voiceThread.setDaemon(true);
+    voiceThread.start();
+  }
+
+  private static void playMp3(String mp3FilePath) {
+    CountDownLatch latch = new CountDownLatch(1);
+
+    Media media = new Media(new File(mp3FilePath).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+    mediaPlayer.setVolume(App.getSfx().getVolume());
+
+    mediaPlayer.setOnEndOfMedia(latch::countDown);
+    mediaPlayer.setOnError(
+            () -> {
+              System.err.println("Error occurred: " + mediaPlayer.getError());
+              latch.countDown();
+            });
+
+    Platform.runLater(mediaPlayer::play);
+
+    try {
+      latch.await(); // Block until the playback is complete
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+  }
+
+  private static void cloudTts(Text text) {
+    try {
+      ApiProxyConfig config = ApiProxyConfig.readConfig();
+
+      // Make request to servers.
+      TextToSpeechRequest ttsRequest = new TextToSpeechRequest(config);
+      ttsRequest.setText(text.text()).setProvider(text.provider()).setVoice(text.voice());
+
+      // Received TTS result.
+      TextToSpeechResult ttsResult = ttsRequest.execute();
+      String audioUrl = ttsResult.getAudioUrl();
+
+      System.out.println("Found audio for '" + text.text() + "': " + audioUrl);
+
+      // Play TTS via JavaFX player.
+      try (InputStream inputStream = new BufferedInputStream(new URL(audioUrl).openStream())) {
+        Player player = new Player(inputStream);
+        player.play();
+      } catch (JavaLayerException | IOException e) {
+        e.printStackTrace();
+      }
+    } catch (ApiProxyException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void stopSpeak() {
+    stopFlag.set(true);
+    dialogQueue.clear();
+  }
+
+  private static void loadMp3Files() {
+    try (Stream<Path> paths =
+                 Files.walk(Paths.get(Objects.requireNonNull(TextToSpeech.class.getResource("/tts")).toURI()))) {
+      paths
+              .filter(Files::isRegularFile)
+              .filter(path -> path.toString().endsWith(".mp3"))
+              .forEach(
+                      path -> {
+                        String fileName = path.getFileName().toString();
+                        String key =
+                                fileName
+                                        .toLowerCase()
+                                        .replaceAll("[^a-z0-9]", "")
+                                        .substring(0, fileName.length() - 4); // Remove ".mp3"
+                        textToMp3Map.put(key, path.toString());
+                      });
+    } catch (IOException | URISyntaxException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static String getMp3FilePath(String text) {
+    if (text == null) {
+      return null;
+    }
+
+    String transformedText = text.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+
+    return textToMp3Map.get(transformedText);
   }
 }

@@ -18,12 +18,12 @@ public class MainMenuController extends ButtonController {
 
   @FXML
   private void onSettings() {
-    App.setRoot(SceneState.SETTINGS);
+    App.setRoot(SceneState.SETTINGS, "Entering settings menu...");
   }
 
   @FXML
   private void onStart() {
-    App.setRoot(SceneState.START_GAME);
+    App.setRoot(SceneState.START_GAME, "Starting game!");
     App.startTimer(300);
   }
 }

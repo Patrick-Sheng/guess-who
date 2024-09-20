@@ -22,6 +22,7 @@ import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.timer.CountdownTimer;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
@@ -45,6 +46,10 @@ public class App extends Application {
   private static int red = 50;
   private static int green = 255;
   private static int blue = 70;
+
+  public static boolean running = true;
+
+  public static final String GUESS_DIALOG = "Let's get to guessing!";
 
   private static boolean isMuted;
 
@@ -74,7 +79,10 @@ public class App extends Application {
    *
    * @param state the state to transition to
    */
-  public static void setRoot(SceneState state) {
+  public static void setRoot(SceneState state, String speech) {
+    TextToSpeech.stopSpeak();
+    TextToSpeech.speak(speech);
+
     currentState = state;
     String fxml = getSceneName(state);
 
@@ -88,31 +96,36 @@ public class App extends Application {
       return;
     }
 
-    Task<Parent> task =
-        new Task<>() {
-          @Override
-          protected Parent call() throws IOException {
-            return loadFxml(fxml);
-          }
-        };
-
-    task.setOnSucceeded(
-        event -> {
-          Parent root = task.getValue();
-          Platform.runLater(
-              () -> {
-                Stage stage = (Stage) scene.getWindow();
-                SetStage(stage, root, state);
-              });
-        });
-
-    task.setOnFailed(
-        event -> {
-          Throwable e = task.getException();
-          e.printStackTrace();
-        });
+    Task<Parent> task = getParentTask(state, fxml);
 
     new Thread(task).start();
+  }
+
+  private static Task<Parent> getParentTask(SceneState state, String fxml) {
+    Task<Parent> task =
+            new Task<>() {
+              @Override
+              protected Parent call() throws IOException {
+                return loadFxml(fxml);
+              }
+            };
+
+    task.setOnSucceeded(
+            event -> {
+              Parent root = task.getValue();
+              Platform.runLater(
+                      () -> {
+                        Stage stage = (Stage) scene.getWindow();
+                        SetStage(stage, root, state);
+                      });
+            });
+
+    task.setOnFailed(
+            event -> {
+              Throwable e = task.getException();
+              e.printStackTrace();
+            });
+    return task;
   }
 
   private static void SetStage(Stage stage, Parent root, SceneState state) {
@@ -195,11 +208,7 @@ public class App extends Application {
     music.setVolume(volume);
 
     music.setOnEndOfMedia(
-        new Runnable() {
-          public void run() {
-            music.seek(Duration.ZERO);
-          }
-        });
+            () -> music.seek(Duration.ZERO));
 
     music.play();
 
@@ -306,12 +315,6 @@ public class App extends Application {
     }
   }
 
-  public static void sendEndGameStats(Suspect suspect) {
-    if (gameOverController != null) {
-      gameOverController.setGameOverImage(suspect);
-    }
-  }
-
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
@@ -326,24 +329,31 @@ public class App extends Application {
     isMuted = false;
 
     hoverSound =
-        new AudioClip(
-            Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
-                .toExternalForm());
-    hoverSound.setVolume(.25f);
+            new AudioClip(
+                    Objects.requireNonNull(App.class.getResource("/sounds/buttonHover.wav"))
+                            .toExternalForm());
+    hoverSound.setVolume(.5f);
 
     Parent root = loadFxml(getSceneName(defaultState));
 
     scene = new Scene(root);
     scene
-        .getStylesheets()
-        .add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
+            .getStylesheets()
+            .add(Objects.requireNonNull(App.class.getResource("/css/style.css")).toExternalForm());
 
     stage.setResizable(false);
     stage.setTitle("PI Masters: Whispers of Emeralds");
     stage
-        .getIcons()
-        .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
+            .getIcons()
+            .add(new Image(Objects.requireNonNull(App.class.getResourceAsStream("/images/logo.png"))));
 
     SetStage(stage, root, defaultState);
+  }
+
+  @Override
+  public void stop() throws Exception {
+    running = false;
+    TextToSpeech.stopSpeak();
+    super.stop();
   }
 }

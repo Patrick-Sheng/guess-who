@@ -14,77 +14,98 @@
 
 <Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GuessingController">
    <Pane prefHeight="768.0" prefWidth="768.0">
-      <children>
-         <ImageView fx:id="pane" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/backgrounds/guess.jpeg" />
-         </ImageView>
-         <Rectangle fx:id="rectAunt" arcHeight="5.0" arcWidth="5.0" height="768.0" onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-         <Rectangle fx:id="rectGardener" arcHeight="5.0" arcWidth="5.0" height="762.0" layoutX="228.0" layoutY="3.0" onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="311.0" />
-         <Rectangle fx:id="rectNiece" arcHeight="5.0" arcWidth="5.0" height="768.0" layoutX="539.0" onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-         <GridPane alignment="CENTER" layoutX="73.0" layoutY="45.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
-            <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="18.0" minHeight="5.0" prefHeight="9.0" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="41.0" minHeight="6.333333333333336" prefHeight="13.333333333333336" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="62.00000000000001" minHeight="10.0" prefHeight="19.999992370605476" vgrow="SOMETIMES" />
-               <RowConstraints maxHeight="46.00000762939453" minHeight="0.0" prefHeight="42.00000762939453" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-               <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 01:00" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="5">
-                  <font>
-                     <Font name="Georgia" size="36.0" />
-                  </font>
-               </Label>
-               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="610.0" text="Enter in your reasoning in the text box below" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
-                  <font>
-                     <Font name="Georgia" size="17.0" />
-                  </font>
-               </Label>
-               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Click on the suspect to make a guess" textAlignment="CENTER" GridPane.rowSpan="3">
-                  <font>
-                     <Font name="Georgia" size="30.0" />
-                  </font>
-               </Label>
-            </children>
-         </GridPane>
-         <TextArea fx:id="explanationTextArea" layoutX="74.0" layoutY="500.0" opacity="0.8" prefHeight="180.0" prefWidth="618.0" promptText="Enter in your reasoning here" wrapText="true">
+      <ImageView fx:id="pane" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../images/backgrounds/guess.jpeg"/>
+      </ImageView>
+      <Rectangle fx:id="rectAunt" arcHeight="5.0" arcWidth="5.0" height="768.0" onMouseClicked="#chooseSuspect"
+                 onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing" opacity="0.5" stroke="BLACK"
+                 strokeType="INSIDE" width="229.0"/>
+      <Rectangle fx:id="rectGardener" arcHeight="5.0" arcWidth="5.0" height="762.0" layoutX="228.0" layoutY="3.0"
+                 onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing"
+                 opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="311.0"/>
+      <Rectangle fx:id="rectNiece" arcHeight="5.0" arcWidth="5.0" height="768.0" layoutX="539.0"
+                 onMouseClicked="#chooseSuspect" onMouseEntered="#enterChoosing" onMouseExited="#exitChoosing"
+                 opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="229.0"/>
+      <GridPane alignment="CENTER" layoutX="73.0" layoutY="45.0" prefHeight="122.0" prefWidth="623.0"
+                styleClass="grid-pane">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="18.0" minHeight="5.0" prefHeight="9.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="41.0" minHeight="6.333333333333336" prefHeight="13.333333333333336"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="62.00000000000001" minHeight="10.0" prefHeight="19.999992370605476"
+                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="46.00000762939453" minHeight="0.0" prefHeight="42.00000762939453"
+                            vgrow="SOMETIMES"/>
+         </rowConstraints>
+         <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0"
+                style="-fx-text-fill: #ffffff !important" text="Time Left: 01:00" textAlignment="CENTER"
+                textFill="WHITE" GridPane.rowIndex="5">
             <font>
-               <Font name="Georgia" size="15.0" />
-            </font></TextArea>
-      	<Button fx:id="submitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0" mnemonicParsing="false" onMouseClicked="#onSubmitFeedback" prefHeight="39.0" prefWidth="129.0" styleClass="highlight-image" text="Submit" textAlignment="CENTER" wrapText="true">
-      		<font>
-      			<Font name="Georgia Bold" size="24.0" />
-      		</font>
-      	</Button>
-      </children>
+               <Font name="Georgia" size="36.0"/>
+            </font>
+         </Label>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="610.0"
+                text="Enter in your reasoning in the text box below" textAlignment="CENTER" textFill="WHITE"
+                GridPane.rowIndex="3">
+            <font>
+               <Font name="Georgia" size="17.0"/>
+            </font>
+         </Label>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="622.0"
+                style="-fx-text-fill: #ffffff !important" text="Click on the suspect to make a guess"
+                textAlignment="CENTER" GridPane.rowSpan="3">
+            <font>
+               <Font name="Georgia" size="30.0"/>
+            </font>
+         </Label>
+      </GridPane>
+      <TextArea fx:id="explanationTextArea" layoutX="74.0" layoutY="500.0" opacity="0.8" prefHeight="180.0"
+                prefWidth="618.0" promptText="Enter in your reasoning here" wrapText="true" style="-fx-control-inner-background: #FBE6B1">
+         <font>
+            <Font name="Georgia" size="15.0"/>
+         </font>
+      </TextArea>
+      <Button fx:id="submitButton" alignment="CENTER" contentDisplay="CENTER" layoutX="563.0" layoutY="695.0"
+              mnemonicParsing="false" onMouseClicked="#onSubmitFeedback" prefHeight="39.0" prefWidth="129.0"
+              styleClass="highlight-image" text="Submit" textAlignment="CENTER" wrapText="true"
+              onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited"
+              style="-fx-background-color: green; -fx-text-fill: white;">
+         <font>
+            <Font name="Georgia Bold" size="24.0"/>
+         </font>
+      </Button>
    </Pane>
    <Pane fx:id="paneTimeIsUp" layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="768.0">
-      <children>
-         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="194.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-         <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="204.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../images/time_is_up.jpeg" />
-            </image>
-         </ImageView>
-         <Label layoutX="291.0" layoutY="250.0" text="Time is Up!" textFill="WHITE">
-            <font>
-               <Font name="Georgia" size="40.0" />
-            </font>
-         </Label>
-         <Button fx:id="moveToNextScene" layoutX="329.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#onMoveToNextScene" prefHeight="107.0" prefWidth="129.0" text="Back to Main Menu" textAlignment="CENTER" wrapText="true">
-            <font>
-               <Font name="Georgia Bold" size="22.0" />
-            </font>
-         </Button>
-         <Label fx:id="systemDescriptionLabel" alignment="CENTER" layoutX="224.0" layoutY="304.0" prefHeight="107.0" prefWidth="341.0" text="You did not select a suspect within time limit. Game is now over." textAlignment="CENTER" textFill="WHITE" wrapText="true">
-            <font>
-               <Font name="Garamond Bold" size="23.0" />
-            </font>
-         </Label>
-      </children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="194.0" layoutY="184.0"
+                 stroke="BLACK" strokeType="INSIDE" width="400.0"/>
+      <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="204.0" layoutY="194.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../images/time_is_up.jpeg"/>
+      </ImageView>
+      <Label layoutX="291.0" layoutY="250.0" text="Time is Up!" textFill="WHITE">
+         <font>
+            <Font name="Georgia" size="40.0"/>
+         </font>
+      </Label>
+      <Button fx:id="moveToNextScene" layoutX="329.0" layoutY="450.0" mnemonicParsing="false"
+              onMouseClicked="#onMoveToNextScene" prefHeight="107.0" prefWidth="129.0" text="Back to Main Menu"
+              textAlignment="CENTER" wrapText="true"
+              style="-fx-background-color: red; -fx-text-fill: #fff;">
+         <font>
+            <Font name="Georgia Bold" size="22.0"/>
+         </font>
+      </Button>
+      <Label fx:id="systemDescriptionLabel" alignment="CENTER" layoutX="224.0" layoutY="304.0" prefHeight="107.0"
+             prefWidth="341.0" text="You did not select a suspect within time limit. Game is now over."
+             textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Garamond Bold" size="23.0"/>
+         </font>
+      </Label>
    </Pane>
 </Pane>
