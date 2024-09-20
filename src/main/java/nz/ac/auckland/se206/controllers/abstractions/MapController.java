@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
@@ -22,7 +23,7 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   public void initialize() {
-    enableButton();
+    checkButton();
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
   }
@@ -58,6 +59,15 @@ public abstract class MapController extends ButtonController {
     exitImage.setVisible(false);
   }
 
+  public static String EnumToName(Suspect suspect) {
+    return switch (suspect) {
+      case AUNT -> "Beatrice Worthington";
+      case NIECE -> "Sophie Baxter";
+      case GARDENER -> "Elias Greenfield";
+      default -> "";
+    };
+  }
+
   @FXML
   private void exitMap() {
     textMap.setText("");
@@ -71,12 +81,15 @@ public abstract class MapController extends ButtonController {
 
     switch (paneId) {
       case "auntieRoom":
+        App.setSelectedSuspect(Suspect.AUNT);
         App.setRoot(SceneState.CHAT, "Going To Aunt Beatrice's Study");
         break;
       case "childRoom":
+        App.setSelectedSuspect(Suspect.NIECE);
         App.setRoot(SceneState.CHAT, "Going To Sophie Baxter's Nursery");
         break;
       case "gardenerRoom":
+        App.setSelectedSuspect(Suspect.GARDENER);
         App.setRoot(SceneState.CHAT, "Going To Elias Greenfield's Garden");
         break;
       case "mainRoom":
@@ -93,7 +106,7 @@ public abstract class MapController extends ButtonController {
     paneRoom.setOpacity(1);
   }
 
-  private void disableButton() {
+  public void disableButton() {
     guessButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
     guessButton.setDisable(true);
     guessButton.setOpacity(1f);
@@ -122,5 +135,13 @@ public abstract class MapController extends ButtonController {
     App.resetColour();
     App.startTimer(60);
     App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
+  }
+
+  public void checkButton() {
+    if (App.checkEnableButton()) {
+      enableButton();
+    } else  {
+      disableButton();
+    }
   }
 }

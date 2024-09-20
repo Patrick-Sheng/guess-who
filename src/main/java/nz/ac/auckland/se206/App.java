@@ -2,6 +2,9 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -15,12 +18,16 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GameOverController;
 import nz.ac.auckland.se206.controllers.GuessingController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
+import nz.ac.auckland.se206.models.InteractionLog;
 import nz.ac.auckland.se206.timer.CountdownTimer;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -30,28 +37,41 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class App extends Application {
   private static Scene scene;
+
   private static MediaPlayer music;
   private static String currentlyPlaying;
   private static AudioClip hoverSound;
+  private static boolean isMuted;
+
   private static CountdownTimer timer;
   private static SceneState currentState;
+
   private static Parent roomControllerRoot;
   private static Parent chatControllerRoot;
+
   private static RoomController roomController;
   private static ChatController chatController;
   private static GuessingController guessingController;
   private static GameOverController gameOverController;
+
+  public static final String GUESS_DIALOG = "Let's get to guessing!";
+
+  public static Map<Suspect, List<InteractionLog>> interactionLogs;
+  public static Map<Suspect, ChatCompletionRequest> chatMessages;
+
+  private static int objectsInterfaced;
+  private static int peopleInterfaced;
+
+  private static Suspect selectedSuspect;
   private static Suspect chosenSuspect;
 
   private static int red = 50;
   private static int green = 255;
   private static int blue = 70;
 
+  private static ApiProxyConfig config;
+
   public static boolean running = true;
-
-  public static final String GUESS_DIALOG = "Let's get to guessing!";
-
-  private static boolean isMuted;
 
   /**
    * The main method that launches the JavaFX application.
@@ -74,6 +94,9 @@ public class App extends Application {
     return music;
   }
 
+  public static void increaseObjects() { objectsInterfaced += 1; }
+  public static void increasePeople() { peopleInterfaced += 1; }
+
   /**
    * Sets the root of the scene to the specified FXML file.
    *
@@ -89,10 +112,15 @@ public class App extends Application {
     if (fxml.equals("room") && roomController != null) {
       Stage stage = (Stage) scene.getWindow();
       SetStage(stage, roomControllerRoot, state);
+
+      roomController.checkButton();
       return;
     } else if (fxml.equals("chat") && chatController != null) {
       Stage stage = (Stage) scene.getWindow();
       SetStage(stage, chatControllerRoot, state);
+
+      chatController.checkButton();
+      chatController.enterUser(App.getSelectedSuspect());
       return;
     }
 
@@ -174,7 +202,18 @@ public class App extends Application {
     guessingController = null;
     gameOverController = null;
     chosenSuspect = null;
+
     resetColour();
+
+    interactionLogs = new HashMap<>();
+    chatMessages = new HashMap<>();
+
+    objectsInterfaced = 0;
+    peopleInterfaced = 0;
+  }
+
+  public static boolean checkEnableButton() {
+      return objectsInterfaced >= 1 && peopleInterfaced >= 3;
   }
 
   public static void resetColour() {
@@ -315,6 +354,14 @@ public class App extends Application {
     }
   }
 
+  public static Suspect getSelectedSuspect() {
+    return selectedSuspect;
+  }
+
+  public static void setSelectedSuspect(Suspect selectedSuspect) {
+    App.selectedSuspect = selectedSuspect;
+  }
+
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
@@ -322,8 +369,11 @@ public class App extends Application {
    * @throws IOException if the "src/main/resources/fxml/room.fxml" file is not found
    */
   @Override
-  public void start(final Stage stage) throws IOException {
+  public void start(final Stage stage) throws IOException, ApiProxyException {
     SceneState defaultState = SceneState.MAIN_MENU;
+
+    config = ApiProxyConfig.readConfig();
+    resetGame();
 
     currentlyPlaying = "";
     isMuted = false;
@@ -355,5 +405,9 @@ public class App extends Application {
     running = false;
     TextToSpeech.stopSpeak();
     super.stop();
+  }
+
+  public static ApiProxyConfig getConfig() {
+    return config;
   }
 }

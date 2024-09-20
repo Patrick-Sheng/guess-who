@@ -61,8 +61,7 @@ public class GuessingController extends ButtonController {
                     @Override
                     protected Void call() {
                         try {
-                            ApiProxyConfig config = ApiProxyConfig.readConfig();
-                            chatCompletionRequest = new ChatCompletionRequest(config).setMaxTokens(200);
+                            chatCompletionRequest = new ChatCompletionRequest(App.getConfig()).setMaxTokens(200);
                             runGpt(new ChatMessage("system", getSystemPrompt()));
                         } catch (ApiProxyException e) {
                             e.printStackTrace();

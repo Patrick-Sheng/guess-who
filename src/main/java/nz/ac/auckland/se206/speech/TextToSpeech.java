@@ -125,10 +125,8 @@ public class TextToSpeech {
 
   private static void cloudTts(Text text) {
     try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-
       // Make request to servers.
-      TextToSpeechRequest ttsRequest = new TextToSpeechRequest(config);
+      TextToSpeechRequest ttsRequest = new TextToSpeechRequest(App.getConfig());
       ttsRequest.setText(text.text()).setProvider(text.provider()).setVoice(text.voice());
 
       // Received TTS result.

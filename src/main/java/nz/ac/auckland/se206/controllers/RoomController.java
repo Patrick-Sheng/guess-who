@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
 
 /**
@@ -66,6 +67,9 @@ public class RoomController extends MapController {
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
     handleRectangleEntered();
+
+    App.increaseObjects();
+    checkButton();
   }
 
   @FXML
