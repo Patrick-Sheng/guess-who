@@ -245,6 +245,7 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException, ApiProxyException {
     SceneState defaultState = SceneState.MAIN_MENU;
+    TextToSpeech.setupTTS();
 
     config = ApiProxyConfig.readConfig();
     gameState = new GameState();

@@ -153,38 +153,44 @@ public class GuessingController extends ButtonController {
 
     @FXML
     private void chooseAunt() {
-        chosenSuspect = Suspect.AUNT;
-        TextToSpeech.speak("Aunt Beatrice");
-        choosingAunt();
+        runChoose(Suspect.AUNT, "Aunt Beatrice");
     }
 
     @FXML
     private void choosingAunt() {
-        highlightCharacterPane(Suspect.AUNT);
+        runHighlight(Suspect.AUNT);
     }
 
     @FXML
     private void chooseGardener() {
-        chosenSuspect = Suspect.GARDENER;
-        TextToSpeech.speak("Elias Greenfield");
-        choosingGardener();
+        runChoose(Suspect.GARDENER, "Elias Greenfield");
     }
 
     @FXML
     private void choosingGardener() {
-        highlightCharacterPane(Suspect.GARDENER);
+            runHighlight(Suspect.GARDENER);
     }
 
     @FXML
     private void chooseNiece() {
-        chosenSuspect = Suspect.NIECE;
-        TextToSpeech.speak("Sophie Baxter");
-        choosingNiece();
+        runChoose(Suspect.NIECE, "Sophie Baxter");
     }
 
     @FXML
     private void choosingNiece() {
-        highlightCharacterPane(Suspect.NIECE);
+        runHighlight(Suspect.NIECE);
+    }
+
+    private void runChoose(Suspect suspect, String speech) {
+        chosenSuspect = suspect;
+        TextToSpeech.speak(speech);
+        highlightCharacterPane(suspect);
+    }
+
+    private void runHighlight(Suspect suspect) {
+        if (chosenSuspect == null) {
+            highlightCharacterPane(suspect);
+        }
     }
 
     private void highlightCharacterPane(Suspect suspect) {

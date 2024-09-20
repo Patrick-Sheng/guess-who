@@ -18,7 +18,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javazoom.jl.decoder.JavaLayerException;
@@ -37,7 +36,7 @@ public class TextToSpeech {
   private static final BlockingQueue<Runnable> dialogQueue = new LinkedBlockingQueue<>();
   private static final AtomicBoolean stopFlag = new AtomicBoolean(false);
 
-  public static void SetupTTS() {
+  public static void setupTTS() {
     loadMp3Files();
     processQueue();
   }
