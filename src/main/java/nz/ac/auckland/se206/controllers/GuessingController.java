@@ -22,6 +22,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class GuessingController extends ButtonController {
   @FXML private Pane paneTimeIsUp;
   @FXML private Label systemDescriptionLabel;
+  @FXML private Label chosenSuspectLabel;
   @FXML private Button moveToNextScene;
 
   @FXML private Rectangle rectAunt;
@@ -46,6 +47,7 @@ public class GuessingController extends ButtonController {
     foundSuspect = false;
     foundExplanation = false;
     disableButton(); // Disable the submit button initially
+    chosenSuspectLabel.setText("");
     explanationTextArea
         .textProperty()
         .addListener(
@@ -239,6 +241,7 @@ public class GuessingController extends ButtonController {
   private void runChoose(Suspect suspect, String speech) {
     chosenSuspect = suspect;
     foundSuspect = true;
+    chosenSuspectLabel.setText(speech);
     if (!isNotValidResponse()) {
       enableButton(); // Enable the button if both suspect and explanation are provided
     }
