@@ -55,7 +55,10 @@ public class GuessingController extends ButtonController {
         .addListener(
             (observable, oldValue, newValue) -> {
               // Listener to check if an explanation has been provided
-              if (!foundExplanation) {
+              if (explanationTextArea.getText().trim().isEmpty()) {
+                foundExplanation = false;
+                disableButton(); // Disable the button if no explanation is provided
+              } else {
                 foundExplanation = true;
                 if (!isNotValidResponse()) {
                   enableButton(); // Enable the button if both suspect and explanation are provided
