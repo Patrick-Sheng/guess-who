@@ -187,7 +187,7 @@ public class GuessingController extends ButtonController {
   private void timeIsUp() {
     App.getGameState().stopTimer();
     paneTimeIsUp.setVisible(true);
-    explanationTextArea.editableProperty().setValue(false);
+    explanationTextArea.setEditable(false);
 
     // Speak to the user, indicating that time is up
     TextToSpeech.speak("Time is up!");

@@ -24,6 +24,8 @@ public abstract class MapController extends ButtonController {
     };
   }
 
+  protected boolean timeIsUp = false;
+
   @FXML private Button guessButton;
   @FXML private ImageView exitImage;
   @FXML private Label timerLabel;
@@ -145,6 +147,7 @@ public abstract class MapController extends ButtonController {
     if (time == 0) {
       GameState state = App.getGameState();
       state.stopTimer();
+      timeIsUp = true;
 
       // Check if the button should be enabled or if the game should end due to time out
       if (App.getGameState().checkEnableButton()) {
