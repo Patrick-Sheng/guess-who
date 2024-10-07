@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -33,12 +34,14 @@ public abstract class MapController extends ButtonController {
   @FXML private Pane paneMap;
   @FXML private Pane paneTimeIsUp;
   @FXML private Text textMap;
+  @FXML private Rectangle rectFadeBackground;
 
   @FXML
   public void initialize() {
     checkButton();
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
+    rectFadeBackground.setVisible(false);
   }
 
   @FXML
@@ -148,6 +151,7 @@ public abstract class MapController extends ButtonController {
       GameState state = App.getGameState();
       state.stopTimer();
       timeIsUp = true;
+      rectFadeBackground.setVisible(true);
 
       // Check if the button should be enabled or if the game should end due to time out
       if (App.getGameState().checkEnableButton()) {

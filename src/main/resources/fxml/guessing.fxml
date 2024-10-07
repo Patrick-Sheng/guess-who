@@ -69,7 +69,8 @@
          </font>
       </Button>
    </Pane>
-   <Pane fx:id="paneTimeIsUp" layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="768.0">
+   <Pane fx:id="paneTimeIsUp" layoutY="-4.0" prefHeight="775.0" prefWidth="768.0">
+      <Rectangle fx:id="rectFadeBackground" arcHeight="5.0" arcWidth="5.0" height="774.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="194.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
       <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="204.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/time_is_up.jpeg" />
