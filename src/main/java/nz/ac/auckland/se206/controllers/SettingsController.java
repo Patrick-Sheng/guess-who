@@ -8,6 +8,7 @@ import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class SettingsController extends ButtonController {
   @FXML private Slider volumeSlider;
@@ -51,6 +52,7 @@ public class SettingsController extends ButtonController {
     // Toggle the mute state of the music and update the application's mute state
     boolean newMute = !music.isMute();
     App.setMuted(newMute);
+    TextToSpeech.voiceState(newMute);
     music.setMute(newMute);
     // Update the mute button text and style based on the new mute state
     updateMuteButton();
