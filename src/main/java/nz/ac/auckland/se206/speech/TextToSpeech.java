@@ -35,6 +35,7 @@ public class TextToSpeech {
 
   private static final BlockingQueue<Runnable> dialogQueue = new LinkedBlockingQueue<>();
   private static final AtomicBoolean stopFlag = new AtomicBoolean(false);
+  private static boolean muted = false;
 
   public static void doStartSpeech() {
     loadMp3Files();
@@ -45,9 +46,18 @@ public class TextToSpeech {
     speak(text, Voice.OPENAI_ALLOY, Provider.OPENAI);
   }
 
+  public static void voiceState(boolean state) {
+    muted = state;
+  }
+
   ////
 
   public static void speak(String message, Voice voice, Provider provider) {
+
+    if (muted) {
+      return;
+    }
+
     // Check if message is empty
     if (message == null) {
       throw new IllegalArgumentException("Text cannot be null.");

@@ -269,6 +269,7 @@
         </ImageView>
     </Pane>
     <Pane fx:id="paneTimeIsUp" prefHeight="768.0" prefWidth="768.0">
+      <Rectangle fx:id="rectFadeBackground" arcHeight="5.0" arcWidth="5.0" height="768.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="184.0" layoutY="185.0" stroke="#5e2900" strokeType="INSIDE" width="400.0" />
         <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="194.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/time_is_up.jpeg" />

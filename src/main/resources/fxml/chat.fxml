@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import org.fxmisc.flowless.*?>
 <?import org.fxmisc.richtext.*?>
 
-<?import javafx.scene.Cursor?>
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
    <Pane fx:id="paneRoom" prefHeight="200.0" prefWidth="200.0">
       <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/backgrounds/gardener.jpeg" />
@@ -164,6 +171,7 @@
       </ImageView>
    </Pane>
    <Pane fx:id="paneTimeIsUp" prefHeight="768.0" prefWidth="768.0">
+      <Rectangle fx:id="rectFadeBackground" arcHeight="5.0" arcWidth="5.0" height="768.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="184.0" layoutY="185.0" stroke="#5e2900" strokeType="INSIDE" width="400.0" />
       <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="194.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/time_is_up.jpeg" />
@@ -173,7 +181,7 @@
             <Font name="Georgia" size="40.0" />
          </font>
       </Label>
-      <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" text="Move to Guess Room" textAlignment="CENTER" wrapText="true" styleClass="highlight-image">
+      <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" styleClass="highlight-image" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Georgia Bold" size="22.0" />
          </font>

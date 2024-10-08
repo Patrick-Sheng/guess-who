@@ -61,6 +61,12 @@ public class ChatController extends MapController {
 
   @FXML
   private void onEnter() {
+
+    // Skip the interaction if the time is up
+    if (timeIsUp == true) {
+      return;
+    }
+
     GameState state = App.getGameState();
     Suspect suspect = App.getGameState().getSelectedSuspect();
 

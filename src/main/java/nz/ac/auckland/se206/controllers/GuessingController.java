@@ -22,7 +22,9 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class GuessingController extends ButtonController {
   @FXML private Pane paneTimeIsUp;
   @FXML private Label systemDescriptionLabel;
+  @FXML private Label chosenSuspectLabel;
   @FXML private Button moveToNextScene;
+  @FXML private Rectangle rectFadeBackground;
 
   @FXML private Rectangle rectAunt;
   @FXML private Rectangle rectGardener;
@@ -42,16 +44,21 @@ public class GuessingController extends ButtonController {
   @FXML
   public void initialize() {
     paneTimeIsUp.setVisible(false); // Hide the "time is up" pane initially
+    rectFadeBackground.setVisible(false); // Hide the fade background initially
     setAiProxyConfig(); // Set up the AI proxy configuration
     foundSuspect = false;
     foundExplanation = false;
     disableButton(); // Disable the submit button initially
+    chosenSuspectLabel.setText("");
     explanationTextArea
         .textProperty()
         .addListener(
             (observable, oldValue, newValue) -> {
               // Listener to check if an explanation has been provided
-              if (!foundExplanation) {
+              if (explanationTextArea.getText().trim().isEmpty()) {
+                foundExplanation = false;
+                disableButton(); // Disable the button if no explanation is provided
+              } else {
                 foundExplanation = true;
                 if (!isNotValidResponse()) {
                   enableButton(); // Enable the button if both suspect and explanation are provided
@@ -184,7 +191,9 @@ public class GuessingController extends ButtonController {
 
   private void timeIsUp() {
     App.getGameState().stopTimer();
+    rectFadeBackground.setVisible(true); // Show the fade background
     paneTimeIsUp.setVisible(true);
+    explanationTextArea.setEditable(false);
 
     // Speak to the user, indicating that time is up
     TextToSpeech.speak("Time is up!");
@@ -239,6 +248,7 @@ public class GuessingController extends ButtonController {
   private void runChoose(Suspect suspect, String speech) {
     chosenSuspect = suspect;
     foundSuspect = true;
+    chosenSuspectLabel.setText(speech);
     if (!isNotValidResponse()) {
       enableButton(); // Enable the button if both suspect and explanation are provided
     }
