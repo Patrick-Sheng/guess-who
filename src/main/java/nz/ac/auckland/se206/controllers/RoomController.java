@@ -104,7 +104,6 @@ public class RoomController extends MapController {
     // Dims the room pane and shows the clue pane
     paneRoom.setOpacity(0.2);
     paneClue.setVisible(true);
-    handleRectangleEntered();
 
     // Updates the game state and checks if a button should be enabled
     App.getGameState().increaseObjects();

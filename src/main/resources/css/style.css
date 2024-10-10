@@ -34,8 +34,8 @@
 }
 
 .chat-pane {
-  -fx-background-color: rgba(135, 93, 60, 1);
-  background-color: rgba(135, 93, 60, 1);
+  -fx-background-color: rgba(135, 93, 60, 0.6);
+  background-color: rgba(135, 93, 60, 0.6);
   -fx-border-radius: 20px;
   border-radius: 20px;
   -fx-background-radius: 10px;

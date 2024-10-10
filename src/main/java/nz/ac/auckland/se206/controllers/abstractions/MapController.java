@@ -58,6 +58,7 @@ public abstract class MapController extends ButtonController {
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
     rectFadeBackground.setVisible(false);
+    App.getGameState().callManualTimerUpdate();
   }
 
   @FXML
