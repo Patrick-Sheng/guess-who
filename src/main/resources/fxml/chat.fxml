@@ -27,21 +27,21 @@
       <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/backgrounds/aunt.jpeg" />
       </ImageView>
-      <GridPane layoutX="148.0" layoutY="648.0" prefHeight="102.0" prefWidth="505.0">
+      <GridPane alignment="CENTER" layoutX="49.0" layoutY="580.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="669.0" styleClass="grid-pane">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="568.0" minWidth="10.0" prefWidth="531.0" />
+            <ColumnConstraints hgrow="SOMETIMES" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="82.66666666666667" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="33.0" minHeight="0.0" prefHeight="15.333333333333329" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="39.33333333333333" minHeight="10.0" prefHeight="27.33333333333333" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="118.66668701171875" minHeight="10.0" prefHeight="65.33335367838544" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="10.0" minHeight="0.0" prefHeight="10" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="20" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <VirtualizedScrollPane>
             <content>
                <InlineCssTextArea fx:id="logArea" editable="false" prefHeight="92.0" prefWidth="585.0" style="-fx-background-color: #FBE6B1" wrapText="true" />
             </content>
          </VirtualizedScrollPane>
-         <TextField fx:id="userField" focusTraversable="false" onAction="#onEnter" pickOnBounds="false" prefHeight="0.0" prefWidth="565.0" promptText="Type here, then press enter to send!" style="-fx-control-inner-background: #FBE6B1" GridPane.rowIndex="2">
+         <TextField fx:id="userField" focusTraversable="false" onAction="#onEnter" pickOnBounds="false" prefHeight="50.0" prefWidth="570.0" promptText="Type here, then press enter to send!" style="-fx-control-inner-background: #FBE6B1" GridPane.rowIndex="2">
             <font>
                <Font name="Georgia" size="12.0" />
             </font>
