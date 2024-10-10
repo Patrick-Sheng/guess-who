@@ -11,10 +11,10 @@
       <Image url="@../images/backgrounds/gardener_guessed.jpeg" />
    </ImageView>
    <ImageView fx:id="imageNiece" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/niece_guessed.jpg" />
+      <Image url="@../images/backgrounds/niece_guessed.jpeg" />
    </ImageView>
    <ImageView fx:id="outOfTime" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/outOfTime.png" />
+      <Image url="@../images/backgrounds/outOfTime.jpeg" />
    </ImageView>
    <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../images/backgrounds/aunt_guessed.jpeg" />

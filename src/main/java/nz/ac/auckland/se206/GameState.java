@@ -66,6 +66,12 @@ public class GameState {
     }
   }
 
+  public void callManualTimerUpdate() {
+    if (timer != null) {
+      timer.updateLabel();
+    }
+  }
+
   public void updateTimer(int time) {
     SceneState currentState = App.getCurrentState();
 

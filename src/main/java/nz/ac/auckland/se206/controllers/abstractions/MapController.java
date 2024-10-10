@@ -58,6 +58,7 @@ public abstract class MapController extends ButtonController {
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
     rectFadeBackground.setVisible(false);
+    App.getGameState().callManualTimerUpdate();
   }
 
   @FXML
@@ -135,7 +136,7 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void enterMain() {
-    textMap.setText("Crime scene");
+    textMap.setText("Crime Scene");
     exitImage.setVisible(false);
   }
 
