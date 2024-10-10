@@ -34,8 +34,8 @@
 }
 
 .chat-pane {
-  -fx-background-color: rgba(135, 93, 60, 1);
-  background-color: rgba(135, 93, 60, 1);
+  -fx-background-color: rgba(135, 93, 60, 0.6);
+  background-color: rgba(135, 93, 60, 0.6);
   -fx-border-radius: 20px;
   border-radius: 20px;
   -fx-background-radius: 10px;
@@ -105,4 +105,23 @@
 
 .lighter-clue:pressed {
   -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+  -fx-pref-width: 0; 
+  -fx-pref-height: 0;
+  -fx-opacity: 0;
+  opacity: 0;
+}
+
+.inline-css-text-area {
+  -fx-padding: 5;
+  padding: 5;
+  -fx-background-radius: 5;
+  -fx-background-color: #FBE6B1;
+  background-color: #FBE6B1;
+}
+
+.virtualized-scroll-pane {
+  -fx-background-radius: 5;
 }
