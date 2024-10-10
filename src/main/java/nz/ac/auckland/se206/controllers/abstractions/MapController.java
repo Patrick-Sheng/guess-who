@@ -14,13 +14,24 @@ import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
-
   public static String enumToName(Suspect suspect) {
     // Use Enum to correspond the name of each suspect
     return switch (suspect) {
-      case AUNT -> "Beatrice Worthington";
+      case AUNT -> "Aunt Beatrice";
       case NIECE -> "Sophie Baxter";
       case GARDENER -> "Elias Greenfield";
+      case DETECTIVE -> "Detective";
+      case NARRATOR -> "Narrator";
+      default -> "";
+    };
+  }
+
+  public static String enumToRoom(Suspect suspect) {
+    // Use Enum to correspond the room of each suspect
+    return switch (suspect) {
+      case AUNT -> "Study";
+      case NIECE -> "Nursery";
+      case GARDENER -> "Garden";
       default -> "";
     };
   }
@@ -66,42 +77,55 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void enterAuntie() {
-    textMap.setText("Auntie Room");
-    exitImage.setVisible(false);
+    changeMapText(Suspect.AUNT);
   }
 
   @FXML
   private void clickAuntie() {
-    launchChatWindow(Suspect.AUNT, "Going To Aunt Beatrice's Study");
+    launchChatWindow(Suspect.AUNT);
   }
 
   @FXML
   private void enterChild() {
-    textMap.setText("Child Room");
-    exitImage.setVisible(false);
+    changeMapText(Suspect.NIECE);
   }
 
   @FXML
   private void clickChild() {
-    launchChatWindow(Suspect.NIECE, "Going To Sophie Baxter's Nursery");
-  }
-
-  @FXML
-  private void clickGardener() {
-    launchChatWindow(Suspect.GARDENER, "Going To Elias Greenfield's Garden");
+    launchChatWindow(Suspect.NIECE);
   }
 
   @FXML
   private void enterGardener() {
-    textMap.setText("Gardener Room");
-    exitImage.setVisible(false);
+    changeMapText(Suspect.GARDENER);
   }
 
-  private void launchChatWindow(Suspect suspect, String text) {
+  @FXML
+  private void clickGardener() {
+    launchChatWindow(Suspect.GARDENER);
+  }
+
+  private void launchChatWindow(Suspect suspect) {
     GameState state = App.getGameState();
     state.setSelectedSuspect(suspect);
-    App.setRoot(SceneState.CHAT, text);
+
+    StringBuilder builder = new StringBuilder();
+    builder
+        .append("Going To ")
+        .append(enumToName(suspect))
+        .append("'s ")
+        .append(enumToRoom(suspect));
+
+    App.setRoot(SceneState.CHAT, builder.toString());
     adjustPanel();
+  }
+
+  private void changeMapText(Suspect suspect) {
+    StringBuilder builder = new StringBuilder();
+    builder.append(enumToName(suspect)).append("'s ").append(enumToRoom(suspect));
+    textMap.setText(builder.toString());
+
+    exitImage.setVisible(false);
   }
 
   @FXML

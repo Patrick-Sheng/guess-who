@@ -70,6 +70,9 @@ public class GameOverController extends ButtonController {
         continueAunt.setVisible(false);
 
         labelSubtitle.setText("Try to be faster next time!");
+        break;
+      default:
+        break;
     }
   }
 

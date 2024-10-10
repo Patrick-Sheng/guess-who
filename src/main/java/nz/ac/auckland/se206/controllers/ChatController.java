@@ -111,6 +111,7 @@ public class ChatController extends MapController {
               Platform.runLater(
                   () -> {
                     addMessage(message, current, current, true);
+                    enterUser(App.getGameState().getSelectedSuspect());
                     logArea.requestFollowCaret();
                   });
             } catch (ApiProxyException e) {
@@ -197,8 +198,7 @@ public class ChatController extends MapController {
     }
 
     // Append the suspect's name and the message to the log area
-    logArea.append(
-        enumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
+    logArea.append(enumToName(log.suspect()) + ": ", "-fx-font-weight: bold");
     logArea.append(log.message(), "");
   }
 
