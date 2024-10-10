@@ -127,9 +127,17 @@
   -fx-background-radius: 5;
 }
 
+.rounded-image {
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0.5, 0, 0);
+  -fx-clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
+  clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
+}
+
 .glow-text {
   -fx-font-family: "Georgia Italic";
+  font-family: "Georgia Italic";
   -fx-font-size: 17pt;
+  font-size: 17pt;
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 0, 0, 0, 0);
 }
 

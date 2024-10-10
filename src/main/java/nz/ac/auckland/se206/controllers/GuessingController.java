@@ -50,7 +50,7 @@ public class GuessingController extends ButtonController {
     foundSuspect = false;
     foundExplanation = false;
     disableButton(); // Disable the submit button initially
-    chosenSuspectLabel.setText("Please Select");
+    setSelectedSuspect("Please Select");
     explanationTextArea
         .textProperty()
         .addListener(
@@ -250,7 +250,7 @@ public class GuessingController extends ButtonController {
     chosenSuspect = suspect;
     foundSuspect = true;
     String name = MapController.enumToName(suspect);
-    chosenSuspectLabel.setText(name);
+    setSelectedSuspect(name);
     if (!isNotValidResponse()) {
       enableButton(); // Enable the button if both suspect and explanation are provided
     }
@@ -262,6 +262,10 @@ public class GuessingController extends ButtonController {
     if (chosenSuspect == null) {
       highlightCharacterPane(suspect);
     }
+  }
+
+  private void setSelectedSuspect(String suspectName) {
+    chosenSuspectLabel.setText("Selected Suspect: " + suspectName);
   }
 
   private void highlightCharacterPane(Suspect suspect) {
