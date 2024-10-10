@@ -64,12 +64,12 @@ public class RoomController extends MapController {
     if (!isLetterReveal) {
       setClue(yellowPaper);
       revealLetterGrid.setVisible(true);
+      TextToSpeech.speak(
+          "You find a blank page lying on the ground, which you suspect contains a message - of"
+              + " what, you're unsure.");
     } else {
       setClue(letterCloseUp);
     }
-    TextToSpeech.speak(
-        "You find a blank page lying on the ground, which you suspect contains a message - of what,"
-            + " you're unsure.");
   }
 
   @FXML
@@ -83,6 +83,7 @@ public class RoomController extends MapController {
   @FXML
   public void reportClose(MouseEvent event) {
     onClue(event);
+    App.playCustomSoundEffect("paper.mp3");
     setClue(reportCloseUp);
   }
 
@@ -178,6 +179,7 @@ public class RoomController extends MapController {
         // Reveals the letter if the drop is successful
         isLetterReveal = true;
         setClue(letterCloseUp);
+        App.playCustomSoundEffect("hiss.mp3");
       }
     }
 
@@ -193,5 +195,6 @@ public class RoomController extends MapController {
   @FXML
   private void clickRose() {
     roseLabel.setVisible(true);
+    App.playCustomSoundEffect("prick.mp3");
   }
 }

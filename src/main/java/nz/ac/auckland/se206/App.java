@@ -254,6 +254,17 @@ public class App extends Application {
     return isRunning;
   }
 
+  public static void playCustomSoundEffect(String name) {
+    if (!music.isMute()) {
+      AudioClip customSound =
+          new AudioClip(
+              Objects.requireNonNull(App.class.getResource("/sounds/" + name)).toExternalForm());
+
+      customSound.setVolume(hoverSound.getVolume());
+      customSound.play();
+    }
+  }
+
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
