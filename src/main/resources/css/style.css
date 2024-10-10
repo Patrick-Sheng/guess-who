@@ -107,8 +107,9 @@
   -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
 }
 
-.scroll-bar:vertical, .scroll-bar:horizontal {
-  -fx-pref-width: 0; 
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+  -fx-pref-width: 0;
   -fx-pref-height: 0;
   -fx-opacity: 0;
   opacity: 0;
@@ -124,4 +125,14 @@
 
 .virtualized-scroll-pane {
   -fx-background-radius: 5;
+}
+
+.glow-text {
+  -fx-font-family: "Georgia Italic";
+  -fx-font-size: 17pt;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 0, 0, 0, 0);
+}
+
+.glow-text:hover {
+  -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 20, 0.5, 0, 0);
 }
