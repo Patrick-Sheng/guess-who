@@ -185,9 +185,13 @@ public abstract class MapController extends ButtonController {
     int minutes = time / 60;
     int seconds = time % 60;
 
-    // Set the text color and update the timer label with the remaining time
-    timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
-    timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
+    try {
+      // Set the text color and update the timer label with the remaining time
+      timerLabel.setStyle(String.format("-fx-text-fill: rgb(%d, %d, %d);", red, green, blue));
+      timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
+    } catch (IllegalStateException e) {
+      // For if the timer is called on a non-main GUI thread, just in case
+    }
   }
 
   @FXML

@@ -13,362 +13,364 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
-    <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
-      <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
+  xmlns="http://javafx.com/javafx/22"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+  <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
+    <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
       <Image url="@../images/backgrounds/manor.jpeg" />
-      </ImageView>
-        <ImageView fitHeight="114.0" fitWidth="308.0" layoutX="343.0" layoutY="658.0" onMouseClicked="#letterReveal" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
-            <Image url="@../images/clue/paper.png" />
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <ImageView fitHeight="226.0" fitWidth="221.0" layoutX="48.0" layoutY="336.0" onMouseClicked="#doorOpen" pickOnBounds="true" styleClass="highlight-clue">
-            <Image url="@../images/clue/door.png" />
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <ImageView fitHeight="256.0" fitWidth="290.0" layoutX="20.0" layoutY="473.0" onMouseClicked="#bagOpen" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
-            <Image url="@../images/clue/bag.png" />
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <GridPane alignment="CENTER" layoutX="76.0" layoutY="44.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="18.0" minHeight="5.0" prefHeight="9.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="41.0" minHeight="6.333333333333336" prefHeight="13.333333333333336" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="62.00000000000001" minHeight="10.0" prefHeight="19.999992370605476" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="46.00000762939453" minHeight="0.0" prefHeight="42.00000762939453" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 05:00" textAlignment="CENTER" textFill="#32ff46" GridPane.rowIndex="5">
-                <font>
-                    <Font name="Georgia" size="36.0" />
-                </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="610.0" text="Click on people or objects to find what's suspicious!" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
-                <font>
-                    <Font name="Georgia" size="17.0" />
-                </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Find the Emerald's Thief:" textAlignment="CENTER" GridPane.rowSpan="3">
-                <font>
-                    <Font name="Georgia" size="30.0" />
-                </font>
-            </Label>
-        </GridPane>
-      <GridPane layoutX="20.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="100.0" styleClass="grid-pane">
-         <columnConstraints>
+    </ImageView>
+    <ImageView fitHeight="114.0" fitWidth="308.0" layoutX="343.0" layoutY="658.0" onMouseClicked="#letterReveal" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+      <Image url="@../images/clue/paper.png" />
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+    <ImageView fitHeight="226.0" fitWidth="221.0" layoutX="48.0" layoutY="336.0" onMouseClicked="#doorOpen" pickOnBounds="true" styleClass="highlight-clue">
+      <Image url="@../images/clue/door.png" />
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+    <ImageView fitHeight="256.0" fitWidth="290.0" layoutX="20.0" layoutY="473.0" onMouseClicked="#bagOpen" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+      <Image url="@../images/clue/bag.png" />
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+    <GridPane alignment="CENTER" layoutX="76.0" layoutY="44.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="18.0" minHeight="5.0" prefHeight="9.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="41.0" minHeight="6.333333333333336" prefHeight="13.333333333333336" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="62.00000000000001" minHeight="10.0" prefHeight="19.999992370605476" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="46.00000762939453" minHeight="0.0" prefHeight="42.00000762939453" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 05:00" textAlignment="CENTER" textFill="#32ff46" GridPane.rowIndex="5">
+        <font>
+          <Font name="Georgia" size="36.0" />
+        </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="610.0" text="Click on people or objects to find what's suspicious!" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="3">
+        <font>
+          <Font name="Georgia" size="17.0" />
+        </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Find the Emerald's Thief:" textAlignment="CENTER" GridPane.rowSpan="3">
+        <font>
+          <Font name="Georgia" size="30.0" />
+        </font>
+      </Label>
+    </GridPane>
+    <GridPane layoutX="20.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="100.0" styleClass="grid-pane">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="152.0000203450521" minHeight="10.0" prefHeight="129.33333333333334" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="121.33333333333334" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <children>
+        <GridPane prefHeight="142.0" prefWidth="96.0">
+          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="152.0000203450521" minHeight="10.0" prefHeight="129.33333333333334" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="121.33333333333334" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <GridPane prefHeight="142.0" prefWidth="96.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fx:id="cluesImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../images/buttons/unchecked.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="cluesLabel" alignment="TOP_CENTER" prefHeight="49.0" prefWidth="101.0" text="Clue Not Visited" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Georgia Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-            <GridPane prefHeight="115.0" prefWidth="96.0" GridPane.rowIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fx:id="suspectsImage" fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../images/buttons/unchecked.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="suspectsLabel" alignment="TOP_CENTER" prefHeight="49.0" prefWidth="96.0" text="0/3 Visited Suspects " textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Georgia Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-         </children>
-      </GridPane>
-      <GridPane layoutX="649.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="100.0" styleClass="grid-pane">
-         <columnConstraints>
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+            <ImageView fx:id="cluesImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <image>
+                <Image url="@../images/buttons/unchecked.png" />
+              </image>
+            </ImageView>
+            <Label fx:id="cluesLabel" alignment="TOP_CENTER" prefHeight="49.0" prefWidth="101.0" text="Clue Not Visited" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+              <font>
+                <Font name="Georgia Bold Italic" size="14.0" />
+              </font>
+            </Label>
+          </children>
+        </GridPane>
+        <GridPane prefHeight="115.0" prefWidth="96.0" GridPane.rowIndex="1">
+          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="173.3333536783854" minHeight="10.0" prefHeight="126.66666666666667" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="124.00000000000001" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <GridPane prefHeight="142.0" prefWidth="96.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" onMouseClicked="#onMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <image>
-                        <Image url="@../images/map/preview.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="TOP_CENTER" prefHeight="47.0" prefWidth="99.0" text="Go To The Map" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Georgia Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-            <GridPane prefHeight="142.0" prefWidth="96.0" GridPane.rowIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fx:id="guessImage" fitHeight="65.0" fitWidth="65.0" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <image>
-                        <Image url="@../images/buttons/no_guess.png" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="guessLabel" alignment="TOP_CENTER" prefHeight="42.0" prefWidth="97.0" text="Cannot Guess Yet" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Georgia Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-         </children>
-      </GridPane>
-    </Pane>
-    <Pane fx:id="paneClue" prefHeight="768.0" prefWidth="768.0">
-        <ImageView fx:id="emeraldRoom" fitHeight="484.0" fitWidth="487.0" layoutX="144.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/clue/emeraldRoom.jpg" />
-        </ImageView>
-        <GridPane layoutX="512.0" layoutY="552.0" prefHeight="61.0" prefWidth="96.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Label fx:id="fabricLabel" alignment="CENTER" prefHeight="22.0" prefWidth="128.0" text="Torn Fabric" textAlignment="CENTER" GridPane.halignment="CENTER">
-                    <font>
-                        <Font name="Georgia" size="12.0" />
-                    </font>
-                </Label>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" onMouseClicked="#clickFabric" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0" GridPane.rowIndex="1">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Rectangle>
-            </children>
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+            <ImageView fx:id="suspectsImage" fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <image>
+                <Image url="@../images/buttons/unchecked.png" />
+              </image>
+            </ImageView>
+            <Label fx:id="suspectsLabel" alignment="TOP_CENTER" prefHeight="49.0" prefWidth="96.0" text="0/3 Visited Suspects " textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+              <font>
+                <Font name="Georgia Bold Italic" size="14.0" />
+              </font>
+            </Label>
+          </children>
         </GridPane>
-        <GridPane layoutX="165.0" layoutY="552.0" prefHeight="61.0" prefWidth="72.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" onMouseClicked="#clickRose" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" GridPane.rowIndex="1">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Rectangle>
-                <Label fx:id="roseLabel" alignment="CENTER" prefHeight="15.0" prefWidth="75.0" text="Roses" textAlignment="CENTER" GridPane.halignment="CENTER">
-                    <font>
-                        <Font name="Georgia" size="12.0" />
-                    </font>
-                </Label>
-            </children>
-        </GridPane>
-        <ImageView fx:id="bagOpen" fitHeight="386.0" fitWidth="474.0" layoutX="191.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/clue/bag_inside.png" />
-        </ImageView>
-        <ImageView fx:id="report" fitHeight="69.0" fitWidth="143.0" layoutX="319.0" layoutY="272.0" onMouseClicked="#reportClose" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
-            <Image url="@../images/clue/report.png" />
-            <cursor>
+      </children>
+    </GridPane>
+    <GridPane layoutX="649.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="100.0" styleClass="grid-pane">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="173.3333536783854" minHeight="10.0" prefHeight="126.66666666666667" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="176.0" minHeight="10.0" prefHeight="124.00000000000001" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <children>
+        <GridPane prefHeight="142.0" prefWidth="96.0">
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+            <ImageView fitHeight="65.0" fitWidth="65.0" onMouseClicked="#onMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <cursor>
                 <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-            <Image url="@../images/buttons/exit.png" />
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <ImageView fx:id="letterCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="240.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/clue/letter_closeup.png" />
-        </ImageView>
-        <ImageView fx:id="reportCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="235.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/clue/report_closeup.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="yellowPaper" fitHeight="192.0" fitWidth="137.0" layoutX="321.0" layoutY="227.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseDropped" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/clue/yellow_page.png" />
-            </image>
-            <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
-            </cursor>
-        </ImageView>
-        <GridPane fx:id="revealLetterGrid" layoutX="98.0" layoutY="430.0" prefHeight="61.0" prefWidth="673.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Label prefHeight="20.0" prefWidth="364.0" text="This letter is written in invisible ink." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER">
-                    <font>
-                        <Font name="Georgia" size="17.0" />
-                    </font>
-                </Label>
-                <Label prefHeight="21.0" prefWidth="537.0" text=" Move the letter around. Can you reveal the hidden message?" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                    <font>
-                        <Font name="Georgia" size="17.0" />
-                    </font>
-                </Label>
-                <Label layoutX="102.0" layoutY="30.0" prefHeight="21.0" prefWidth="528.0" text=" I might have heard that heating it up might do some tricks." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                    <font>
-                        <Font name="Georgia" size="17.0" />
-                    </font>
-                </Label>
-            </children>
+              </cursor>
+              <image>
+                <Image url="@../images/map/preview.png" />
+              </image>
+            </ImageView>
+            <Label alignment="TOP_CENTER" prefHeight="47.0" prefWidth="99.0" text="Go To The Map" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+              <font>
+                <Font name="Georgia Bold Italic" size="14.0" />
+              </font>
+            </Label>
+          </children>
         </GridPane>
-    </Pane>
-    <Pane fx:id="paneMap" prefHeight="768.0" prefWidth="768.0">
-        <ImageView fitHeight="685.0" fitWidth="819.0" layoutX="-25.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/map/map_mansion.png" />
-        </ImageView>
-        <GridPane layoutX="221.0" layoutY="214.0" prefHeight="334.0" prefWidth="336.0" styleClass="game-grid">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="161.00000610351563" minHeight="10.0" prefHeight="158.60001220703126" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="106.60001220703126" minHeight="10.0" prefHeight="51.99998779296877" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="122.59998168945316" minHeight="10.0" prefHeight="119.39996948242191" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <Pane onMouseClicked="#clickGardener" onMouseEntered="#enterGardener" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickAuntie" onMouseEntered="#enterAuntie" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="18.0" prefWidth="112.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickChild" onMouseEntered="#enterChild" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickGuess" onMouseEntered="#enterGuess" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-            <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Pane>
-        </GridPane>
-        <Text fx:id="textMap" layoutX="135" layoutY="605" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " wrappingWidth="500" />
-        <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.74" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-            <Image url="@../images/buttons/exit.png" />
-            <cursor>
+        <GridPane prefHeight="142.0" prefWidth="96.0" GridPane.rowIndex="1">
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="85.6" minHeight="10.0" prefHeight="72.33334350585938" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="114.3999969482422" minHeight="10.0" prefHeight="40.66667683919272" valignment="CENTER" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+            <ImageView fx:id="guessImage" fitHeight="65.0" fitWidth="65.0" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <cursor>
                 <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-    </Pane>
-    <Pane fx:id="paneTimeIsUp" prefHeight="768.0" prefWidth="768.0">
-      <Rectangle fx:id="rectFadeBackground" arcHeight="5.0" arcWidth="5.0" height="768.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="184.0" layoutY="185.0" stroke="#5e2900" strokeType="INSIDE" width="400.0" />
-        <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="194.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../images/time_is_up.jpeg" />
-        </ImageView>
-        <Label layoutX="281.0" layoutY="248.0" text="Time is Up!" textFill="WHITE">
-            <font>
-                <Font name="Georgia" size="40.0" />
-            </font>
+              </cursor>
+              <image>
+                <Image url="@../images/buttons/no_guess.png" />
+              </image>
+            </ImageView>
+            <Label fx:id="guessLabel" alignment="TOP_CENTER" prefHeight="42.0" prefWidth="97.0" text="Cannot Guess Yet" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+              <font>
+                <Font name="Georgia Bold Italic" size="14.0" />
+              </font>
+            </Label>
+          </children>
+        </GridPane>
+      </children>
+    </GridPane>
+  </Pane>
+  <Pane fx:id="paneClue" prefHeight="768.0" prefWidth="768.0">
+    <ImageView fx:id="emeraldRoom" fitHeight="484.0" fitWidth="487.0" layoutX="144.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/clue/emeraldRoom.jpg" />
+    </ImageView>
+    <GridPane layoutX="512.0" layoutY="552.0" prefHeight="61.0" prefWidth="96.0">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <children>
+        <Label fx:id="fabricLabel" alignment="CENTER" prefHeight="22.0" prefWidth="128.0" text="Torn Fabric" textAlignment="CENTER" GridPane.halignment="CENTER">
+          <font>
+            <Font name="Georgia" size="12.0" />
+          </font>
         </Label>
-        <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" styleClass="highlight-image" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
-            <font>
-                <Font name="Georgia Bold" size="22.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
-    </Pane>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" onMouseClicked="#clickFabric" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="96.0" GridPane.rowIndex="1">
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+        </Rectangle>
+      </children>
+    </GridPane>
+    <GridPane layoutX="165.0" layoutY="552.0" prefHeight="61.0" prefWidth="72.0">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" onMouseClicked="#clickRose" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="84.0" GridPane.rowIndex="1">
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+        </Rectangle>
+        <Label fx:id="roseLabel" alignment="CENTER" prefHeight="15.0" prefWidth="75.0" text="Roses" textAlignment="CENTER" GridPane.halignment="CENTER">
+          <font>
+            <Font name="Georgia" size="12.0" />
+          </font>
+        </Label>
+      </children>
+    </GridPane>
+    <ImageView fx:id="bagOpen" fitHeight="386.0" fitWidth="474.0" layoutX="191.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/clue/bag_inside.png" />
+    </ImageView>
+    <ImageView fx:id="report" fitHeight="69.0" fitWidth="143.0" layoutX="319.0" layoutY="272.0" onMouseClicked="#reportClose" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+      <Image url="@../images/clue/report.png" />
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+    <ImageView fitHeight="38.0" fitWidth="126.0" layoutX="323.0" layoutY="689.0" onMouseClicked="#onExitClue" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+      <Image url="@../images/buttons/exit.png" />
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+    <ImageView fx:id="letterCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="240.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/clue/letter_closeup.png" />
+    </ImageView>
+    <ImageView fx:id="reportCloseUp" fitHeight="414.0" fitWidth="336.0" layoutX="235.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/clue/report_closeup.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="yellowPaper" fitHeight="192.0" fitWidth="137.0" layoutX="321.0" layoutY="227.0" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" onMouseReleased="#onMouseDropped" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/clue/yellow_page.png" />
+      </image>
+      <cursor>
+        <Cursor fx:constant="OPEN_HAND" />
+      </cursor>
+    </ImageView>
+    <GridPane fx:id="revealLetterGrid" layoutX="98.0" layoutY="430.0" prefHeight="61.0" prefWidth="673.0">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <children>
+        <Label prefHeight="20.0" prefWidth="364.0" text="This letter is written in invisible ink." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER">
+          <font>
+            <Font name="Georgia" size="17.0" />
+          </font>
+        </Label>
+        <Label prefHeight="21.0" prefWidth="537.0" text=" Move the letter around. Can you reveal the hidden message?" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+          <font>
+            <Font name="Georgia" size="17.0" />
+          </font>
+        </Label>
+        <Label layoutX="102.0" layoutY="30.0" prefHeight="21.0" prefWidth="528.0" text=" I might have heard that heating it up might do some tricks." textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+          <font>
+            <Font name="Georgia" size="17.0" />
+          </font>
+        </Label>
+      </children>
+    </GridPane>
+  </Pane>
+  <Pane fx:id="paneMap" prefHeight="768.0" prefWidth="768.0">
+    <ImageView fitHeight="685.0" fitWidth="819.0" layoutX="-25.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/map/map_mansion.png" />
+    </ImageView>
+    <GridPane layoutX="221.0" layoutY="214.0" prefHeight="334.0" prefWidth="336.0" styleClass="game-grid">
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="161.00000610351563" minHeight="10.0" prefHeight="158.60001220703126" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="106.60001220703126" minHeight="10.0" prefHeight="51.99998779296877" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="122.59998168945316" minHeight="10.0" prefHeight="119.39996948242191" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <Pane onMouseClicked="#clickGardener" onMouseEntered="#enterGardener" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickAuntie" onMouseEntered="#enterAuntie" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="18.0" prefWidth="112.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickChild" onMouseEntered="#enterChild" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickGuess" onMouseEntered="#enterGuess" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+      <Pane onMouseClicked="#clickMain" onMouseEntered="#enterMain" onMouseExited="#exitMap" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <cursor>
+          <Cursor fx:constant="HAND" />
+        </cursor>
+      </Pane>
+    </GridPane>
+    <Text fx:id="textMap" layoutX="135" layoutY="605" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="map-text" text=" " wrappingWidth="500" />
+    <ImageView fx:id="exitImage" fitHeight="38.0" fitWidth="126.0" layoutX="321.0" layoutY="578.0" onMouseClicked="#onExitMap" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" opacity="0.74" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+      <Image url="@../images/buttons/exit.png" />
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+  </Pane>
+  <Pane fx:id="paneTimeIsUp" prefHeight="768.0" prefWidth="768.0">
+    <Rectangle fx:id="rectFadeBackground" arcHeight="5.0" arcWidth="5.0" height="768.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="768.0" />
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d7875f" height="400.0" layoutX="184.0" layoutY="185.0" stroke="#5e2900" strokeType="INSIDE" width="400.0" />
+    <ImageView fitHeight="380.0" fitWidth="380.0" layoutX="194.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../images/time_is_up.jpeg" />
+    </ImageView>
+    <Label layoutX="281.0" layoutY="248.0" text="Time is Up!" textFill="WHITE">
+      <font>
+        <Font name="Georgia" size="40.0" />
+      </font>
+    </Label>
+    <Button layoutX="321.0" layoutY="454.0" mnemonicParsing="false" onMouseClicked="#onMakeGuess" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" prefHeight="111.0" prefWidth="126.0" style="-fx-background-color: green; -fx-text-fill: white;" styleClass="highlight-image" text="Move to Guess Room" textAlignment="CENTER" wrapText="true">
+      <font>
+        <Font name="Georgia Bold" size="22.0" />
+      </font>
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </Button>
+  </Pane>
 </Pane>

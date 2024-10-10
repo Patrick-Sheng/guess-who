@@ -3,8 +3,13 @@ package nz.ac.auckland.se206;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.concurrent.Task;
 import javafx.scene.Parent;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
+import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
+import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
+import nz.ac.auckland.apiproxy.chat.openai.Choice;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GameOverController;
 import nz.ac.auckland.se206.controllers.GuessingController;
@@ -12,6 +17,7 @@ import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.models.InteractionLog;
+import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.timer.CountdownTimer;
 
 public class GameState {
@@ -22,6 +28,8 @@ public class GameState {
 
   private RoomController roomController;
   private ChatController chatController;
+
+  private ChatCompletionRequest chatCompletionRequest;
 
   private GuessingController guessingController;
   private GameOverController gameOverController;
@@ -38,6 +46,8 @@ public class GameState {
   private int red = 50;
   private int green = 255;
   private int blue = 70;
+
+  private String message = "";
 
   public int getSuspectCount() {
     return peopleInterfaced;
@@ -125,6 +135,109 @@ public class GameState {
       } else if (green + 10 > 31) {
         green -= 10;
       }
+    }
+  }
+
+  public void setExplaination(String text) {
+    message = text.trim();
+    setAiProxyConfig();
+  }
+
+  public void setAiProxyConfig() {
+
+    Task<Void> setGptModelTask =
+        new Task<>() {
+          @Override
+          protected Void call() {
+            try {
+              // Configure the chatCompletionRequest with specific parameters
+              chatCompletionRequest =
+                  new ChatCompletionRequest(App.getConfig())
+                      .setTemperature(0.1)
+                      .setTopP(0.2)
+                      .setMaxTokens(1000);
+              runGpt(new ChatMessage("system", getSystemPrompt()));
+              sendExplaination();
+              // Run the GPT model with a system prompt to initialize the chat
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+            }
+            return null;
+          }
+        };
+
+    // Start the task in a new thread to avoid blocking the main thread
+    new Thread(setGptModelTask).start();
+  }
+
+  /**
+   * Generates the system prompt based on the profession.
+   *
+   * @return the system prompt string
+   */
+  private String getSystemPrompt() {
+    return PromptEngineering.getPrompt("feedback_instruction.txt", null);
+  }
+
+  public void sendExplaination() {
+    // Create a background task to get the explanation from the GPT model
+    Task<String> getExplanationTask =
+        new Task<>() {
+          @Override
+          protected String call() {
+            if (!message.isEmpty()) {
+              try {
+                // Run the GPT model with the user's message and return the response
+                ChatMessage response = runGpt(new ChatMessage("user", message));
+                assert response != null;
+                return response.getContent();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+            }
+            return null;
+          }
+        };
+
+    // Update the game state with the explanation when the task succeeds
+    getExplanationTask.setOnSucceeded(
+        event -> {
+          String explanation = getExplanationTask.getValue();
+          if (explanation != null) {
+            App.getGameState().updateFeedbackPrompt(explanation);
+          }
+        });
+    // Handle task failure by printing the exception
+    getExplanationTask.setOnFailed(
+        event -> {
+          Throwable e = getExplanationTask.getException();
+          e.printStackTrace();
+          sendExplaination();
+        });
+
+    // Start the task in a new thread to avoid blocking the main thread
+    new Thread(getExplanationTask).start();
+  }
+
+  /**
+   * Runs the GPT model with a given chat message.
+   *
+   * @param msg the chat message to process
+   * @return the response chat message
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   */
+  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    chatCompletionRequest.addMessage(msg);
+    try {
+      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
+      chatCompletionRequest.addMessage(result.getChatMessage());
+      // Runs the GPT model with a given chat message.
+      return result.getChatMessage();
+    } catch (ApiProxyException e) {
+      // Catch any error if there is any
+      e.printStackTrace();
+      return null;
     }
   }
 
