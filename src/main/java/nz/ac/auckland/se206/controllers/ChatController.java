@@ -81,7 +81,7 @@ public class ChatController extends MapController {
     addMessage(text, state.getSelectedSuspect(), Suspect.DETECTIVE, true);
     userField.clear(); // Clear the input field after the text is send
 
-    checkButton(); // Check if any buttons need to be enabled or disabled
+    isGuessReadyAndUpdate(); // Check if any buttons need to be enabled or disabled
 
     addLog(
         new InteractionLog(suspect, "is thinking..."), true); // Log that the suspect is processing
@@ -252,12 +252,12 @@ public class ChatController extends MapController {
 
     // Re/set components to current state
     userField.clear();
-    checkButton();
+    isGuessReadyAndUpdate();
   }
 
   private void increasePersonAmount() {
     App.getGameState().increasePeople();
-    checkButton();
+    isGuessReadyAndUpdate();
   }
 
   private ChatCompletionRequest getChatCompletionRequest(Suspect suspect) {

@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206.controllers.abstractions;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -38,9 +38,14 @@ public abstract class MapController extends ButtonController {
 
   protected boolean timeIsUp = false;
 
-  @FXML private Button guessButton;
+  @FXML private ImageView cluesImage;
   @FXML private ImageView exitImage;
+  @FXML private ImageView guessImage;
+  @FXML private ImageView suspectsImage;
+  @FXML private Label cluesLabel;
+  @FXML private Label guessLabel;
   @FXML private Label timerLabel;
+  @FXML private Label suspectsLabel;
   @FXML private Pane paneRoom;
   @FXML private Pane paneMap;
   @FXML private Pane paneTimeIsUp;
@@ -49,7 +54,7 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   public void initialize() {
-    checkButton();
+    isGuessReadyAndUpdate();
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
     rectFadeBackground.setVisible(false);
@@ -142,13 +147,13 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void enterGuess() {
-    textMap.setText("Guess Room" + (App.getGameState().checkEnableButton() ? "" : " (Locked)"));
+    textMap.setText("Guess Room" + (isGuessReadyAndUpdate() ? "" : " (Locked)"));
     exitImage.setVisible(false);
   }
 
   @FXML
   private void clickGuess() {
-    if (App.getGameState().checkEnableButton()) {
+    if (isGuessReadyAndUpdate()) {
       onMakeGuess();
       adjustPanel();
     }
@@ -159,17 +164,6 @@ public abstract class MapController extends ButtonController {
     paneRoom.setOpacity(1);
   }
 
-  public void disableButton() {
-    guessButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
-    guessButton.setDisable(true);
-    guessButton.setOpacity(1f);
-  }
-
-  public void enableButton() {
-    guessButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-    guessButton.setDisable(false);
-  }
-
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
       GameState state = App.getGameState();
@@ -178,7 +172,7 @@ public abstract class MapController extends ButtonController {
       rectFadeBackground.setVisible(true);
 
       // Check if the button should be enabled or if the game should end due to time out
-      if (App.getGameState().checkEnableButton()) {
+      if (isGuessReadyAndUpdate()) {
         paneTimeIsUp.setVisible(true); // Show the "time is up" pane
       } else {
         state.setSuspect(Suspect.OUT_OF_TIME);
@@ -204,11 +198,36 @@ public abstract class MapController extends ButtonController {
     App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
   }
 
-  public void checkButton() {
-    if (App.getGameState().checkEnableButton()) {
-      enableButton();
-    } else {
-      disableButton();
-    }
+  public boolean isGuessReadyAndUpdate() {
+    // Check current progress of game
+    int objectCount = App.getGameState().getObjectCount();
+    int suspectCount = App.getGameState().getSuspectCount();
+
+    boolean hasMetSuspect = suspectCount >= 3;
+    boolean hasMetObjects = objectCount > 0;
+    boolean hasMetGuess = hasMetSuspect && hasMetObjects;
+
+    // Set notifications of current progress
+    Image metCriteriaImage =
+        new Image(App.class.getResourceAsStream("/images/buttons/checked.png"));
+    Image notMetCriteriaImage =
+        new Image(App.class.getResourceAsStream("/images/buttons/unchecked.png"));
+
+    suspectsLabel.setText(suspectCount + "/3 Visited Suspects");
+    suspectsImage.setImage(hasMetSuspect ? metCriteriaImage : notMetCriteriaImage);
+
+    cluesLabel.setText(
+        (objectCount > 1 ? "Clues" : "Clue") + (!hasMetObjects ? " not" : "") + " visited");
+    cluesImage.setImage(hasMetObjects ? metCriteriaImage : notMetCriteriaImage);
+
+    // Set state of guess button
+    metCriteriaImage = new Image(App.class.getResourceAsStream("/images/buttons/guess.png"));
+    notMetCriteriaImage = new Image(App.class.getResourceAsStream("/images/buttons/no_guess.png"));
+
+    guessImage.setImage(hasMetGuess ? metCriteriaImage : notMetCriteriaImage);
+    guessImage.setDisable(hasMetGuess ? false : true);
+    guessLabel.setText(hasMetGuess ? "Guess Suspect" : "Cannot Guess Yet");
+
+    return hasMetGuess;
   }
 }

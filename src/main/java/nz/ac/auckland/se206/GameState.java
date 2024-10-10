@@ -39,16 +39,20 @@ public class GameState {
   private int green = 255;
   private int blue = 70;
 
+  public int getSuspectCount() {
+    return peopleInterfaced;
+  }
+
+  public int getObjectCount() {
+    return objectsInterfaced;
+  }
+
   public void increaseObjects() {
     objectsInterfaced += 1;
   }
 
   public void increasePeople() {
     peopleInterfaced += 1;
-  }
-
-  public boolean checkEnableButton() {
-    return objectsInterfaced >= 1 && peopleInterfaced >= 3;
   }
 
   public void startTimer(int time) {
