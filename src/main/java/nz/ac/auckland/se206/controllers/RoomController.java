@@ -8,7 +8,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
-import nz.ac.auckland.se206.enums.Clues;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
@@ -51,25 +50,45 @@ public class RoomController extends MapController {
 
   @FXML
   public void bagOpen(MouseEvent event) {
-    onClue(event, Clues.BAG);
+    onClue(event);
+    setClue(bagOpen);
+    report.setVisible(true);
+    TextToSpeech.speak(
+        "Opening the leather bag up, you see documents neatly tucked in the case, a book, and a"
+            + " pair of gloves.");
   }
 
   @FXML
   public void letterReveal(MouseEvent event) {
-    onClue(event, Clues.LETTER);
+    onClue(event);
+    if (!isLetterReveal) {
+      setClue(yellowPaper);
+      revealLetterGrid.setVisible(true);
+    } else {
+      setClue(letterCloseUp);
+    }
+    TextToSpeech.speak(
+        "You find a blank page lying on the ground, which you suspect contains a message - of what,"
+            + " you're unsure.");
   }
 
   @FXML
   public void doorOpen(MouseEvent event) {
-    onClue(event, Clues.DOOR);
+    onClue(event);
+    setClue(emeraldRoom);
+    TextToSpeech.speak(
+        "The oak doors open wide to reveal the room containing the once-treasured necklace.");
   }
 
   @FXML
   public void reportClose(MouseEvent event) {
-    onClue(event, Clues.REPORT);
+    onClue(event);
+    setClue(reportCloseUp);
   }
 
-  private void onClue(MouseEvent event, Clues clue) {
+  private void onClue(MouseEvent event) {
+    TextToSpeech.stopSpeak();
+
     if (!isClueClick) {
       isClueClick = true;
     }
@@ -78,28 +97,6 @@ public class RoomController extends MapController {
     ImageView clickedImageView = (ImageView) event.getSource();
     clickedImageView.getStyleClass().remove("highlight-clue");
     clickedImageView.getStyleClass().add("lighter-clue");
-
-    // Performs actions based on which clue was clicked
-    switch (clue) {
-      case BAG:
-        setClue(bagOpen);
-        report.setVisible(true);
-        break;
-      case LETTER:
-        if (!isLetterReveal) {
-          setClue(yellowPaper);
-          revealLetterGrid.setVisible(true);
-        } else {
-          setClue(letterCloseUp);
-        }
-        break;
-      case DOOR:
-        setClue(emeraldRoom);
-        break;
-      case REPORT:
-        setClue(reportCloseUp);
-        break;
-    }
 
     // Dims the room pane and shows the clue pane
     paneRoom.setOpacity(0.2);
