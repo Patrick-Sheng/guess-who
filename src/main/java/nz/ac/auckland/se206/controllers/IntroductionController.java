@@ -15,6 +15,7 @@ public class IntroductionController {
   @FXML ImageView imageDetectiveManor;
   @FXML Label labelDescription;
   @FXML Label labelClickInstruction;
+  @FXML Label labelSkipIntro;
 
   @FXML
   public void initialize() {
@@ -23,8 +24,11 @@ public class IntroductionController {
     imageDetectiveHouse.setVisible(false);
     imageDetectiveManor.setVisible(false);
 
+    labelSkipIntro.setVisible(true);
     imageFamilyPhoto.setVisible(true);
-    labelDescription.setText("The family photo of the wealthy family who owns the emerald.");
+    labelDescription.setText(
+        "The Worthington family has gathered for a reunion. Celebrating their legacy of an"
+            + " exquisite emerald that has been passed down for generations.");
     labelClickInstruction.setText("Click anywhere to go next");
   }
 
@@ -33,20 +37,21 @@ public class IntroductionController {
     if (imageFamilyPhoto.isVisible()) {
       imageFamilyPhoto.setVisible(false);
       imageEmeraldRoomBefore.setVisible(true);
-      labelDescription.setText("The emerald room before the theft.");
+      labelDescription.setText("As night falls, with the family asleep, the emerald is stolen.");
     } else if (imageEmeraldRoomBefore.isVisible()) {
       imageEmeraldRoomBefore.setVisible(false);
       imageEmeraldRoomAfter.setVisible(true);
-      labelDescription.setText("The emerald room after the theft.");
+      labelDescription.setText("The next morning, the family discovers the emerald is missing.");
     } else if (imageEmeraldRoomAfter.isVisible()) {
       imageEmeraldRoomAfter.setVisible(false);
       imageDetectiveHouse.setVisible(true);
-      labelDescription.setText("The detective's house.");
+      labelDescription.setText("You, a private detective received a call about the theft.");
     } else if (imageDetectiveHouse.isVisible()) {
       imageDetectiveHouse.setVisible(false);
       imageDetectiveManor.setVisible(true);
-      labelDescription.setText("The manor where the emerald was stolen.");
+      labelDescription.setText("Now, standing outside Worthington Manor, you must find the thief.");
       labelClickInstruction.setText("Click anywhere to start the game!");
+      labelSkipIntro.setVisible(false);
     } else if (imageDetectiveManor.isVisible()) {
       startGame();
     }
