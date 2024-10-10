@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
-  xmlns="http://javafx.com/javafx/11.0.14-internal"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
   <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
     <Image url="@../images/backgrounds/gardener_guessed.jpeg" />
   </ImageView>
@@ -32,22 +34,21 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-      <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="36.0" minHeight="0.0" prefHeight="14.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="76.66668701171875" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="45.33331298828125" vgrow="SOMETIMES" />
     </rowConstraints>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="62.0" prefHeight="35.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Game Over!" textAlignment="CENTER" GridPane.rowIndex="0">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="62.0" prefHeight="46.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Game Over!" textAlignment="CENTER" GridPane.rowIndex="0">
       <font>
         <Font name="Georgia" size="48.0" />
       </font>
     </Label>
-    <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="40.0" prefWidth="622.0" text="Here are some feedback based on your explanation" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
+    <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="40.0" prefWidth="622.0" text="Here are some feedback based on your explanation" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
       <font>
         <Font name="Georgia" size="17.0" />
       </font>
     </Label>
   </GridPane>
-  <ImageView fx:id="continueOther" fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" onMouseClicked="#backToMenu" styleClass="highlight-image">
+  <ImageView fx:id="continueOther" fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="708.0" onMouseClicked="#backToMenu" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
     <image>
       <Image url="@../images/buttons/continue.png" />
     </image>
@@ -55,7 +56,7 @@
       <Cursor fx:constant="HAND" />
     </cursor>
   </ImageView>
-  <ImageView fx:id="continueAunt" fitHeight="68.0" fitWidth="219.0" layoutX="280.0" layoutY="706.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" onMouseClicked="#backToMenu" styleClass="highlight-image">
+  <ImageView fx:id="continueAunt" fitHeight="48.0" fitWidth="225.0" layoutX="276.0" layoutY="705.0" onMouseClicked="#backToMenu" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
     <image>
       <Image url="@../images/buttons/aunt_continue.png" />
     </image>
