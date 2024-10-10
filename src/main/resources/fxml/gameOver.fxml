@@ -14,9 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
-  xmlns="http://javafx.com/javafx/22"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
   <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
     <Image url="@../images/backgrounds/gardener_guessed.jpeg" />
   </ImageView>
@@ -29,14 +27,14 @@
   <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
     <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
   </ImageView>
-  <GridPane fx:id="feedbackGrid" alignment="CENTER" layoutX="178.0" layoutY="313.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="451.0" styleClass="chat-pane">
+  <GridPane fx:id="feedbackGrid" alignment="CENTER" layoutX="92.0" layoutY="262.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="615.0" styleClass="chat-pane">
     <columnConstraints>
       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" prefWidth="421.0" />
     </columnConstraints>
     <rowConstraints>
-      <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="76.00001017252605" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="312.00002034505206" minHeight="10.0" prefHeight="203.66665649414062" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="61.666707356770814" minHeight="4.6666259765625" prefHeight="61.000020345052064" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="59.333323160807296" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="312.00002034505206" minHeight="10.0" prefHeight="273.3333435058594" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="77.33331298828125" minHeight="4.6666259765625" prefHeight="53.333333333333314" valignment="CENTER" vgrow="ALWAYS" />
     </rowConstraints>
     <children>
       <GridPane GridPane.rowIndex="1">
@@ -44,12 +42,14 @@
           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="22.000001907348633" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints maxHeight="54.99998346964519" minHeight="10.0" prefHeight="54.99998346964519" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints maxHeight="83.99996757507324" minHeight="10.0" prefHeight="16.000038146972656" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints maxHeight="77.3332748413086" minHeight="10.0" prefHeight="48.00004069010417" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints maxHeight="69.99996185302734" minHeight="10.0" prefHeight="22.33331298828125" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints maxHeight="47.00002034505209" minHeight="10.0" prefHeight="47.00002034505209" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="19.666656494140625" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="54.99998346964519" minHeight="10.0" prefHeight="41.66666666666666" valignment="CENTER" vgrow="ALWAYS" />
+               <RowConstraints maxHeight="54.99998346964519" minHeight="10.0" prefHeight="45.3333740234375" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="83.99996757507324" minHeight="10.0" prefHeight="21.333292643229157" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="77.3332748413086" minHeight="10.0" prefHeight="43.00002034505208" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="69.99996185302734" minHeight="7.6666259765625" prefHeight="19.666646321614593" valignment="CENTER" vgrow="ALWAYS" />
+               <RowConstraints maxHeight="47.00002034505209" minHeight="10.0" prefHeight="41.99997965494791" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="47.00002034505209" minHeight="10.0" prefHeight="40.666646321614564" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
         <children>
           <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Motives Found">
@@ -57,44 +57,198 @@
               <Font name="Georgia Bold" size="12.0" />
             </font>
           </Text>
-          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions Found" GridPane.rowIndex="2">
-            <font>
-              <Font name="Georgia Bold" size="12.0" />
-            </font>
-          </Text>
-          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Clues Found" GridPane.rowIndex="4">
-            <font>
-              <Font name="Georgia Bold" size="12.0" />
-            </font>
-          </Text>
-          <GridPane GridPane.rowIndex="3" styleClass="grid-pane">
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="1">
             <columnConstraints>
               <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.66668701171875" minWidth="10.0" prefWidth="32.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="115.33331298828125" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.66668701171875" minWidth="10.0" prefWidth="277.66668701171875" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="116.00002034505206" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.99999999999994" minWidth="10.0" prefWidth="371.3333129882812" />
             </columnConstraints>
             <rowConstraints>
               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <ImageView fx:id="point1Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <image>
                   <Image url="@../images/buttons/unchecked.png" />
                 </image>
               </ImageView>
-              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Framing the Gardener" textAlignment="CENTER" wrappingWidth="110.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Past Lover" textAlignment="CENTER" wrappingWidth="148.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <font>
-                  <Font name="Georgia" size="18.0" />
+                  <Font name="Georgia" size="14.0" />
                 </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
               </Text>
-              <VBox styleClass="virtualized-scroll-pane" GridPane.columnIndex="2">
-                <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="black-text-area">
-                  <Text fx:id="point3" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="27.0" prefWidth="337.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point1Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                     <font>
-                      <Font name="Georgia" size="18.0" />
+                      <Font name="Georgia" size="14.0" />
                     </font>
                   </Text>
                 </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="2">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.66668701171875" minWidth="10.0" prefWidth="32.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="116.00002034505206" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.99999999999994" minWidth="10.0" prefWidth="371.3333129882812" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point2Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Financial Problem" textAlignment="CENTER" wrappingWidth="148.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="27.0" prefWidth="337.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point2Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="14.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions Found" GridPane.rowIndex="3">
+            <font>
+              <Font name="Georgia Bold" size="12.0" />
+            </font>
+          </Text>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="4">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.66668701171875" minWidth="10.0" prefWidth="32.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="116.00002034505206" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.99999999999994" minWidth="10.0" prefWidth="371.3333129882812" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point3Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Framing the Gardener" textAlignment="CENTER" wrappingWidth="148.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="27.0" prefWidth="337.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point3Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="14.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Clues Found" GridPane.rowIndex="5">
+            <font>
+              <Font name="Georgia Bold" size="12.0" />
+            </font>
+          </Text>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="6">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.66668701171875" minWidth="10.0" prefWidth="32.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="116.00002034505206" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.99999999999994" minWidth="10.0" prefWidth="371.3333129882812" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point4Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Love Letter" textAlignment="CENTER" wrappingWidth="148.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="27.0" prefWidth="337.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point4Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="14.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="7">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.66668701171875" minWidth="10.0" prefWidth="32.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="116.00002034505206" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.99999999999994" minWidth="10.0" prefWidth="371.3333129882812" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point5Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfume Scent" textAlignment="CENTER" wrappingWidth="148.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="27.0" prefWidth="337.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point5Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="14.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
               </VBox>
             </children>
           </GridPane>
@@ -119,28 +273,28 @@
           </Text>
           <VBox styleClass="virtualized-scroll-pane" GridPane.rowIndex="1">
             <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
-              <Text fx:id="reasoning" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <Text fx:id="reasoning" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="This may take a while..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <font>
-                  <Font name="Georgia" size="18.0" />
+                  <Font name="Georgia" size="14.0" />
                 </font>
               </Text>
             </TextFlow>
           </VBox>
         </children>
         <GridPane.margin>
-          <Insets left="20.0" right="20.0" top="10.0" bottom="10.0" />
+          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
         </GridPane.margin>
       </GridPane>
-      <GridPane prefHeight="64.0" prefWidth="415.0" GridPane.rowIndex="2">
+      <GridPane prefHeight="62.0" prefWidth="411.0" GridPane.rowIndex="2">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="48.666676839192704" minHeight="10.0" prefHeight="25.3333740234375" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints maxHeight="42.66668701171875" minHeight="10.0" prefHeight="27.33329264322917" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="48.666676839192704" minHeight="10.0" prefHeight="26.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="42.66668701171875" minHeight="8.666646321614579" prefHeight="15.333333333333329" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rating" textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rating" textAlignment="CENTER" wrappingWidth="422.6496772766113" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <font>
               <Font name="Georgia" size="18.0" />
             </font>
@@ -148,18 +302,18 @@
               <Insets bottom="10.0" />
             </GridPane.margin>
           </Text>
-          <VBox styleClass="virtualized-scroll-pane" GridPane.rowIndex="1">
+          <VBox prefHeight="26.0" prefWidth="410.0" styleClass="virtualized-scroll-pane" GridPane.rowIndex="1">
             <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
-              <Text fx:id="rating" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <Text fx:id="rating" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="129.24639892578125" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <font>
-                  <Font name="Georgia" size="18.0" />
+                  <Font name="Georgia" size="14.0" />
                 </font>
               </Text>
             </TextFlow>
           </VBox>
         </children>
         <GridPane.margin>
-          <Insets left="20.0" right="20.0" top="10.0" bottom="10.0" />
+          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
         </GridPane.margin>
       </GridPane>
     </children>

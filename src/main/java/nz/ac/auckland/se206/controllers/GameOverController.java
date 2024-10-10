@@ -1,9 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -23,14 +22,22 @@ public class GameOverController extends ButtonController {
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
   @FXML private ImageView outOfTime;
+  @FXML private ImageView point1Image;
+  @FXML private ImageView point2Image;
+  @FXML private ImageView point3Image;
+  @FXML private ImageView point4Image;
+  @FXML private ImageView point5Image;
   @FXML private GridPane feedbackGrid;
   @FXML private Label labelSubtitle;
   @FXML private Text reasoning;
   @FXML private Text rating;
+  @FXML private Text point1Text;
+  @FXML private Text point2Text;
+  @FXML private Text point3Text;
+  @FXML private Text point4Text;
+  @FXML private Text point5Text;
 
   private int attempts = 0;
-  private Map<FeedbackType, Boolean> pointSuccess = new HashMap<>();
-  private Map<FeedbackType, String> pointFeedback = new HashMap<>();
 
   @FXML
   public void initialize() {
@@ -105,6 +112,11 @@ public class GameOverController extends ButtonController {
 
       JSONArray points = jsonObject.getJSONArray("points");
 
+      Image metCriteriaImage =
+          new Image(App.class.getResource("/images/buttons/checked.png").toExternalForm());
+      Image notMetCriteriaImage =
+          new Image(App.class.getResource("/images/buttons/unchecked.png").toExternalForm());
+
       for (int i = 0; i < points.length(); i++) {
         JSONObject point = points.getJSONObject(i);
 
@@ -116,14 +128,57 @@ public class GameOverController extends ButtonController {
 
         String action = point.getString("action");
 
-        pointSuccess.putIfAbsent(type, status);
-        pointFeedback.putIfAbsent(type, action);
+        Text text = getTextFromEnum(type);
+
+        if (text != null) {
+          text.setText(action);
+        }
+
+        ImageView image = getCheckFromEnum(type);
+
+        if (image != null) {
+          image.setImage(status ? metCriteriaImage : notMetCriteriaImage);
+        }
       }
     } catch (Exception e) {
       System.err.println("Error parsing JSON: " + e.getMessage());
       System.err.println("Full JSON: " + feedback);
       attempts += 1;
       App.getGameState().setAiProxyConfig();
+    }
+  }
+
+  public Text getTextFromEnum(FeedbackType type) {
+    switch (type) {
+      case PastLover:
+        return point1Text;
+      case FinanceProblem:
+        return point2Text;
+      case FramedGardener:
+        return point3Text;
+      case LoveLetter:
+        return point4Text;
+      case PerfumeScent:
+        return point5Text;
+      default:
+        return null;
+    }
+  }
+
+  public ImageView getCheckFromEnum(FeedbackType type) {
+    switch (type) {
+      case PastLover:
+        return point1Image;
+      case FinanceProblem:
+        return point2Image;
+      case FramedGardener:
+        return point3Image;
+      case LoveLetter:
+        return point4Image;
+      case PerfumeScent:
+        return point5Image;
+      default:
+        return null;
     }
   }
 
