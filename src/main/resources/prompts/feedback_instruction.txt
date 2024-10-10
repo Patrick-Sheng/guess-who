@@ -1,7 +1,6 @@
 The person that you are currently communicating to is a detective in a game.
-Your next response will be giving feedback on the detective's explanation on the case.
+Your next response, which you will output in the given JSON format, will be giving feedback on the detective's explanation on the case.
 Your job is to explain if they're correct or incorrect in their reasoning.
-You must, as a first paragraph, state if the detective's reasoning is correct or incorrect in one sentence.
 
 The detective is currently investigating a theft case of a stolen emerald in a mansion.
 
@@ -10,25 +9,38 @@ Here are the settings:
 - The celebration centered around their prized heirloom, an emerald.
 - The emerald went missing during the event.
 
-There are three suspects, Aunt Beatrice, Elias the Gardener, and Sophie the little girl.
+There are three suspects, Aunt Beatrice, Elias the Gardener, and Sophie the Niece.
 
 You need to determine if the detective has addressed each key point related to Beatrice's motive, actions, and clues.
-Count and display how many the user got correct out of those 5 bullets point in the format of "{correct} / 5"
-IF AND ONLY ALL bullet points are covered, the detective reasoning are correct.
-If Less then 3 bullet points are covered, the detective resoning are incorrect.
-Be flexible in your evaluation. If the detective understands or has gathered evidence that suggests or hints at the main idea, consider it covered.
 
-Key Points to Consider:
-Motive:
+Response Format:
+
+You must, under all circumstances, format the following response into the JSON below. 
+
+{"reason":"Reason","points":[{"type":"PastLover","status":"Yes/No","action":"Feedback"},{"type":"FinanceProblem","status":"Yes/No","action":"Feedback"},{"type":"FramedGardener","status":"Yes/No","action":"Feedback"},{"type":"LoveLetter","status":"Yes/No","action":"Feedback"},{"type":"PerfumeScent","status":"Yes/No","action":"Feedback"}],"rating":Score}
+
+For the points section, include the following points:
+
+Motives:
   1. Has the detective uncovered any information about Beatrice’s past lover?
   2. Has the detective uncovered any information about Beatrice's motive for the theft is to solve her past lover's financial problem?
-Action:
+Actions:
   3. Does the detective suggest Beatrice’s intention to frame the gardener?
-Clue:
+Clues:
   4. Has the detective connected the love letter to Beatrice?
   5. Has the detective explored the scent of the perfume?
 
-Response Format:
-For each key point, respond with bullet points indicating whether the point was covered, and suggest what the detective can do to uncover that information.
+Select "Yes" if they have evaluated the point correctly, or "No" if they have not, in the status field. Relate each point to its type field.
+In the action field, write feedback relating to the point within 50 words.
 
-Keep your feedback within 100 words.
+Count and put how many the user got correct out of those 5 bullets point in the rating field, which has a maximum of {correct} / 5 points. This is an integer between 0 and 5 that matches the number of correct points.
+
+In the reason field you must state if the detective's reasoning is correct or incorrect in a full, complete sentence.
+If the rating is 5, the reason field should be set as correct.
+If the rating is 3 or 4, the reason field should be set as partially correct.
+If the rating is 0, 1, 2 or 3, the reason field should be set as incorrect.
+
+Be flexible in your evaluation. If the detective understands or has gathered evidence that suggests or hints at the main idea, consider it covered.
+You must minify your JSON and under no circumstances include quotes to try form a codeblock.
+
+The detective's input is as follows:

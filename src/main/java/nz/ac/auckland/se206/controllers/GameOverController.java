@@ -1,13 +1,20 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
+import nz.ac.auckland.se206.enums.FeedbackType;
 import nz.ac.auckland.se206.enums.SceneState;
+import nz.ac.auckland.se206.enums.SuccessfulPoint;
 import nz.ac.auckland.se206.enums.Suspect;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class GameOverController extends ButtonController {
   @FXML private ImageView continueOther;
@@ -16,8 +23,14 @@ public class GameOverController extends ButtonController {
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
   @FXML private ImageView outOfTime;
-  @FXML private TextArea feedbackTextArea;
+  @FXML private GridPane feedbackGrid;
   @FXML private Label labelSubtitle;
+  @FXML private Text reasoning;
+  @FXML private Text rating;
+
+  private int attempts = 0;
+  private Map<FeedbackType, Boolean> pointSuccess = new HashMap<>();
+  private Map<FeedbackType, String> pointFeedback = new HashMap<>();
 
   @FXML
   public void initialize() {
@@ -26,8 +39,7 @@ public class GameOverController extends ButtonController {
     imageGardener.setVisible(false);
     imageNiece.setVisible(false);
     outOfTime.setVisible(false);
-    feedbackTextArea.setVisible(false);
-    feedbackTextArea.setText("Loading...");
+    feedbackGrid.setVisible(false);
   }
 
   public void setGameOverImage(Suspect suspect) {
@@ -36,7 +48,7 @@ public class GameOverController extends ButtonController {
     switch (suspect) {
       case AUNT:
         imageAunt.setVisible(true);
-        feedbackTextArea.setVisible(true);
+        feedbackGrid.setVisible(true);
 
         continueOther.setVisible(false);
         continueAunt.setVisible(true);
@@ -77,7 +89,60 @@ public class GameOverController extends ButtonController {
   }
 
   public void setFeedbackPrompt(String feedback) {
-    feedbackTextArea.setText(feedback);
+    if (attempts > 10) {
+      System.err.println("Something went horribly wrong, returning!");
+      return;
+    }
+
+    try {
+      JSONObject jsonObject = new JSONObject(feedback);
+
+      String reasoningStr = jsonObject.getString("reason");
+      reasoning.setText(reasoningStr);
+
+      int ratingAmount = jsonObject.getInt("rating");
+      rating.setText(ratingAmount + " Out Of 5");
+
+      JSONArray points = jsonObject.getJSONArray("points");
+
+      for (int i = 0; i < points.length(); i++) {
+        JSONObject point = points.getJSONObject(i);
+
+        String typeString = point.getString("type");
+        FeedbackType type = feedbackFromString(typeString);
+
+        String statusString = point.getString("status");
+        boolean status = successfulFromString(statusString) == SuccessfulPoint.Yes;
+
+        String action = point.getString("action");
+
+        pointSuccess.putIfAbsent(type, status);
+        pointFeedback.putIfAbsent(type, action);
+      }
+    } catch (Exception e) {
+      System.err.println("Error parsing JSON: " + e.getMessage());
+      System.err.println("Full JSON: " + feedback);
+      attempts += 1;
+      App.getGameState().setAiProxyConfig();
+    }
+  }
+
+  public static SuccessfulPoint successfulFromString(String input) {
+    for (SuccessfulPoint enumValue : SuccessfulPoint.values()) {
+      if (enumValue.name().equalsIgnoreCase(input)) {
+        return enumValue;
+      }
+    }
+    throw new IllegalArgumentException("No success enum constant matches the input: " + input);
+  }
+
+  public static FeedbackType feedbackFromString(String input) {
+    for (FeedbackType enumValue : FeedbackType.values()) {
+      if (enumValue.name().equalsIgnoreCase(input)) {
+        return enumValue;
+      }
+    }
+    throw new IllegalArgumentException("No feedback enum constant matches the input: " + input);
   }
 
   @FXML

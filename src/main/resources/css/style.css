@@ -144,3 +144,15 @@
 .glow-text:hover {
   -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 20, 0.5, 0, 0);
 }
+
+.text-field-yellow {
+  -fx-control-inner-background: #FBE6B1;
+}
+
+.black-text-area {
+  -fx-padding: 5;
+  padding: 5;
+  -fx-background-radius: 5;
+  -fx-background-color: #1A3D57;
+  background-color: #1A3D57;
+}

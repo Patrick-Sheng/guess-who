@@ -7,17 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
-import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
-import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
-import nz.ac.auckland.apiproxy.chat.openai.Choice;
-import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
-import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class GuessingController extends ButtonController {
@@ -36,7 +30,6 @@ public class GuessingController extends ButtonController {
   @FXML private Label timerLabel;
   @FXML private TextArea explanationTextArea;
 
-  private ChatCompletionRequest chatCompletionRequest;
   private Suspect chosenSuspect;
 
   private boolean foundSuspect;
@@ -46,7 +39,6 @@ public class GuessingController extends ButtonController {
   public void initialize() {
     paneTimeIsUp.setVisible(false); // Hide the "time is up" pane initially
     rectFadeBackground.setVisible(false); // Hide the fade background initially
-    setAiProxyConfig(); // Set up the AI proxy configuration
     foundSuspect = false;
     foundExplanation = false;
     disableButton(); // Disable the submit button initially
@@ -77,104 +69,6 @@ public class GuessingController extends ButtonController {
   public void enableButton() {
     submitButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
     submitButton.setDisable(false);
-  }
-
-  /**
-   * Generates the system prompt based on the profession.
-   *
-   * @return the system prompt string
-   */
-  private String getSystemPrompt() {
-    return PromptEngineering.getPrompt("feedback_instruction.txt", null);
-  }
-
-  public void setAiProxyConfig() {
-
-    Task<Void> setGptModelTask =
-        new Task<>() {
-          @Override
-          protected Void call() {
-            try {
-              // Configure the chatCompletionRequest with specific parameters
-              chatCompletionRequest =
-                  new ChatCompletionRequest(App.getConfig())
-                      .setTemperature(0.1)
-                      .setTopP(0.2)
-                      .setMaxTokens(200);
-              runGpt(new ChatMessage("system", getSystemPrompt()));
-              // Run the GPT model with a system prompt to initialize the chat
-            } catch (ApiProxyException e) {
-              e.printStackTrace();
-            }
-            return null;
-          }
-        };
-
-    // Start the task in a new thread to avoid blocking the main thread
-    new Thread(setGptModelTask).start();
-  }
-
-  /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      // Runs the GPT model with a given chat message.
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      // Catch any error if there is any
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  private void setExplanation() {
-    // Create a background task to get the explanation from the GPT model
-    Task<String> getExplanationTask =
-        new Task<>() {
-          @Override
-          protected String call() {
-            String message = explanationTextArea.getText().trim();
-            if (!message.isEmpty()) {
-              try {
-                // Run the GPT model with the user's message and return the response
-                ChatMessage response = runGpt(new ChatMessage("user", message));
-                assert response != null;
-                System.out.println(response.getContent());
-                return response.getContent();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-              }
-            }
-            return null;
-          }
-        };
-
-    // Update the game state with the explanation when the task succeeds
-    getExplanationTask.setOnSucceeded(
-        event -> {
-          String explanation = getExplanationTask.getValue();
-          if (explanation != null) {
-            App.getGameState().updateFeedbackPrompt(explanation);
-          }
-        });
-    // Handle task failure by printing the exception
-    getExplanationTask.setOnFailed(
-        event -> {
-          Throwable e = getExplanationTask.getException();
-          e.printStackTrace();
-        });
-
-    // Start the task in a new thread to avoid blocking the main thread
-    new Thread(getExplanationTask).start();
   }
 
   public void updateLblTimer(int time, int red, int green, int blue) {
@@ -301,7 +195,10 @@ public class GuessingController extends ButtonController {
                 App.setRoot(
                     SceneState.END_GAME_WON,
                     "Wow, you got it! Who knew it could have been Aunt Beatrice?");
-                setExplanation(); // Set the explanation for the correct choice
+                App.getGameState()
+                    .setExplaination(
+                        explanationTextArea
+                            .getText()); // Set the explanation for the correct choice
                 break;
               case GARDENER:
                 App.setRoot(
