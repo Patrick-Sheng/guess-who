@@ -51,7 +51,7 @@
             </Label>
          </children>
       </Pane>
-      <Label fx:id="labelSkipIntro" alignment="CENTER" layoutX="603.0" layoutY="41.0" onMouseClicked="#startGame" prefHeight="55.0" prefWidth="122.0" text="Skip Intro" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="labelSkipIntro" alignment="CENTER" layoutX="603.0" layoutY="41.0" onMouseClicked="#startGame" prefHeight="55.0" prefWidth="122.0" text="Skip Intro" textAlignment="CENTER" textFill="WHITE" styleClass="glow-text">
          <font>
             <Font name="Georgia Italic" size="23.0" />
          </font>
