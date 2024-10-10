@@ -274,7 +274,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException, ApiProxyException {
-    SceneState defaultState = SceneState.START_GUESSING;
+    SceneState defaultState = SceneState.MAIN_MENU;
     TextToSpeech.doStartSpeech();
 
     // Initialize game state, variables, and API proxy config
