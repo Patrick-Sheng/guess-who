@@ -27,18 +27,18 @@
       <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@../images/backgrounds/aunt.jpeg" />
       </ImageView>
-      <GridPane alignment="CENTER" layoutX="42.0" layoutY="612.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="138.0" prefWidth="676.0" styleClass="chat-pane">
+      <GridPane alignment="CENTER" layoutX="42.0" layoutY="610.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="145.0" prefWidth="676.0" styleClass="chat-pane">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="118.66668701171875" minHeight="10.0" prefHeight="65.33335367838544" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="10.0" minHeight="0.0" prefHeight="10" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="20" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <VirtualizedScrollPane>
+         <VirtualizedScrollPane styleClass="virtualized-scroll-pane">
             <content>
-               <InlineCssTextArea fx:id="logArea" editable="false" prefHeight="92.0" prefWidth="585.0" style="-fx-background-color: #FBE6B1" wrapText="true" />
+               <InlineCssTextArea fx:id="logArea" editable="false" prefHeight="92.0" prefWidth="585.0" wrapText="true" styleClass="inline-css-text-area" />
             </content>
          </VirtualizedScrollPane>
          <TextField fx:id="userField" focusTraversable="false" onAction="#onEnter" pickOnBounds="false" prefHeight="50.0" prefWidth="570.0" promptText="Type here, then press enter to send!" style="-fx-control-inner-background: #FBE6B1" GridPane.rowIndex="2">
