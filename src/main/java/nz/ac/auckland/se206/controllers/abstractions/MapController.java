@@ -17,7 +17,7 @@ public abstract class MapController extends ButtonController {
   public static String enumToName(Suspect suspect) {
     // Use Enum to correspond the name of each suspect
     return switch (suspect) {
-      case AUNT -> "Aunt Beatrice";
+      case AUNT -> "Beatrice Worthington";
       case NIECE -> "Sophie Baxter";
       case GARDENER -> "Elias Greenfield";
       case DETECTIVE -> "Detective";
@@ -210,9 +210,9 @@ public abstract class MapController extends ButtonController {
 
     // Set notifications of current progress
     Image metCriteriaImage =
-        new Image(App.class.getResourceAsStream("/images/buttons/checked.png"));
+        new Image(App.class.getResource("/images/buttons/checked.png").toExternalForm());
     Image notMetCriteriaImage =
-        new Image(App.class.getResourceAsStream("/images/buttons/unchecked.png"));
+        new Image(App.class.getResource("/images/buttons/unchecked.png").toExternalForm());
 
     suspectsLabel.setText(suspectCount + "/3 Visited Suspects");
     suspectsImage.setImage(hasMetSuspect ? metCriteriaImage : notMetCriteriaImage);
@@ -222,8 +222,10 @@ public abstract class MapController extends ButtonController {
     cluesImage.setImage(hasMetObjects ? metCriteriaImage : notMetCriteriaImage);
 
     // Set state of guess button
-    metCriteriaImage = new Image(App.class.getResourceAsStream("/images/buttons/guess.png"));
-    notMetCriteriaImage = new Image(App.class.getResourceAsStream("/images/buttons/no_guess.png"));
+    metCriteriaImage =
+        new Image(App.class.getResource("/images/buttons/guess.png").toExternalForm());
+    notMetCriteriaImage =
+        new Image(App.class.getResource("/images/buttons/no_guess.png").toExternalForm());
 
     guessImage.setImage(hasMetGuess ? metCriteriaImage : notMetCriteriaImage);
     guessImage.setDisable(hasMetGuess ? false : true);

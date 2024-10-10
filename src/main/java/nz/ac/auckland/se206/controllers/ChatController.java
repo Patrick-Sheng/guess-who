@@ -37,6 +37,15 @@ public class ChatController extends MapController {
     return false;
   }
 
+  private static String enumToPrefix(Suspect suspect) {
+    return switch (suspect) {
+      case AUNT -> "Aunt";
+      case NIECE -> "Niece";
+      case GARDENER -> "Gardener";
+      default -> "";
+    };
+  }
+
   private static String enumToPrompt(Suspect suspect) {
     return switch (suspect) {
       case AUNT -> "auntie";
@@ -183,7 +192,8 @@ public class ChatController extends MapController {
     imageNiece.setVisible(suspect == Suspect.NIECE);
     imageAunt.setVisible(suspect == Suspect.AUNT);
 
-    suspectLabel.setText(enumToName(suspect)); // Set the label to the suspect's name
+    // Set the label to the suspect's name
+    suspectLabel.setText(enumToPrefix(suspect) + " " + enumToName(suspect));
   }
 
   private boolean isActor(Suspect objectType) {
