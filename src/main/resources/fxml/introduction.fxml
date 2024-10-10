@@ -44,7 +44,7 @@
                   <Font name="Georgia" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="labelClickInstruction" alignment="CENTER" layoutX="141.0" layoutY="654.0" prefHeight="55.0" prefWidth="486.0" text="Click anywhere to go next" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="labelClickInstruction" alignment="CENTER" layoutX="141.0" layoutY="654.0" prefHeight="55.0" prefWidth="486.0" text="Click anywhere to go next" textAlignment="CENTER" textFill="WHITE" styleClass="glow-text">
                <font>
                   <Font name="Georgia Italic" size="23.0" />
                </font>

@@ -25,7 +25,7 @@
             <Font name="Georgia" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="chosenSuspectLabel" layoutX="394.0" layoutY="462.0" text="Aunt Beatrice" textFill="WHITE">
+      <Label fx:id="chosenSuspectLabel" layoutX="394.0" layoutY="462.0" text="None" textFill="WHITE">
          <font>
             <Font name="Georgia" size="18.0" />
          </font>

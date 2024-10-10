@@ -50,7 +50,7 @@ public class GuessingController extends ButtonController {
     foundSuspect = false;
     foundExplanation = false;
     disableButton(); // Disable the submit button initially
-    chosenSuspectLabel.setText("");
+    chosenSuspectLabel.setText("Please Select");
     explanationTextArea
         .textProperty()
         .addListener(

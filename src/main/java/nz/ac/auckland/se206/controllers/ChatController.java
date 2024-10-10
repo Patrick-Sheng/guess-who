@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -55,6 +58,7 @@ public class ChatController extends MapController {
     };
   }
 
+  @FXML private Button chatButton;
   @FXML private ImageView imageGardener;
   @FXML private ImageView imageNiece;
   @FXML private ImageView imageAunt;
@@ -62,15 +66,41 @@ public class ChatController extends MapController {
   @FXML private Label suspectLabel;
   @FXML private TextField userField;
 
+  public void disableButton() {
+    chatButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
+    chatButton.setDisable(true);
+    chatButton.setOpacity(1f);
+  }
+
+  public void enableButton() {
+    chatButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+    chatButton.setDisable(false);
+  }
+
   @FXML
   public void initialize() {
     super.initialize();
+    disableButton();
     enterUser(App.getGameState().getSelectedSuspect());
+
+    userField
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() > 0) {
+                  enableButton();
+                } else {
+                  disableButton();
+                }
+              }
+            });
   }
 
   @FXML
   private void onEnter() {
-
     // Skip the interaction if the time is up
     if (timeIsUp == true) {
       return;
