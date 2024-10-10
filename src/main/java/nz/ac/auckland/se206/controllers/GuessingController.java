@@ -296,7 +296,7 @@ public class GuessingController extends ButtonController {
               case AUNT:
                 App.setRoot(
                     SceneState.END_GAME_WON,
-                    "Wow, you got it! Who knew it could have been Beatrice?");
+                    "Wow, you got it! Who knew it could have been Aunt Beatrice?");
                 setExplanation(); // Set the explanation for the correct choice
                 break;
               case GARDENER:
