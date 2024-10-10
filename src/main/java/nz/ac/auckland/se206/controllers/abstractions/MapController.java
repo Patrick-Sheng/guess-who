@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206.controllers.abstractions;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -14,22 +14,38 @@ import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public abstract class MapController extends ButtonController {
-
   public static String enumToName(Suspect suspect) {
     // Use Enum to correspond the name of each suspect
     return switch (suspect) {
-      case AUNT -> "Beatrice Worthington";
+      case AUNT -> "Aunt Beatrice";
       case NIECE -> "Sophie Baxter";
       case GARDENER -> "Elias Greenfield";
+      case DETECTIVE -> "Detective";
+      case NARRATOR -> "Narrator";
+      default -> "";
+    };
+  }
+
+  public static String enumToRoom(Suspect suspect) {
+    // Use Enum to correspond the room of each suspect
+    return switch (suspect) {
+      case AUNT -> "Study";
+      case NIECE -> "Nursery";
+      case GARDENER -> "Garden";
       default -> "";
     };
   }
 
   protected boolean timeIsUp = false;
 
-  @FXML private Button guessButton;
+  @FXML private ImageView cluesImage;
   @FXML private ImageView exitImage;
+  @FXML private ImageView guessImage;
+  @FXML private ImageView suspectsImage;
+  @FXML private Label cluesLabel;
+  @FXML private Label guessLabel;
   @FXML private Label timerLabel;
+  @FXML private Label suspectsLabel;
   @FXML private Pane paneRoom;
   @FXML private Pane paneMap;
   @FXML private Pane paneTimeIsUp;
@@ -38,7 +54,7 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   public void initialize() {
-    checkButton();
+    isGuessReadyAndUpdate();
     paneTimeIsUp.setVisible(false);
     paneMap.setVisible(false);
     rectFadeBackground.setVisible(false);
@@ -66,42 +82,55 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void enterAuntie() {
-    textMap.setText("Auntie Room");
-    exitImage.setVisible(false);
+    changeMapText(Suspect.AUNT);
   }
 
   @FXML
   private void clickAuntie() {
-    launchChatWindow(Suspect.AUNT, "Going To Aunt Beatrice's Study");
+    launchChatWindow(Suspect.AUNT);
   }
 
   @FXML
   private void enterChild() {
-    textMap.setText("Child Room");
-    exitImage.setVisible(false);
+    changeMapText(Suspect.NIECE);
   }
 
   @FXML
   private void clickChild() {
-    launchChatWindow(Suspect.NIECE, "Going To Sophie Baxter's Nursery");
-  }
-
-  @FXML
-  private void clickGardener() {
-    launchChatWindow(Suspect.GARDENER, "Going To Elias Greenfield's Garden");
+    launchChatWindow(Suspect.NIECE);
   }
 
   @FXML
   private void enterGardener() {
-    textMap.setText("Gardener Room");
-    exitImage.setVisible(false);
+    changeMapText(Suspect.GARDENER);
   }
 
-  private void launchChatWindow(Suspect suspect, String text) {
+  @FXML
+  private void clickGardener() {
+    launchChatWindow(Suspect.GARDENER);
+  }
+
+  private void launchChatWindow(Suspect suspect) {
     GameState state = App.getGameState();
     state.setSelectedSuspect(suspect);
-    App.setRoot(SceneState.CHAT, text);
+
+    StringBuilder builder = new StringBuilder();
+    builder
+        .append("Going To ")
+        .append(enumToName(suspect))
+        .append("'s ")
+        .append(enumToRoom(suspect));
+
+    App.setRoot(SceneState.CHAT, builder.toString());
     adjustPanel();
+  }
+
+  private void changeMapText(Suspect suspect) {
+    StringBuilder builder = new StringBuilder();
+    builder.append(enumToName(suspect)).append("'s ").append(enumToRoom(suspect));
+    textMap.setText(builder.toString());
+
+    exitImage.setVisible(false);
   }
 
   @FXML
@@ -118,13 +147,13 @@ public abstract class MapController extends ButtonController {
 
   @FXML
   private void enterGuess() {
-    textMap.setText("Guess Room" + (App.getGameState().checkEnableButton() ? "" : " (Locked)"));
+    textMap.setText("Guess Room" + (isGuessReadyAndUpdate() ? "" : " (Locked)"));
     exitImage.setVisible(false);
   }
 
   @FXML
   private void clickGuess() {
-    if (App.getGameState().checkEnableButton()) {
+    if (isGuessReadyAndUpdate()) {
       onMakeGuess();
       adjustPanel();
     }
@@ -135,17 +164,6 @@ public abstract class MapController extends ButtonController {
     paneRoom.setOpacity(1);
   }
 
-  public void disableButton() {
-    guessButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
-    guessButton.setDisable(true);
-    guessButton.setOpacity(1f);
-  }
-
-  public void enableButton() {
-    guessButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-    guessButton.setDisable(false);
-  }
-
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
       GameState state = App.getGameState();
@@ -154,7 +172,7 @@ public abstract class MapController extends ButtonController {
       rectFadeBackground.setVisible(true);
 
       // Check if the button should be enabled or if the game should end due to time out
-      if (App.getGameState().checkEnableButton()) {
+      if (isGuessReadyAndUpdate()) {
         paneTimeIsUp.setVisible(true); // Show the "time is up" pane
       } else {
         state.setSuspect(Suspect.OUT_OF_TIME);
@@ -180,11 +198,36 @@ public abstract class MapController extends ButtonController {
     App.setRoot(SceneState.START_GUESSING, App.GUESS_DIALOG);
   }
 
-  public void checkButton() {
-    if (App.getGameState().checkEnableButton()) {
-      enableButton();
-    } else {
-      disableButton();
-    }
+  public boolean isGuessReadyAndUpdate() {
+    // Check current progress of game
+    int objectCount = App.getGameState().getObjectCount();
+    int suspectCount = App.getGameState().getSuspectCount();
+
+    boolean hasMetSuspect = suspectCount >= 3;
+    boolean hasMetObjects = objectCount > 0;
+    boolean hasMetGuess = hasMetSuspect && hasMetObjects;
+
+    // Set notifications of current progress
+    Image metCriteriaImage =
+        new Image(App.class.getResourceAsStream("/images/buttons/checked.png"));
+    Image notMetCriteriaImage =
+        new Image(App.class.getResourceAsStream("/images/buttons/unchecked.png"));
+
+    suspectsLabel.setText(suspectCount + "/3 Visited Suspects");
+    suspectsImage.setImage(hasMetSuspect ? metCriteriaImage : notMetCriteriaImage);
+
+    cluesLabel.setText(
+        (objectCount > 1 ? "Clues" : "Clue") + (!hasMetObjects ? " not" : "") + " visited");
+    cluesImage.setImage(hasMetObjects ? metCriteriaImage : notMetCriteriaImage);
+
+    // Set state of guess button
+    metCriteriaImage = new Image(App.class.getResourceAsStream("/images/buttons/guess.png"));
+    notMetCriteriaImage = new Image(App.class.getResourceAsStream("/images/buttons/no_guess.png"));
+
+    guessImage.setImage(hasMetGuess ? metCriteriaImage : notMetCriteriaImage);
+    guessImage.setDisable(hasMetGuess ? false : true);
+    guessLabel.setText(hasMetGuess ? "Guess Suspect" : "Cannot Guess Yet");
+
+    return hasMetGuess;
   }
 }

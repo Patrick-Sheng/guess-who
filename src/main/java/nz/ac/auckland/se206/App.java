@@ -84,13 +84,13 @@ public class App extends Application {
         Stage stage = (Stage) scene.getWindow();
         setStage(stage, gameState.getRoomControllerRoot(), state);
 
-        roomController.checkButton();
+        roomController.isGuessReadyAndUpdate();
         return;
       } else if (fxml.equals("chat") && chatController != null) {
         Stage stage = (Stage) scene.getWindow();
         setStage(stage, gameState.getChatControllerRoot(), state);
 
-        chatController.checkButton();
+        chatController.isGuessReadyAndUpdate();
         chatController.enterUser(gameState.getSelectedSuspect());
         return;
       }

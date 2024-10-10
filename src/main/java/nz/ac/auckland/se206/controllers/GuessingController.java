@@ -14,6 +14,7 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
+import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
@@ -202,7 +203,7 @@ public class GuessingController extends ButtonController {
       // If neither a suspect nor an explanation was provided, inform the user and prompt them to go
       // back to the main menu
       systemDescriptionLabel.setText(
-          "You did not select a suspect amd explanation within time limit. Game is now over.");
+          "You did not select a suspect amd explanation within time limit. The game is now over.");
       moveToNextScene.setText("Back to Main Menu");
     } else {
       // If a suspect and explanation were provided, allow the user to submit their choice
@@ -217,7 +218,7 @@ public class GuessingController extends ButtonController {
 
   @FXML
   private void chooseAunt() {
-    runChoose(Suspect.AUNT, "Aunt Beatrice");
+    runChoose(Suspect.AUNT);
   }
 
   @FXML
@@ -227,7 +228,7 @@ public class GuessingController extends ButtonController {
 
   @FXML
   private void chooseGardener() {
-    runChoose(Suspect.GARDENER, "Elias Greenfield");
+    runChoose(Suspect.GARDENER);
   }
 
   @FXML
@@ -237,7 +238,7 @@ public class GuessingController extends ButtonController {
 
   @FXML
   private void chooseNiece() {
-    runChoose(Suspect.NIECE, "Sophie Baxter");
+    runChoose(Suspect.NIECE);
   }
 
   @FXML
@@ -245,14 +246,15 @@ public class GuessingController extends ButtonController {
     runHighlight(Suspect.NIECE);
   }
 
-  private void runChoose(Suspect suspect, String speech) {
+  private void runChoose(Suspect suspect) {
     chosenSuspect = suspect;
     foundSuspect = true;
-    chosenSuspectLabel.setText(speech);
+    String name = MapController.enumToName(suspect);
+    chosenSuspectLabel.setText(name);
     if (!isNotValidResponse()) {
       enableButton(); // Enable the button if both suspect and explanation are provided
     }
-    TextToSpeech.speak(speech);
+    TextToSpeech.speak(name);
     highlightCharacterPane(suspect); // Highlight the selected suspect's image
   }
 

@@ -6,6 +6,13 @@ import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 
 public class MainMenuController extends ButtonController {
+  private boolean hasEnteredRoom;
+
+  @FXML
+  public void initialize() {
+    hasEnteredRoom = false;
+  }
+
   @FXML
   private void onExit() {
     System.exit(0);
@@ -13,12 +20,17 @@ public class MainMenuController extends ButtonController {
 
   @FXML
   private void onSettings() {
-    App.setRoot(SceneState.SETTINGS, "Entering settings menu...");
+    if (!hasEnteredRoom) {
+      App.setRoot(SceneState.SETTINGS, "Entering settings menu...");
+    }
   }
 
   @FXML
   private void onStart() {
-    App.setRoot(SceneState.START_GAME, "Starting game!");
-    App.getGameState().startTimer(300);
+    if (!hasEnteredRoom) {
+      hasEnteredRoom = true;
+      App.setRoot(SceneState.START_GAME, "Starting game!");
+      App.getGameState().startTimer(300);
+    }
   }
 }

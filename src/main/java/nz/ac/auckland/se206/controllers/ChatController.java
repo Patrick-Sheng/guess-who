@@ -81,7 +81,7 @@ public class ChatController extends MapController {
     addMessage(text, state.getSelectedSuspect(), Suspect.DETECTIVE, true);
     userField.clear(); // Clear the input field after the text is send
 
-    checkButton(); // Check if any buttons need to be enabled or disabled
+    isGuessReadyAndUpdate(); // Check if any buttons need to be enabled or disabled
 
     addLog(
         new InteractionLog(suspect, "is thinking..."), true); // Log that the suspect is processing
@@ -111,6 +111,7 @@ public class ChatController extends MapController {
               Platform.runLater(
                   () -> {
                     addMessage(message, current, current, true);
+                    enterUser(App.getGameState().getSelectedSuspect());
                     logArea.requestFollowCaret();
                   });
             } catch (ApiProxyException e) {
@@ -197,8 +198,7 @@ public class ChatController extends MapController {
     }
 
     // Append the suspect's name and the message to the log area
-    logArea.append(
-        enumToName(log.suspect()) + " (" + log.suspect().name() + "): ", "-fx-font-weight: bold");
+    logArea.append(enumToName(log.suspect()) + ": ", "-fx-font-weight: bold");
     logArea.append(log.message(), "");
   }
 
@@ -252,12 +252,12 @@ public class ChatController extends MapController {
 
     // Re/set components to current state
     userField.clear();
-    checkButton();
+    isGuessReadyAndUpdate();
   }
 
   private void increasePersonAmount() {
     App.getGameState().increasePeople();
-    checkButton();
+    isGuessReadyAndUpdate();
   }
 
   private ChatCompletionRequest getChatCompletionRequest(Suspect suspect) {

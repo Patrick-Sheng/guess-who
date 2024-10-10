@@ -40,7 +40,7 @@ public class RoomController extends MapController {
     // Speaks introductory message to the player
     TextToSpeech.speak(
         "The thief of a family heirloom, an emerald, is aloof - and it's your job to find them out"
-            + " - mister detective!");
+            + ", private detective!");
 
     // Initializes the state of clue interaction and visibility
     isClueClick = false;
@@ -108,7 +108,7 @@ public class RoomController extends MapController {
 
     // Updates the game state and checks if a button should be enabled
     App.getGameState().increaseObjects();
-    checkButton();
+    isGuessReadyAndUpdate();
   }
 
   private void setClue(ImageView image) {
