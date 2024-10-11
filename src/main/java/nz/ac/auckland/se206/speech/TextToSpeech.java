@@ -90,6 +90,11 @@ public class TextToSpeech {
         });
   }
 
+  public static void stopSpeak() {
+    stopFlag.set(true);
+    dialogQueue.clear();
+  }
+
   private static void processQueue() {
     // Makes sure that voice will not overlap each other
     Thread voiceThread =
@@ -166,11 +171,6 @@ public class TextToSpeech {
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
-  }
-
-  public static void stopSpeak() {
-    stopFlag.set(true);
-    dialogQueue.clear();
   }
 
   private static void loadMp3Files() {
