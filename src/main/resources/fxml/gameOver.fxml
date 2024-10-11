@@ -1,57 +1,356 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
-   <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/gardener_guessed.jpeg" />
-   </ImageView>
-   <ImageView fx:id="imageNiece" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/niece_guessed.jpeg" />
-   </ImageView>
-   <ImageView fx:id="outOfTime" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/outOfTime.jpeg" />
-   </ImageView>
-   <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
-   </ImageView>
-   <TextArea fx:id="feedbackTextArea" editable="false" layoutX="130.0" layoutY="268.0" opacity="0.8" prefHeight="370.0" prefWidth="520.0" style="-fx-control-inner-background: #FBE6B1" wrapText="true">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
+  <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/backgrounds/gardener_guessed.jpeg" />
+  </ImageView>
+  <ImageView fx:id="imageNiece" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/backgrounds/niece_guessed.jpeg" />
+  </ImageView>
+  <ImageView fx:id="outOfTime" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/backgrounds/outOfTime.jpeg" />
+  </ImageView>
+  <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
+  </ImageView>
+  <GridPane fx:id="feedbackGrid" alignment="CENTER" layoutX="63.0" layoutY="253.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="672.0" styleClass="feedback-pane">
+    <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" prefWidth="421.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="62.00002034505209" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="320.9999796549479" minHeight="10.0" prefHeight="311.66666666666663" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="77.33331298828125" minHeight="4.6666259765625" prefHeight="59.333333333333314" valignment="CENTER" vgrow="ALWAYS" />
+    </rowConstraints>
+    <children>
+      <GridPane GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" valignment="CENTER" vgrow="ALWAYS" />
+        </rowConstraints>
+        <children>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Motives Found">
+            <font>
+              <Font name="Georgia Bold" size="12.0" />
+            </font>
+          </Text>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="1">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="61.666656494140625" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="139.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="470.66666666666674" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point1Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Past Lover" textAlignment="CENTER" wrappingWidth="134.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="40.0" prefWidth="451.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point1Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="12.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="2">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="70.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="480.0" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point2Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Financial Problem" textAlignment="CENTER" wrappingWidth="130.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="40.0" prefWidth="465.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point2Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="12.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Actions Found" GridPane.rowIndex="3">
+            <font>
+              <Font name="Georgia Bold" size="12.0" />
+            </font>
+          </Text>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="4">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="70.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="480.0" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point3Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Framing the Gardener" textAlignment="CENTER" wrappingWidth="130.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="40.0" prefWidth="465.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point3Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="12.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Clues Found" GridPane.rowIndex="5">
+            <font>
+              <Font name="Georgia Bold" size="12.0" />
+            </font>
+          </Text>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="6">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="70.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="480.0" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point4Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Love Letter" textAlignment="CENTER" wrappingWidth="130.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="40.0" prefWidth="465.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point4Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="12.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+          <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="7">
+            <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="70.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="480.0" />
+            </columnConstraints>
+            <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+              <ImageView fx:id="point5Image" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <image>
+                  <Image url="@../images/buttons/unchecked.png" />
+                </image>
+              </ImageView>
+              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfume Scent" textAlignment="CENTER" wrappingWidth="130.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+                <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+                </GridPane.margin>
+              </Text>
+              <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <TextFlow maxWidth="-Infinity" prefHeight="40.0" prefWidth="465.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                  <Text fx:id="point5Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <font>
+                      <Font name="Georgia" size="12.0" />
+                    </font>
+                  </Text>
+                </TextFlow>
+                <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </GridPane.margin>
+              </VBox>
+            </children>
+          </GridPane>
+        </children>
+      </GridPane>
+      <GridPane prefHeight="64.0" prefWidth="415.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Reasoning Overview" textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <font>
+              <Font name="Georgia" size="16.0" />
+            </font>
+            <GridPane.margin>
+              <Insets bottom="15.0" />
+            </GridPane.margin>
+          </Text>
+          <VBox styleClass="virtualized-scroll-pane" GridPane.rowIndex="1">
+            <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
+              <Text fx:id="reasoning" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="This may take a while..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+              </Text>
+            </TextFlow>
+          </VBox>
+        </children>
+        <GridPane.margin>
+          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+        </GridPane.margin>
+      </GridPane>
+      <GridPane prefHeight="62.0" prefWidth="411.0" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rating" textAlignment="CENTER" wrappingWidth="422.6496772766113" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <font>
+              <Font name="Georgia" size="16.0" />
+            </font>
+            <GridPane.margin>
+              <Insets bottom="15.0" />
+            </GridPane.margin>
+          </Text>
+          <VBox prefHeight="26.0" prefWidth="410.0" styleClass="virtualized-scroll-pane" GridPane.rowIndex="1">
+            <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
+              <Text fx:id="rating" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="129.24639892578125" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                  <Font name="Georgia" size="14.0" />
+                </font>
+              </Text>
+            </TextFlow>
+          </VBox>
+        </children>
+        <GridPane.margin>
+          <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+        </GridPane.margin>
+      </GridPane>
+    </children>
+  </GridPane>
+  <GridPane alignment="CENTER" layoutX="78.0" layoutY="131.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="76.66668701171875" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="45.33331298828125" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutY="62.0" prefHeight="46.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Game Over!" textAlignment="CENTER" GridPane.rowIndex="0">
       <font>
-         <Font name="Georgia" size="17.0" />
+        <Font name="Georgia" size="48.0" />
       </font>
-   </TextArea>
-   <GridPane alignment="CENTER" layoutX="78.0" layoutY="131.0" prefHeight="122.0" prefWidth="623.0" styleClass="grid-pane">
-      <columnConstraints>
-         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      </columnConstraints>
-      <rowConstraints>
-         <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="36.0" minHeight="0.0" prefHeight="14.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="62.0" prefHeight="35.0" prefWidth="622.0" style="-fx-text-fill: #ffffff !important" text="Game Over!" textAlignment="CENTER" GridPane.rowIndex="0">
-         <font>
-            <Font name="Georgia" size="48.0" />
-         </font>
-      </Label>
-      <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="40.0" prefWidth="622.0" text="Here are some feedback based on your explanation" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
-         <font>
-            <Font name="Georgia" size="17.0" />
-         </font>
-      </Label>
-   </GridPane>
-   <ImageView fx:id="continueOther" fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="708.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" onMouseClicked="#backToMenu" styleClass="highlight-image">
-      <image>
-         <Image url="@../images/buttons/continue.png" />
-      </image>
-   </ImageView>
-   <ImageView fx:id="continueAunt" fitHeight="68.0" fitWidth="219.0" layoutX="280.0" layoutY="706.0" pickOnBounds="true" preserveRatio="true" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" onMouseClicked="#backToMenu" styleClass="highlight-image">
-      <image>
-         <Image url="@../images/buttons/aunt_continue.png" />
-      </image>
-   </ImageView>
+    </Label>
+    <Label fx:id="labelSubtitle" alignment="CENTER" contentDisplay="CENTER" layoutY="153.0" prefHeight="40.0" prefWidth="622.0" text="Here are some feedback based on your explanation" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+      <font>
+        <Font name="Georgia" size="17.0" />
+      </font>
+    </Label>
+  </GridPane>
+  <ImageView fx:id="continueOther" fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="708.0" onMouseClicked="#backToMenu" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+    <image>
+      <Image url="@../images/buttons/continue.png" />
+    </image>
+    <cursor>
+      <Cursor fx:constant="HAND" />
+    </cursor>
+  </ImageView>
+  <ImageView fx:id="continueAunt" fitHeight="48.0" fitWidth="225.0" layoutX="276.0" layoutY="705.0" onMouseClicked="#backToMenu" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+    <image>
+      <Image url="@../images/buttons/aunt_continue.png" />
+    </image>
+    <cursor>
+      <Cursor fx:constant="HAND" />
+    </cursor>
+  </ImageView>
 </Pane>

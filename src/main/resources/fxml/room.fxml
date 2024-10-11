@@ -13,9 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
-    <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
-      <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
+  xmlns="http://javafx.com/javafx/22"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+  <Pane fx:id="paneRoom" prefHeight="768.0" prefWidth="768.0">
+    <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">
       <Image url="@../images/backgrounds/manor.jpeg" />
       </ImageView>
         <ImageView fitHeight="114.0" fitWidth="308.0" layoutX="343.0" layoutY="658.0" onMouseClicked="#letterReveal" pickOnBounds="true" preserveRatio="true" styleClass="highlight-clue">

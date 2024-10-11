@@ -167,6 +167,8 @@ public class App extends Application {
       } else if (fxml.equals("gameOver")) {
         gameState.setGameOverController(loader.getController());
         gameState.getGameOverController().setGameOverImage(gameState.getChosenSuspect());
+      } else if (fxml.equals("introduction")) {
+        gameState.setIntroductionController(loader.getController());
       }
     }
 

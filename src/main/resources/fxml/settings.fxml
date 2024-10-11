@@ -5,46 +5,49 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
-   <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/backgrounds/settings.jpeg" />
-   </ImageView>
-   <ImageView fitHeight="258.0" fitWidth="280.0" layoutX="255.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../images/logo.png" />
-   </ImageView>
-   <GridPane alignment="CENTER" hgap="10" layoutX="130.0" layoutY="345.0" prefHeight="145.0" prefWidth="532.0" styleClass="grid-pane" vgap="10">
-      <Label prefHeight="22.0" prefWidth="115.0" text="Music:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="0">
-         <font>
-            <Font name="Calibri" size="30.0" />
-         </font>
-      </Label>
-      <Slider fx:id="volumeSlider" prefHeight="37.0" prefWidth="234.0" value="50" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-      <Label prefHeight="22.0" prefWidth="115.0" text="SFX:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="1">
-         <font>
-            <Font name="Calibri" size="30.0" />
-         </font>
-      </Label>
-      <Slider fx:id="sfxSlider" prefHeight="37.0" prefWidth="234.0" value="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label text="Mute:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="2">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <ToggleButton fx:id="muteButton" onAction="#onMuteToggle" prefHeight="25.0" prefWidth="342.0" text="Off" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font></ToggleButton>
-      <columnConstraints>
-         <ColumnConstraints />
-         <ColumnConstraints />
-      </columnConstraints>
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
-   </GridPane>
-   <ImageView fitHeight="179.0" fitWidth="193.0" layoutX="309.0" layoutY="522.0" onMouseClicked="#onBackButton" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-      <Image url="@../images/buttons/back.png" />
-   </ImageView>
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
+  xmlns="http://javafx.com/javafx/11.0.14-internal"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SettingsController">
+  <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/backgrounds/settings.jpeg" />
+  </ImageView>
+  <ImageView fitHeight="258.0" fitWidth="280.0" layoutX="255.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+    <Image url="@../images/logo.png" />
+  </ImageView>
+  <GridPane alignment="CENTER" hgap="10" layoutX="130.0" layoutY="345.0" prefHeight="145.0" prefWidth="532.0" styleClass="grid-pane" vgap="10">
+    <Label prefHeight="22.0" prefWidth="115.0" text="Music:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <font>
+        <Font name="Calibri" size="30.0" />
+      </font>
+    </Label>
+    <Slider fx:id="volumeSlider" prefHeight="37.0" prefWidth="234.0" value="50" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label prefHeight="22.0" prefWidth="115.0" text="SFX:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="1">
+      <font>
+        <Font name="Calibri" size="30.0" />
+      </font>
+    </Label>
+    <Slider fx:id="sfxSlider" prefHeight="37.0" prefWidth="234.0" value="50" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label text="Mute:" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="2">
+      <font>
+        <Font size="30.0" />
+      </font>
+    </Label>
+    <ToggleButton fx:id="muteButton" onAction="#onMuteToggle" prefHeight="25.0" prefWidth="342.0" text="Off" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <font>
+        <Font name="Georgia Bold" size="18.0" />
+      </font>
+    </ToggleButton>
+    <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+    </rowConstraints>
+  </GridPane>
+  <ImageView fitHeight="179.0" fitWidth="193.0" layoutX="309.0" layoutY="522.0" onMouseClicked="#onBackButton" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+    <Image url="@../images/buttons/back.png" />
+  </ImageView>
 </Pane>

@@ -33,6 +33,17 @@
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
 }
 
+.feedback-pane {
+  -fx-background-color: rgba(135, 93, 60, 0.2);
+  background-color: rgba(135, 93, 60, 0.2);
+  -fx-border-radius: 20px;
+  border-radius: 20px;
+  -fx-background-radius: 10px;
+  -fx-padding: 10px;
+  padding: 10px;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
+}
+
 .chat-pane {
   -fx-background-color: rgba(135, 93, 60, 0.6);
   background-color: rgba(135, 93, 60, 0.6);
@@ -127,12 +138,32 @@
   -fx-background-radius: 5;
 }
 
+.rounded-image {
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0.5, 0, 0);
+  -fx-clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
+  clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
+}
+
 .glow-text {
   -fx-font-family: "Georgia Italic";
+  font-family: "Georgia Italic";
   -fx-font-size: 17pt;
+  font-size: 17pt;
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 0, 0, 0, 0);
 }
 
 .glow-text:hover {
   -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 20, 0.5, 0, 0);
+}
+
+.text-field-yellow {
+  -fx-control-inner-background: #FBE6B1;
+}
+
+.black-text-area {
+  -fx-padding: 5;
+  padding: 5;
+  -fx-background-radius: 5;
+  -fx-background-color: #1A3D57;
+  background-color: #1A3D57;
 }
