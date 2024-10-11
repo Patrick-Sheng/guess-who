@@ -93,7 +93,7 @@ public class RoomController extends MapController {
     TextToSpeech.speak(
         "The oak doors open wide to reveal the room containing the once-treasured necklace.");
 
-    Circle clip = new Circle(50);
+    Circle clip = new Circle(65);
 
     RadialGradient gradient =
         new RadialGradient(

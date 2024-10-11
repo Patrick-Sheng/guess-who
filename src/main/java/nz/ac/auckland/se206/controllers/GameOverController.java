@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.security.InvalidAlgorithmParameterException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -104,12 +105,6 @@ public class GameOverController extends ButtonController {
     try {
       JSONObject jsonObject = new JSONObject(feedback);
 
-      String reasoningStr = jsonObject.getString("reason");
-      reasoning.setText(reasoningStr);
-
-      int ratingAmount = jsonObject.getInt("rating");
-      rating.setText(ratingAmount + " Out Of 5");
-
       JSONArray points = jsonObject.getJSONArray("points");
 
       Image metCriteriaImage =
@@ -149,8 +144,29 @@ public class GameOverController extends ButtonController {
       }
 
       if (pointCount == 5) {
-        ratingAmount = correct;
-        rating.setText(ratingAmount + " Out Of 5");
+        rating.setText(correct + " Out Of 5");
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("The detective's reasoning is ");
+
+        if (correct >= 5) {
+          builder.append("correct");
+        } else if (correct >= 3) {
+          builder.append("partially correct");
+        } else {
+          builder.append("incorrect");
+        }
+
+        builder.append(".");
+        reasoning.setText(builder.toString());
+
+        builder.append(" ");
+        String reasoningStr = jsonObject.getString("additional");
+        builder.append(reasoningStr);
+
+        reasoning.setText(builder.toString());
+      } else {
+        throw new InvalidAlgorithmParameterException();
       }
     } catch (Exception e) {
       System.err.println("Error parsing JSON: " + e.getMessage());
