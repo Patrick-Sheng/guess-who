@@ -31,6 +31,12 @@ import org.fxmisc.richtext.InlineCssTextArea;
  */
 public class ChatController extends MapController {
 
+  /**
+   * Checks if there has been any interaction with the detective in the provided logs.
+   *
+   * @param logs The list of interaction logs to check.
+   * @return true if there is at least one interaction with the detective; false otherwise.
+   */
   private static boolean hasDetectiveInteraction(List<InteractionLog> logs) {
     for (InteractionLog log : logs) {
       if (log.suspect().equals(Suspect.DETECTIVE)) {
@@ -40,6 +46,12 @@ public class ChatController extends MapController {
     return false;
   }
 
+  /**
+   * Converts the given suspect enum to a corresponding prefix string for display.
+   *
+   * @param suspect The suspect enum to convert.
+   * @return The prefix string representing the suspect.
+   */
   private static String enumToPrefix(Suspect suspect) {
     return switch (suspect) {
       case AUNT -> "Aunt";
@@ -49,6 +61,12 @@ public class ChatController extends MapController {
     };
   }
 
+  /**
+   * Converts the given suspect enum to a corresponding prompt string for AI interaction.
+   *
+   * @param suspect The suspect enum to convert.
+   * @return The prompt string representing the suspect.
+   */
   private static String enumToPrompt(Suspect suspect) {
     return switch (suspect) {
       case AUNT -> "auntie";
@@ -66,17 +84,20 @@ public class ChatController extends MapController {
   @FXML private Label suspectLabel;
   @FXML private TextField userField;
 
+  /** Disables the chat button and changes its style to indicate it's inactive. */
   public void disableButton() {
     chatButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
     chatButton.setDisable(true);
     chatButton.setOpacity(1f);
   }
 
+  /** Enables the chat button and changes its style to indicate it's active. */
   public void enableButton() {
     chatButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
     chatButton.setDisable(false);
   }
 
+  /** Initializes the chat controller, setting up the user interface and event listeners. */
   @FXML
   public void initialize() {
     super.initialize();
@@ -99,6 +120,10 @@ public class ChatController extends MapController {
             });
   }
 
+  /**
+   * Handles the event when the user presses enter after typing a message. It processes the user
+   * input, updates the chat logs, and fetches the response from the suspect.
+   */
   @FXML
   private void onEnter() {
     // Skip the interaction if the time is up
@@ -129,6 +154,11 @@ public class ChatController extends MapController {
     fetchMessage(suspect);
   }
 
+  /**
+   * Fetches a response message from the specified suspect using the GPT model.
+   *
+   * @param current The suspect for whom to fetch the response message.
+   */
   private void fetchMessage(Suspect current) {
     // Initialize the task to fetch the voice and message.
     Task<Void> task =
@@ -164,6 +194,14 @@ public class ChatController extends MapController {
     new Thread(task).start();
   }
 
+  /**
+   * Adds a message to the interaction log for a specified conversation and updates the UI.
+   *
+   * @param message The message content to add.
+   * @param conversation The suspect involved in the conversation.
+   * @param from The source of the message (user or suspect).
+   * @param newLineBefore Whether to add a new line before the message in the log.
+   */
   private void addMessage(
       String message, Suspect conversation, Suspect from, boolean newLineBefore) {
     GameState state = App.getGameState();
@@ -190,6 +228,11 @@ public class ChatController extends MapController {
     }
   }
 
+  /**
+   * Prepares the introductory message and UI for a specified suspect.
+   *
+   * @param suspect The suspect with whom the user will interact.
+   */
   public void enterUser(Suspect suspect) {
     // Prepare the introductory message based on the suspect
     String intro;
@@ -226,12 +269,24 @@ public class ChatController extends MapController {
     suspectLabel.setText(enumToPrefix(suspect) + " " + enumToName(suspect));
   }
 
+  /**
+   * Checks if the given suspect is an actor in the game.
+   *
+   * @param objectType The suspect to check.
+   * @return True if the suspect is an actor (NIECE, AUNT, or GARDENER), false otherwise.
+   */
   private boolean isActor(Suspect objectType) {
     return objectType == Suspect.NIECE
         || objectType == Suspect.AUNT
         || objectType == Suspect.GARDENER;
   }
 
+  /**
+   * Adds a log entry to the chat log area.
+   *
+   * @param log The interaction log to be added.
+   * @param newLineBefore If true, adds a new line before the log entry.
+   */
   private void addLog(InteractionLog log, boolean newLineBefore) {
     if (newLineBefore) {
       logArea.appendText("\n");
@@ -242,6 +297,12 @@ public class ChatController extends MapController {
     logArea.append(log.message(), "");
   }
 
+  /**
+   * Initiates a dialog with the selected suspect.
+   *
+   * @param intro The introductory message to be displayed.
+   * @param suspect The suspect to interact with.
+   */
   private void startDialog(String intro, Suspect suspect) {
     GameState state = App.getGameState();
 
@@ -294,11 +355,18 @@ public class ChatController extends MapController {
     isGuessReadyAndUpdate();
   }
 
+  /** Increases the count of people interacted with in the game state. */
   private void increasePersonAmount() {
     App.getGameState().increasePeople();
     isGuessReadyAndUpdate();
   }
 
+  /**
+   * Creates a chat completion request for the given suspect.
+   *
+   * @param suspect The suspect for whom the chat completion request is to be created.
+   * @return A configured ChatCompletionRequest for the specified suspect.
+   */
   private ChatCompletionRequest getChatCompletionRequest(Suspect suspect) {
     ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest(App.getConfig());
 

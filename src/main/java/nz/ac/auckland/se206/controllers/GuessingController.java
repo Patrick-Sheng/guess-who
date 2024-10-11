@@ -35,6 +35,10 @@ public class GuessingController extends ButtonController {
   private boolean foundSuspect;
   private boolean foundExplanation;
 
+  /**
+   * Initializes the guessing controller by setting the visibility of UI elements, initializing
+   * state variables, and adding a listener to the explanation text area.
+   */
   @FXML
   public void initialize() {
     paneTimeIsUp.setVisible(false); // Hide the "time is up" pane initially
@@ -60,17 +64,28 @@ public class GuessingController extends ButtonController {
             });
   }
 
+  /** Disables the submit button and sets its style to indicate it is inactive. */
   public void disableButton() {
     submitButton.setStyle("-fx-background-color: darkred; -fx-text-fill: white;");
     submitButton.setDisable(true);
     submitButton.setOpacity(1f);
   }
 
+  /** Enables the submit button and updates its style to indicate it is active. */
   public void enableButton() {
     submitButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
     submitButton.setDisable(false);
   }
 
+  /**
+   * Updates the timer label with the remaining time and changes its color. If the time reaches
+   * zero, it triggers the time-up event.
+   *
+   * @param time the remaining time in seconds
+   * @param red the red component of the timer text color
+   * @param green the green component of the timer text color
+   * @param blue the blue component of the timer text color
+   */
   public void updateLblTimer(int time, int red, int green, int blue) {
     if (time == 0) {
       timeIsUp(); // If time is up, trigger the time-up event
@@ -84,6 +99,10 @@ public class GuessingController extends ButtonController {
     timerLabel.setText(String.format("Time Left: %02d:%02d", minutes, seconds));
   }
 
+  /**
+   * Handles the event when the time is up, stops the timer, speaks a notification to the user, and
+   * updates the UI accordingly.
+   */
   private void timeIsUp() {
     App.getGameState().stopTimer();
 
@@ -105,40 +124,57 @@ public class GuessingController extends ButtonController {
     }
   }
 
+  /**
+   * Checks if the user has provided a valid response (both a suspect and an explanation).
+   *
+   * @return true if the response is not valid; false otherwise
+   */
   private boolean isNotValidResponse() {
     return !foundSuspect || !foundExplanation;
   }
 
+  /** Handles the user's choice of the Aunt as a suspect. */
   @FXML
   private void chooseAunt() {
     runChoose(Suspect.AUNT);
   }
 
+  /** Highlights the Aunt suspect when the user hovers over it. */
   @FXML
   private void choosingAunt() {
     runHighlight(Suspect.AUNT);
   }
 
+  /** Handles the user's choice of the Gardener as a suspect. */
   @FXML
   private void chooseGardener() {
     runChoose(Suspect.GARDENER);
   }
 
+  /** Highlights the Gardener suspect when the user hovers over it. */
   @FXML
   private void choosingGardener() {
     runHighlight(Suspect.GARDENER);
   }
 
+  /** Handles the user's choice of the Niece as a suspect. */
   @FXML
   private void chooseNiece() {
     runChoose(Suspect.NIECE);
   }
 
+  /** Highlights the Niece suspect when the user hovers over it. */
   @FXML
   private void choosingNiece() {
     runHighlight(Suspect.NIECE);
   }
 
+  /**
+   * Processes the user's selection of a suspect and enables the submit button if both a suspect and
+   * an explanation have been provided.
+   *
+   * @param suspect the selected suspect
+   */
   private void runChoose(Suspect suspect) {
     chosenSuspect = suspect;
     foundSuspect = true;
@@ -151,22 +187,38 @@ public class GuessingController extends ButtonController {
     highlightCharacterPane(suspect); // Highlight the selected suspect's image
   }
 
+  /**
+   * Highlights the selected suspect's image if no suspect has been chosen yet.
+   *
+   * @param suspect the suspect to highlight
+   */
   private void runHighlight(Suspect suspect) {
     if (chosenSuspect == null) {
       highlightCharacterPane(suspect);
     }
   }
 
+  /**
+   * Updates the label to display the name of the selected suspect.
+   *
+   * @param suspectName the name of the chosen suspect
+   */
   private void setSelectedSuspect(String suspectName) {
     chosenSuspectLabel.setText("Selected Suspect: " + suspectName);
   }
 
+  /**
+   * Adjusts the opacity of suspect rectangles based on the chosen suspect.
+   *
+   * @param suspect the suspect whose pane will be highlighted
+   */
   private void highlightCharacterPane(Suspect suspect) {
     rectAunt.setOpacity(suspect == Suspect.AUNT ? 0 : 0.5);
     rectGardener.setOpacity(suspect == Suspect.GARDENER ? 0 : 0.5);
     rectNiece.setOpacity(suspect == Suspect.NIECE ? 0 : 0.5);
   }
 
+  /** Resets the opacity of suspect rectangles when exiting the choosing state. */
   @FXML
   private void exitChoosing() {
     if (chosenSuspect == null) {
@@ -176,6 +228,10 @@ public class GuessingController extends ButtonController {
     }
   }
 
+  /**
+   * Submits the user's feedback (chosen suspect and explanation) and navigates to the appropriate
+   * end game scene.
+   */
   @FXML
   private void onSubmitFeedback() {
     App.getGameState().stopTimer();
@@ -217,6 +273,10 @@ public class GuessingController extends ButtonController {
     new Thread(task).start();
   }
 
+  /**
+   * Moves to the next scene based on the user's responses. If the responses are not valid,
+   * navigates back to the main menu; otherwise, submits the feedback.
+   */
   @FXML
   public void onMoveToNextScene() {
     App.getGameState().stopTimer(); // Stop the game timer

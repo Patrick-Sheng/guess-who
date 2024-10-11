@@ -39,6 +39,10 @@ public class GameOverController extends ButtonController {
 
   private int attempts = 0;
 
+  /**
+   * Initializes the GameOverController. Sets all images and feedback grids to invisible at the
+   * start of the game over state.
+   */
   @FXML
   public void initialize() {
     // Disable image when first enter the game over state
@@ -49,6 +53,11 @@ public class GameOverController extends ButtonController {
     feedbackGrid.setVisible(false);
   }
 
+  /**
+   * Sets the game over image and subtitle based on the selected suspect.
+   *
+   * @param suspect The suspect that triggered the game over state.
+   */
   public void setGameOverImage(Suspect suspect) {
     // Displays the corresponding image, shows the feedback text area if necessary, and updates the
     // subtitle.
@@ -95,6 +104,11 @@ public class GameOverController extends ButtonController {
     }
   }
 
+  /**
+   * Sets the feedback prompt based on the JSON feedback received after the game.
+   *
+   * @param feedback A JSON string containing the feedback information.
+   */
   public void setFeedbackPrompt(String feedback) {
     if (attempts > 10) {
       System.err.println("Something went horribly wrong, returning!");
@@ -160,6 +174,12 @@ public class GameOverController extends ButtonController {
     }
   }
 
+  /**
+   * Retrieves the corresponding Text object for a given FeedbackType.
+   *
+   * @param type The FeedbackType for which to retrieve the Text object.
+   * @return The corresponding Text object, or null if none exists.
+   */
   public Text getTextFromEnum(FeedbackType type) {
     switch (type) {
       case PastLover:
@@ -177,6 +197,12 @@ public class GameOverController extends ButtonController {
     }
   }
 
+  /**
+   * Retrieves the corresponding ImageView for a given FeedbackType.
+   *
+   * @param type The FeedbackType for which to retrieve the ImageView.
+   * @return The corresponding ImageView, or null if none exists.
+   */
   public ImageView getCheckFromEnum(FeedbackType type) {
     switch (type) {
       case PastLover:
@@ -194,6 +220,13 @@ public class GameOverController extends ButtonController {
     }
   }
 
+  /**
+   * Converts a string input to the corresponding SuccessfulPoint enum.
+   *
+   * @param input The input string to convert.
+   * @return The corresponding SuccessfulPoint enum.
+   * @throws IllegalArgumentException if no matching enum constant is found.
+   */
   public static SuccessfulPoint successfulFromString(String input) {
     for (SuccessfulPoint enumValue : SuccessfulPoint.values()) {
       if (enumValue.name().equalsIgnoreCase(input)) {
@@ -203,6 +236,13 @@ public class GameOverController extends ButtonController {
     throw new IllegalArgumentException("No success enum constant matches the input: " + input);
   }
 
+  /**
+   * Converts a string input to the corresponding FeedbackType enum.
+   *
+   * @param input The input string to convert.
+   * @return The corresponding FeedbackType enum.
+   * @throws IllegalArgumentException if no matching enum constant is found.
+   */
   public static FeedbackType feedbackFromString(String input) {
     for (FeedbackType enumValue : FeedbackType.values()) {
       if (enumValue.name().equalsIgnoreCase(input)) {
@@ -212,6 +252,7 @@ public class GameOverController extends ButtonController {
     throw new IllegalArgumentException("No feedback enum constant matches the input: " + input);
   }
 
+  /** Navigates back to the main menu. */
   @FXML
   public void backToMenu() {
     App.setRoot(SceneState.MAIN_MENU, "Going back to main menu...");

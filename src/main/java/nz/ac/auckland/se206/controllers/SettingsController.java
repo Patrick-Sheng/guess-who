@@ -18,6 +18,11 @@ public class SettingsController extends ButtonController {
   private MediaPlayer music;
   private AudioClip sfx;
 
+  /**
+   * Initializes the settings screen. Sets the volume sliders to the current application volume
+   * levels and configures listeners to update volumes in real-time. Also initializes the mute
+   * button state based on the current mute state of the music.
+   */
   @FXML
   public void initialize() {
     // Get the current music and sound effects instances from the application
@@ -47,6 +52,10 @@ public class SettingsController extends ButtonController {
     music.muteProperty().addListener((observable, oldValue, newValue) -> updateMuteButton());
   }
 
+  /**
+   * Toggles the mute state of the background music when the mute button is clicked. Updates the
+   * application's mute state and adjusts the mute button appearance accordingly.
+   */
   @FXML
   private void onMuteToggle() {
     // Toggle the mute state of the music and update the application's mute state
@@ -58,6 +67,11 @@ public class SettingsController extends ButtonController {
     updateMuteButton();
   }
 
+  /**
+   * Updates the mute button text and style to reflect the current mute state of the background
+   * music. Sets text to "On" and text color to dark red when muted, otherwise sets text to "Off"
+   * and text color to green.
+   */
   private void updateMuteButton() {
     // Update the mute button text and style
     if (music.isMute()) {
@@ -69,6 +83,10 @@ public class SettingsController extends ButtonController {
     }
   }
 
+  /**
+   * Returns to the main menu when the back button is clicked. Displays a message indicating the
+   * navigation.
+   */
   @FXML
   private void onBackButton() {
     App.setRoot(SceneState.MAIN_MENU, "Going back to home page...");
