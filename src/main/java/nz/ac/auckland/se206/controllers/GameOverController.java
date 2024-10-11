@@ -16,7 +16,41 @@ import nz.ac.auckland.se206.enums.Suspect;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/** Controller for the game over screen. */
 public class GameOverController extends ButtonController {
+
+  /**
+   * Converts a string input to the corresponding SuccessfulPoint enum.
+   *
+   * @param input The input string to convert.
+   * @return The corresponding SuccessfulPoint enum.
+   * @throws IllegalArgumentException if no matching enum constant is found.
+   */
+  public static SuccessfulPoint successfulFromString(String input) {
+    for (SuccessfulPoint enumValue : SuccessfulPoint.values()) {
+      if (enumValue.name().equalsIgnoreCase(input)) {
+        return enumValue;
+      }
+    }
+    throw new IllegalArgumentException("No success enum constant matches the input: " + input);
+  }
+
+  /**
+   * Converts a string input to the corresponding FeedbackType enum.
+   *
+   * @param input The input string to convert.
+   * @return The corresponding FeedbackType enum.
+   * @throws IllegalArgumentException if no matching enum constant is found.
+   */
+  public static FeedbackType feedbackFromString(String input) {
+    for (FeedbackType enumValue : FeedbackType.values()) {
+      if (enumValue.name().equalsIgnoreCase(input)) {
+        return enumValue;
+      }
+    }
+    throw new IllegalArgumentException("No feedback enum constant matches the input: " + input);
+  }
+
   @FXML private ImageView continueOther;
   @FXML private ImageView continueAunt;
   @FXML private ImageView imageAunt;
@@ -111,7 +145,7 @@ public class GameOverController extends ButtonController {
    * @param feedback A JSON string containing the feedback information.
    */
   public void setFeedbackPrompt(String feedback) {
-    if (attempts > 10) {
+    if (attempts > 10) { // If we've tried too many times, just return
       System.err.println("Something went horribly wrong, returning!");
       return;
     }
@@ -121,6 +155,7 @@ public class GameOverController extends ButtonController {
 
       JSONArray points = jsonObject.getJSONArray("points");
 
+      // Load images for the feedback
       Image metCriteriaImage =
           new Image(App.class.getResource("/images/buttons/checked.png").toExternalForm());
       Image notMetCriteriaImage =
@@ -129,6 +164,7 @@ public class GameOverController extends ButtonController {
       int correct = 0;
       int pointCount = points.length();
 
+      // Loop through each point in the feedback
       for (int i = 0; i < pointCount; i++) {
         JSONObject point = points.getJSONObject(i);
 
@@ -156,13 +192,13 @@ public class GameOverController extends ButtonController {
           image.setImage(status ? metCriteriaImage : notMetCriteriaImage);
         }
       }
-
       if (pointCount == 5) {
         rating.setText(correct + " Out Of 5");
 
         StringBuilder builder = new StringBuilder();
         builder.append("The detective's reasoning is ");
 
+        // Determine the detective's reasoning based on the number of correct points
         if (correct >= 5) {
           builder.append("correct");
         } else if (correct >= 3) {
@@ -197,6 +233,7 @@ public class GameOverController extends ButtonController {
    * @return The corresponding Text object, or null if none exists.
    */
   public Text getTextFromEnum(FeedbackType type) {
+    //  Switch statement to determine which text object to return
     switch (type) {
       case PastLover:
         return point1Text;
@@ -220,6 +257,7 @@ public class GameOverController extends ButtonController {
    * @return The corresponding ImageView, or null if none exists.
    */
   public ImageView getCheckFromEnum(FeedbackType type) {
+    // Load relevant enum for images in gameover screen.
     switch (type) {
       case PastLover:
         return point1Image;
@@ -234,38 +272,6 @@ public class GameOverController extends ButtonController {
       default:
         return null;
     }
-  }
-
-  /**
-   * Converts a string input to the corresponding SuccessfulPoint enum.
-   *
-   * @param input The input string to convert.
-   * @return The corresponding SuccessfulPoint enum.
-   * @throws IllegalArgumentException if no matching enum constant is found.
-   */
-  public static SuccessfulPoint successfulFromString(String input) {
-    for (SuccessfulPoint enumValue : SuccessfulPoint.values()) {
-      if (enumValue.name().equalsIgnoreCase(input)) {
-        return enumValue;
-      }
-    }
-    throw new IllegalArgumentException("No success enum constant matches the input: " + input);
-  }
-
-  /**
-   * Converts a string input to the corresponding FeedbackType enum.
-   *
-   * @param input The input string to convert.
-   * @return The corresponding FeedbackType enum.
-   * @throws IllegalArgumentException if no matching enum constant is found.
-   */
-  public static FeedbackType feedbackFromString(String input) {
-    for (FeedbackType enumValue : FeedbackType.values()) {
-      if (enumValue.name().equalsIgnoreCase(input)) {
-        return enumValue;
-      }
-    }
-    throw new IllegalArgumentException("No feedback enum constant matches the input: " + input);
   }
 
   /** Navigates back to the main menu. */

@@ -18,7 +18,7 @@
             <Font name="Georgia" size="36.0" />
          </font>
       </Label>
-      <Pane onMouseClicked="#nextScene" prefHeight="768.0" prefWidth="768.0">
+      <Pane onMouseClicked="#goNextScene" prefHeight="768.0" prefWidth="768.0">
          <children>
             <Pane layoutX="72.0" layoutY="193.0" prefHeight="356.0" prefWidth="624.0">
                <children>

@@ -10,6 +10,7 @@ import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
+/** Controller for the settings screen. */
 public class SettingsController extends ButtonController {
   @FXML private Slider volumeSlider;
   @FXML private Slider sfxSlider;
