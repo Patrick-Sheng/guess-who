@@ -117,7 +117,10 @@ public class GameOverController extends ButtonController {
       Image notMetCriteriaImage =
           new Image(App.class.getResource("/images/buttons/unchecked.png").toExternalForm());
 
-      for (int i = 0; i < points.length(); i++) {
+      int correct = 0;
+      int pointCount = points.length();
+
+      for (int i = 0; i < pointCount; i++) {
         JSONObject point = points.getJSONObject(i);
 
         String typeString = point.getString("type");
@@ -125,6 +128,10 @@ public class GameOverController extends ButtonController {
 
         String statusString = point.getString("status");
         boolean status = successfulFromString(statusString) == SuccessfulPoint.Yes;
+
+        if (status) {
+          correct++;
+        }
 
         String action = point.getString("action");
 
@@ -139,6 +146,11 @@ public class GameOverController extends ButtonController {
         if (image != null) {
           image.setImage(status ? metCriteriaImage : notMetCriteriaImage);
         }
+      }
+
+      if (pointCount == 5) {
+        ratingAmount = correct;
+        rating.setText(ratingAmount + " Out Of 5");
       }
     } catch (Exception e) {
       System.err.println("Error parsing JSON: " + e.getMessage());

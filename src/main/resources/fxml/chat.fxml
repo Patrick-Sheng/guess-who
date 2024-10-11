@@ -58,7 +58,7 @@
               <Font name="Georgia" size="12.0" />
             </font>
           </TextField>
-          <Button fx:id="chatButton" alignment="CENTER" onMouseClicked="#onEnter" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" text="Send Chat" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="virtualized-scroll-pane inline-css-text-area" style="-fx-background-color: #FBE6B1">
+          <Button fx:id="chatButton" alignment="CENTER" onMouseClicked="#onEnter" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="134.0" text="Send Chat" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" styleClass="highlight-image">
             <font>
               <Font name="Georgia Bold" size="12.0" />
             </font>

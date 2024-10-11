@@ -27,7 +27,7 @@
   <ImageView fx:id="imageAunt" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
     <Image url="@../images/backgrounds/aunt_guessed.jpeg" />
   </ImageView>
-  <GridPane fx:id="feedbackGrid" alignment="CENTER" layoutX="63.0" layoutY="253.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="672.0" styleClass="feedback-pane">
+  <GridPane fx:id="feedbackGrid" alignment="CENTER" layoutX="30.0" layoutY="252.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="705.0" styleClass="feedback-pane">
     <columnConstraints>
       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" prefWidth="421.0" />
     </columnConstraints>
@@ -59,9 +59,9 @@
           </Text>
           <GridPane prefHeight="45.0" prefWidth="618.0" styleClass="grid-pane" GridPane.rowIndex="1">
             <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="61.666656494140625" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="139.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="470.66666666666674" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="70.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="150.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.0" minWidth="10.0" prefWidth="480.0" />
             </columnConstraints>
             <rowConstraints>
               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -240,7 +240,7 @@
               </Text>
               <VBox alignment="CENTER" prefWidth="278.0" styleClass="virtualized-scroll-pane" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <TextFlow maxWidth="-Infinity" prefHeight="40.0" prefWidth="465.0" style="-fx-text-alignment: center;" styleClass="black-text-area" textAlignment="CENTER" VBox.vgrow="ALWAYS">
-                  <Text fx:id="point5Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <Text fx:id="point5Text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="53.06837463378906" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                     <font>
                       <Font name="Georgia" size="12.0" />
                     </font>
