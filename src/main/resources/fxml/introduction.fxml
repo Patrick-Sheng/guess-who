@@ -56,7 +56,7 @@
             </Label>
          </children>
       </Pane>
-      <Label fx:id="labelClickInstruction" alignment="CENTER" layoutX="141.0" layoutY="132.0" onMouseClicked="#nextScene" prefHeight="55.0" prefWidth="486.0" styleClass="glow-text" text="Click anywhere or press anykey to go next" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="labelClickInstruction" alignment="CENTER" layoutX="141.0" layoutY="132.0" onMouseClicked="#goNextScene" prefHeight="55.0" prefWidth="486.0" styleClass="glow-text" text="Click anywhere or press anykey to go next" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Georgia Italic" size="23.0" />
          </font>
