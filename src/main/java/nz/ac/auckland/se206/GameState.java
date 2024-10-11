@@ -21,6 +21,12 @@ import nz.ac.auckland.se206.models.InteractionLog;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.timer.CountdownTimer;
 
+/**
+ * This class represents the state of the game. It stores the current state of the game, the timer,
+ * the controllers, the chat messages, the interaction logs, the selected suspect, the chosen
+ * suspect, the number of objects interfaced, the number of people interfaced, the colour of the
+ * timer, and the message.
+ */
 public class GameState {
   private CountdownTimer timer;
 
@@ -72,18 +78,30 @@ public class GameState {
     timer.start();
   }
 
+  /**
+   * Stops the timer if it is running. This method is used when the game moves to a different state.
+   */
   public void stopTimer() {
     if (timer != null) {
       timer.stop();
     }
   }
 
+  /**
+   * Calls the updateLabel method in the timer class to update the timer label. This method is used
+   * for manual timer updates.
+   */
   public void callManualTimerUpdate() {
     if (timer != null) {
       timer.updateLabel();
     }
   }
 
+  /**
+   * Updates the timer label in relevant controller based on the current state of the game.
+   *
+   * @param time the time to update the timer label with.
+   */
   public void updateTimer(int time) {
     SceneState currentState = App.getCurrentState();
 
@@ -122,6 +140,9 @@ public class GameState {
     }
   }
 
+  /**
+   * Changes the colour of the timer at different increments based on the current state of the game.
+   */
   public void changeTimerColor() {
     SceneState currentState = App.getCurrentState();
 
@@ -152,6 +173,10 @@ public class GameState {
     setAiProxyConfig();
   }
 
+  /**
+   * Sets the AI proxy configuration for the GPT model. This method is used to configure the GPT
+   * model with specific parameters.
+   */
   public void setAiProxyConfig() {
 
     Task<Void> setGptModelTask =
@@ -188,6 +213,10 @@ public class GameState {
     return PromptEngineering.getPrompt("feedback_instruction.txt", null);
   }
 
+  /**
+   * Sends the explanation to the GPT model to generate a response. This method is used to get the
+   * explanation for the user's message.
+   */
   public void sendExplaination() {
     // Create a background task to get the explanation from the GPT model
     Task<String> getExplanationTask =
@@ -250,6 +279,11 @@ public class GameState {
     }
   }
 
+  /**
+   * Passes the feedback prompt to the game over controller.
+   *
+   * @param prompt the feedback prompt to pass.
+   */
   public void updateFeedbackPrompt(String prompt) {
     if (gameOverController != null) {
       gameOverController.setFeedbackPrompt(prompt);
@@ -320,6 +354,10 @@ public class GameState {
     return gameOverController;
   }
 
+  /**
+   * Resets the colour of the timer to the default colour. This method is used when the timer is
+   * reset.
+   */
   public void resetColour() {
     red = 50;
     green = 255;

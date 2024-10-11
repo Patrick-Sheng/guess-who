@@ -42,6 +42,11 @@ public class TextToSpeech {
     processQueue();
   }
 
+  /**
+   * Passes the text to the speak method with the default voice and provider.
+   *
+   * @param text The text to speak.
+   */
   public static void speak(final String text) {
     speak(text, Voice.OPENAI_ALLOY, Provider.OPENAI);
   }
@@ -50,8 +55,13 @@ public class TextToSpeech {
     muted = state;
   }
 
-  ////
-
+  /**
+   * Speak the given message using the given voice and provider.
+   *
+   * @param message The message to speak.
+   * @param voice The voice to use.
+   * @param provider The provider to use.
+   */
   public static void speak(String message, Voice voice, Provider provider) {
 
     if (muted) {
