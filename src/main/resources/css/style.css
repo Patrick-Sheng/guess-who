@@ -1,169 +1,169 @@
 .highlight-image {
-  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.1), 20, 0.5, 0, 0) !important;
+    -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.1), 20, 0.5, 0, 0) !important;
 }
 
 .highlight-image:hover {
-  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.5), 30, 0.5, 0, 0) !important;
+    -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.5), 30, 0.5, 0, 0) !important;
 }
 
 .highlight-image:pressed {
-  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.75), 40, 0.5, 0, 0) !important;
+    -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 0.75), 40, 0.5, 0, 0) !important;
 }
 
 .pane {
-  -fx-background-color: #1a1a1a;
-  background-color: #1a1a1a;
+    -fx-background-color: #1a1a1a;
+    background-color: #1a1a1a;
 }
 
 .label {
-  -fx-font-family: 'Georgia', serif;
-  font-family: 'Georgia', serif;
-  -fx-text-fill: #FEFCCD;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
+    -fx-font-family: 'Georgia', serif;
+    font-family: 'Georgia', serif;
+    -fx-text-fill: #FEFCCD;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
 }
 
 .grid-pane {
-  -fx-background-color: rgba(7, 60, 140, 0.2);
-  background-color: rgba(7, 60, 140, 0.2);
-  -fx-border-radius: 15px;
-  border-radius: 15px;
-  -fx-background-radius: 10px;
-  -fx-padding: 10px;
-  padding: 10px;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
+    -fx-background-color: rgba(7, 60, 140, 0.2);
+    background-color: rgba(7, 60, 140, 0.2);
+    -fx-border-radius: 15px;
+    border-radius: 15px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
 }
 
 .feedback-pane {
-  -fx-background-color: rgba(135, 93, 60, 0.2);
-  background-color: rgba(135, 93, 60, 0.2);
-  -fx-border-radius: 20px;
-  border-radius: 20px;
-  -fx-background-radius: 10px;
-  -fx-padding: 10px;
-  padding: 10px;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
+    -fx-background-color: rgba(135, 93, 60, 0.2);
+    background-color: rgba(135, 93, 60, 0.2);
+    -fx-border-radius: 20px;
+    border-radius: 20px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
 }
 
 .chat-pane {
-  -fx-background-color: rgba(135, 93, 60, 0.6);
-  background-color: rgba(135, 93, 60, 0.6);
-  -fx-border-radius: 20px;
-  border-radius: 20px;
-  -fx-background-radius: 10px;
-  -fx-padding: 10px;
-  padding: 10px;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
+    -fx-background-color: rgba(135, 93, 60, 0.6);
+    background-color: rgba(135, 93, 60, 0.6);
+    -fx-border-radius: 20px;
+    border-radius: 20px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
 }
 
 .slider {
-  -fx-control-inner-background: #FEFCCD;
-  -fx-control-inner-background-alt: #FFFFFF;
-  -fx-background-color: linear-gradient(to bottom, #27576E, #1A3D57);
-  background-color: linear-gradient(to bottom, #27576E, #1A3D57);
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
+    -fx-control-inner-background: #FEFCCD;
+    -fx-control-inner-background-alt: #FFFFFF;
+    -fx-background-color: linear-gradient(to bottom, #27576E, #1A3D57);
+    background-color: linear-gradient(to bottom, #27576E, #1A3D57);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
 }
 
 .toggle-button {
-  -fx-background-color: #2b2b2b, linear-gradient(to bottom, #27576E, #1A3D57);
-  background-color: #2b2b2b, linear-gradient(to bottom, #27576E, #1A3D57);
-  -fx-text-fill: #FEFCCD;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
+    -fx-background-color: #2b2b2b, linear-gradient(to bottom, #27576E, #1A3D57);
+    background-color: #2b2b2b, linear-gradient(to bottom, #27576E, #1A3D57);
+    -fx-text-fill: #FEFCCD;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
 }
 
 .image-view {
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);
 }
 
 .credits-label {
-  -fx-text-fill: #FEFCCD;
-  -fx-font-family: 'Georgia', serif;
-  font-family: 'Georgia', serif;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
+    -fx-text-fill: #FEFCCD;
+    -fx-font-family: 'Georgia', serif;
+    font-family: 'Georgia', serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 5, 0.5, 0, 0);
 }
 
 .map-text {
-  -fx-font-family: 'Georgia', serif;
-  -fx-font-size: 20px;
-  -fx-fill: #171714;
-  -fx-font-weight: bold;
-  font-family: 'Georgia', serif;
-  font-size: 20px;
-  fill: #171714;
-  font-weight: bold;
-  -fx-text-alignment: center;
-  -fx-alignment: center;
+    -fx-font-family: 'Georgia', serif;
+    -fx-font-size: 20px;
+    -fx-fill: #171714;
+    -fx-font-weight: bold;
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    fill: #171714;
+    font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
 }
 
 .highlight-clue {
-  -fx-effect: dropshadow(gaussian, rgba(14, 14, 14, 0.75), 30, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(14, 14, 14, 0.75), 30, 0.5, 0, 0);
 }
 
 .highlight-clue:hover {
-  -fx-effect: dropshadow(gaussian, rgba(239, 207, 80, 0.919), 20, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(239, 207, 80, 0.919), 20, 0.5, 0, 0);
 }
 
 .highlight-clue:pressed {
-  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
 }
 
 .lighter-clue {
-  -fx-effect: dropshadow(gaussian, rgba(200, 200, 200, 1), 40, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(200, 200, 200, 1), 40, 0.5, 0, 0);
 }
 
 .lighter-clue:hover {
-  -fx-effect: dropshadow(gaussian, rgba(239, 207, 80, 0.919), 20, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(239, 207, 80, 0.919), 20, 0.5, 0, 0);
 }
 
 .lighter-clue:pressed {
-  -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(249, 245, 229, 1), 40, 0.5, 0, 0);
 }
 
 .scroll-bar:vertical,
 .scroll-bar:horizontal {
-  -fx-pref-width: 0;
-  -fx-pref-height: 0;
-  -fx-opacity: 0;
-  opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+    opacity: 0;
 }
 
 .inline-css-text-area {
-  -fx-padding: 5;
-  padding: 5;
-  -fx-background-radius: 5;
-  -fx-background-color: #FBE6B1;
-  background-color: #FBE6B1;
+    -fx-padding: 5;
+    padding: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: #FBE6B1;
+    background-color: #FBE6B1;
 }
 
 .virtualized-scroll-pane {
-  -fx-background-radius: 5;
+    -fx-background-radius: 5;
 }
 
 .rounded-image {
-  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0.5, 0, 0);
-  -fx-clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
-  clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0.5, 0, 0);
+    -fx-clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
+    clip: "M 0 0 L 200 0 Q 200 0 200 50 L 200 200 Q 200 200 150 200 L 0 200 Q 0 200 0 150 Z";
 }
 
 .glow-text {
-  -fx-font-family: "Georgia Italic";
-  font-family: "Georgia Italic";
-  -fx-font-size: 17pt;
-  font-size: 17pt;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 0, 0, 0, 0);
+    -fx-font-family: "Georgia Italic";
+    font-family: "Georgia Italic";
+    -fx-font-size: 17pt;
+    font-size: 17pt;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0), 0, 0, 0, 0);
 }
 
 .glow-text:hover {
-  -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 20, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 20, 0.5, 0, 0);
 }
 
 .text-field-yellow {
-  -fx-control-inner-background: #FBE6B1;
+    -fx-control-inner-background: #FBE6B1;
 }
 
 .black-text-area {
-  -fx-padding: 5;
-  padding: 5;
-  -fx-background-radius: 5;
-  -fx-background-color: #1A3D57;
-  background-color: #1A3D57;
+    -fx-padding: 5;
+    padding: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: #1A3D57;
+    background-color: #1A3D57;
 }
