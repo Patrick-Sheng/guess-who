@@ -39,7 +39,7 @@ Clues:
   LoveLetter: Has the detective connected the love letter to Beatrice?
   PerfumeScent: Has the detective explored the scent of the perfume?
 
-You must select "Yes" if they have evaluated the point correctly, or "No" if they have not, in the status field. Relate each point to its type field.
+You must select "Yes" if and only if they have evaluated the point correctly, or "No" if they have not, in the status field. Relate each point to its type field.
 In the action field, write feedback relating to the point within 50 words.
 Be flexible in your evaluation. If the detective understands or has gathered evidence that suggests or hints at the main idea, consider it covered.
 In the additional section, add what they could improve on within 20 words. If and only if they have covered all points, you must say "No improvements necessary!".
