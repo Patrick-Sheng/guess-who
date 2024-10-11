@@ -23,8 +23,11 @@ public class RoomController extends MapController {
   @FXML private ImageView emeraldRoom;
   @FXML private ImageView letterCloseUp;
   @FXML private ImageView reportCloseUp;
+  @FXML private ImageView medicineBill;
   @FXML private ImageView report;
   @FXML private ImageView yellowPaper;
+  @FXML private ImageView arrowRight;
+  @FXML private ImageView arrowLeft;
   @FXML private GridPane revealLetterGrid;
 
   private Boolean isClueClick;
@@ -85,6 +88,24 @@ public class RoomController extends MapController {
     onClue(event);
     App.playCustomSoundEffect("paper.mp3");
     setClue(reportCloseUp);
+    arrowLeft.setVisible(false);
+    arrowRight.setVisible(true);
+  }
+
+  @FXML
+  public void arrowClick(MouseEvent event) {
+    ImageView clickedArrow = (ImageView) event.getSource();
+    if (clickedArrow.getId().equals("arrowLeft")) {
+      setClue(reportCloseUp);
+      App.playCustomSoundEffect("paper.mp3");
+      arrowLeft.setVisible(false);
+      arrowRight.setVisible(true);
+    } else {
+      setClue(medicineBill);
+      App.playCustomSoundEffect("paper.mp3");
+      arrowLeft.setVisible(true);
+      arrowRight.setVisible(false);
+    }
   }
 
   private void onClue(MouseEvent event) {
@@ -114,11 +135,14 @@ public class RoomController extends MapController {
     letterCloseUp.setVisible(false);
     emeraldRoom.setVisible(false);
     reportCloseUp.setVisible(false);
+    medicineBill.setVisible(false);
     report.setVisible(false);
     yellowPaper.setVisible(false);
     revealLetterGrid.setVisible(false);
     roseLabel.setVisible(false);
     shoePrintLabel.setVisible(false);
+    arrowLeft.setVisible(false);
+    arrowRight.setVisible(false);
 
     // Shows the specified clue image
     image.setVisible(true);
