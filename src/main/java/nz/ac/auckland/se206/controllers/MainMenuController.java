@@ -30,6 +30,7 @@ public class MainMenuController extends ButtonController {
     if (!hasEnteredRoom) {
       hasEnteredRoom = true;
       App.setRoot(SceneState.INTRODUCTION, "Playing introduction...");
+      App.getGameState().startTimer(300);
     }
   }
 }

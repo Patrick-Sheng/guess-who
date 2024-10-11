@@ -13,6 +13,7 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.GameOverController;
 import nz.ac.auckland.se206.controllers.GuessingController;
+import nz.ac.auckland.se206.controllers.IntroductionController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
@@ -31,6 +32,7 @@ public class GameState {
 
   private ChatCompletionRequest chatCompletionRequest;
 
+  private IntroductionController introductionController;
   private GuessingController guessingController;
   private GameOverController gameOverController;
 
@@ -108,6 +110,11 @@ public class GameState {
             guessingController.updateLblTimer(time, red, green, blue);
           }
           break;
+        case INTRODUCTION:
+          if (introductionController != null) {
+            introductionController.updateLblTimer(time, red, green, blue);
+          }
+          break;
         default:
           System.out.println("Other: " + time);
           break;
@@ -119,7 +126,9 @@ public class GameState {
     SceneState currentState = App.getCurrentState();
 
     // Sets how fast colours change based on current state
-    if (currentState.equals(SceneState.START_GAME) || currentState.equals(SceneState.CHAT)) {
+    if (currentState.equals(SceneState.START_GAME)
+        || currentState.equals(SceneState.CHAT)
+        || currentState.equals(SceneState.INTRODUCTION)) {
       if (blue - 2 > 31) {
         blue -= 2;
       } else if (red + 2 < 256) {
@@ -277,6 +286,10 @@ public class GameState {
 
   public ChatController getChatController() {
     return chatController;
+  }
+
+  public void setIntroductionController(IntroductionController introductionController) {
+    this.introductionController = introductionController;
   }
 
   public void setGameOverController(GameOverController gameOverController) {
