@@ -17,7 +17,7 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class RoomController extends MapController {
   @FXML private Pane paneRoom;
   @FXML private Pane paneClue;
-  @FXML private Label fabricLabel;
+  @FXML private Label shoePrintLabel;
   @FXML private Label roseLabel;
   @FXML private ImageView bagOpen;
   @FXML private ImageView emeraldRoom;
@@ -118,7 +118,7 @@ public class RoomController extends MapController {
     yellowPaper.setVisible(false);
     revealLetterGrid.setVisible(false);
     roseLabel.setVisible(false);
-    fabricLabel.setVisible(false);
+    shoePrintLabel.setVisible(false);
 
     // Shows the specified clue image
     image.setVisible(true);
@@ -188,8 +188,9 @@ public class RoomController extends MapController {
   }
 
   @FXML
-  private void clickFabric() {
-    fabricLabel.setVisible(true);
+  private void clickShoePrint() {
+    shoePrintLabel.setVisible(true);
+    App.playCustomSoundEffect("mud.mp3");
   }
 
   @FXML
