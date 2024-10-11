@@ -4,18 +4,18 @@
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
-  xmlns="http://javafx.com/javafx/11.0.14-internal"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
-  <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
-    <Image url="@../images/backgrounds/title.jpeg" />
-  </ImageView>
-  <ImageView fitHeight="56.0" fitWidth="215.0" layoutX="50.0" layoutY="623.0" onMouseClicked="#onStart" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-    <Image url="@../images/buttons/play.png" />
-  </ImageView>
-  <ImageView fitHeight="56.0" fitWidth="215.0" layoutX="282.0" layoutY="623.0" onMouseClicked="#onSettings" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-    <Image url="@../images/buttons/settings.png" />
-  </ImageView>
-  <ImageView fitHeight="56.0" fitWidth="204.0" layoutX="526.0" layoutY="623.0" onMouseClicked="#onExit" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
-    <Image url="@../images/buttons/exit.png" />
-  </ImageView>
+    xmlns="http://javafx.com/javafx/11.0.14-internal"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainMenuController">
+    <ImageView fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/backgrounds/title.jpeg" />
+    </ImageView>
+    <ImageView fitHeight="56.0" fitWidth="215.0" layoutX="50.0" layoutY="623.0" onMouseClicked="#onStart" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+        <Image url="@../images/buttons/play.png" />
+    </ImageView>
+    <ImageView fitHeight="56.0" fitWidth="215.0" layoutX="282.0" layoutY="623.0" onMouseClicked="#onSettings" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+        <Image url="@../images/buttons/settings.png" />
+    </ImageView>
+    <ImageView fitHeight="56.0" fitWidth="204.0" layoutX="526.0" layoutY="623.0" onMouseClicked="#onExit" onMouseEntered="#handleRectangleEntered" onMouseExited="#handleRectangleExited" pickOnBounds="true" preserveRatio="true" styleClass="highlight-image">
+        <Image url="@../images/buttons/exit.png" />
+    </ImageView>
 </Pane>
