@@ -42,6 +42,9 @@ public class GameState {
   private int objectsInterfaced = 0;
   private int peopleInterfaced = 0;
 
+  private boolean foundRose = false;
+  private boolean foundFootprint = false;
+
   private Suspect selectedSuspect;
   private Suspect chosenSuspect;
 
@@ -145,6 +148,22 @@ public class GameState {
         green -= 10;
       }
     }
+  }
+
+  public boolean hasFoundFootprint() {
+    return foundFootprint;
+  }
+
+  public void setFoundFootprint(boolean foundFootprint) {
+    this.foundFootprint = foundFootprint;
+  }
+
+  public boolean hasFoundRose() {
+    return foundRose;
+  }
+
+  public void setFoundRose(boolean foundRose) {
+    this.foundRose = foundRose;
   }
 
   public void setExplaination(String text) {

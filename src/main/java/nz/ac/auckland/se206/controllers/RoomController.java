@@ -17,6 +17,7 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
@@ -90,6 +91,12 @@ public class RoomController extends MapController {
   public void doorOpen(MouseEvent eventMouse) {
     onClue(eventMouse);
     setClue(emeraldRoom);
+
+    GameState state = App.getGameState();
+    emeraldRoomBackdrop.setVisible(true);
+    roseLabel.setVisible(state.hasFoundRose());
+    shoePrintLabel.setVisible(state.hasFoundFootprint());
+
     TextToSpeech.speak(
         "The oak doors open wide to reveal the room containing the once-treasured necklace.");
 
@@ -195,9 +202,6 @@ public class RoomController extends MapController {
 
     // Shows the specified clue image
     image.setVisible(true);
-    if (image == emeraldRoom) {
-      emeraldRoomBackdrop.setVisible(true);
-    }
   }
 
   @FXML
@@ -270,11 +274,13 @@ public class RoomController extends MapController {
   private void clickShoePrint() {
     shoePrintLabel.setVisible(true);
     App.playCustomSoundEffect("mud.mp3");
+    App.getGameState().setFoundFootprint(true);
   }
 
   @FXML
   private void clickRose() {
     roseLabel.setVisible(true);
     App.playCustomSoundEffect("prick.mp3");
+    App.getGameState().setFoundRose(true);
   }
 }
