@@ -3,14 +3,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.IntroductionController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" onKeyReleased="#onKeyReleased" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.IntroductionController">
    <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="39.0" prefHeight="39.0" prefWidth="624.0" style="-fx-text-fill: #ffffff !important" text="Prelude" textAlignment="CENTER">
+         <font>
+            <Font name="Georgia" size="46.0" />
+         </font>
+      </Label>
+      <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="68.0" layoutY="91.0" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 05:00" textAlignment="CENTER" textFill="#32ff46">
+         <font>
+            <Font name="Georgia" size="36.0" />
+         </font>
+      </Label>
       <Pane onMouseClicked="#nextScene" prefHeight="768.0" prefWidth="768.0">
          <children>
             <Pane layoutX="72.0" layoutY="172.0" prefHeight="356.0" prefWidth="624.0">
@@ -47,40 +54,17 @@
                   <Font name="Georgia" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="labelClickInstruction" alignment="CENTER" layoutX="141.0" layoutY="653.0" prefHeight="55.0" prefWidth="486.0" styleClass="glow-text" text="Click anywhere to go next" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Georgia Italic" size="23.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
-      <Label fx:id="labelSkipIntro" alignment="CENTER" layoutX="607.0" layoutY="651.0" onMouseClicked="#startGame" prefHeight="55.0" prefWidth="122.0" styleClass="glow-text" text="Skip Intro" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="labelClickInstruction" alignment="CENTER" layoutX="141.0" layoutY="132.0" onMouseClicked="#nextScene" prefHeight="55.0" prefWidth="486.0" styleClass="glow-text" text="Click anywhere or press anykey to go next" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Georgia Italic" size="23.0" />
          </font>
       </Label>
-      <GridPane alignment="CENTER" layoutX="76.0" layoutY="44.0" prefHeight="110.0" prefWidth="623.0" styleClass="grid-pane">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="54.200018310546874" minHeight="10.0" prefHeight="28.60001220703125" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="45.8" minHeight="0.0" prefHeight="30.999987792968746" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="62.00000000000001" minHeight="0.0" prefHeight="15.199993896484372" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="72.4" minHeight="0.0" prefHeight="36.79998779296875" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="624.0" style="-fx-text-fill: #ffffff !important" text="Prelude" textAlignment="CENTER" GridPane.rowSpan="3">
-               <font>
-                  <Font name="Georgia" size="46.0" />
-               </font>
-            </Label>
-            <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="631.0" style="-fx-text-fill: #ffffff !important" text="Time Left: 05:00" textAlignment="CENTER" textFill="#32ff46" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Georgia" size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </GridPane>
+      <Label fx:id="labelSkipIntro" alignment="CENTER" layoutX="171.0" layoutY="681.0" onMouseClicked="#startGame" prefHeight="55.0" prefWidth="426.0" styleClass="glow-text" text="Click here to skip intro" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="23.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

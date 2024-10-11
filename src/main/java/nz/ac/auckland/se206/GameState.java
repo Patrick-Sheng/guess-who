@@ -112,7 +112,7 @@ public class GameState {
           break;
         case INTRODUCTION:
           if (introductionController != null) {
-            introductionController.updateLblTimer(time, red, green, blue);
+            introductionController.updateLblTimer(time, 255, 255, 255);
           }
           break;
         default:

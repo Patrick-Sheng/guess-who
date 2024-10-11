@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
@@ -20,20 +21,41 @@ public class IntroductionController extends MapController {
   @FXML Label labelClickInstruction;
   @FXML Label labelSkipIntro;
 
+  private boolean canSkipIntro;
+
   @FXML
   public void initialize() {
     imageEmeraldRoomBefore.setVisible(false);
     imageEmeraldRoomAfter.setVisible(false);
     imageDetectiveHouse.setVisible(false);
+    labelClickInstruction.setVisible(true);
     labelSkipIntro.setVisible(true);
+
+    canSkipIntro = false;
 
     progressImage(imageDetectiveManor, imageFamilyPhoto);
 
     labelDescription.setText(
         "The Worthington family has gathered for a reunion. Celebrating their legacy and heralding"
             + " an exquisite emerald that has been passed down for generations.");
-    labelClickInstruction.setText("Click anywhere to go next");
+    labelClickInstruction.setText("Click anywhere or any key to go next");
+    labelSkipIntro.setText("Click here to skip intro");
     sendTts("The Worthington's were celebrating");
+
+    // Prevent user from spam clicking too fast
+    Thread textThread =
+        new Thread() {
+          public void run() {
+            try {
+              Thread.sleep(1000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+            canSkipIntro = true;
+          }
+        };
+    textThread.setDaemon(true);
+    textThread.start();
   }
 
   public void sendTts(String speech) {
@@ -58,8 +80,8 @@ public class IntroductionController extends MapController {
     } else if (imageDetectiveHouse.isVisible()) {
       progressImage(imageDetectiveHouse, imageDetectiveManor);
       labelDescription.setText("Now, standing outside Worthington Manor, you must find the thief.");
-      labelClickInstruction.setText("Click anywhere to start the game!");
-      labelSkipIntro.setVisible(false);
+      labelClickInstruction.setVisible(false);
+      labelSkipIntro.setText("Click anywhere to start the game!");
       sendTts("Whom now must find the thief");
     } else if (imageDetectiveManor.isVisible()) {
       startGame();
@@ -79,6 +101,14 @@ public class IntroductionController extends MapController {
 
   @FXML
   public void startGame() {
+    if (!canSkipIntro) {
+      return;
+    }
     App.setRoot(SceneState.START_GAME, "Starting game!");
+  }
+
+  @FXML
+  public void onKeyReleased(KeyEvent event) {
+    nextScene();
   }
 }

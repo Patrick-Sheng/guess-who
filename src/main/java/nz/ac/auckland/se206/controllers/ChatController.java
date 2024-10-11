@@ -291,7 +291,6 @@ public class ChatController extends MapController {
     }
 
     // Re/set components to current state
-    userField.clear();
     isGuessReadyAndUpdate();
   }
 
