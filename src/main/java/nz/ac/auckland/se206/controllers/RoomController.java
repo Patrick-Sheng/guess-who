@@ -1,11 +1,21 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Circle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -21,6 +31,7 @@ public class RoomController extends MapController {
   @FXML private Label roseLabel;
   @FXML private ImageView bagOpen;
   @FXML private ImageView emeraldRoom;
+  @FXML private ImageView emeraldRoomBackdrop;
   @FXML private ImageView letterCloseUp;
   @FXML private ImageView reportCloseUp;
   @FXML private ImageView medicineBill;
@@ -76,11 +87,48 @@ public class RoomController extends MapController {
   }
 
   @FXML
-  public void doorOpen(MouseEvent event) {
-    onClue(event);
+  public void doorOpen(MouseEvent eventMouse) {
+    onClue(eventMouse);
     setClue(emeraldRoom);
     TextToSpeech.speak(
         "The oak doors open wide to reveal the room containing the once-treasured necklace.");
+
+    Circle clip = new Circle(50);
+
+    RadialGradient gradient =
+        new RadialGradient(
+            0,
+            0,
+            0.5,
+            0.5,
+            0.5,
+            true,
+            CycleMethod.NO_CYCLE,
+            new Stop(0, Color.BLACK),
+            new Stop(1, Color.TRANSPARENT));
+    clip.setFill(gradient);
+
+    emeraldRoom.setClip(clip);
+
+    clip.setCenterX(eventMouse.getX() - emeraldRoom.getLayoutX());
+    clip.setCenterY(eventMouse.getY() - emeraldRoom.getLayoutY());
+
+    Scene scene = emeraldRoom.getScene();
+
+    scene.addEventFilter(
+        MouseEvent.MOUSE_MOVED,
+        event -> {
+          clip.setCenterX(event.getX() - emeraldRoom.getLayoutX());
+          clip.setCenterY(event.getY() - emeraldRoom.getLayoutY());
+        });
+
+    Image torch = new Image(App.class.getResource("/images/clue/torch.png").toExternalForm());
+
+    scene.setCursor(new ImageCursor(torch));
+
+    ColorAdjust colorAdjust = new ColorAdjust();
+    colorAdjust.setBrightness(-0.90);
+    emeraldRoomBackdrop.setEffect(colorAdjust);
   }
 
   @FXML
@@ -134,6 +182,7 @@ public class RoomController extends MapController {
     bagOpen.setVisible(false);
     letterCloseUp.setVisible(false);
     emeraldRoom.setVisible(false);
+    emeraldRoomBackdrop.setVisible(false);
     reportCloseUp.setVisible(false);
     medicineBill.setVisible(false);
     report.setVisible(false);
@@ -146,6 +195,9 @@ public class RoomController extends MapController {
 
     // Shows the specified clue image
     image.setVisible(true);
+    if (image == emeraldRoom) {
+      emeraldRoomBackdrop.setVisible(true);
+    }
   }
 
   @FXML
@@ -155,6 +207,9 @@ public class RoomController extends MapController {
     paneClue.setVisible(false);
     paneRoom.setOpacity(1);
     handleRectangleExited();
+
+    Scene scene = paneRoom.getScene();
+    scene.setCursor(Cursor.DEFAULT);
   }
 
   @FXML

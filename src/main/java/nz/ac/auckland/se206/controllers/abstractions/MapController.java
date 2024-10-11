@@ -221,8 +221,7 @@ public abstract class MapController extends ButtonController {
     suspectsLabel.setText(suspectCount + "/3 Visited Suspects");
     suspectsImage.setImage(hasMetSuspect ? metCriteriaImage : notMetCriteriaImage);
 
-    cluesLabel.setText(
-        (objectCount > 1 ? "Clues" : "Clue") + (!hasMetObjects ? " not" : "") + " visited");
+    cluesLabel.setText("Clue" + (!hasMetObjects ? " not" : "") + " visited");
     cluesImage.setImage(hasMetObjects ? metCriteriaImage : notMetCriteriaImage);
 
     // Set state of guess button
