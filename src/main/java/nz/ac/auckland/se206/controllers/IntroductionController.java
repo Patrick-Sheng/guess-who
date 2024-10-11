@@ -76,7 +76,7 @@ public class IntroductionController extends MapController {
     } else if (imageEmeraldRoomAfter.isVisible()) {
       progressImage(imageEmeraldRoomAfter, imageDetectiveHouse);
       labelDescription.setText("You, a private detective received a call about the theft.");
-      sendTts("They called you, a detective");
+      sendTts("They called upon you, a detective");
     } else if (imageDetectiveHouse.isVisible()) {
       progressImage(imageDetectiveHouse, imageDetectiveManor);
       labelDescription.setText("Now, standing outside Worthington Manor, you must find the thief.");
