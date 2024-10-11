@@ -5,6 +5,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.ButtonController;
 import nz.ac.auckland.se206.enums.SceneState;
 
+/** Controller for the main menu screen. */
 public class MainMenuController extends ButtonController {
   private boolean hasEnteredRoom;
 

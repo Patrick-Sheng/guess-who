@@ -17,14 +17,14 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class IntroductionController extends MapController {
 
-  @FXML ImageView imageFamilyPhoto;
-  @FXML ImageView imageEmeraldRoomBefore;
-  @FXML ImageView imageEmeraldRoomAfter;
-  @FXML ImageView imageDetectiveHouse;
-  @FXML ImageView imageDetectiveManor;
-  @FXML Label labelDescription;
-  @FXML Label labelClickInstruction;
-  @FXML Label labelSkipIntro;
+  @FXML private ImageView imageFamilyPhoto;
+  @FXML private ImageView imageEmeraldRoomBefore;
+  @FXML private ImageView imageEmeraldRoomAfter;
+  @FXML private ImageView imageDetectiveHouse;
+  @FXML private ImageView imageDetectiveManor;
+  @FXML private Label labelDescription;
+  @FXML private Label labelClickInstruction;
+  @FXML private Label labelSkipIntro;
 
   private boolean canSkipIntro;
 

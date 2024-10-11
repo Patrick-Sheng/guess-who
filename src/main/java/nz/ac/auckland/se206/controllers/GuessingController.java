@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
+/** Controller for the guessing scene. */
 public class GuessingController extends ButtonController {
   @FXML private Pane paneTimeIsUp;
   @FXML private Label systemDescriptionLabel;

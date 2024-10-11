@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers.abstractions;
 import javafx.fxml.FXML;
 import nz.ac.auckland.se206.App;
 
+/** Abstract class for button controllers. */
 public abstract class ButtonController {
 
   /**

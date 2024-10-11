@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.enums.Suspect;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
+/** Abstract class for map controllers. */
 public abstract class MapController extends ButtonController {
 
   /**
