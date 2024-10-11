@@ -20,7 +20,7 @@
       </Label>
       <Pane onMouseClicked="#nextScene" prefHeight="768.0" prefWidth="768.0">
          <children>
-            <Pane layoutX="72.0" layoutY="172.0" prefHeight="356.0" prefWidth="624.0">
+            <Pane layoutX="72.0" layoutY="193.0" prefHeight="356.0" prefWidth="624.0">
                <children>
                   <ImageView fx:id="imageFamilyPhoto" fitHeight="330.0" fitWidth="330.0" layoutX="146.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,7 +49,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Label fx:id="labelDescription" alignment="CENTER" layoutX="69.0" layoutY="528.0" prefHeight="116.0" prefWidth="630.0" text="Story here..." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label fx:id="labelDescription" alignment="CENTER" layoutX="69.0" layoutY="549.0" prefHeight="116.0" prefWidth="630.0" text="Story here..." textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Georgia" size="23.0" />
                </font>
