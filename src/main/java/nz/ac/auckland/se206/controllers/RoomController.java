@@ -47,6 +47,10 @@ public class RoomController extends MapController {
   private double mouseAnchorX;
   private double mouseAnchorY;
 
+  /**
+   * Initializes the room controller, setting up initial states and speaking the introductory
+   * message.
+   */
   @FXML
   public void initialize() {
     super.initialize();
@@ -62,6 +66,11 @@ public class RoomController extends MapController {
     paneClue.setVisible(false);
   }
 
+  /**
+   * Handles the event of clicking on the bag to reveal clues inside.
+   *
+   * @param event the MouseEvent triggered by the user clicking on the bag
+   */
   @FXML
   public void bagOpen(MouseEvent event) {
     onClue(event);
@@ -72,6 +81,11 @@ public class RoomController extends MapController {
             + " pair of gloves.");
   }
 
+  /**
+   * Reveals the letter clue when clicked, and displays its close-up view if already revealed.
+   *
+   * @param event the MouseEvent triggered by the user clicking on the letter
+   */
   @FXML
   public void letterReveal(MouseEvent event) {
     onClue(event);
@@ -86,6 +100,11 @@ public class RoomController extends MapController {
     }
   }
 
+  /**
+   * Handles the event of opening the door to reveal the emerald room, applying a spotlight effect.
+   *
+   * @param eventMouse the MouseEvent triggered by the user clicking on the door
+   */
   @FXML
   public void doorOpen(MouseEvent eventMouse) {
     onClue(eventMouse);
@@ -131,6 +150,11 @@ public class RoomController extends MapController {
     emeraldRoomBackdrop.setEffect(colorAdjust);
   }
 
+  /**
+   * Switches between pages of the report document when an arrow is clicked.
+   *
+   * @param event the MouseEvent triggered by clicking on the left or right arrow
+   */
   @FXML
   public void reportClose(MouseEvent event) {
     onClue(event);
@@ -140,6 +164,11 @@ public class RoomController extends MapController {
     arrowRight.setVisible(true);
   }
 
+  /**
+   * Switches between pages of the report document when an arrow is clicked.
+   *
+   * @param event the MouseEvent triggered by clicking on the left or right arrow
+   */
   @FXML
   public void arrowClick(MouseEvent event) {
     ImageView clickedArrow = (ImageView) event.getSource();
@@ -156,6 +185,13 @@ public class RoomController extends MapController {
     }
   }
 
+  /**
+   * Handles the event when a clue is clicked. Stops any ongoing speech, highlights the selected
+   * clue, and dims the room pane to focus on the clue. Also updates the game state to reflect that
+   * a clue has been interacted with.
+   *
+   * @param event the MouseEvent triggered by clicking on a clue
+   */
   private void onClue(MouseEvent event) {
     TextToSpeech.stopSpeak();
 
@@ -177,6 +213,12 @@ public class RoomController extends MapController {
     isGuessReadyAndUpdate();
   }
 
+  /**
+   * Sets the specified clue image as visible while hiding all other clue-related images and labels.
+   * Also displays the backdrop for the emerald room if the selected clue is the emerald.
+   *
+   * @param image the ImageView of the clue to be displayed
+   */
   private void setClue(ImageView image) {
     // Hides all clue-related images and labels
     bagOpen.setVisible(false);
@@ -200,6 +242,7 @@ public class RoomController extends MapController {
     }
   }
 
+  /** Shows the room and hides the clue pane, restoring the default cursor and room visibility. */
   @FXML
   private void onExitClue() {
     // Hides the clue and restores the room pane's visibility
@@ -212,6 +255,11 @@ public class RoomController extends MapController {
     scene.setCursor(Cursor.DEFAULT);
   }
 
+  /**
+   * Records the initial position when the user presses on the yellow paper clue.
+   *
+   * @param event the MouseEvent triggered by pressing the yellow paper
+   */
   @FXML
   private void onMousePressed(MouseEvent event) {
     // Records the initial mouse position when the yellow paper is pressed
@@ -224,6 +272,11 @@ public class RoomController extends MapController {
     paneRoom.setOpacity(1);
   }
 
+  /**
+   * Drags the yellow paper clue across the screen as the mouse moves, within specified bounds.
+   *
+   * @param event the MouseEvent triggered by dragging the yellow paper
+   */
   @FXML
   private void onMouseDragged(MouseEvent event) {
     // Updates the yellow paper's position based on the mouse's movement
@@ -242,9 +295,9 @@ public class RoomController extends MapController {
   }
 
   /**
-   * Handles mouse drop events when the user releases the mouse button after dragging the shovel.
+   * Handles mouse drop events, revealing the letter grid if the yellow paper is dropped correctly.
    *
-   * @param event the MouseEvent triggered by the user releasing the mouse button
+   * @param event the MouseEvent triggered by releasing the yellow paper
    */
   @FXML
   private void onMouseDropped(MouseEvent event) {
@@ -266,12 +319,14 @@ public class RoomController extends MapController {
     paneRoom.setOpacity(0.2);
   }
 
+  /** Displays a label and plays a sound effect when the shoe print clue is clicked. */
   @FXML
   private void clickShoePrint() {
     shoePrintLabel.setVisible(true);
     App.playCustomSoundEffect("mud.mp3");
   }
 
+  /** Displays a label and plays a sound effect when the rose clue is clicked. */
   @FXML
   private void clickRose() {
     roseLabel.setVisible(true);

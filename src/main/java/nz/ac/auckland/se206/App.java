@@ -209,6 +209,7 @@ public class App extends Application {
     currentlyPlaying = name;
   }
 
+  /** Plays the hover sound effect when the mouse hovers over a button. */
   public static void playHover() {
     if (!isMuted) {
       hoverSound.play();
@@ -257,6 +258,11 @@ public class App extends Application {
     return isRunning;
   }
 
+  /**
+   * Plays a custom sound effect from the "sounds" directory.
+   *
+   * @param name the name of the sound effect file.
+   */
   public static void playCustomSoundEffect(String name) {
     if (!music.isMute()) {
       AudioClip customSound =

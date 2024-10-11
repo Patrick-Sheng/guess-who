@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import nz.ac.auckland.se206.App;
 
+/** Countdown timer that runs in the game. */
 public class CountdownTimer {
   private int remainingTime;
   private boolean isRunning;
@@ -14,6 +15,10 @@ public class CountdownTimer {
     isRunning = true;
   }
 
+  /**
+   * Starts the timer by creating a new thread that updates the timer every second. The timer will
+   * stop when the remaining time reaches 0.
+   */
   public void start() {
 
     // Updates timer by decreasing timer by 1 every 1 second
@@ -41,6 +46,7 @@ public class CountdownTimer {
     isRunning = false;
   }
 
+  /** Stops the timer and interrupts the timer thread. */
   public void stop() {
     pause();
     if (timerThread != null && timerThread.isAlive()) {

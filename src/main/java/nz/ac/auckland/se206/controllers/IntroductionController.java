@@ -23,6 +23,11 @@ public class IntroductionController extends MapController {
 
   private boolean canSkipIntro;
 
+  /**
+   * Initializes the introduction controller by setting the initial visibility of images and labels,
+   * configuring the description text, and starting a thread to allow skipping the intro after a
+   * delay.
+   */
   @FXML
   public void initialize() {
     imageEmeraldRoomBefore.setVisible(false);
@@ -58,11 +63,20 @@ public class IntroductionController extends MapController {
     textThread.start();
   }
 
+  /**
+   * Sends text-to-speech output for the given speech string after stopping any ongoing speech.
+   *
+   * @param speech the text to be converted to speech
+   */
   public void sendTts(String speech) {
     TextToSpeech.stopSpeak();
     TextToSpeech.speak(speech);
   }
 
+  /**
+   * Progresses to the next scene based on the currently visible image, updating the displayed image
+   * and description text while also providing appropriate text-to-speech feedback.
+   */
   @FXML
   public void nextScene() {
     if (imageFamilyPhoto.isVisible()) {
@@ -88,6 +102,12 @@ public class IntroductionController extends MapController {
     }
   }
 
+  /**
+   * Progresses the visibility from the old image to the new image with a rounded rectangle clip.
+   *
+   * @param oldImage the ImageView of the currently visible image
+   * @param newImage the ImageView of the image to be displayed next
+   */
   private void progressImage(ImageView oldImage, ImageView newImage) {
     oldImage.setVisible(false);
 
@@ -99,6 +119,7 @@ public class IntroductionController extends MapController {
     newImage.setVisible(true);
   }
 
+  /** Starts the game by changing the root scene to the game state if the intro can be skipped. */
   @FXML
   public void startGame() {
     if (!canSkipIntro) {
@@ -107,6 +128,11 @@ public class IntroductionController extends MapController {
     App.setRoot(SceneState.START_GAME, "Starting game!");
   }
 
+  /**
+   * Handles key release events to progress to the next scene in the introduction.
+   *
+   * @param event the KeyEvent triggered by releasing a key
+   */
   @FXML
   public void onKeyReleased(KeyEvent event) {
     nextScene();
