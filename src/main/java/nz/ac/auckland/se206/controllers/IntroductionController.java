@@ -25,6 +25,7 @@ public class IntroductionController extends MapController {
     imageEmeraldRoomBefore.setVisible(false);
     imageEmeraldRoomAfter.setVisible(false);
     imageDetectiveHouse.setVisible(false);
+    labelClickInstruction.setVisible(true);
     labelSkipIntro.setVisible(true);
 
     progressImage(imageDetectiveManor, imageFamilyPhoto);
@@ -58,8 +59,8 @@ public class IntroductionController extends MapController {
     } else if (imageDetectiveHouse.isVisible()) {
       progressImage(imageDetectiveHouse, imageDetectiveManor);
       labelDescription.setText("Now, standing outside Worthington Manor, you must find the thief.");
-      labelClickInstruction.setText("Click anywhere to start the game!");
-      labelSkipIntro.setVisible(false);
+      labelClickInstruction.setVisible(false);
+      labelSkipIntro.setText("Click anywhere to start the game!");
       sendTts("Whom now must find the thief");
     } else if (imageDetectiveManor.isVisible()) {
       startGame();
