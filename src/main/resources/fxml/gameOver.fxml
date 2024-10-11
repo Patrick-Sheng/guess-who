@@ -14,9 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;"
-  xmlns="http://javafx.com/javafx/22"
-  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.GameOverController">
   <ImageView fx:id="imageGardener" fitHeight="768.0" fitWidth="768.0" pickOnBounds="true" preserveRatio="true">
     <Image url="@../images/backgrounds/gardener_guessed.jpeg" />
   </ImageView>
@@ -34,8 +32,8 @@
       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" prefWidth="421.0" />
     </columnConstraints>
     <rowConstraints>
-      <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="62.00002034505209" valignment="CENTER" vgrow="ALWAYS" />
-      <RowConstraints maxHeight="320.9999796549479" minHeight="10.0" prefHeight="311.66666666666663" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="67.00001017252603" valignment="CENTER" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="320.9999796549479" minHeight="10.0" prefHeight="313.6666564941406" valignment="CENTER" vgrow="ALWAYS" />
       <RowConstraints maxHeight="77.33331298828125" minHeight="4.6666259765625" prefHeight="59.333333333333314" valignment="CENTER" vgrow="ALWAYS" />
     </rowConstraints>
     <children>
@@ -265,7 +263,7 @@
           <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Reasoning Overview" textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Overview" textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <font>
               <Font name="Georgia" size="16.0" />
             </font>
@@ -277,7 +275,7 @@
             <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
               <Text fx:id="reasoning" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="This may take a while..." textAlignment="CENTER" wrappingWidth="595.3163948059082" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <font>
-                  <Font name="Georgia" size="14.0" />
+                  <Font name="Georgia" size="12.0" />
                 </font>
               </Text>
             </TextFlow>
@@ -296,7 +294,7 @@
           <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
-          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Rating" textAlignment="CENTER" wrappingWidth="422.6496772766113" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" textAlignment="CENTER" wrappingWidth="422.6496772766113" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <font>
               <Font name="Georgia" size="16.0" />
             </font>
@@ -308,7 +306,7 @@
             <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
               <Text fx:id="rating" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="129.24639892578125" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <font>
-                  <Font name="Georgia" size="14.0" />
+                  <Font name="Georgia" size="12.0" />
                 </font>
               </Text>
             </TextFlow>
