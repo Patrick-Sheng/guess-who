@@ -5,10 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.controllers.abstractions.MapController;
 import nz.ac.auckland.se206.enums.SceneState;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
-public class IntroductionController {
+public class IntroductionController extends MapController {
 
   @FXML ImageView imageFamilyPhoto;
   @FXML ImageView imageEmeraldRoomBefore;
@@ -79,6 +80,6 @@ public class IntroductionController {
   @FXML
   public void startGame() {
     App.setRoot(SceneState.START_GAME, "Starting game!");
-    App.getGameState().startTimer(300);
+    // App.getGameState().startTimer(300);
   }
 }
