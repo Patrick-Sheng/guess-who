@@ -73,8 +73,10 @@ public class RoomController extends MapController {
    */
   @FXML
   public void bagOpen(MouseEvent event) {
+    // Call onClue method to handle any clue-related actions for the event
     onClue(event);
     setClue(bagOpen);
+    // Make the report visible to the player
     report.setVisible(true);
     TextToSpeech.speak(
         "Opening the leather bag up, you see documents neatly tucked in the case, a book, and a"
@@ -89,13 +91,16 @@ public class RoomController extends MapController {
   @FXML
   public void letterReveal(MouseEvent event) {
     onClue(event);
+    // Check if the letter has not been revealed yet
     if (!isLetterReveal) {
       setClue(yellowPaper);
       revealLetterGrid.setVisible(true);
+      // Use text-to-speech to describe the found clue to the player
       TextToSpeech.speak(
           "You find a blank page lying on the ground, which you suspect contains a message - of"
               + " what, you're unsure.");
     } else {
+      // If the letter has already been revealed, set the clue to the close-up of the letter
       setClue(letterCloseUp);
     }
   }
@@ -107,13 +112,16 @@ public class RoomController extends MapController {
    */
   @FXML
   public void doorOpen(MouseEvent eventMouse) {
+    // Trigger clue interaction logic
     onClue(eventMouse);
+    // Set the current clue to the emerald room
     setClue(emeraldRoom);
+    // Announce the opening of the door using text-to-speech
     TextToSpeech.speak(
         "The oak doors open wide to reveal the room containing the once-treasured necklace.");
 
     Circle clip = new Circle(50);
-
+    // Define a radial gradient for the clip, transitioning from black to transparent
     RadialGradient gradient =
         new RadialGradient(
             0,
@@ -122,11 +130,11 @@ public class RoomController extends MapController {
             0.5,
             0.5,
             true,
-            CycleMethod.NO_CYCLE,
+            CycleMethod.NO_CYCLE, // No repeating of the gradient
             new Stop(0, Color.BLACK),
             new Stop(1, Color.TRANSPARENT));
-    clip.setFill(gradient);
-
+    clip.setFill(gradient); // Apply the gradient to the clip
+    // Set the clipping mask on the emerald room
     emeraldRoom.setClip(clip);
 
     clip.setCenterX(eventMouse.getX() - emeraldRoom.getLayoutX());
@@ -134,17 +142,21 @@ public class RoomController extends MapController {
 
     Scene scene = emeraldRoom.getScene();
 
+    // Get the current scene for further mouse event handling
+    // Add a mouse move event filter to update the clip's position
     scene.addEventFilter(
         MouseEvent.MOUSE_MOVED,
         event -> {
+          // Update the center position of the clip with the mouse coordinates
           clip.setCenterX(event.getX() - emeraldRoom.getLayoutX());
           clip.setCenterY(event.getY() - emeraldRoom.getLayoutY());
         });
-
+    // Load the torch image to use as a cursor
     Image torch = new Image(App.class.getResource("/images/clue/torch.png").toExternalForm());
 
     scene.setCursor(new ImageCursor(torch));
 
+    // Create a color adjustment effect to darken the emerald room backdrop
     ColorAdjust colorAdjust = new ColorAdjust();
     colorAdjust.setBrightness(-0.90);
     emeraldRoomBackdrop.setEffect(colorAdjust);
@@ -172,14 +184,19 @@ public class RoomController extends MapController {
   @FXML
   public void arrowClick(MouseEvent event) {
     ImageView clickedArrow = (ImageView) event.getSource();
+
+    // Check if the left arrow was clicked
     if (clickedArrow.getId().equals("arrowLeft")) {
+      // Set the clue to a close-up report when the left arrow is clicked
       setClue(reportCloseUp);
       App.playCustomSoundEffect("paper.mp3");
       arrowLeft.setVisible(false);
       arrowRight.setVisible(true);
     } else {
+      // If the left arrow was not clicked, set the clue to the medicine bill
       setClue(medicineBill);
       App.playCustomSoundEffect("paper.mp3");
+      // Show the left arrow and hide the right arrow
       arrowLeft.setVisible(true);
       arrowRight.setVisible(false);
     }
