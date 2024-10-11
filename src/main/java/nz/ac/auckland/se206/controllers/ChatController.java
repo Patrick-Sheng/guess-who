@@ -104,6 +104,7 @@ public class ChatController extends MapController {
     disableButton();
     enterUser(App.getGameState().getSelectedSuspect());
 
+    // Add a listener to the user input field to enable/disable chat button if text area is empty
     userField
         .textProperty()
         .addListener(

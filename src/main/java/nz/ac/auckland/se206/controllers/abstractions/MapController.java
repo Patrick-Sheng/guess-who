@@ -144,6 +144,7 @@ public abstract class MapController extends ButtonController {
     GameState state = App.getGameState();
     state.setSelectedSuspect(suspect);
 
+    // Prepare the chat window message
     StringBuilder builder = new StringBuilder();
     builder
         .append("Going To ")

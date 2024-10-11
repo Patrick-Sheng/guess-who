@@ -31,8 +31,8 @@ You must, under all circumstances, format the following response into the JSON b
 For the points section, include the following points:
 
 Motives:
-  PastLover: Has the detective uncovered any information about Beatrice’s past lover?
-  FinanceProblem: Has the detective uncovered any information about Beatrice's motive for the theft is to solve her past lover's financial problem?
+  PastLover: Has the detective uncovered any information about Beatrice’s past lover Robert?
+  FinanceProblem: Has the detective uncovered any information about Beatrice's motive for the theft is to solve her past lover Robert's financial problem?
 Actions:
   FramedGardener: Does the detective suggest Beatrice’s intention to frame the gardener?
 Clues:
