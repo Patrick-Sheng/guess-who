@@ -72,7 +72,7 @@ public class IntroductionController extends MapController {
     } else if (imageEmeraldRoomBefore.isVisible()) {
       progressImage(imageEmeraldRoomBefore, imageEmeraldRoomAfter);
       labelDescription.setText("The next morning, the family discovers the emerald is missing.");
-      sendTts("Before long, their emerald had vanished");
+      sendTts("Before long, their emerald heirloom had vanished");
     } else if (imageEmeraldRoomAfter.isVisible()) {
       progressImage(imageEmeraldRoomAfter, imageDetectiveHouse);
       labelDescription.setText("You, a private detective received a call about the theft.");

@@ -306,7 +306,7 @@
             <TextFlow prefHeight="92.0" prefWidth="585.0" style="-fx-text-alignment: center;" styleClass="inline-css-text-area">
               <Text fx:id="rating" fill="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="129.24639892578125" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                 <font>
-                  <Font name="Georgia" size="14.0" />
+                  <Font name="Georgia" size="12.0" />
                 </font>
               </Text>
             </TextFlow>
