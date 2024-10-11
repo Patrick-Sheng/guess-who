@@ -52,7 +52,7 @@ public class IntroductionController extends MapController {
     labelDescription.setText(
         "The Worthington family has gathered for a reunion. Celebrating their legacy and heralding"
             + " an exquisite emerald that has been passed down for generations.");
-    labelClickInstruction.setText("Click anywhere or any key to go next");
+    labelClickInstruction.setText("Click anywhere or press any key to go next");
     // Set the instruction for skipping the intro
     labelSkipIntro.setText("Click here to skip intro");
     sendTts("The Worthington's were celebrating");
