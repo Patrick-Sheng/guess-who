@@ -95,11 +95,6 @@ public class GuessingController extends ButtonController {
       // back to the main menu
       App.getGameState().setSuspect(Suspect.OUT_OF_TIME);
       App.setRoot(SceneState.END_GAME_LOST, "Looks like you ran out of time!"); // End the game
-
-      // systemDescriptionLabel.setText(
-      //     "You did not select a suspect amd explanation within time limit. The game is now
-      // over.");
-      // moveToNextScene.setText("Back to Main Menu");
     } else {
       rectFadeBackground.setVisible(true); // Show the fade background
       paneTimeIsUp.setVisible(true);
