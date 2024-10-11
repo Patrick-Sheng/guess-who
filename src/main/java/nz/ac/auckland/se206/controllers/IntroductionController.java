@@ -80,6 +80,5 @@ public class IntroductionController extends MapController {
   @FXML
   public void startGame() {
     App.setRoot(SceneState.START_GAME, "Starting game!");
-    // App.getGameState().startTimer(300);
   }
 }
