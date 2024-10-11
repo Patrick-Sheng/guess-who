@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" onKeyTyped="#onKeyTyped" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.IntroductionController">
+<Pane maxHeight="768.0" maxWidth="768.0" minHeight="768.0" minWidth="768.0" onKeyReleased="#onKeyReleased" pickOnBounds="false" prefHeight="768.0" prefWidth="768.0" scaleShape="false" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.IntroductionController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="39.0" prefHeight="39.0" prefWidth="624.0" style="-fx-text-fill: #ffffff !important" text="Prelude" textAlignment="CENTER">
          <font>

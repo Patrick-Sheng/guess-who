@@ -21,6 +21,8 @@ public class IntroductionController extends MapController {
   @FXML Label labelClickInstruction;
   @FXML Label labelSkipIntro;
 
+  private boolean canSkipIntro;
+
   @FXML
   public void initialize() {
     imageEmeraldRoomBefore.setVisible(false);
@@ -28,6 +30,8 @@ public class IntroductionController extends MapController {
     imageDetectiveHouse.setVisible(false);
     labelClickInstruction.setVisible(true);
     labelSkipIntro.setVisible(true);
+
+    canSkipIntro = false;
 
     progressImage(imageDetectiveManor, imageFamilyPhoto);
 
@@ -37,6 +41,21 @@ public class IntroductionController extends MapController {
     labelClickInstruction.setText("Click anywhere or any key to go next");
     labelSkipIntro.setText("Click here to skip intro");
     sendTts("The Worthington's were celebrating");
+
+    // Prevent user from spam clicking too fast
+    Thread textThread =
+        new Thread() {
+          public void run() {
+            try {
+              Thread.sleep(1000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+            canSkipIntro = true;
+          }
+        };
+    textThread.setDaemon(true);
+    textThread.start();
   }
 
   public void sendTts(String speech) {
@@ -82,11 +101,14 @@ public class IntroductionController extends MapController {
 
   @FXML
   public void startGame() {
+    if (!canSkipIntro) {
+      return;
+    }
     App.setRoot(SceneState.START_GAME, "Starting game!");
   }
 
   @FXML
-  public void onKeyTyped(KeyEvent event) {
+  public void onKeyReleased(KeyEvent event) {
     nextScene();
   }
 }
