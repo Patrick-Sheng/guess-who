@@ -86,9 +86,6 @@ public class GuessingController extends ButtonController {
 
   private void timeIsUp() {
     App.getGameState().stopTimer();
-    rectFadeBackground.setVisible(true); // Show the fade background
-    paneTimeIsUp.setVisible(true);
-    explanationTextArea.setEditable(false);
 
     // Speak to the user, indicating that time is up
     TextToSpeech.speak("Time is up!");
@@ -96,10 +93,17 @@ public class GuessingController extends ButtonController {
     if (isNotValidResponse()) {
       // If neither a suspect nor an explanation was provided, inform the user and prompt them to go
       // back to the main menu
-      systemDescriptionLabel.setText(
-          "You did not select a suspect amd explanation within time limit. The game is now over.");
-      moveToNextScene.setText("Back to Main Menu");
+      App.getGameState().setSuspect(Suspect.OUT_OF_TIME);
+      App.setRoot(SceneState.END_GAME_LOST, "Looks like you ran out of time!"); // End the game
+
+      // systemDescriptionLabel.setText(
+      //     "You did not select a suspect amd explanation within time limit. The game is now
+      // over.");
+      // moveToNextScene.setText("Back to Main Menu");
     } else {
+      rectFadeBackground.setVisible(true); // Show the fade background
+      paneTimeIsUp.setVisible(true);
+      explanationTextArea.setEditable(false);
       // If a suspect and explanation were provided, allow the user to submit their choice
       systemDescriptionLabel.setText("Click submit to see if you are correct.");
       moveToNextScene.setText("Submit");
