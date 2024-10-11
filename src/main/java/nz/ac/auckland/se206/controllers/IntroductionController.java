@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.abstractions.MapController;
@@ -33,7 +34,8 @@ public class IntroductionController extends MapController {
     labelDescription.setText(
         "The Worthington family has gathered for a reunion. Celebrating their legacy and heralding"
             + " an exquisite emerald that has been passed down for generations.");
-    labelClickInstruction.setText("Click anywhere to go next");
+    labelClickInstruction.setText("Click anywhere or any key to go next");
+    labelSkipIntro.setText("Click here to skip intro");
     sendTts("The Worthington's were celebrating");
   }
 
@@ -81,5 +83,10 @@ public class IntroductionController extends MapController {
   @FXML
   public void startGame() {
     App.setRoot(SceneState.START_GAME, "Starting game!");
+  }
+
+  @FXML
+  public void onKeyTyped(KeyEvent event) {
+    nextScene();
   }
 }
